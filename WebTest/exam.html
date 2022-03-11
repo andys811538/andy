@@ -1,152 +1,157 @@
 <!DOCTYPE html>
 <!-- saved from url=(0062)https://andys811538.github.io/exam.github.io/WebTest/exam.html -->
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    
+<html><head><meta name="viewport" content="width=device-width, initial-scale=1" http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script src="https://kit.fontawesome.com/c45d543d64.js" crossorigin="anonymous"></script>
     <title>My test page</title>
     <style type="text/css">
     /* For Mobile */
-            .Answer{
-                border-radius: 10px ;padding: 10px;
-                width: 95%; height: auto; font-size: 40px;
-                font-family:Microsoft JhengHei;
-                background-color: rgb(212, 236, 255)
-            }
-            .question{
-                margin-bottom: 10px;
-                border-radius: 10px;background-color: rgb(134, 183, 255);
-                width: 95%; height:auto;padding: 10px;font-size: 54px;
-                font-family:Microsoft JhengHei;
-            }
-            .Option{margin-bottom:10px;;}
-            body>div>button{
-                margin: 3px; width: 16%;height: 70px;font-size: 36px;
-            }
-            body>div>select{
-                margin: 3px; width: 10%;height: 50px;font-size: 36px; margin-left: 10px;
-            }
-            body>div>input{
-                margin: 3px; width: 30%;height: 70px;font-size: 36px;
-            }
-            .input{
-                width: 40px;height: 30px;margin-right: 15px;padding: 0px;margin:0;vertical-align:-4px;
+
+            body{
+                font-family: "Helvetica", "Arial","LiHei Pro","黑體-繁","微軟正黑體", sans-serif;
             }
 
-            .Correct{
-                background-color: rgba(44, 160, 255, 0.644);
-
-                font-style: oblique;
-                font-weight: bold;
-                border-radius: 10px;
-
-            }
-            .Wrong{
-                background-color: rgba(255, 72, 72, 0.616);
-                font-style: oblique;
-                font-weight: bold;
-                border-radius: 10px;
-            }
-
-            .Select{
-                margin-top: 20px;
-                display: flex;
-                align-items: center;
-            }
-
-            label{
-
-                height:50px
-            }
-
-
+            .bottom{
+            display: flex;position: fixed;bottom: 0;width: 100%;left:0
             
-
-        @media screen and (min-device-width: 900px) {
-            .Answer{
-                border-radius: 10px ;padding: 20px;
-                width: 1000px;height: 300px; font-size: 16px;
-                font-family:Microsoft JhengHei;
-                background-color: rgb(212, 236, 255)
             }
+            .bottom>div{
+                display: flex;justify-content: center;
+                align-items: center;font-size: 50px;color: rgba(18, 44, 99);
+                width:26%;height:60px;text-align: center;border: 5px solid;border-radius: 25px;
+                background-color: rgb(255, 255, 255) ;  
+            }
+            .bottom>div:hover{
+                background-color: rgba(255, 255, 255, 0.911);color: rgb(31, 68, 150);border-color: rgba(18, 44, 99);
+            }
+            .left{
+                margin-left: auto;
+            }
+            .up{
+                margin-left: 15px;
+                margin-right: 15px;
+            }
+            .right{
+                margin-right: auto;
+            }
+
+
+            .top{
+                display: flex; justify-content:space-between;align-items: center;        
+                 
+            }
+            .top>div{
+                align-items: center; width: 30%;
+            }
+            .file{
+                display:flex;
+                justify-content: flex-start;
+                
+            }
+            .number{
+                display: flex;
+                justify-content: center;
+                align-items: center                
+            }
+            .select{
+                display:flex;
+                justify-content: flex-end;
+            }
+            .number>label>input{
+                width:20px;
+                text-align: center;
+                vertical-align: 1px;
+                border-width: 0 0 1px 0;
+                background-color: #fcfcfc;
+                
+                
+            }
+
             .question{
-                margin-bottom: 10px;
-                border-radius: 10px;background-color: rgb(134, 183, 255);
-                width: 1000px;height:70px;padding: 20px;font-size: 22px;
-                font-family:Microsoft JhengHei;
-            }
-            .Option{margin-bottom:10px;}
-            body>div>button{
-                margin: 3px; width: 110px;height: 50x;font-size: 18px;
-            }
-            body>div>select{
-                margin: 3px; width: 70px;height: 25x;font-size: 18px;
-            }
-            body>div>input{
-                margin: 3px; width: 200px;height: 50px;font-size: 18px;
-            }
-            .input{
-                width: 20px;height: 20px;margin-right: 15px;padding: 0px;margin:0;vertical-align:-4px;
-            }
-            .Correct{
-                background-color: rgba(44, 160, 255, 0.644);
-                background-size: 200%;
-                font-style: oblique;
-                font-weight: bold;
+                padding: 20px;
+                margin:auto;margin-top: 20px;;background-color: rgba(47, 137, 255, 0.63);
                 border-radius: 10px;
+                box-shadow:2px 2px 5px 0px #485B70;
             }
-            .Wrong{
-                background-color: rgba(255, 72, 72, 0.616);
-                font-style: oblique;
-                font-weight: bold;
-                border-radius: 10px;
-            }
-            .Select{
 
+
+            .Answer{
+                padding: 10px;
                 margin-top: 10px;
+                background-color: rgb(157, 196, 255);
+                border-radius: 10px;
+                box-shadow:2px 2px 5px 0px #485B70;
+            }
+
+            .option{
                 display: flex;
                 align-items: center;
-            }
-            
-            label{
-
-            height:50px
-
+                padding: 5px;
+                margin-top: 5px;
+                border-radius: 5px;
+                
             }
 
+            .option>label{
+                display: flex;
+                
+            }
+            .radio{
+                margin-bottom: 4px;
 
-        }
+            }
+
+            .Correct{
+                background-color: rgba(70, 149, 252, 0.884);
+                border-radius: 5px;
+                font-weight: bold;
+                font-style: italic;
+                
+            }
+
+            .Wrong{
+                background-color: rgba(255, 139, 139, 0.781);
+                border-radius: 5px;
+            }
+
     </style>
 
   </head>
     <body class="vsc-initialized">
 
-        <div class="Option">
-        <button onclick="previous()">Previous</button><button onclick="next()">Next</button><button onclick="check()">Answer</button>
-        <input type="file" name="file" id="file">
-        <select id="category" class="easyui-combobox" name="category" data-options="panelHeight:'auto'">
-            <option name="data" value="100">100</option>
-            <option name="data" value="101">101</option>
-            <option name="data" value="102">102</option>
-            <option name="data" value="103">103</option>
-            <option name="data" value="104">104</option>
-            <option name="data" value="105">105</option>
-            <option name="data" value="106">106</option>
-            <option name="data" value="107">107</option>
-            <option name="data" value="108">108</option>
-            <option name="data" value="109">109</option>
-            <option name="data" value="110">110</option>
-            <option name="data" value="0" selected>---</option>
+        <div class="top">
+            <div class="file"><input type="file" name="file" id="file"></div>
+            <div class="number"><label><input type="text" value=0>／<spam id="count">0</spam></label></div>
+            <div class="select"><select id="category" class="easyui-combobox" name="category" data-options="panelHeight:'auto'">
+                    <option name="data" value="100">100</option>
+                    <option name="data" value="101">101</option>
+                    <option name="data" value="102">102</option>
+                    <option name="data" value="103">103</option>
+                    <option name="data" value="104">104</option>
+                    <option name="data" value="105">105</option>
+                    <option name="data" value="106">106</option>
+                    <option name="data" value="107">107</option>
+                    <option name="data" value="108">108</option>
+                    <option name="data" value="109">109</option>
+                    <option name="data" value="110">110</option>
+                    <option name="data" value="0" selected>---</option>
+                </select></div></div>
 
-        </select>
+        <div class="bottom">
+            <div onclick="previous()" class="left"><i class="fa-solid fa-chevron-left"></i></div>
+            <div onclick="check()" class="up"><i class="fa-solid fa-circle-chevron-up"></i></div>
+            <div onclick="next()" class="right"><i class="fa-solid fa-chevron-right"></i></div>
         </div>
 
+
         <div class="question" id="question">題目</div>
-        <form class="Answer">
-            <div class="Select" id="A"><label id="A1"><input class="input" type="radio" name="Answer" value="A">選項 A </label></div>
-            <div class="Select" id="B"><label id="B1"><input class="input" type="radio" name="Answer" value="B">選項 B </label></div>
-            <div class="Select" id="C"><label id="C1"><input class="input" type="radio" name="Answer" value="C">選項 C </label></div>
-            <div class="Select" id="D"><label id="D1"><input class="input" type="radio" name="Answer" value="D">選項 D </label></div>
+
+        <div class="Answer">
+            <div class="option" id="A"><label><input class="radio" type="radio" name="Answer" value="A"><spam id="A1">選項 A</spam></label></div>
+            <div class="option" id="B"><label><input class="radio" type="radio" name="Answer" value="B"><spam id="B1">選項 B</spam></label></div>
+            <div class="option" id="C"><label><input class="radio" type="radio" name="Answer" value="C"><spam id="C1">選項 C</spam></label></div>
+            <div class="option" id="D"><label><input class="radio" type="radio" name="Answer" value="D"><spam id="D1">選項 D</spam></label></div>
             
-        </form>
+        </div>
 
 
 
@@ -156,6 +161,11 @@
         
         var number = 0
         var str = ""
+        var state = false    //表示問題載入狀態ture:載入
+        var startX=null
+        var endX=null
+        var startY=null
+        var endY=null
 
 
 
@@ -169,12 +179,14 @@
             str = str.replace(/Ｃ/g,"C");
             str = str.replace(/Ｄ/g,"D");
 
-            console.log(str)
+            // console.log(str)
             str = str + "B3"            
 
             question = str.matchAll(/[A-D]\d{1,2}(.*?)\(A\){1,2}/g);
             question = Array.from(question)
                                     
+            
+            document.getElementById("count").innerText = question.length
             BCD = str.matchAll(/\(A\)(.*?)[A-D]\d/g);
             BCD = Array.from(BCD)
 
@@ -194,16 +206,26 @@
             QN = question[number][1]
             An = question[number][0].substring(0, 1);  //AanswerN
 
-            console.log(An+QN+A+B+C+D)
+            // console.log(An+QN+A+B+C+D)
+
+            document.querySelector("body > div.top > div.number > label > input[type=text]").value = number + 1
 
             document.getElementById("question").innerText = (number+1) + "." + QN
-            document.getElementById("A1").innerHTML = '<label id="A1" ><input class="input" type="radio" name="Answer" value="A"> ' + A + '</label><br/>'
-            document.getElementById("B1").innerHTML = '<label id="B1" ><input class="input" type="radio" name="Answer" value="B"> ' + B + '</label><br/>'
-            document.getElementById("C1").innerHTML = '<label id="C1" ><input class="input" type="radio" name="Answer" value="C"> ' + C + '</label><br/>'
-            document.getElementById("D1").innerHTML = '<label id="D1" ><input class="input" type="radio" name="Answer" value="D"> ' + D + '</label><br/>'
+            document.getElementById("A1").innerHTML = '<spam id="A1"> ' + A + '</spam>'
+            document.getElementById("B1").innerHTML = '<spam id="A1"> ' + B + '</spam>'
+            document.getElementById("C1").innerHTML = '<spam id="A1"> ' + C + '</spam>'
+            document.getElementById("D1").innerHTML = '<spam id="A1"> ' + D + '</spam>'
+
+            if(document.querySelector("[name=Answer]:checked").checked==null){return}
+            document.querySelector("[name=Answer]:checked").checked=false
+
+            
+
         }
 
         function check(){
+
+            if(state==false){return}
 
             var C = document.querySelector("[name=Answer]:checked")
             if (C.value == An) {
@@ -220,13 +242,18 @@
         }
 
         function next(){
+            if(state==false){return}
+            if(number===document.getElementById("count").innerText){return}
             document.getElementById(An).classList.remove("Correct")
             document.getElementById(An).classList.remove("Wrong")
             number=number+1
             TEST(number)
+            
 
         }
         function previous(){
+            if(state==false){return}
+            if(number===0){return}
             document.getElementById(An).classList.remove("Correct")
             document.getElementById(An).classList.remove("Wrong")
             number=number-1
@@ -268,7 +295,13 @@
                 });
         }
 
+        document.querySelector("body > div.top > div.number > label > input[type=text]").onclick = function(){
+            this.select()
+        }
 
+        document.querySelector("body > div.top > div.number > label > input[type=text]").onchange = function(){
+            TEST(Number(this.value)-1)
+        }
 
 
         // getText("https://andys811538.github.io/exam.github.io/WebTest/109.txt")
@@ -277,17 +310,18 @@
         
         document.getElementById("category").onchange = function(){
 
-
+            state = true
 
             ddd = document.getElementById("category").value + ".txt"
 
             getText("https://andys811538.github.io/exam.github.io/WebTest/" + ddd)
 
-
         }
 
 
         document.getElementById('file').onchange = function(){
+
+            state = true
 
             var file = this.files[0];
             var reader = new FileReader();
@@ -301,6 +335,55 @@
             
         }
 
+
+        document.addEventListener('touchstart', function(event) {
+
+                if (event.targetTouches.length == 1) {
+                    var touch = event.targetTouches[0]
+                    startX = touch.pageX
+                    startY = touch.pageY
+                                                 
+                }         
+
+        }, false);
+
+        document.addEventListener('touchmove', function(event) {
+                        if (event.targetTouches.length == 1) {
+                        var touch = event.targetTouches[0]
+                        endX = touch.pageX
+                        endY = touch.pageY
+                        }
+
+        }, false);    
+
+        document.addEventListener('touchend', function(event) {
+
+            if(endX === null){return}
+            if(endY === null){return}
+
+            if(startX-endX>100){
+                startX=null
+                endX=null
+                previous()
+            }
+            if(endX-startX>100){
+                startX=null
+                endX=null
+                next()
+            }
+
+            if(startY-endY>100){
+                startY=null
+                endY=null
+                check()
+            }
+
+            startX=null
+            startY=null
+            endX=null
+            endY=null
+        
+        }, false);     
 
 
 
