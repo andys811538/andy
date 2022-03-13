@@ -130,7 +130,11 @@
         <div class="top">
             <div class="file"><input type="file" name="file" id="file"></div>
             <div class="number"><label><input type="text" value=0>／<spam id="count">0</spam></label></div>
-            <div class="select"><select id="category" class="easyui-combobox" name="category" data-options="panelHeight:'auto'">
+            <div class="select"><select id="category" class="easyui-combobox" name="category" data-options="panelHeight:'auto'">                    
+                    <option name="data" value="92">100</option>
+                    <option name="data" value="93">100</option>
+                    <option name="data" value="94">100</option>
+                    <option name="data" value="99">100</option>
                     <option name="data" value="100">100</option>
                     <option name="data" value="101">101</option>
                     <option name="data" value="102">102</option>
@@ -370,19 +374,19 @@
             if(endX === null){return}
             if(endY === null){return}
 
-            if(startX-endX>100){
+            if(startX-endX>80){
                 startX=null
                 endX=null
                 next()
             }
-            if(endX-startX>100){
+            if(endX-startX>80){
                 startX=null
                 endX=null
                 
                 previous()
             }
 
-            if(startY-endY>100){
+            if(startY-endY>80){
                 startY=null
                 endY=null
                 check()
