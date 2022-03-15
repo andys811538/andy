@@ -100,7 +100,7 @@
                 
             }
             .radio{
-                margin-bottom: 4px;
+                margin-top: 8px;
 
             }
 
@@ -207,8 +207,10 @@
             BCD = str.matchAll(/\(A\)(.*?)[A-D]\d/g);
             BCD = Array.from(BCD)
 
-            TEST(0)
             number = 0
+            
+            TEST(0)
+            
         }
 
         function TEST(number){
@@ -317,6 +319,7 @@
         }
 
         document.querySelector("body > div.top > div.number > label > input[type=text]").onchange = function(){
+            number = Number(this.value)-1
             TEST(Number(this.value)-1)
         }
 
@@ -331,6 +334,7 @@
 
             ddd = document.getElementById("category").value + ".txt"
 
+            
             getText("https://andys811538.github.io/exam.github.io/WebTest/" + ddd)
 
         }
