@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+<style type="text/css">
+
+    :nth-child(0){--n:0}
+    :nth-child(1){--n:1}
+    :nth-child(2){--n:2}
+    :nth-child(3){--n:3}
+    :nth-child(4){--n:4}
+    :nth-child(5){--n:5}
+    :nth-child(6){--n:6}
+    :nth-child(7){--n:7}
+    :nth-child(8){--n:8}
+    :nth-child(9){--n:9}
+    :nth-child(10){--n:10}
+    :nth-child(11){--n:11}
+    :nth-child(12){--n:12}
+    :nth-child(13){--n:13}
+    :nth-child(14){--n:14}
+    :nth-child(15){--n:15}
+    :nth-child(16){--n:16}
+    :nth-child(17){--n:17}
+    :nth-child(18){--n:18}
+    :nth-child(19){--n:19}
+    :nth-child(20){--n:20}
+
+
+    @keyframes abc {
+        0% {
+            visibility: visible;
+            transform: rotate(var(--Stardeg)) translate(0px,var(--R)) scale(calc(  100% - 5% * var(--n)       ))  ;          
+        }
+
+        100% {
+            transform:  rotate(var(--Enddeg)) translate(0px,var(--R)) scale(calc(  100% - 5% * var(--n)       ))  ;
+        }
+    }
+
+    body{        
+        --t:1000ms;
+        --r:      25px;
+        --R:-100px;
+        --d:35deg;
+        --delay:  calc(       var(--t) / 15                                       );
+        --Stardeg:calc(       200deg - var(--d) * var(--n)                         );
+        --Enddeg: calc(       var(--Stardeg) + 360deg       );
+    }
+
+
+    .box:nth-child(n){
+        visibility: hidden;
+        position: absolute;
+        left:150px;
+        top: 150px;
+        width:var(--r);
+        height: var(--r);
+        border-radius: 50%;
+
+        
+        background-color: hsl(calc(     var(--n) *  350 / 15        ) , 100%, 50%)   ;   
+        
+        animation: abc var(--t) infinite  ;
+        animation-delay: calc(      var(--delay) * var(--n)             );
+        animation-timing-function:cubic-bezier(.36,.81,.37,.36) ;
+        /* cubic-bezier(.36,.81,.37,.36) */
+    }
+
+
+
+
+</style>
+<body>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+
+
+
+
+
+</body>
+</html>
