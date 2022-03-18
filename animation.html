@@ -51,18 +51,19 @@
         --delay:  calc(       var(--t) / 15                                       );
         --Stardeg:calc(       200deg - var(--d) * var(--n)                         );
         --Enddeg: calc(       var(--Stardeg) + 360deg       );
+        background-color: black;
     }
 
 
     .box:nth-child(n){
         visibility: hidden;
         position: absolute;
-        left:150px;
-        top: 150px;
+        left:calc(  50% - 13px  );
+        top: calc(  50% - 10px  );
         width:var(--r);
         height: var(--r);
         border-radius: 50%;
-
+        box-shadow: 0 0 2px hsl(calc(     var(--n) *  350 / 15        ) , 20%, 100%);
         
         background-color: hsl(calc(     var(--n) *  350 / 15        ) , 100%, 50%)   ;   
         
@@ -70,25 +71,41 @@
         animation-delay: calc(      var(--delay) * var(--n)             );
         animation-timing-function:cubic-bezier(.36,.81,.37,.36) ;
         /* cubic-bezier(.36,.81,.37,.36) */
+        
+    }
+
+    .load{
+
+        font-family: 'Courier New', Courier, monospace;font-weight: bold;
+        position:fixed;
+        left: calc(  50% - 103px  );
+        top: calc(  50% + 130px  );
+        font-size: 35px;
+        color: aliceblue;
+
     }
 
 
-
-
 </style>
-<body>
-    <div class="box"></div>
-    <div class="box"></div>
-    <div class="box"></div>
-    <div class="box"></div>
-    <div class="box"></div>
-    <div class="box"></div>
-    <div class="box"></div>
-    <div class="box"></div>
-    <div class="box"></div>
-    <div class="box"></div>
-    <div class="box"></div>
+<body >
+    <div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+    </div>
 
+    <div class="load">loading...</div>
+
+    <!-- <div style="position:absolute;background-color: black;height:100%; width: 1px;left: 50%;"></div>
+    <div style="position:absolute;background-color: black;height: 1px; width:100%;top: 50%;"></div> -->
 
 
 
