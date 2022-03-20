@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+
+    body{
+
+        background-color: black;
+
+    }
+
+
+    @keyframes spin {
+        0%{
+            transform:  perspective(1000px) rotateX(-25deg) rotateY(0deg) rotateZ(-25deg);
+        }
+
+        50%{
+            transform:  perspective(1000px) rotateX(25deg) rotateY(180deg) rotateZ(0deg);
+        }
+
+        100%{
+            transform: perspective(1000px) rotateX(-25deg) rotateY(360deg) rotateZ(-25deg);
+        }
+    }
+
+    .Box3D{
+        --w:200px;
+        --h:200px;    
+        position: absolute;
+        left: calc( 50% - var(--w) / 2);
+        top: calc( 50% - var(--h) / 2);
+        width: var(--w);
+        height:var(--h);
+        /* border: 5px solid rgb(0, 0, 0); */
+        transform-origin:100px 100px -100px ;
+        transform-style: preserve-3d; 
+        animation: spin 2.5s linear infinite;
+    } 
+
+
+    
+    .Box3D>div{
+        position: absolute;
+        width:100%;
+        height: 100%;
+        transform-style: preserve-3d;
+        backface-visibility: hidden;
+        font-size: 50px;
+        font-family: 'Courier New', Courier, monospace;
+        font-weight: bold;
+        text-align: center;
+        line-height: 200px;
+        color:azure
+    }
+
+    .back{        
+        background-color: rgba(127, 255, 185, 0.774); 
+        transform: translateZ(-200px) rotateX(-180deg);
+    }
+
+    .front{        
+        background-color: rgb(0, 38, 255);       
+    }
+
+    .left{        
+        transform-origin: left center;
+        background-color: rgb(197, 65, 250);
+        transform: translateZ(-200px) rotateY(-90deg);        
+    }
+
+    .right{        
+        transform-origin: right center;
+        background-color: rgb(240, 157, 49);
+        transform: translateZ(-200px) rotateY(90deg);
+     
+    }
+
+    .bottom{
+        transform-origin: top center;
+        background-color: rgba(5, 115, 158, 0.884);
+        transform: translateZ(-200px) rotateX(90deg);
+    }
+
+    .top{
+        transform-origin: bottom center;
+        background-color: rgba(158, 5, 38, 0.829);
+        transform: translateZ(-200px) rotateX(-90deg);
+    }
+
+
+</style>
+
+
+<body>
+
+    <div class="Box3D">
+        <div class="back">BACK</div>
+        <div class="front">FRONT</div>
+        <div class="top">TOP</div>
+        <div class="bottom">BOTTOM</div>
+        <div class="left">LEFT</div>
+        <div class="right">RIGHT</div>
+    </div>
+
+    
+</body>
+</html>
