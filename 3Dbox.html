@@ -17,18 +17,13 @@
 
 
     @keyframes spin {
-        0%{
-            transform:  perspective(1000px) rotateX(-25deg) rotateY(0deg) rotateZ(-25deg);
-        }
-
-        50%{
-            transform:  perspective(1000px) rotateX(25deg) rotateY(180deg) rotateZ(0deg);
-        }
-
-        100%{
-            transform: perspective(1000px) rotateX(-25deg) rotateY(360deg) rotateZ(-25deg);
-        }
+    0%{
+        transform: perspective(1000px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
     }
+    100%{
+        transform: perspective(1000px) rotateX(720deg) rotateY(2520deg) rotateZ(2160deg);
+    }
+}
 
     .Box3D{
         --w:200px;
@@ -41,7 +36,8 @@
         /* border: 5px solid rgb(0, 0, 0); */
         transform-origin:100px 100px -100px ;
         transform-style: preserve-3d; 
-        animation: spin 2.5s linear infinite;
+        animation: spin 32s linear infinite;
+        /* transform: rotateY(-90deg); */
     } 
 
 
@@ -57,42 +53,253 @@
         font-weight: bold;
         text-align: center;
         line-height: 200px;
-        color:azure
+        color:azure;
+        background-color: rgb(217, 224, 230);
+        background: radial-gradient(circle at 120px 80px, #ffffff, rgba(244, 250, 255, 0.699));
+        border: 1px solid black;
+
+        
     }
 
     .back{        
-        background-color: rgba(127, 255, 185, 0.774); 
+        /* background-color: rgba(127, 255, 185, 0.774);  */
         transform: translateZ(-200px) rotateX(-180deg);
+
     }
 
     .front{        
-        background-color: rgb(0, 38, 255);       
+        /* background-color: rgb(0, 38, 255);      */
+ 
     }
 
     .left{        
         transform-origin: left center;
-        background-color: rgb(197, 65, 250);
-        transform: translateZ(-200px) rotateY(-90deg);        
+        /* background-color: rgb(197, 65, 250); */
+        transform: translateZ(-200px) rotateY(-90deg);   
+   
     }
 
     .right{        
         transform-origin: right center;
-        background-color: rgb(240, 157, 49);
+        /* background-color: rgb(240, 157, 49); */
         transform: translateZ(-200px) rotateY(90deg);
+
      
     }
 
     .bottom{
         transform-origin: top center;
-        background-color: rgba(5, 115, 158, 0.884);
+        /* background-color: rgba(5, 115, 158, 0.884); */
         transform: translateZ(-200px) rotateX(90deg);
+
     }
 
     .top{
         transform-origin: bottom center;
-        background-color: rgba(158, 5, 38, 0.829);
+        /* background-color: rgba(158, 5, 38, 0.829); */
         transform: translateZ(-200px) rotateX(-90deg);
+
     }
+
+    body{
+        --dice:50px
+    }
+
+
+    .one{
+        position: absolute;
+        left: calc( 50% - var(--dice) / 2);
+        top:calc( 50% - var(--dice) / 2);;
+        width: var(--dice);
+        height: var(--dice);
+        border-radius: 50%;
+        background-color:brown;
+    }
+
+    .two:nth-child(1){
+        position: absolute;
+        left: calc( 25% - var(--dice) / 2);
+        top:calc( 25% - var(--dice) / 2);;
+        width: var(--dice);
+        height: var(--dice);
+        border-radius: 50%;
+        background-color: rgb(0, 0, 0);
+
+    }
+    .two:nth-child(2){
+        position: absolute;
+        left: calc( 75% - var(--dice) / 2);
+        top:calc( 75% - var(--dice) / 2);
+        width: var(--dice);
+        height: var(--dice);
+        border-radius: 50%;
+        background-color: rgb(0, 0, 0);
+    }
+
+    .three:nth-child(1){
+        position: absolute;
+        left: calc( 75% - var(--dice) / 2);
+        top:calc( 75% - var(--dice) / 2);
+        width: var(--dice);
+        height: var(--dice);
+        border-radius: 50%;
+        background-color: rgb(0, 0, 0);
+    }
+    .three:nth-child(2){
+        position: absolute;
+        left: calc( 50% - var(--dice) / 2);
+        top:calc( 50% - var(--dice) / 2);
+        width: var(--dice);
+        height: var(--dice);
+        border-radius: 50%;
+        background-color: rgb(0, 0, 0);
+    }
+    .three:nth-child(3){
+        position: absolute;
+        left: calc( 25% - var(--dice) / 2);
+        top:calc( 25% - var(--dice) / 2);
+        width: var(--dice);
+        height: var(--dice);
+        border-radius: 50%;
+        background-color: rgb(0, 0, 0);
+    }
+    .four:nth-child(1){
+        position: absolute;
+        left: calc( 25% - var(--dice) / 2);
+        top:calc( 25% - var(--dice) / 2);
+        width: var(--dice);
+        height: var(--dice);
+        border-radius: 50%;
+        background-color: rgb(0, 0, 0);
+    }
+    .four:nth-child(2){
+        position: absolute;
+        left: calc( 75% - var(--dice) / 2);
+        top:calc( 25% - var(--dice) / 2);
+        width: var(--dice);
+        height: var(--dice);
+        border-radius: 50%;
+        background-color: rgb(0, 0, 0);
+    }
+    .four:nth-child(3){
+        position: absolute;
+        left: calc( 25% - var(--dice) / 2);
+        top:calc( 75% - var(--dice) / 2);
+        width: var(--dice);
+        height: var(--dice);
+        border-radius: 50%;
+        background-color: rgb(0, 0, 0);
+    }
+    .four:nth-child(4){
+        position: absolute;
+        left: calc( 75% - var(--dice) / 2);
+        top:calc( 75% - var(--dice) / 2);
+        width: var(--dice);
+        height: var(--dice);
+        border-radius: 50%;
+        background-color: rgb(0, 0, 0);
+    }
+    .five:nth-child(1){
+        position: absolute;
+        left: calc( 25% - var(--dice) / 2);
+        top:calc( 25% - var(--dice) / 2);
+        width: var(--dice);
+        height: var(--dice);
+        border-radius: 50%;
+        background-color: rgb(0, 0, 0);
+    }
+    .five:nth-child(2){
+        position: absolute;
+        left: calc( 75% - var(--dice) / 2);
+        top:calc( 25% - var(--dice) / 2);
+        width: var(--dice);
+        height: var(--dice);
+        border-radius: 50%;
+        background-color: rgb(0, 0, 0);
+    }
+    .five:nth-child(3){
+        position: absolute;
+        left: calc( 25% - var(--dice) / 2);
+        top:calc( 75% - var(--dice) / 2);
+        width: var(--dice);
+        height: var(--dice);
+        border-radius: 50%;
+        background-color: rgb(0, 0, 0);
+    }
+    .five:nth-child(4){
+        position: absolute;
+        left: calc( 75% - var(--dice) / 2);
+        top:calc( 75% - var(--dice) / 2);
+        width: var(--dice);
+        height: var(--dice);
+        border-radius: 50%;
+        background-color: rgb(0, 0, 0);
+    }
+    .five:nth-child(5){
+        position: absolute;
+        left: calc( 50% - var(--dice) / 2);
+        top:calc( 50% - var(--dice) / 2);
+        width: var(--dice);
+        height: var(--dice);
+        border-radius: 50%;
+        background-color: rgb(0, 0, 0);
+    }
+
+    .six:nth-child(1){
+        position: absolute;
+        left: calc( 33% - var(--dice) / 2);
+        top:calc( 20% - var(--dice) / 2);
+        width: var(--dice);
+        height: var(--dice);
+        border-radius: 50%;
+        background-color: rgb(0, 0, 0);
+    }
+    .six:nth-child(2){
+        position: absolute;
+        left: calc( 66% - var(--dice) / 2);
+        top:calc( 20% - var(--dice) / 2);
+        width: var(--dice);
+        height: var(--dice);
+        border-radius: 50%;
+        background-color: rgb(0, 0, 0);
+    }
+    .six:nth-child(3){
+        position: absolute;
+        left: calc( 33% - var(--dice) / 2);
+        top:calc( 50% - var(--dice) / 2);
+        width: var(--dice);
+        height: var(--dice);
+        border-radius: 50%;
+        background-color: rgb(0, 0, 0);
+    }
+    .six:nth-child(4){
+        position: absolute;
+        left: calc( 66% - var(--dice) / 2);
+        top:calc( 50% - var(--dice) / 2);
+        width: var(--dice);
+        height: var(--dice);
+        border-radius: 50%;
+        background-color: rgb(0, 0, 0);
+    }
+    .six:nth-child(5){
+        position: absolute;
+        left: calc( 33% - var(--dice) / 2);
+        top:calc( 80% - var(--dice) / 2);
+        width: var(--dice);
+        height: var(--dice);
+        border-radius: 50%;
+        background-color: rgb(0, 0, 0);
+    }
+    .six:nth-child(6){
+        position: absolute;
+        left: calc( 66% - var(--dice) / 2);
+        top:calc( 80% - var(--dice) / 2);
+        width: var(--dice);
+        height: var(--dice);
+        border-radius: 50%;
+        background-color: rgb(0, 0, 0);
+    }
+
 
 
 </style>
@@ -101,12 +308,42 @@
 <body>
 
     <div class="Box3D">
-        <div class="back">BACK</div>
-        <div class="front">FRONT</div>
-        <div class="top">TOP</div>
-        <div class="bottom">BOTTOM</div>
-        <div class="left">LEFT</div>
-        <div class="right">RIGHT</div>
+        <div class="back">
+            <div class="one"></div>
+        </div>
+        
+        <div class="front">
+            <div class="two"></div>
+            <div class="two"></div>
+        </div>
+
+        <div class="top">
+            <div class="three"></div>
+            <div class="three"></div>
+            <div class="three"></div>
+        </div>
+
+        <div class="bottom">
+            <div class="four"></div>
+            <div class="four"></div>
+            <div class="four"></div>
+            <div class="four"></div>
+        </div>
+        <div class="left">
+            <div class="five"></div>
+            <div class="five"></div>
+            <div class="five"></div>
+            <div class="five"></div>
+            <div class="five"></div>
+        </div>
+        <div class="right">
+            <div class="six"></div>
+            <div class="six"></div>
+            <div class="six"></div>
+            <div class="six"></div>
+            <div class="six"></div>
+            <div class="six"></div>
+        </div>
     </div>
 
     
