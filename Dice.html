@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://kit.fontawesome.com/c45d543d64.js" crossorigin="anonymous"></script>
 </head>
 
 <style>
@@ -19,24 +20,35 @@
         --rY:0;
         --rZ:0;
         --rDeg:0deg;
-        --x:0px;
-        --y:0px;
-        --z:0px;
+        --x:-60vw;
+        --y:-200vh;
+        --z:170vh;
         --S: calc( var(--x) + var(--y) + var(--z) );
 
-
-
-
+        
     }
+
 
 
     @keyframes hMove {
         0%{
-            transform: perspective(1000px) translateX(0) translateY(0) translateZ(-3000px);
+            transform: perspective(1000px) 
+            translateX(0) 
+            translateY(0) 
+            translateZ(-3000px)
+            rotateX(10deg)
+            rotateY(-10deg)
+            ;
 
         }
         100%{
-            transform: perspective(1000px) translateX(-60vh) translateY(-200vh) translateZ(-3000px);
+            transform: perspective(1000px)
+            translateX(var(--x)) 
+            translateY(var(--y)) 
+            translateZ(-3000px)
+            rotateX(10deg)
+            rotateY(-10deg)
+            ;
 
         }
     }
@@ -47,7 +59,7 @@
         }
 
         50%{
-            transform: translateZ(270vh);
+            transform: translateZ(var(--z));
         }
 
         100%{            
@@ -57,12 +69,13 @@
 
     @keyframes rotate {
         0%{
-            transform:  rotate3d(-0.1,0.2,0.7,0deg);
+            transform:  rotate3d(var(--rX),var(--rY),var(--rZ),0deg);
 
         }
         100%{
-            transform:  rotate3d(-0.1,0.5,0.7,1080deg);
+            transform:  rotate3d(var(--rX),var(--rY),var(--rZ),var(--rDeg));
         }
+
 
     }
 
@@ -76,25 +89,37 @@
     }
 
 
+
+
     .hMove{
+
+        --x:-60vw;
+        --y:-200vh;
+        
+        
         --w:70vw;
         --h:70vw;
         position: absolute;
-        left: calc( 50vw - var(--w) / 2);
-        top: calc( 70vh - var(--h) / 2);
+        left: calc( 50% - var(--w) / 2);
+        top: calc( 70% - var(--h) / 2);
         width: var(--w);
         height:var(--h);
         /* border: 5px solid rgb(255, 255, 255); */
         transform-origin:center center -35vw ;
         transform-style: preserve-3d; 
-        animation: hMove 0.8s linear;
+        /* animation: hMove 0.8s linear; */
         animation-fill-mode:forwards;
         backface-visibility: hidden;
-        transform: rotateX(45deg) rotateY(-25deg) rotateZ(15deg);
+        transform: perspective(1000px) 
+            translateZ(-3000px)
+            rotateX(10deg)
+            rotateY(-10deg);
 
     }
 
     .vMove{
+        --z:170vh;
+
         --w:100%;
         --h:100%;
         position: absolute;
@@ -102,12 +127,18 @@
         height:var(--h);
         transform-origin:center center -35vw ;
         transform-style: preserve-3d; 
-        animation: vMove 0.8s ease-in-out;
+        /* animation: vMove 0.8s ease-in-out; */
         /* border: 5px solid rgb(255, 255, 255); */
         backface-visibility: hidden;
     }
 
     .Box3D{
+
+        --rX:-0.1;
+        --rY:0.5;
+        --rZ:0.7;
+        --rDeg:1440deg;
+
         --w:100%;
         --h:100%;
         position: absolute;
@@ -117,8 +148,8 @@
         /* transform-origin:100px 100px -100px ; */
         transform-origin:center center -35vw ;
         transform-style: preserve-3d; 
-        backface-visibility: hidden;
-        animation: rotate 2.5s linear ;
+        /* backface-visibility: hidden; */
+        /* animation: rotate 2.5s ease-out forwards; */
 
         /* animation: spin 34s linear infinite; */
         /* transform: rotateY(-90deg); */
@@ -380,7 +411,17 @@
         background-color: rgb(0, 0, 0);
     }
 
+.button{
+    position: absolute;
+    left: 45vw;
+    top: 80vh;
+    margin-bottom: 10vh;
+    color: #4db7fdda;
+    font-size: 20vw;
+    cursor:pointer;
 
+
+}
 
 </style>
 
@@ -388,62 +429,126 @@
 <body>
 
 
-    <div class="hMove">
-        <div class="vMove">
-            <div class="Box3D">
-                <div class="back">
-                    <div class="one"></div>
-                </div>
-                
-                <div class="front">
-                    <div class="two"></div>
-                    <div class="two"></div>
-                </div>
+    <div class="surface">
+        <div class="hMove">
+            <div class="vMove">
+                <div class="Box3D">
+                    <div class="back">
+                        <div class="one"></div>
+                    </div>
+                    
+                    <div class="front">
+                        <div class="two"></div>
+                        <div class="two"></div>
+                    </div>
 
-                <div class="top">
-                    <div class="three"></div>
-                    <div class="three"></div>
-                    <div class="three"></div>
-                </div>
+                    <div class="top">
+                        <div class="three"></div>
+                        <div class="three"></div>
+                        <div class="three"></div>
+                    </div>
 
-                <div class="bottom">
-                    <div class="four"></div>
-                    <div class="four"></div>
-                    <div class="four"></div>
-                    <div class="four"></div>
-                </div>
-                <div class="left">
-                    <div class="five"></div>
-                    <div class="five"></div>
-                    <div class="five"></div>
-                    <div class="five"></div>
-                    <div class="five"></div>
-                </div>
-                <div class="right">
-                    <div class="six"></div>
-                    <div class="six"></div>
-                    <div class="six"></div>
-                    <div class="six"></div>
-                    <div class="six"></div>
-                    <div class="six"></div>
-                </div>
-            </div>   
+                    <div class="bottom">
+                        <div class="four"></div>
+                        <div class="four"></div>
+                        <div class="four"></div>
+                        <div class="four"></div>
+                    </div>
+                    <div class="left">
+                        <div class="five"></div>
+                        <div class="five"></div>
+                        <div class="five"></div>
+                        <div class="five"></div>
+                        <div class="five"></div>
+                    </div>
+                    <div class="right">
+                        <div class="six"></div>
+                        <div class="six"></div>
+                        <div class="six"></div>
+                        <div class="six"></div>
+                        <div class="six"></div>
+                        <div class="six"></div>
+                    </div>
+                </div>   
+            </div>
         </div>
+    </div>
+
+    <div onclick="start()" class="button">
+        <i class="fa-solid fa-circle-play"></i>
     </div>
 </body>
 
 <script>
 
-    document.querySelector("body").style.setProperty("--h","50px")
+    // var x = -60
+    // var y = -200
+    // var z = 170
+    // var rX = 0.1
+    // var rY = 0.5
+    // var rZ = 0.7
+    // var rDeg = 1440
+    // var dT = 0.8
+    // var dsT = 2.5
 
-    document.querySelector("body").style.setProperty("--x","30")
-    document.querySelector("body").style.setProperty("--y","40")
-    document.querySelector("body").style.setProperty("--z","50")
+    
 
-    // document.querySelector("body").style.setProperty("--S","12")
 
-    // document.querySelector(".Box3D").style.setProperty("animation","spin2 3s linear infinite,move 3s ease infinite")
-    // animation: spin 34s linear infinite;
+    function getRandom(rnd){
+        var pNum = Math.floor(Math.random()*rnd)
+        var nNum = -1 * Math.floor(Math.random()*rnd)
+
+        
+
+        if(Math.abs(pNum)>=Math.abs(nNum))return pNum
+        return nNum
+    }
+
+    
+    function start(){
+
+        document.querySelector(".hMove").style.setProperty("animation","none")
+        document.querySelector(".vMove").style.setProperty("animation","none")
+        document.querySelector(".Box3D").style.setProperty("animation","none")
+
+        window.setTimeout(function(){
+            
+            
+        
+
+        var x = getRandom(140)
+        var y = -1 * Math.abs(getRandom(240)) - 100
+        var z = 100 + Math.abs(getRandom(120))
+        var rX = getRandom(100)/100
+        var rY = getRandom(100)/100
+        var rZ = getRandom(100)/100
+        var rDeg = 720 + Math.abs(getRandom(18)) * 90//1440
+        var dT = 0.8
+        var dsT = 2.5
+
+        console.log("x:"+x+";y:"+y+"z:"+z+";rX:"+rX+"rY:"+rY+";rZ:"+rZ+";rDeg:"+rDeg)
+
+
+
+        document.querySelector(".hMove").style.setProperty("--x",x + "vw")
+        document.querySelector(".hMove").style.setProperty("--y",y + "vw")
+
+        document.querySelector(".vMove").style.setProperty("--z",z + "vh")
+
+
+        document.querySelector(".Box3D").style.setProperty("--rX",rX)
+        document.querySelector(".Box3D").style.setProperty("--rY",rY)
+        document.querySelector(".Box3D").style.setProperty("--rZ",rZ)
+        document.querySelector(".Box3D").style.setProperty("--rDeg",rDeg + "deg")
+
+        document.querySelector(".hMove").style.setProperty("animation","hMove " + dT + "s linear forwards")
+        document.querySelector(".vMove").style.setProperty("animation","vMove " + dT + "s ease-in-out")
+        document.querySelector(".Box3D").style.setProperty("animation","rotate " + dsT + "s ease-out forwards")
+
+        },10)
+        
+
+    }
 
 </script>
 
