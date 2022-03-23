@@ -650,80 +650,17 @@
 
         if (Math.abs(pNum) >= Math.abs(nNum)) return pNum
         return nNum
-    }
-
-    window.addEventListener("deviceorientation", function (event){
-        rDeg = event.gamma  //+left;-right
-    },false)
-
-    window.addEventListener('devicemotion', function (event) {
-
-        var ax = event.acceleration.x,
-            ay = event.acceleration.y,
-            az = event.acceleration.z;
-
-            if(az>3.5 & ay>6.5){
-                if(ax>19){
-                    ax = 20
-                }
-                if(ax<-19){
-                    ax = -20
-                }
-                if(ay>19){
-                    ay = 20
-                }
-                if(az>19){
-                    az = 20
-                }
-                if(rDeg>30){
-                    rDeg = 30
-                }
-                if(rDeg<-30){
-                    rDeg = -30
-                }
-
-                //20 max ; 7 min                   
-
-                x = 140 * rDeg / 30
-                y = -1 * 240 * ay / 20
-                z = 220 * az / 20
-                rX = getRandom(5) * 90//getRandom(100) / 100
-                rY = getRandom(5) * 90//getRandom(100) / 100
-                rZ = 720 + Math.abs(getRandom(1520)) * (ay + az) / 40  //getRandom(100) / 100
-
-                dT = 0.8
-                dsT = 2.5
-
-                rolling()
-            }
-
-
-    },false)
-
-
-
-
-
-
-
-
-
-    function start() {
-
-        y = -1 * Math.abs(getRandom(240))
-        x = getRandom(140)
-        z = 100 + Math.abs(getRandom(120))
-        rX = getRandom(5) * 90//getRandom(100) / 100
-        rY = getRandom(5) * 90//getRandom(100) / 100
-        rZ = 720 + Math.abs(getRandom(1220))//getRandom(100) / 100
-        rDeg = 720 + Math.abs(getRandom(18)) * 45//1440
-        dT = 0.8
-        dsT = 2.5
-
-        rolling()
 
     }
 
+    function getPN(){
+
+        var Temp = Math.random()
+        if(Temp>0.45) return +1
+        if(Temp<=0.45) return -1
+
+    }
+    
     function rolling() {
         document.querySelector(".hMove").style.setProperty("animation", "none")
         document.querySelector(".vMove").style.setProperty("animation", "none")
@@ -758,6 +695,76 @@
 
 
     }
+
+    window.addEventListener("deviceorientation", function (event){
+        rDeg = event.beta  //90-left;90+right
+    },false)
+
+    window.addEventListener('devicemotion', function (event) {
+
+        var ax = event.acceleration.x,
+            ay = event.acceleration.y,
+            az = event.acceleration.z;
+
+            if(az>3.5 & ay>6.5){
+                if(ax>19){
+                    ax = 20
+                }
+                if(ax<-19){
+                    ax = -20
+                }
+                if(ay>19){
+                    ay = 20
+                }
+                if(az>19){
+                    az = 20
+                }
+                rDeg = rDeg - 90
+
+
+                //20 max ; 7 min                   
+
+                x = 140 * rDeg / 45
+                y = -1 * 240 * ay / 20
+                z = 220 * az / 20
+                rX = getRandom(5) * 90//getRandom(100) / 100
+                rY = getRandom(5) * 90//getRandom(100) / 100
+                rZ = getPN() * (720 + Math.abs(getRandom(1520)) * (ay + az) / 40)  //getRandom(100) / 100
+
+                dT = 0.8
+                dsT = 2.5
+
+                rolling()
+            }
+
+
+    },false)
+
+
+
+
+
+
+
+
+
+    function start() {
+
+        y = -1 * Math.abs(getRandom(240))
+        x = getRandom(140)
+        z = 100 + Math.abs(getRandom(120))
+        rX = getRandom(5) * 90//getRandom(100) / 100
+        rY = getRandom(5) * 90//getRandom(100) / 100
+        rZ = getPN() * (720 + Math.abs(getRandom(1220)))//getRandom(100) / 100
+        rDeg = 720 + Math.abs(getRandom(18)) * 45//1440
+        dT = 0.8
+        dsT = 2.5
+
+        rolling()
+
+    }
+
+
 
 </script>
 
