@@ -606,6 +606,8 @@
         <i class="fa-solid fa-question"></i>
     </div>
 
+
+    <!-- <div id="sts" style="font-size: xx-large;color: #ffffff;">123</div> -->
     <!-- <div class="helpBox">
         <div class="rotate">
             <i class="fa-solid fa-arrows-rotate"></i>
@@ -696,17 +698,19 @@
 
     }
 
-    window.addEventListener("deviceorientation", function (event){
-        rDeg = event.beta  //90-left;90+right
-    },false)
+    // window.addEventListener("deviceorientation", function (event){
+        
+        
+    // },false)
 
     window.addEventListener('devicemotion', function (event) {
 
         var ax = event.acceleration.x,
             ay = event.acceleration.y,
             az = event.acceleration.z;
-
-            if(az>3.5 & ay>6.5){
+            rDeg = event.rotationRate.gamma  //90+left;90-right
+            // document.getElementById("sts").innerText = rDeg
+            if(az>3.5 & ay>4.5){
                 if(ax>19){
                     ax = 20
                 }
@@ -719,12 +723,17 @@
                 if(az>19){
                     az = 20
                 }
-                rDeg = rDeg - 90
 
+                if(rDeg>19){
+                    rDeg = 20
+                }
+                if(rDeg<-19){
+                    rDeg = -19
+                }
 
                 //20 max ; 7 min                   
 
-                x = 140 * rDeg / 45
+                x = -140 * (rDeg) / 19
                 y = -1 * 240 * ay / 20
                 z = 220 * az / 20
                 rX = getRandom(5) * 90//getRandom(100) / 100
