@@ -12,7 +12,7 @@
 <style>
     body {
 
-        background-color: rgba(0, 0, 0, 0.856);
+        background-color: rgb(43, 43, 43);
 
         margin: 0;
 
@@ -20,7 +20,7 @@
         --rY: 0;
         --rZ: 0;
         --rDeg: 0deg;
-        --x: -60vw;
+        --x: -60vmin;
         --y: -200vh;
         --z: 170vh;
         --S: calc(var(--x) + var(--y) + var(--z));
@@ -141,19 +141,19 @@
 
     .hMove {
 
-        --x: -60vw;
+        --x: -60vmin;
         --y: -200vh;
 
 
-        --w: 70vw;
-        --h: 70vw;
+        --w: 70vmin;
+        --h: 70vmin;
         position: absolute;
         left: calc(50% - var(--w) / 2);
         top: calc(70% - var(--h) / 2);
         width: var(--w);
         height: var(--h);
         /* border: 5px solid rgb(255, 255, 255); */
-        transform-origin: center center -35vw;
+        transform-origin: center center -35vmin;
         transform-style: preserve-3d;
         /* animation: hMove 0.8s linear; */
         animation-fill-mode: forwards;
@@ -170,7 +170,7 @@
         position: absolute;
         width: var(--w);
         height: var(--h);
-        transform-origin: center center -35vw;
+        transform-origin: center center -35vmin;
         transform-style: preserve-3d;
         /* animation: vMove 0.8s ease-in-out; */
         /* border: 5px solid rgb(255, 255, 255); */
@@ -191,7 +191,7 @@
         height: var(--h);
         /* border: 5px solid rgb(0, 0, 0); */
         /* transform-origin:100px 100px -100px ; */
-        transform-origin: center center -35vw;
+        transform-origin: center center -35vmin;
         transform-style: preserve-3d;
         /* backface-visibility: hidden; */
         /* animation: rotate 2.5s ease-out forwards; */
@@ -222,7 +222,7 @@
 
     .back {
         /* background-color: rgba(0, 255, 115, 0.774);  */
-        transform: translateZ(-70vw) rotateX(-180deg);
+        transform: translateZ(-70vmin) rotateX(-180deg);
 
     }
 
@@ -231,14 +231,14 @@
     .left {
         transform-origin: left center;
         /* background-color: rgb(197, 65, 250); */
-        transform: translateZ(-70vw) rotateY(-90deg);
+        transform: translateZ(-70vmin) rotateY(-90deg);
 
     }
 
     .right {
         transform-origin: right center;
         /* background-color: rgb(240, 157, 49); */
-        transform: translateZ(-70vw) rotateY(90deg);
+        transform: translateZ(-70vmin) rotateY(90deg);
 
 
     }
@@ -246,19 +246,19 @@
     .bottom {
         transform-origin: top center;
         /* background-color: rgba(5, 115, 158, 0.884); */
-        transform: translateZ(-70vw) rotateX(90deg);
+        transform: translateZ(-70vmin) rotateX(90deg);
 
     }
 
     .top {
         transform-origin: bottom center;
         /* background-color: rgba(158, 5, 38, 0.829); */
-        transform: translateZ(-70vw) rotateX(-90deg);
+        transform: translateZ(-70vmin) rotateX(-90deg);
 
     }
 
     body {
-        --dice: 15vw
+        --dice: 15vmin
     }
 
 
@@ -478,24 +478,75 @@
     .button {
         position: fixed;
         margin: 0;
-        width: 20vw;
-        height: 20vw;
-        left: 40vw;
+        width: 20vmin;
+        height: 20vmin;
+        left: calc(50vw - 10vmin);
         top: 80vh;
         border-radius: 50%;
         margin-bottom: 10vh;
 
         color: #4db7fdda;
-        font-size: 20vw;
+        font-size: 20vmin;
         cursor: pointer;
 
 
     }
 
-    .test {
-        font-size: large;
-        color: #ffffff;
+    .help {
+        position: fixed;
+        margin: 1vmin;
+        right: 0;
+        width: 8vmin;
+        height: 8vmin;
+        color: #4db7fdda;
+        font-size: 8vmin;
+        cursor: pointer;
+
     }
+
+    .helpBox{
+        position: fixed;
+        opacity: 0.96;
+        width: 80vw;
+        height: 80vh;
+        background-color: aliceblue;
+        left: 10vw;
+        top: 10vw;
+        border-radius: 3vmin;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* .phone{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .phone>i{
+        position: absolute;
+        width: 30vmin;
+        height: 30vmin;
+        font-size: 30vmin;
+        left: calc( 50% - 10vmin);        
+        transform: perspective(1000px) rotateX(55deg) rotateZ(-25deg);   
+
+    }
+
+    .rotate{
+        position: absolute;
+        width: 50vmin;
+        height: 50vmin;
+        font-size: 60vmin;
+        left: calc( 30% - 10vmin); 
+        color: rgb(0, 140, 255);
+               
+        
+
+    } */
+
+
 </style>
 
 
@@ -547,12 +598,25 @@
         </div>
     </div>
 
-
-
-
     <div onclick="start()" class="button">
         <i class="fa-solid fa-circle-play"></i>
     </div>
+
+    <div class="help">
+        <i class="fa-solid fa-question"></i>
+    </div>
+
+    <!-- <div class="helpBox">
+        <div class="rotate">
+            <i class="fa-solid fa-arrows-rotate"></i>
+        </div>
+        <div class="phone">
+            <i class="fa-solid fa-mobile-screen-button"></i>            
+        </div>
+
+    </div> -->
+
+
 </body>
 
 <script>
@@ -588,6 +652,9 @@
         return nNum
     }
 
+    window.addEventListener("deviceorientation", function (event){
+        rDeg = event.gamma  //+left;-right
+    },false)
 
     window.addEventListener('devicemotion', function (event) {
 
@@ -595,7 +662,7 @@
             ay = event.acceleration.y,
             az = event.acceleration.z;
 
-            if(az>7 & ay>7){
+            if(az>3.5 & ay>6.5){
                 if(ax>19){
                     ax = 20
                 }
@@ -608,10 +675,17 @@
                 if(az>19){
                     az = 20
                 }
+                if(rDeg>30){
+                    rDeg = 30
+                }
+                if(rDeg<-30){
+                    rDeg = -30
+                }
+
                 //20 max ; 7 min                   
 
-                x = 140 * ax / 20
-                y = -1 * 340 * ay / 20
+                x = 140 * rDeg / 30
+                y = -1 * 240 * ay / 20
                 z = 220 * az / 20
                 rX = getRandom(5) * 90//getRandom(100) / 100
                 rY = getRandom(5) * 90//getRandom(100) / 100
@@ -636,7 +710,7 @@
 
     function start() {
 
-        y = -1 * Math.abs(getRandom(240)) - 100
+        y = -1 * Math.abs(getRandom(240))
         x = getRandom(140)
         z = 100 + Math.abs(getRandom(120))
         rX = getRandom(5) * 90//getRandom(100) / 100
@@ -662,7 +736,7 @@
 
 
             document.querySelector(".hMove").style.setProperty("--x", x + "vw")
-            document.querySelector(".hMove").style.setProperty("--y", y + "vw")
+            document.querySelector(".hMove").style.setProperty("--y", y + "vh")
 
             document.querySelector(".vMove").style.setProperty("--z", z + "vh")
 
