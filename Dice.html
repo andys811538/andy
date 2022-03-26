@@ -624,6 +624,19 @@
 <script>
 
 
+    $('.Gravity').on('click',function(){
+    // ios 提示授权， 返回的是一个 promise
+        window.DeviceOrientationEvent.requestPermission()
+         .then(state => {
+            if(state === "granted"){//允许
+                alert("允许使用陀螺仪：",state)
+            }else if(state === "denied"){//拒绝
+                alert("拒绝使用陀螺仪：",state)
+            }else if(state === "prompt"){
+                alert("用户进行其他操作：",state)
+            }
+        })    
+    })  
     
     // var x = -60
     // var y = -200
@@ -706,10 +719,9 @@
     // },false)
     
     
-    if(window.DeviceOrientationEvent && window.DeviceOrientationEvent.requestPermission){
-        DeviceOrientationEvent.requestPermission().then(r=>{
+
             
-            window.addEventListener('devicemotion', function (event) {
+    window.addEventListener('devicemotion', function (event) {
 
         var ax = event.acceleration.x,
             ay = event.acceleration.y,
@@ -754,9 +766,7 @@
 
 
     },false)
-            
-        });
-    }
+
 
     
 
