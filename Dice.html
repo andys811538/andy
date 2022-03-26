@@ -623,6 +623,8 @@
 
 <script>
 
+
+    
     // var x = -60
     // var y = -200
     // var z = 170
@@ -702,8 +704,12 @@
         
         
     // },false)
-
-    window.addEventListener('devicemotion', function (event) {
+    
+    
+    if(window.DeviceOrientationEvent && window.DeviceOrientationEvent.requestPermission){
+        DeviceOrientationEvent.requestPermission().then(r=>{
+            
+            window.addEventListener('devicemotion', function (event) {
 
         var ax = event.acceleration.x,
             ay = event.acceleration.y,
@@ -748,6 +754,11 @@
 
 
     },false)
+            
+        });
+    }
+
+    
 
 
 
