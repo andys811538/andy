@@ -177,96 +177,96 @@
 
 
     
+    setTimeout(function(){
 
+        var Timer = setInterval(function(){
 
-    var Timer = setInterval(function(){
+            time = time + dt
+            for(i=1; i<=num; i++){        
 
-        time = time + dt
-        for(i=1; i<=num; i++){        
-
-            for(j=i;j<=num;j++){
-                if(j===i){
-                    continue
-                }
-                
-                dBallx = ball[i].x - ball[j].x
-                dBally = ball[i].y - ball[j].y
-
-
-
-                dBall = Math.pow(dBallx,2) + Math.pow(dBally,2)
-
-                if(dBall>Math.pow(2*ball[1].r,2)){
-                    state[i][j] = true                    
-                }
-                
-                if(state[i][j] === true && dBall <= Math.pow(2*ball[1].r,2)){
-                    
-                    
-                    var vx1 = ball[i].vx
-                    var vy1 = ball[i].vy
-                    var vx2 = ball[j].vx
-                    var vy2 = ball[j].vy
-
-                    var vax = (vx1 + vx2)
-                    var vay = (vy1 + vy2)
-                    // console.log(ball[i].vx,ball[j].vx)
-
-                    if((vx1*vx1+vy1*vy1)>(vx2*vx2+vy2*vy2)){
-                        dBallx = ball[i].x - ball[j].x
-                        dBally = ball[i].y - ball[j].y
-                        a = (vax * dBallx + vay * dBally) / (dBallx * dBallx + dBally * dBally) * dBallx
-                        b = (vax * dBallx + vay * dBally) / (dBallx * dBallx + dBally * dBally) * dBally
-
-                        ball[j].vx = a
-                        ball[j].vy = b
-                        ball[i].vx = vax - a
-                        ball[i].vy = vay - b
-
-                        // console.log("j")
-                        // console.log(ball[i].vx,ball[j].vx)
-
+                for(j=i;j<=num;j++){
+                    if(j===i){
+                        continue
                     }
 
-                    else if((vx1*vx1+vy1*vy1)<(vx2*vx2+vy2*vy2)){
-                        dBallx = ball[i].x - ball[j].x
-                        dBally = ball[i].y - ball[j].y
-                        a = (vax * dBallx + vay * dBally) / (dBallx * dBallx + dBally * dBally) * dBallx
-                        b = (vax * dBallx + vay * dBally) / (dBallx * dBallx + dBally * dBally) * dBally
+                    dBallx = ball[i].x - ball[j].x
+                    dBally = ball[i].y - ball[j].y
 
-                        ball[i].vx = a
-                        ball[i].vy = b
-                        ball[j].vx = vax - a
-                        ball[j].vy = vay - b
 
-                        // console.log("i")
-                        // console.log(ball[i].vx,ball[j].vx)
+
+                    dBall = Math.pow(dBallx,2) + Math.pow(dBally,2)
+
+                    if(dBall>Math.pow(2*ball[1].r,2)){
+                        state[i][j] = true                    
                     }
 
+                    if(state[i][j] === true && dBall <= Math.pow(2*ball[1].r,2)){
 
-                       
-                    
-                    state[i][j] = false
+
+                        var vx1 = ball[i].vx
+                        var vy1 = ball[i].vy
+                        var vx2 = ball[j].vx
+                        var vy2 = ball[j].vy
+
+                        var vax = (vx1 + vx2)
+                        var vay = (vy1 + vy2)
+                        // console.log(ball[i].vx,ball[j].vx)
+
+                        if((vx1*vx1+vy1*vy1)>(vx2*vx2+vy2*vy2)){
+                            dBallx = ball[i].x - ball[j].x
+                            dBally = ball[i].y - ball[j].y
+                            a = (vax * dBallx + vay * dBally) / (dBallx * dBallx + dBally * dBally) * dBallx
+                            b = (vax * dBallx + vay * dBally) / (dBallx * dBallx + dBally * dBally) * dBally
+
+                            ball[j].vx = a
+                            ball[j].vy = b
+                            ball[i].vx = vax - a
+                            ball[i].vy = vay - b
+
+                            // console.log("j")
+                            // console.log(ball[i].vx,ball[j].vx)
+
+                        }
+
+                        else if((vx1*vx1+vy1*vy1)<(vx2*vx2+vy2*vy2)){
+                            dBallx = ball[i].x - ball[j].x
+                            dBally = ball[i].y - ball[j].y
+                            a = (vax * dBallx + vay * dBally) / (dBallx * dBallx + dBally * dBally) * dBallx
+                            b = (vax * dBallx + vay * dBally) / (dBallx * dBallx + dBally * dBally) * dBally
+
+                            ball[i].vx = a
+                            ball[i].vy = b
+                            ball[j].vx = vax - a
+                            ball[j].vy = vay - b
+
+                            // console.log("i")
+                            // console.log(ball[i].vx,ball[j].vx)
+                        }
+
+
+
+
+                        state[i][j] = false
+                    }
+                }    
+                // console.log(state)
+
+                if(ball[i].x>=boundX | ball[i].x<=0){
+                    ball[i].vx = -ball[i].vx
                 }
-            }    
-            // console.log(state)
+                if(ball[i].y>=boundY | ball[i].y<=0){
+                    ball[i].vy = -ball[i].vy
+                }
 
-            if(ball[i].x>=boundX | ball[i].x<=0){
-                ball[i].vx = -ball[i].vx
-            }
-            if(ball[i].y>=boundY | ball[i].y<=0){
-                ball[i].vy = -ball[i].vy
+                ball[i].x = ball[i].x + ball[i].vx * dt
+                ball[i].y = ball[i].y + ball[i].vy * dt
+                ball[i].element.style.transform = "translate(" + ball[i].x + "px, " + ball[i].y + "px)"
+
             }
 
-            ball[i].x = ball[i].x + ball[i].vx * dt
-            ball[i].y = ball[i].y + ball[i].vy * dt
-            ball[i].element.style.transform = "translate(" + ball[i].x + "px, " + ball[i].y + "px)"
-                    
-        }
-        
-    },dt)
+        },dt)
     
-
+    },2000)
 
 
 </script>    
