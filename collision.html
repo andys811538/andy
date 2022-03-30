@@ -76,35 +76,35 @@
 <body>
 
     <div id="bound" class="bound">
-        <div id="box1" class="box"></div>
-        <div id="box2" class="box"></div>
-        <div id="box3" class="box"></div>
-        <div id="box4" class="box"></div>
-        <div id="box5" class="box"></div>
-        <div id="box6" class="box"></div>
-        <div id="box7" class="box"></div>
-        <div id="box8" class="box"></div>
-        <div id="box9" class="box"></div>
-        <div id="box10" class="box"></div>
-        <div id="box11" class="box"></div>
-        <div id="box12" class="box"></div>
-        <div id="box13" class="box"></div>
-        <div id="box14" class="box"></div>
-        <div id="box15" class="box"></div>
-        <div id="box16" class="box"></div>
-        <div id="box17" class="box"></div>
-        <div id="box18" class="box"></div>
-        <div id="box19" class="box"></div>
-        <div id="box20" class="box"></div>
-        <div id="box21" class="box"></div>
-        <div id="box22" class="box"></div>
-        <div id="box23" class="box"></div>
-        <div id="box24" class="box"></div>
-        <div id="box25" class="box"></div>
-        <div id="box26" class="box"></div>
-        <div id="box27" class="box"></div>
-        <div id="box28" class="box"></div>
-        <div id="box29" class="box"></div>
+        <div id="box1"  onclick="change(1)" class="box"></div>
+        <div id="box2"  onclick="change(2)" class="box"></div>
+        <div id="box3"  onclick="change(3)" class="box"></div>
+        <div id="box4"  onclick="change(4)" class="box"></div>
+        <div id="box5"  onclick="change(5)" class="box"></div>
+        <div id="box6"  onclick="change(6)" class="box"></div>
+        <div id="box7"  onclick="change(7)" class="box"></div>
+        <div id="box8"  onclick="change(8)" class="box"></div>
+        <div id="box9"  onclick="change(9)" class="box"></div>
+        <div id="box10" onclick="change(10)" class="box"></div>
+        <div id="box11" onclick="change(11)" class="box"></div>
+        <div id="box12" onclick="change(12)" class="box"></div>
+        <div id="box13" onclick="change(13)" class="box"></div>
+        <div id="box14" onclick="change(14)" class="box"></div>
+        <div id="box15" onclick="change(15)" class="box"></div>
+        <div id="box16" onclick="change(16)" class="box"></div>
+        <div id="box17" onclick="change(17)" class="box"></div>
+        <div id="box18" onclick="change(18)" class="box"></div>
+        <div id="box19" onclick="change(19)" class="box"></div>
+        <div id="box20" onclick="change(20)" class="box"></div>
+        <div id="box21" onclick="change(21)" class="box"></div>
+        <div id="box22" onclick="change(22)" class="box"></div>
+        <div id="box23" onclick="change(23)" class="box"></div>
+        <div id="box24" onclick="change(24)" class="box"></div>
+        <div id="box25" onclick="change(25)" class="box"></div>
+        <div id="box26" onclick="change(26)" class="box"></div>
+        <div id="box27" onclick="change(27)" class="box"></div>
+        <div id="box28" onclick="change(28)" class="box"></div>
+        <div id="box29" onclick="change(29)" class="box"></div>
     </div>
 
 </body>
@@ -146,7 +146,7 @@
         ball[i].vx = initialV()
         ball[i].vy = initialV()     
         ball[i].r = parseFloat(ball[i].style.width) / 2       
-        
+
     }   
 
     for(i=1 ; i<=num; i++){
@@ -165,18 +165,12 @@
 
     }
 
-        // ball[1].x = 100
-        // ball[1].y = 250
-        // ball[1].vx = 0
-        // ball[1].vy = 0   
-
-        // ball[2].x = 300
-        // ball[2].y = 250
-        // ball[2].vx = -1
-        // ball[2].vy = 0
-
-
     
+    function change(temp){
+        ball[temp].vx = initialV()
+        ball[temp].vy = initialV()
+    }
+
     setTimeout(function(){
 
         var Timer = setInterval(function(){
@@ -267,6 +261,7 @@
         },dt)
     
     },2000)
+
 
 
 </script>    
