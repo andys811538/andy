@@ -9,36 +9,36 @@
 
 <style>
 
-:nth-child(1){--n:1}
-:nth-child(2){--n:2}
-:nth-child(3){--n:3}
-:nth-child(4){--n:4}
-:nth-child(5){--n:5}
-
-:nth-child(7){--n:7}
-:nth-child(8){--n:8}
-:nth-child(9){--n:9}
-:nth-child(10){--n:10}
-:nth-child(11){--n:11}
-:nth-child(12){--n:12}
-:nth-child(13){--n:13}
-:nth-child(14){--n:14}
-:nth-child(15){--n:15}
-:nth-child(16){--n:16}
-:nth-child(17){--n:17}
-:nth-child(18){--n:18}
-:nth-child(19){--n:19}
-:nth-child(20){--n:20}
-:nth-child(21){--n:21}
-:nth-child(22){--n:22}
-:nth-child(23){--n:23}
-:nth-child(24){--n:24}
-:nth-child(25){--n:25}
-:nth-child(26){--n:26}
-:nth-child(27){--n:27}
-:nth-child(28){--n:28}
-:nth-child(29){--n:29}
-:nth-child(30){--n:30}
+    :nth-child(1){ --n:1  ; --r:4vmin}
+    :nth-child(2){ --n:2  ; --r:4vmin}
+    :nth-child(3){ --n:3  ; --r:4vmin}
+    :nth-child(4){ --n:4  ; --r:4vmin}
+    :nth-child(5){ --n:5  ; --r:4vmin}
+    :nth-child(6){ --n:6  ; --r:4vmin}
+    :nth-child(7){ --n:7  ; --r:4vmin}
+    :nth-child(8){ --n:8  ; --r:4vmin}
+    :nth-child(9){ --n:9  ; --r:4vmin}
+    :nth-child(10){--n:10 ; --r:4vmin}
+    :nth-child(11){--n:11 ; --r:4vmin}
+    :nth-child(12){--n:12 ; --r:4vmin}
+    :nth-child(13){--n:13 ; --r:4vmin}
+    :nth-child(14){--n:14 ; --r:4vmin}
+    :nth-child(15){--n:15 ; --r:4vmin}
+    :nth-child(16){--n:16 ; --r:4vmin}
+    :nth-child(17){--n:17 ; --r:4vmin}
+    :nth-child(18){--n:18 ; --r:4vmin}
+    :nth-child(19){--n:19 ; --r:4vmin}
+    :nth-child(20){--n:20 ; --r:4vmin}
+    :nth-child(21){--n:21 ; --r:4vmin}
+    :nth-child(22){--n:22 ; --r:4vmin}
+    :nth-child(23){--n:23 ; --r:4vmin}
+    :nth-child(24){--n:24 ; --r:4vmin}
+    :nth-child(25){--n:25 ; --r:4vmin}
+    :nth-child(26){--n:26 ; --r:4vmin}
+    :nth-child(27){--n:27 ; --r:4vmin}
+    :nth-child(28){--n:28 ; --r:4vmin}
+    :nth-child(29){--n:29 ; --r:4vmin}
+    :nth-child(30){--n:30 ; --r:4vmin}
 
     body{
         margin: 0;
@@ -47,20 +47,26 @@
 
     .bound{
         margin: 0;
-        width: calc( 99.5vw - 10vmin);
-        height: calc( 99.5vh - 10vmin);
+        width: calc( 99vw);
+        height: calc( 99vh);
         /* margin-bottom: 10vmin; */
         /* border: solid 1px black; */
-        padding-right: 10vmin;
-        padding-bottom: 10vmin;
+        /* padding-right: 10vmin;
+        padding-bottom: 10vmin; */
+        /* border: 1px white solid; */
     }
 
     .box:nth-child(n){
         position: absolute;
         background-color: hsl(calc(   var(--n) * 360 / 30       ), 80%, 50%);
-        width: 4vmin;
-        height: 4vmin;
-        transform:translate(45vw,45vh);
+        /* background: radial-gradient(circle at center center, hsl(calc(   var(--n) * 360 / 30       ), 80%, 20%), hsl(calc(   320 - var(--n) * 360 / 30 ), 80%, 20%)); */
+        background: linear-gradient(45deg, hsl(calc(   var(--n) * 360 / 30       ), 90%, 60%),
+        hsl(calc(   ( var(--n) + 3) * 360 / 30       ), 90%, 55%),
+        hsl(calc(   ( var(--n) + 5 ) * 360 / 30       ), 80%, 55%),
+        hsl(calc(   ( var(--n) + 7 ) * 360 / 30       ), 80%, 55%));
+        width: var(--r);
+        height: var(--r);
+        transform:translate(calc( 99vw / 2 - var(--r) / 2   ),calc( 99vh / 2 - var(--r) / 2   ));
         /* border: 1px solid black; */
         border-radius: 50%;
         font-size: 4vmin;
@@ -68,6 +74,7 @@
         text-align: center;
         line-height: 4vmin;
         font-family: 'Courier New', Courier, monospace;
+
     }
 
     
@@ -110,6 +117,9 @@
 </body>
 
 <script>
+    // :nth-child(1)
+
+
 
     const bound = document.getElementById("bound")
     const boundStyle = getComputedStyle(bound)
@@ -120,6 +130,17 @@
     const dt = 1
     var time = 0
     
+    function getRandom(rnd) {
+        var pNum = Math.floor(Math.random() * rnd)
+        var nNum = -1 * Math.floor(Math.random() * rnd)
+
+
+
+        if (Math.abs(pNum) >= Math.abs(nNum)) return pNum
+        return nNum
+
+    }
+
     function getPN(){
 
         var Temp = Math.random()
@@ -128,15 +149,18 @@
     }
 
     function initialV(){
-        var result = (0.4 + Math.random())*1.5*getPN()
+        var result = (0.4 + Math.random())*3*getPN()
         return result
     }
-
 
     var num = 29
     var ball = []   
     var state = []
-    
+
+    // for(i = 1 ; i<=num ; i++){
+    //     document.querySelector(":nth-child(" + i + ")").style.setProperty("--r", 4 + Math.abs(getRandom(6)) + "vmin")
+    // }
+
     for(i=1 ; i<=num; i++){
         ball[i]={}
         ball[i].element=document.getElementById("box" + i)
@@ -146,7 +170,7 @@
         ball[i].vx = initialV()
         ball[i].vy = initialV()     
         ball[i].r = parseFloat(ball[i].style.width) / 2       
-
+        // console.log(ball[i].r)
     }   
 
     for(i=1 ; i<=num; i++){
@@ -156,7 +180,6 @@
         }
     }
 
-
     function getPN(){
 
         var Temp = Math.random()
@@ -164,7 +187,6 @@
         if(Temp<=0.5) return -1
 
     }
-
     
     function change(temp){
         ball[temp].vx = initialV()
@@ -186,16 +208,13 @@
                     dBallx = ball[i].x - ball[j].x
                     dBally = ball[i].y - ball[j].y
 
-
-
                     dBall = Math.pow(dBallx,2) + Math.pow(dBally,2)
 
                     if(dBall>Math.pow(2*ball[1].r,2)){
                         state[i][j] = true                    
                     }
 
-                    if(state[i][j] === true && dBall <= Math.pow(2*ball[1].r,2)){
-
+                    if(state[i][j] === true && dBall <= Math.pow(ball[i].r + ball[j].r,2)){
 
                         var vx1 = ball[i].vx
                         var vy1 = ball[i].vy
@@ -237,18 +256,15 @@
                             // console.log(ball[i].vx,ball[j].vx)
                         }
 
-
-
-
                         state[i][j] = false
                     }
                 }    
                 // console.log(state)
 
-                if(ball[i].x>=boundX | ball[i].x<=0){
+                if(ball[i].x + 2*ball[i].r>=boundX | ball[i].x<=0){
                     ball[i].vx = -ball[i].vx
                 }
-                if(ball[i].y>=boundY | ball[i].y<=0){
+                if(ball[i].y + 2*ball[i].r>=boundY | ball[i].y<=0){
                     ball[i].vy = -ball[i].vy
                 }
 
@@ -261,8 +277,6 @@
         },dt)
     
     },2000)
-
-
 
 </script>    
 
