@@ -46,10 +46,11 @@
     }
 
     .bound{
-        margin: 0;
+        margin: auto;
         width: calc( 99vw);
         height: calc( 99vh);
-        /* margin-bottom: 10vmin; */
+        /* line-height: 100vh; */
+        margin-top: 0.5vh;
         /* border: solid 1px black; */
         /* padding-right: 10vmin;
         padding-bottom: 10vmin; */
@@ -69,7 +70,7 @@
         transform:translate(calc( 99vw / 2 - var(--r) / 2   ),calc( 99vh / 2 - var(--r) / 2   ));
         /* border: 1px solid black; */
         border-radius: 50%;
-        font-size: var(--r);
+        font-size: calc( var(--r) / 2);
         color: rgb(0, 0, 0);
         text-align: center;
         line-height: var(--r);
@@ -166,13 +167,15 @@
     for(i=1 ; i<=num; i++){
         ball[i]={}
         ball[i].element=document.getElementById("box" + i)
-        // ball[i].element.innerText = i
+        ball[i].element.innerText = i
         ball[i].style = getComputedStyle(document.getElementById("box" + i))
-        ball[i].x = boundX / 2
-        ball[i].y = boundY / 2
+        ball[i].r = parseFloat(ball[i].style.width) / 2       
+        ball[i].ox = boundX / 2
+        ball[i].oy = boundY / 2
+        ball[i].x = ball[i].ox + ball[i].r
+        ball[i].y = ball[i].oy + ball[i].r
         ball[i].vx = initialV()
         ball[i].vy = initialV()     
-        ball[i].r = parseFloat(ball[i].style.width) / 2       
         // console.log(ball[i].r)
     }   
 
@@ -200,8 +203,12 @@
 
         var Timer = setInterval(function(){
 
+
+
             time = time + dt
-            for(i=1; i<=num; i++){        
+            for(i=1; i<=num; i++){       
+                
+                 
 
                 for(j=i;j<=num;j++){
                     if(j===i){
@@ -266,16 +273,19 @@
                 }    
                 // console.log(state)
 
-                if(ball[i].x + 2*ball[i].r>=boundX | ball[i].x<=0){
+                if(ball[i].x + ball[i].r >= boundX | ball[i].x - ball[i].r<=0){
                     ball[i].vx = -ball[i].vx
                 }
-                if(ball[i].y + 2*ball[i].r>=boundY | ball[i].y<=0){
+                if(ball[i].y + ball[i].r >= boundY | ball[i].y - ball[i].r<=0){
                     ball[i].vy = -ball[i].vy
                 }
 
+                              
+
                 ball[i].x = ball[i].x + ball[i].vx * dt
                 ball[i].y = ball[i].y + ball[i].vy * dt
-                ball[i].element.style.transform = "translate(" + ball[i].x + "px, " + ball[i].y + "px)"
+
+                ball[i].element.style.transform = "translate(" + (ball[i].x - ball[i].r) + "px, " + (ball[i].y - ball[i].r) + "px)"
 
             }
 
