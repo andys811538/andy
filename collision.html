@@ -66,6 +66,9 @@
         hsl(calc(   ( var(--n) + 3) * 360 / 30       ), 90%, 55%),
         hsl(calc(   ( var(--n) + 5 ) * 360 / 30       ), 80%, 55%),
         hsl(calc(   ( var(--n) + 7 ) * 360 / 30       ), 80%, 55%));
+        box-shadow: 0px 0px 3px hsl(calc(   var(--n) * 360 / 30       ), 80%, 50%);
+
+                    
         width: var(--r);
         height: var(--r);
         transform:translate(calc( 99vw / 2 - var(--r) / 2   ),calc( 99vh / 2 - var(--r) / 2   ));
@@ -161,20 +164,22 @@
 
     for(i = 1 ; i<=num ; i++){
         
-        document.querySelector(".box:nth-child(" + i + ")").style.setProperty("--r", 4 + Math.abs(getRandom(6)) + "vmin")
+        document.querySelector(".box:nth-child(" + i + ")").style.setProperty("--r", + 4 + Math.abs(Math.random()*6) + "vmin") // + Math.abs(getRandom(6))
     }
 
 
     for(i=1 ; i<=num; i++){
         ball[i]={}
         ball[i].element=document.getElementById("box" + i)
-        ball[i].element.innerText = i
+        // ball[i].element.innerText = i
         ball[i].style = getComputedStyle(document.getElementById("box" + i))
         ball[i].r = parseFloat(ball[i].style.width) / 2       
         ball[i].ox = boundX / 2
         ball[i].oy = boundY / 2
         ball[i].x = ball[i].ox + ball[i].r
         ball[i].y = ball[i].oy + ball[i].r
+        ball[i].px = ball[i].ox + ball[i].r
+        ball[i].py = ball[i].oy + ball[i].r
         ball[i].vx = initialV()
         ball[i].vy = initialV()     
         // console.log(ball[i].r)
@@ -249,6 +254,8 @@
                             ball[i].vx = vax - a
                             ball[i].vy = vay - b
 
+                            
+
                             // console.log("j")
                             // console.log(ball[i].vx,ball[j].vx)
 
@@ -265,9 +272,24 @@
                             ball[j].vx = vax - a
                             ball[j].vy = vay - b
 
+
                             // console.log("i")
                             // console.log(ball[i].vx,ball[j].vx)
                         }
+
+                        // ball[i].px = ball[i].x + ball[i].vx * dt
+                        // ball[i].py = ball[i].y + ball[i].vy * dt
+                        // ball[j].px = ball[j].x + ball[j].vx * dt
+                        // ball[j].py = ball[j].y + ball[j].vy * dt
+
+                        // dBallpx = ball[i].px - ball[j].px
+                        // dBallpy = ball[i].py - ball[j].py
+
+                        // dBallp = Math.pow(dBallpx,2) + Math.pow(dBallpy,2)
+
+                        // if(dBallp>Math.pow(ball[i].r + ball[j].r,2)){
+                        //     continue                                      
+                        // }
 
                         state[i][j] = false
                     }
@@ -285,6 +307,10 @@
 
                 ball[i].x = ball[i].x + ball[i].vx * dt
                 ball[i].y = ball[i].y + ball[i].vy * dt
+
+                
+
+                
 
                 ball[i].element.style.transform = "translate(" + (ball[i].x - ball[i].r) + "px, " + (ball[i].y - ball[i].r) + "px)"
 
