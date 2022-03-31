@@ -60,7 +60,7 @@
         position: absolute;
         background-color: hsl(calc(   var(--n) * 360 / 30       ), 80%, 50%);
         /* background: radial-gradient(circle at center center, hsl(calc(   var(--n) * 360 / 30       ), 80%, 20%), hsl(calc(   320 - var(--n) * 360 / 30 ), 80%, 20%)); */
-        background: linear-gradient(45deg, hsl(calc(   var(--n) * 360 / 30       ), 90%, 60%),
+        background: linear-gradient(calc( 360deg / 30 * var(--n)     ), hsl(calc(   var(--n) * 360 / 30       ), 90%, 60%),
         hsl(calc(   ( var(--n) + 3) * 360 / 30       ), 90%, 55%),
         hsl(calc(   ( var(--n) + 5 ) * 360 / 30       ), 80%, 55%),
         hsl(calc(   ( var(--n) + 7 ) * 360 / 30       ), 80%, 55%));
@@ -69,10 +69,10 @@
         transform:translate(calc( 99vw / 2 - var(--r) / 2   ),calc( 99vh / 2 - var(--r) / 2   ));
         /* border: 1px solid black; */
         border-radius: 50%;
-        font-size: 4vmin;
-        color: aliceblue;
+        font-size: var(--r);
+        color: rgb(0, 0, 0);
         text-align: center;
-        line-height: 4vmin;
+        line-height: var(--r);
         font-family: 'Courier New', Courier, monospace;
 
     }
@@ -157,13 +157,16 @@
     var ball = []   
     var state = []
 
-    // for(i = 1 ; i<=num ; i++){
-    //     document.querySelector(":nth-child(" + i + ")").style.setProperty("--r", 4 + Math.abs(getRandom(6)) + "vmin")
-    // }
+    for(i = 1 ; i<=num ; i++){
+        
+        document.querySelector(".box:nth-child(" + i + ")").style.setProperty("--r", 4 + Math.abs(getRandom(6)) + "vmin")
+    }
+
 
     for(i=1 ; i<=num; i++){
         ball[i]={}
         ball[i].element=document.getElementById("box" + i)
+        // ball[i].element.innerText = i
         ball[i].style = getComputedStyle(document.getElementById("box" + i))
         ball[i].x = boundX / 2
         ball[i].y = boundY / 2
@@ -210,11 +213,13 @@
 
                     dBall = Math.pow(dBallx,2) + Math.pow(dBally,2)
 
-                    if(dBall>Math.pow(2*ball[1].r,2)){
-                        state[i][j] = true                    
+                    if(dBall>Math.pow(ball[i].r + ball[j].r,2)){
+                        state[i][j] = true                                           
                     }
 
                     if(state[i][j] === true && dBall <= Math.pow(ball[i].r + ball[j].r,2)){
+
+                        // console.log(`collision: ${i}-${j} ; R${i}:${ball[i].r} R${j}:${ball[j].r} dball:${dBall}`) 
 
                         var vx1 = ball[i].vx
                         var vy1 = ball[i].vy
@@ -226,8 +231,8 @@
                         // console.log(ball[i].vx,ball[j].vx)
 
                         if((vx1*vx1+vy1*vy1)>(vx2*vx2+vy2*vy2)){
-                            dBallx = ball[i].x - ball[j].x
-                            dBally = ball[i].y - ball[j].y
+                            // dBallx = ball[i].x - ball[j].x
+                            // dBally = ball[i].y - ball[j].y
                             a = (vax * dBallx + vay * dBally) / (dBallx * dBallx + dBally * dBally) * dBallx
                             b = (vax * dBallx + vay * dBally) / (dBallx * dBallx + dBally * dBally) * dBally
 
@@ -242,8 +247,8 @@
                         }
 
                         else if((vx1*vx1+vy1*vy1)<(vx2*vx2+vy2*vy2)){
-                            dBallx = ball[i].x - ball[j].x
-                            dBally = ball[i].y - ball[j].y
+                            // dBallx = ball[i].x - ball[j].x
+                            // dBally = ball[i].y - ball[j].y
                             a = (vax * dBallx + vay * dBally) / (dBallx * dBallx + dBally * dBally) * dBallx
                             b = (vax * dBallx + vay * dBally) / (dBallx * dBallx + dBally * dBally) * dBally
 
