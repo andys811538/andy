@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    :nth-child(1) {
+        --n: 1;
+        --r: 4vmin
+    }
+
+    :nth-child(2) {
+        --n: 2;
+        --r: 4vmin
+    }
+
+    :nth-child(3) {
+        --n: 3;
+        --r: 4vmin
+    }
+
+    :nth-child(4) {
+        --n: 4;
+        --r: 4vmin
+    }
+
+    :nth-child(5) {
+        --n: 5;
+        --r: 4vmin
+    }
+
+    :nth-child(6) {
+        --n: 6;
+        --r: 4vmin
+    }
+
+    :nth-child(7) {
+        --n: 7;
+        --r: 4vmin
+    }
+
+    :nth-child(8) {
+        --n: 8;
+        --r: 4vmin
+    }
+
+    :nth-child(9) {
+        --n: 9;
+        --r: 4vmin
+    }
+
+    :nth-child(10) {
+        --n: 10;
+        --r: 4vmin
+    }
+
+    :nth-child(11) {
+        --n: 11;
+        --r: 4vmin
+    }
+
+    :nth-child(12) {
+        --n: 12;
+        --r: 4vmin
+    }
+
+    :nth-child(13) {
+        --n: 13;
+        --r: 4vmin
+    }
+
+    :nth-child(14) {
+        --n: 14;
+        --r: 4vmin
+    }
+
+    :nth-child(15) {
+        --n: 15;
+        --r: 4vmin
+    }
+
+    :nth-child(16) {
+        --n: 16;
+        --r: 4vmin
+    }
+
+    :nth-child(17) {
+        --n: 17;
+        --r: 4vmin
+    }
+
+    :nth-child(18) {
+        --n: 18;
+        --r: 4vmin
+    }
+
+    :nth-child(19) {
+        --n: 19;
+        --r: 4vmin
+    }
+
+    :nth-child(20) {
+        --n: 20;
+        --r: 4vmin
+    }
+
+    :nth-child(21) {
+        --n: 21;
+        --r: 4vmin
+    }
+
+    :nth-child(22) {
+        --n: 22;
+        --r: 4vmin
+    }
+
+    :nth-child(23) {
+        --n: 23;
+        --r: 4vmin
+    }
+
+    :nth-child(24) {
+        --n: 24;
+        --r: 4vmin
+    }
+
+    :nth-child(25) {
+        --n: 25;
+        --r: 4vmin
+    }
+
+    :nth-child(26) {
+        --n: 26;
+        --r: 4vmin
+    }
+
+    :nth-child(27) {
+        --n: 27;
+        --r: 4vmin
+    }
+
+    :nth-child(28) {
+        --n: 28;
+        --r: 4vmin
+    }
+
+    :nth-child(29) {
+        --n: 29;
+        --r: 4vmin
+    }
+
+    :nth-child(30) {
+        --n: 30;
+        --r: 4vmin
+    }
+
+    body {
+        margin: 0;
+        background-color: black;
+    }
+
+    .bound {
+        position: fixed;
+        left: 0;
+        top: 0;
+        margin: auto;
+        width: calc(99vw);
+        height: calc(99vh);
+        /* line-height: 100vh; */
+        margin-top: 0.5vh;
+        /* border: solid 1px black; */
+        /* padding-right: 10vmin;
+        padding-bottom: 10vmin; */
+        /* border: 1px white solid; */
+    }
+
+    .box:nth-child(n) {
+        user-select: none;
+        position: absolute;
+        background-color: hsl(calc(var(--n) * 360 / 30), 80%, 50%);
+        /* background: radial-gradient(circle at center center, hsl(calc(   var(--n) * 360 / 30       ), 80%, 20%), hsl(calc(   320 - var(--n) * 360 / 30 ), 80%, 20%)); */
+        background: linear-gradient(calc(360deg / 30 * var(--n)), hsl(calc(var(--n) * 360 / 30), 90%, 60%),
+                hsl(calc((var(--n) + 3) * 360 / 30), 90%, 55%),
+                hsl(calc((var(--n) + 5) * 360 / 30), 80%, 55%),
+                hsl(calc((var(--n) + 7) * 360 / 30), 80%, 55%));
+        box-shadow: 0px 0px 3px hsl(calc(var(--n) * 360 / 30), 80%, 50%);
+
+
+        width: var(--r);
+        height: var(--r);
+        transform: translate(calc(99vw / 2 - var(--r) / 2), calc(99vh / 2 - var(--r) / 2));
+        /* border: 1px solid black; */
+        border-radius: 50%;
+        font-size: calc(var(--r) / 2);
+        color: rgb(236, 235, 235);
+        text-align: center;
+        line-height: var(--r);
+        font-family: 'Courier New', Courier, monospace;
+
+    }
+
+    .time {
+        display: fixed;
+        margin: auto;
+        color: aliceblue;
+        font-size: 10vmin;
+        font-family: 'Courier New', Courier, monospace;
+        font-weight: bold;
+    }
+</style>
+
+<body>
+
+    <div id="bound" class="bound">
+        <div id="box1" onclick="change(1)" class="box"></div>
+        <div id="box2" onclick="change(2)" class="box"></div>
+        <div id="box3" onclick="change(3)" class="box"></div>
+        <div id="box4" onclick="change(4)" class="box"></div>
+        <div id="box5" onclick="change(5)" class="box"></div>
+        <div id="box6" onclick="change(6)" class="box"></div>
+        <div id="box7" onclick="change(7)" class="box"></div>
+        <div id="box8" onclick="change(8)" class="box"></div>
+        <div id="box9" onclick="change(9)" class="box"></div>
+        <div id="box10" onclick="change(10)" class="box"></div>
+        <div id="box11" onclick="change(11)" class="box"></div>
+        <div id="box12" onclick="change(12)" class="box"></div>
+        <div id="box13" onclick="change(13)" class="box"></div>
+        <div id="box14" onclick="change(14)" class="box"></div>
+        <div id="box15" onclick="change(15)" class="box"></div>
+        <div id="box16" onclick="change(16)" class="box"></div>
+        <div id="box17" onclick="change(17)" class="box"></div>
+        <div id="box18" onclick="change(18)" class="box"></div>
+        <div id="box19" onclick="change(19)" class="box"></div>
+        <div id="box20" onclick="change(20)" class="box"></div>
+        <div id="box21" onclick="change(21)" class="box"></div>
+        <div id="box22" onclick="change(22)" class="box"></div>
+        <div id="box23" onclick="change(23)" class="box"></div>
+        <div id="box24" onclick="change(24)" class="box"></div>
+        <div id="box25" onclick="change(25)" class="box"></div>
+        <div id="box26" onclick="change(26)" class="box"></div>
+        <div id="box27" onclick="change(27)" class="box"></div>
+        <div id="box28" onclick="change(28)" class="box"></div>
+        <div id="box29" onclick="change(29)" class="box"></div>
+    </div>
+
+
+    <!-- <div id="time" class="time">123456</div> -->
+</body>
+
+<script>
+    // :nth-child(1)
+
+
+
+    const bound = document.getElementById("bound")
+    const boundStyle = getComputedStyle(bound)
+
+    const boundX = parseFloat(boundStyle.width)
+    const boundY = parseFloat(boundStyle.height)
+
+    const dt = 1
+    var time = 0
+
+    function getRandom(rnd) {
+        var pNum = Math.floor(Math.random() * rnd)
+        var nNum = -1 * Math.floor(Math.random() * rnd)
+
+
+
+        if (Math.abs(pNum) >= Math.abs(nNum)) return pNum
+        return nNum
+
+    }
+
+    function getPN() {
+
+        var Temp = Math.random()
+        if (Temp > 0.5) return +1
+        if (Temp <= 0.5) return -1
+    }
+
+    function initialV() {
+        var result = (0.4 + Math.random()) * 2 * getPN()
+        return result
+    }
+
+    var num = 29
+    var ball = []
+    var state = []
+    var r = []
+    var v = []
+    var pos = []
+    var c = []
+    var vc = []
+
+    for (i = 1; i <= num; i++) {
+
+        document.querySelector(".box:nth-child(" + i + ")").style.setProperty("--r", + 4 + Math.abs(getRandom(6)) + "vmin") // + Math.abs(getRandom(6))
+    }
+
+
+    for (i = 1; i <= num; i++) {
+        ball[i] = {}
+        ball[i].element = document.getElementById("box" + i)
+        // ball[i].element.innerText = i
+        ball[i].style = getComputedStyle(document.getElementById("box" + i))
+        pos[i] = []
+        v[i] = []
+
+        r[i] = parseFloat(ball[i].style.width) / 2
+
+        pos[i] = [boundX / 2 + r[i], boundY / 2 + r[i]]
+        v[i] = [initialV(), initialV()]
+
+    }
+
+
+    // pos[1] = [100,100]
+    // pos[2] = [300,100]
+    // v[1] = [0.2,0]
+    // v[2] = [-0.2,0]
+
+    for (i = 1; i <= num; i++) {
+        state[i] = []
+        for (j = i; j <= num; j++) {
+            state[i][j] = false
+        }
+    }
+
+    function getPN() {
+
+        var Temp = Math.random()
+        if (Temp > 0.5) return +1
+        if (Temp <= 0.5) return -1
+
+    }
+
+    function change(temp) {
+        ball[temp].vx = initialV()
+        ball[temp].vy = initialV()
+    }
+
+    function mag(vector = []) {
+        return root(squ(vector[0]) + squ(vector[1]))
+    }
+
+    function squ(n1) {
+        return n1 * n1
+    }
+
+    function root(n1) {
+        return Math.sqrt(n1, 2)
+    }
+
+    function dot(vector1 = [], vector2 = []) {
+        return vector1[0] * vector2[0] + vector1[1] * vector2[1]
+    }
+
+    function proj(vector1 = [], vector2 = []) {
+        temp = dot(vector1, vector2) / (squ(vector2[0]) + squ(vector2[1]))
+        return [temp * vector2[0], temp * vector2[1]]
+    }
+
+    function dist(pos1 = [], pos2 = []) {
+        return root(squ(pos1[0] - pos2[0]) + squ(pos1[1] - pos2[1]))
+    }
+
+    function vAdd(vector1 = [], vector2 = []) {
+        return [vector1[0] + vector2[0], vector1[1] + vector2[1]]
+    }
+
+    function vSub(vector1 = [], vector2 = []){
+        return [vector1[0] - vector2[0], vector1[1] - vector2[1]]
+    }
+
+    function vDiv(vector = [], n) {
+        return [vector[0] / n, vector[1] / n]
+    }
+
+    function vMul(vector = [], n){
+        return [vector[0] * n, vector[1] * n]
+    }
+
+    function path(pos1 = [], pos2 = []){
+        return [pos2[0]-pos1[0],pos2[1]-pos1[1]]
+    }
+
+
+    setTimeout(function () {
+
+        var Timer = setInterval(function () {
+
+            // document.getElementById("time").innerText = time
+            // console.log(time)
+            time = time + dt
+            for (i = 1; i <= num; i++) {
+
+
+
+                for (j = i; j <= num; j++) {
+                    if (j === i) {
+                        continue
+                    }
+
+                    dBall = dist(pos[i], pos[j])
+
+                    if (dBall >= r[i] + r[j]) {
+                        state[i][j] = true
+
+                    }
+
+                    if (state[i][j] === true && dBall < r[i] + r[j]) {
+
+                        
+
+                        var v1 = v[i]
+                        var v2 = v[j]
+                        c = path(pos[i],pos[j])  //ball i to ball j vector
+
+                        var vp1 = proj(v[i], c) //project v1 on line of centers
+                        var vp2 = proj(v[j], c) //project v1 on line of centers
+
+                        vc = vAdd(vp1, vp2)
+
+
+                        v[i] = vSub(vAdd(vp2,v1),vp1)
+                        v[j] = vSub(vAdd(vp1,v2),vp2)
+
+                        state[i][j] = false
+
+                    }
+                }
+
+                if (pos[i][0] + r[i] > boundX) {
+                    v[i][0] = -v[i][0]
+                    pos[i][0] = boundX - r[i]
+                }
+                if (pos[i][0] - r[i] < 0) {
+                    v[i][0] = -v[i][0]
+                    pos[i][0] = r[i]
+                }
+                if (pos[i][1] + r[i] > boundY) {
+                    v[i][1] = -v[i][1]
+                    pos[i][1] = boundY - r[i]
+                }
+                if (pos[i][1] - r[i] < 0) {
+                    v[i][1] = -v[i][1]
+                    pos[i][1] = r[i]
+                }
+
+                pos[i] = vAdd(pos[i],vMul(v[i],dt))
+
+                ball[i].element.style.transform = "translate(" + (pos[i][0] - r[i]) + "px, " + (pos[i][1] - r[i]) + "px)"
+
+            }
+
+        }, dt)
+
+    }, 2000)
+
+</script>
+
+</html>
