@@ -327,8 +327,7 @@
     }
 
     function change(temp) {
-        ball[temp].vx = initialV()
-        ball[temp].vy = initialV()
+        v[temp] = [initialV(),initialV()]
     }
 
     function mag(vector = []) {
