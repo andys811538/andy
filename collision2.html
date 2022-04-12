@@ -2,7 +2,608 @@
 <html lang="en">
 
 <head>
+    <meta charset="UTF-8"><!DOCTYPE html>
+<html lang="en">
+
+<head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collision</title>
+    <script src="https://kit.fontawesome.com/c45d543d64.js" crossorigin="anonymous"></script>
+</head>
+
+<style>
+
+    body {
+        margin: 0;
+        background-color: black;
+        
+    }
+
+    .bound {
+        position: fixed;
+        left: 0;
+        top: 0;
+        margin: auto;
+        width: calc(99vw);
+        height: calc(99vh);
+        /* line-height: 100vh; */
+        margin-top: 0.5vh;
+        /* border: solid 1px black; */
+        /* padding-right: 10vmin;
+        padding-bottom: 10vmin; */
+        /* border: 1px white solid; */
+    }
+
+    .box:nth-child(n) {
+        user-select: none;
+        position: absolute;
+        background: linear-gradient(calc(1deg * var(--deg)), hsl(calc(var(--col)), 80%, 50%),hsl(calc(var(--col) + 60), 80%, 50%));
+        box-shadow: 0px 0px 3px hsl(calc(var(--n) * 360 / var(--s)), 80%, 50%);
+
+        width: var(--r);
+        height: var(--r);
+        transform: translate(calc(99vw / 2 - var(--r) / 2), calc(99vh / 2 - var(--r) / 2));
+        /* border: 1px solid black; */
+        border-radius: 50%;
+        font-size: calc(var(--r) / 2);
+        color: rgb(236, 235, 235);
+        text-align: center;
+        line-height: var(--r);
+        font-family: 'Courier New', Courier, monospace;
+
+    }
+
+    .time {
+        display: fixed;
+        margin: auto;
+        color: aliceblue;
+        font-size: 10vmin;
+        font-family: 'Courier New', Courier, monospace;
+        font-weight: bold;
+    }
+    
+    .option{
+        padding-bottom: 2vmin;
+        font-size: large;        
+        font-family: 'Courier New', Courier, monospace;
+        font-weight: bold;
+        color: rgb(18, 18, 17);
+        position: fixed;
+        width: 85vmin;
+        /* height: 35vh; */
+        margin: auto;
+        top: 20vh;
+        left: calc( (100vw - 85vmin) / 2 );
+        text-align: center;
+        border: 1px solid white;
+        border-radius: 10px;
+        background-color: rgba(240, 248, 255, 0.674);
+        transition: all 0.7s;
+
+    }
+    .number{
+        width: 40px;
+        height: 20px;
+        border-radius: 5px;
+        text-align: center;
+    }
+    .OK{
+        background-color: rgba(43, 141, 252, 0.885);
+        font-family: 'Courier New', Courier, monospace;
+        font-size: large;
+        font-weight: 500;
+        color:aliceblue;
+        width: 20%;
+        height: 15%;
+        border-radius: 5px;
+        margin-top: 3%;
+        text-align: center;
+        transition: all 0.1s;
+    }
+    .OK:hover{
+        transform: scale(1.05);
+        background-color: rgb(42, 128, 225);
+    }
+    .OK:focus{
+        transform: scale(1.05);
+        background-color: rgb(42, 128, 225);
+    }
+    .topBar{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 2%;
+        transition: all 0.5s;
+    }
+    .gear, .cancle{
+        width: 8%;
+        transition: all 0.1;
+    }
+
+
+
+    .cancle{
+        color: brown;
+        transition: 0.1s;
+    }
+    .cancle:hover{
+        color: rgb(197, 1, 1);
+        transform: scale(1.05);
+    }
+    .title{
+        margin: auto;
+        text-align: end;
+
+    }
+    .content{
+        display: flex;
+        justify-content: center;
+        align-items:center;
+        margin: auto;
+        width: max-content;
+        text-align: left;
+        transition: all 0.5s;
+    }
+
+    .rightContent>div{
+        padding: 7px;
+    }
+    .leftContent{
+            text-align: center;
+        }
+    input[type=checkbox]{
+        width: 20px;
+        height: 20px;
+        margin-right: 5px;
+        vertical-align: middle;
+
+    }
+    label{
+        vertical-align: middle;
+
+    }
+    table{
+        width: auto;
+        text-align: center;
+
+
+    }
+
+    .collapse{    
+        transform: translate(-45vmin,calc(-1 * var(--h) / 2 - 0vh)) scale(0);
+        top: 0;
+        left: 100%;
+        visibility: collapse;        
+    }
+
+
+    .hidden{
+        visibility: hidden;
+    }
+
+    .statuBar{
+        position: fixed;
+        font-size: 5vmin;
+        width: fit-content;        
+        color: aliceblue;
+        padding: 1vmin;
+        right: 0px;
+        transition: all 50ms;
+    }
+
+    .statuBar:focus{
+        transform: scale(1.1);
+    }
+
+    .statuBar:hover{
+        transform: rotate(360deg);
+        color: rgb(252, 252, 228);
+    }
+
+    #ballColor{
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        border: none;
+        background-color: transparent;
+        width: 50px;
+        height: 50px;
+        cursor: pointer;
+    }
+    #ballColor::-webkit-color-swatch{
+        border: 1px black solid;
+        border-radius: 50%;
+    }
+
+    @media only screen and (max-width: 470px) {
+        .content{
+            display: block;            
+        }
+        .leftContent{
+            text-align: center;
+        }
+    }
+</style>
+
+<body>
+
+    
+    <div id="bound" class="bound"> </div>
+    <div id="option" class="option">
+        <div id="topBar" class="topBar">
+            <div class="gear" ><i class="fa-solid fa-gear"></i></div>
+            <div>Option</div>
+            <div class="title"></div>
+            <div id="cancle" class="cancle"><i class="fa-solid fa-circle-xmark"></i></div>
+        </div>
+        <div><input id="number" min="1" max="999" class="number" type="number" value="3">Please input the number of balls</div>
+        <div id="content" class="content">     
+            
+            <div class="rightContent">
+                    <div><input id="randomSize" type="checkbox" checked="true"><label for="randomSize">Random Size</label></div>
+                    <div><input id="randomVel" type="checkbox" checked="true"><label for="randomVel">Random Velocity</label></div>                                 
+                    <div><input id="randomMass" type="checkbox" checked="true"><label for="randomMass">Random Mass</label></div>                         
+                    <div><input id="randomColor" type="checkbox" ><label for="randomColor">Random Color</label></div>                         
+            </div>
+
+            <div class="leftContent">
+                <div>
+                    <div><label id="labelSize" for="size">Size:</label></div>
+                    <div><input id="size" min="0" max="10" value="5" type="range" disabled="false"></div>
+                </div>
+                <div>
+                    <div><label for="velocity">Velocity:</label></div>
+                    <div><input id="velocity" min="0" max="5" step="0.1" value="2.5" type="range" disabled="false"></div>
+                </div>
+                <div>
+                    <div><label for="restitution">Restitution:</label></div>
+                    <div><input id="restitution"  min="0.1" max="1" step="0.05" value="1"  type="range" ></div>
+                </div>
+                <div>
+                    <div><label for="ballColor">Ball Color:</label></div>
+                    <div><input type="color" id="ballColor" value="#e66465" ></div>
+                </div>
+            </div>            
+        </div>
+           
+        <div><input onclick="ok()" class="OK" type="button" value="Start!"></div>
+    </div>
+    <div id="statuBar" class="statuBar"><i class="fa-solid fa-gear"></i></div>
+    <!-- <div id="time" class="time">123456</div> -->
+
+</body>
+
+<script>
+
+    const size =  document.getElementById("size")
+    const velocity = document.getElementById("velocity")
+    const randomSize = document.getElementById("randomSize")
+    const randomVel = document.getElementById("randomVel")
+    const randomMass = document.getElementById("randomMass")
+    const cancle = document.getElementById("cancle")
+    const option = document.getElementById("option")
+    const topBar = document.getElementById("topBar")
+    const content = document.getElementById("content")
+    const statuBar = document.getElementById("statuBar")
+    const restitution = document.getElementById("restitution")
+    const randomColor = document.getElementById("randomColor")
+    const ballColor = document.getElementById("ballColor")
+    
+    cancle.onclick = function(){        
+        // topBar.classList.add("collapse")
+        // content.classList.add("collapse")
+        option.classList.add("collapse")
+    }
+
+    statuBar.onclick = function(){
+        // topBar.classList.remove("collapse")
+        // content.classList.remove("collapse")
+        option.classList.remove("collapse")
+        // topBar.classList.add("expand")
+        // content.classList.add("expand")
+        // option.classList.add("expand")
+    }
+
+
+    var ballSize = 9
+    size.onchange = function(){
+        ballSize = Number(size.value) + 4
+
+    }
+
+
+    var sizeState = true   //for random size state
+    randomSize.onchange = function(){
+        if(randomSize.checked===true){
+            size.disabled = true
+            sizeState = true
+        } else {
+            ballSize = Number(size.value) + 4
+            sizeState = false
+            size.disabled = false
+        }
+    }
+
+
+    var velState = true   //for random vel state
+    randomVel.onchange = function(){
+        if(randomVel.checked===true){
+            velocity.disabled = true
+            velState = true
+        } else {
+            velocity.disabled = false
+            velState = false
+        }
+    }
+
+    var massState = true
+    randomMass.onchange = function(){
+        if(randomMass.checked===true){
+            massState = true
+        } else {
+            massState = false
+        }
+    }
+
+    var colorState = false
+    var colorSave = ""
+    randomColor.onchange = function(){
+        if(randomColor.checked===true){
+            colorSave = ballColor.value
+            ballColor.value = "#CBCBCB"
+            ballColor.disabled = true
+            colorState = true
+        } else {
+            ballColor.value = colorSave
+            ballColor.disabled = false
+            colorState = false
+        }
+    }
+
+    var num = 3
+
+    document.getElementById("number").onchange = function(){
+        num = document.getElementById("number").value
+    }
+
+    const optionStyle = getComputedStyle(option)
+
+    document.querySelector("body").style.setProperty("--h",optionStyle.height)
+
+    function ok(){
+        start(num)
+        option.classList.add("collapse")
+    }
+
+
+    function getRandom(rnd) {
+        var pNum = Math.floor(Math.random() * rnd)
+        var nNum = -1 * Math.floor(Math.random() * rnd)
+        if (Math.abs(pNum) >= Math.abs(nNum)) return pNum
+        return nNum
+    }
+
+    function getPN() {
+        var Temp = Math.random()
+        if (Temp > 0.5) return +1
+        if (Temp <= 0.5) return -1
+    }
+
+    function initialV() {
+
+        if (velState === true){
+            const result = Math.random() * 3 * getPN()
+            return  [result,result]
+        }
+        const deg = Math.random()*2*Math.PI
+        const x = getPN() * velocity.value * Math.cos(deg)
+        const y = getPN() * velocity.value * Math.sin(deg)
+        return [x,y]
+    }
+
+    function change(temp) {
+        v[temp] = [initialV(), initialV()]
+    }
+
+    function squ(n1) {
+        return n1 * n1
+    }
+
+    function root(n1) {
+        return Math.sqrt(n1, 2)
+    }
+
+    class vector {
+        constructor(x, y) {
+            this.x = x
+            this.y = y
+        }
+        add(vector2) {
+            return new vector(this.x + vector2.x, this.y + vector2.y)
+        }
+        sub(vector2) {
+            return new vector(this.x - vector2.x, this.y - vector2.y)
+        }
+        mul(n) {
+            return new vector(this.x * n, this.y * n)
+        }
+        div(n) {
+            return new vector(this.x / n, this.y / n)
+        }
+        mag(vector2) {
+            const dx = vector.x - this.x
+            const dy = vecotr.y - this.y
+            return root(dx * dx + dy * dy)
+        }
+        dot(vector2) {
+            return this.x * vector2.x + this.y * vector2.y
+        }
+        proj(vector2) {
+            const temp = this.dot(vector2) / (squ(vector2.x) + squ(vector2.y))
+            return new vector(temp * vector2.x, temp * vector2.y)
+        }
+    }
+
+    class position {
+        constructor(x, y) {
+            this.x = x
+            this.y = y
+        }
+        move(vector) {
+            return new position(this.x + vector.x, this.y + vector.y)
+        }
+        static path(p1, p2) {
+            return new vector(p2.x - p1.x, p2.y - p1.y)
+        }
+        static distance(p1, p2) {
+            const dx = p2.x - p1.x
+            const dy = p2.y - p1.y
+            return root(dx * dx + dy * dy)
+        }
+    }
+
+    const bound = document.getElementById("bound")
+    const boundStyle = getComputedStyle(bound)
+
+    const boundX = parseFloat(boundStyle.width)
+    const boundY = parseFloat(boundStyle.height)
+
+    function start(num = 2){
+
+       
+
+        const dt = 1
+        var time = 0
+
+        var inner = ""
+        for (i = 1; i <= num; i++) {
+            inner = inner + '<div id="box' + i + '" onclick="change(' + i + ')" class="box"></div>'
+        }
+        bound.innerHTML = inner
+
+        var ball = []
+        var state = []
+        var r = []  //radius of ball
+        var v = []  //velocity of ball
+        var pos = [] //position
+        var lineCenters = new vector(0, 0) // line of centers
+        var vc = new vector(0, 0) //velocity of centroid
+        var m = []  //mass
+        var e = restitution.value //coefficient of restitution
+
+        document.querySelector("body").style.setProperty("--s",num)
+
+        if(colorState===false){
+            for (i = 1; i <= num; i++) {
+                document.querySelector(".box:nth-child(" + i + ")").style.setProperty("background", "none")
+                document.querySelector(".box:nth-child(" + i + ")").style.setProperty("background-color", ballColor.value)
+            }
+        }
+
+        for (i = 1; i <= num; i++) {
+                document.querySelector(".box:nth-child(" + i + ")").style.setProperty("--deg", Math.abs(getRandom(360)))
+                document.querySelector(".box:nth-child(" + i + ")").style.setProperty("--col", Math.random()*360)
+            }
+
+        if(sizeState===false){
+            for (i = 1; i <= num; i++) {
+                document.querySelector(".box:nth-child(" + i + ")").style.setProperty("--r", + ballSize + "vmin") // + Math.abs(getRandom(6))
+            }
+        } else {
+            for (i = 1; i <= num; i++) {
+                document.querySelector(".box:nth-child(" + i + ")").style.setProperty("--r", + 4 + Math.abs(getRandom(10)) + "vmin") // + Math.abs(getRandom(6))
+            }
+        }
+
+        for (i = 1; i <= num; i++) {
+            ball[i] = {}
+            ball[i].element = document.getElementById("box" + i)
+            // ball[i].element.innerText = i
+            ball[i].style = getComputedStyle(document.getElementById("box" + i))
+            r[i] = parseFloat(ball[i].style.width) / 2
+            pos[i] = new position(boundX / 2 + r[i], boundY / 2 + r[i])
+            v[i] = new vector(initialV()[0], initialV()[1])
+            if(massState===true){m[i] = r[i] * r[i] * r[i]}
+            m[i] = 1
+        }
+
+        for (i = 1; i <= num; i++) {
+            state[i] = []
+            for (j = i; j <= num; j++) {
+                state[i][j] = false
+            }
+        }
+
+        setTimeout(function () {
+
+            var Timer = setInterval(function () {
+
+                // document.getElementById("time").innerText = time
+                // console.log(time)
+
+                time = time + dt
+                for (i = 1; i <= num; i++) {
+                    for (j = i; j <= num; j++) {
+                        if (j === i) { continue }
+
+                        dBall = position.distance(pos[i], pos[j])
+
+                        if (dBall >= r[i] + r[j]) {
+                            state[i][j] = true
+                        }
+
+                        if (state[i][j] === true && dBall < r[i] + r[j]) {
+
+                            var v1 = v[i]
+                            var v2 = v[j]
+                            lineCenters = position.path(pos[i], pos[j])  //ball i to ball j vector
+
+                            var vp1 = v[i].proj(lineCenters) //project v1 on line of centers
+                            var vp2 = v[j].proj(lineCenters) //project v1 on line of centers
+
+                            vc = vp1.mul(m[i]).add(vp2.mul(m[j])).div(m[i] + m[j])
+
+                            v[i] = vc.mul(2).sub(vp1.mul(e)).sub(vp1).add(v1)
+                            v[j] = vc.mul(2).sub(vp2.mul(e)).sub(vp2).add(v2)
+
+                            state[i][j] = false
+                        }
+                    }
+
+                    if (pos[i].x + r[i] > boundX) {
+                        v[i].x = -v[i].x * e
+                        pos[i].x = boundX - r[i]
+                    }
+                    if (pos[i].x - r[i] < 0) {
+                        v[i].x = -v[i].x * e
+                        pos[i].x = r[i]
+                    }
+                    if (pos[i].y + r[i] > boundY) {
+                        v[i].y = -v[i].y * e
+                        pos[i].y = boundY - r[i]
+                    }
+                    if (pos[i].y - r[i] < 0) {
+                        v[i].y = -v[i].y * e
+                        pos[i].y = r[i]
+                    }
+
+                    pos[i] = pos[i].move(v[i].mul(dt))
+                    ball[i].element.style.transform = "translate(" + (pos[i].x - r[i]) + "px, " + (pos[i].y - r[i]) + "px)"
+                }
+            }, dt)
+        }, 10)
+
+    }
+    
+    start(num)
+
+    
+
+</script>
+
+</html>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Collision</title>
