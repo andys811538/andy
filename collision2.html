@@ -114,9 +114,12 @@
         transition: all 0.5s;
     }
     .gear, .cancle{
-        width: 5%;
-
+        width: 8%;
+        transition: all 0.1;
     }
+
+
+
     .cancle{
         color: brown;
         transition: 0.1s;
@@ -143,7 +146,9 @@
     .rightContent>div{
         padding: 7px;
     }
-
+    .leftContent{
+            text-align: center;
+        }
     input[type=checkbox]{
         width: 20px;
         height: 20px;
@@ -180,6 +185,31 @@
         color: aliceblue;
         padding: 1vmin;
         right: 0px;
+        transition: all 50ms;
+    }
+
+    .statuBar:focus{
+        transform: scale(1.1);
+    }
+
+    .statuBar:hover{
+        transform: rotate(360deg);
+        color: rgb(252, 252, 228);
+    }
+
+    #ballColor{
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        border: none;
+        background-color: transparent;
+        width: 50px;
+        height: 50px;
+        cursor: pointer;
+    }
+    #ballColor::-webkit-color-swatch{
+        border: 1px black solid;
+        border-radius: 50%;
     }
 
     @media only screen and (max-width: 470px) {
@@ -209,7 +239,8 @@
             <div class="rightContent">
                     <div><input id="randomSize" type="checkbox" checked="true"><label for="randomSize">Random Size</label></div>
                     <div><input id="randomVel" type="checkbox" checked="true"><label for="randomVel">Random Velocity</label></div>                                 
-                    <div><input id="randomMass" type="checkbox" checked="true"><label for="randomMass">Random Mass</label></div>               
+                    <div><input id="randomMass" type="checkbox" checked="true"><label for="randomMass">Random Mass</label></div>                         
+                    <div><input id="randomColor" type="checkbox" ><label for="randomColor">Random Color</label></div>                         
             </div>
 
             <div class="leftContent">
@@ -225,9 +256,13 @@
                     <div><label for="restitution">Restitution:</label></div>
                     <div><input id="restitution"  min="0.1" max="1" step="0.05" value="1"  type="range" ></div>
                 </div>
-            </div>
-            
+                <div>
+                    <div><label for="ballColor">Ball Color:</label></div>
+                    <div><input type="color" id="ballColor" value="#e66465" ></div>
+                </div>
+            </div>            
         </div>
+           
         <div><input onclick="ok()" class="OK" type="button" value="Start!"></div>
     </div>
     <div id="statuBar" class="statuBar"><i class="fa-solid fa-gear"></i></div>
@@ -248,6 +283,8 @@
     const content = document.getElementById("content")
     const statuBar = document.getElementById("statuBar")
     const restitution = document.getElementById("restitution")
+    const randomColor = document.getElementById("randomColor")
+    const ballColor = document.getElementById("ballColor")
     
     cancle.onclick = function(){        
         // topBar.classList.add("collapse")
@@ -305,6 +342,20 @@
         }
     }
 
+    var colorState = false
+    var colorSave = ""
+    randomColor.onchange = function(){
+        if(randomColor.checked===true){
+            colorSave = ballColor.value
+            ballColor.value = "#CBCBCB"
+            ballColor.disabled = true
+            colorState = true
+        } else {
+            ballColor.value = colorSave
+            ballColor.disabled = false
+            colorState = false
+        }
+    }
 
     var num = 3
 
@@ -334,9 +385,13 @@
     function initialV() {
 
         if (velState === true){
-            return  (Math.random()) * 2 * getPN()
+            const result = Math.random() * 3 * getPN()
+            return  [result,result]
         }
-        return velocity.value
+        const deg = Math.random()*2*Math.PI
+        const x = getPN() * velocity.value * Math.cos(deg)
+        const y = getPN() * velocity.value * Math.sin(deg)
+        return [x,y]
     }
 
     function change(temp) {
@@ -431,10 +486,17 @@
 
         document.querySelector("body").style.setProperty("--s",num)
 
-        for (i = 1; i <= num; i++) {
-            document.querySelector(".box:nth-child(" + i + ")").style.setProperty("--deg", Math.abs(getRandom(360)))
-            document.querySelector(".box:nth-child(" + i + ")").style.setProperty("--col", Math.random()*360)
+        if(colorState===false){
+            for (i = 1; i <= num; i++) {
+                document.querySelector(".box:nth-child(" + i + ")").style.setProperty("background", "none")
+                document.querySelector(".box:nth-child(" + i + ")").style.setProperty("background-color", ballColor.value)
+            }
         }
+
+        for (i = 1; i <= num; i++) {
+                document.querySelector(".box:nth-child(" + i + ")").style.setProperty("--deg", Math.abs(getRandom(360)))
+                document.querySelector(".box:nth-child(" + i + ")").style.setProperty("--col", Math.random()*360)
+            }
 
         if(sizeState===false){
             for (i = 1; i <= num; i++) {
@@ -453,7 +515,7 @@
             ball[i].style = getComputedStyle(document.getElementById("box" + i))
             r[i] = parseFloat(ball[i].style.width) / 2
             pos[i] = new position(boundX / 2 + r[i], boundY / 2 + r[i])
-            v[i] = new vector(getPN() * initialV(), getPN() * initialV())
+            v[i] = new vector(initialV()[0], initialV()[1])
             if(massState===true){m[i] = r[i] * r[i] * r[i]}
             m[i] = 1
         }
