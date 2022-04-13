@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+
+    div{
+        width: 100%;
+        font-size: large;
+        font-family: 'Courier New', Courier, monospace;
+        font-weight: bold;
+        text-align: center;
+    }
+    div>div{
+        width: 100%;
+    }
+
+</style>
+
+<body>
+
+<div>
+    <div><label for="name">Name:</label><input type="text" name="name" id="name"></div>    
+    <div><label for="sex">Sex:</label><input type="text" name="sex" id="sex"></div>    
+    <div><label for="age">Age:</label><input type="text" name="age" id="age"></div>    
+    <div><label for="tall">Tall:</label><input type="text" name="tall" id="tall"></div>
+    <div><input onclick="submit()" type="button" name="button" id="button">Submit</div>    
+</div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.js"
+integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="crossorigin="anonymous"></script>
+<script>
+
+const a = document.querySelector("#name")
+const b = document.querySelector("#sex")
+const c = document.querySelector("#age")
+const d = document.querySelector("#tall")
+
+function submit(){
+    var parameter = {
+        name: a.value,
+        sex:  b.value,
+        age:  c.value,
+        tall: d.value
+    }
+
+    $.ajax({
+        type: "post",
+        url: "https://script.google.com/macros/s/AKfycbyMx669tnvlvUkQFbopgoSbx2OOmyrUSzeYlrwMyB8VPDQDLAhrqUmd8R8Cfp4B6NaB/exec",
+        data: parameter,
+        success: function(response) {
+            if(response == "成功"){
+                alert("成功::::"+no);
+            }
+        }
+    });
+}
+
+
+
+</script>
+    
+</body>
+
+</html>
