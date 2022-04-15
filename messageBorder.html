@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+
+  body{
+    margin: 0;
+    padding: 0;
+    font-family: "Helvetica", "Arial","LiHei Pro","黑體-繁","微軟正黑體", sans-serif;
+    font-size: 5vmin;
+    background-color: aliceblue;
+  }
+
+  .main{
+    /* border: 1px solid black; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .information{
+    background-color: rgb(255, 255, 255);
+    width: 90%;
+    border: 1px solid black;
+    border-radius: 2vmin;
+    text-align: left;
+    margin-top: 1vh;
+    margin-bottom: 30vh;
+  }
+
+  .content{    
+    display: flex;
+    align-items:flex-start    
+  }
+
+  .name{
+    width: 17%;
+    margin: 10px;
+    margin-top: 15px;
+    text-align: center;
+  }
+
+  .fit{
+    width: 83%;
+    display: flex;
+    justify-content: left;
+    align-items: flex-end;
+  }
+
+  .message{
+    /* width: 80%; */
+    text-align: left;
+    word-wrap:break-word;
+    word-break: break-all;
+    margin: 5px;
+    padding: 10px;
+    background-color: rgb(132, 186, 233);
+    border-radius: 3vmin;
+  }
+
+  .time{
+    width: 20%;
+    /* height: 1vmin; */
+    /* height: 1vmin; */
+    color: rgba(96, 96, 96, 0.768);
+    font-size:1vmin;
+    padding: 1vmin;
+    /* line-height: 100%; */
+  }
+
+  .form{
+    position: fixed;
+    height: 28vh;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    background-color: rgb(90, 93, 96);
+  }
+
+  #userName{
+    width: 15vmin;
+    margin: 1vmin;
+    height: 4vh;
+    text-align: center;
+    font-size: 5vmin;
+  }
+
+  #message{
+    width: 90%;
+    height: 20vh;
+    font-size: 5vmin;
+  }
+
+  button{
+    font-size: 5vmin;
+  }
+
+
+  .flexCenter{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .line1{
+    width: 90%;
+    height: 7vh;
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+  }
+
+  .afk{
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(240, 248, 255, 0.372);
+    cursor: pointer;
+  }
+
+  .afk>div{
+    padding: 2vmin;
+    width: 40vw;    
+    font-size: 10vmin;
+    border-radius: 2vmin;
+    font-weight: bold;
+    color: #b82323;
+    background-color: rgba(137, 135, 135, 0.916);
+  }
+
+  .disable{
+    display: none;
+  }
+
+</style>
+
+<body>
+
+  <div class="afk flexCenter disable" id="afk">
+    <div>長時間無回應，點擊頁面重新載入。</div>
+  </div>
+
+  <div class="form">
+    <div>
+      <div class="flexCenter">
+        <div class="line1">
+          <label for="userName">User Name: <input type="text" id="userName"></label>
+          <button id="input">input</button>
+        </div>
+      </div>
+      <div class="flexCenter"><textarea id="message" cols="30" rows="10"></textarea></div>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="information" id="information">
+      <!-- <div class="content">
+        <div class="name">Admin</div>
+        <div class="fit">
+          <div class="message">這是一個留言板！</div>
+          <div class="time">admin</div>
+        </div>        
+      </div> -->
+      <!-- <div class="content">
+        <div class="name">Andyy</div>
+        <div class="fit">
+          <div class="message">Hello!</div>
+          <div class="time">上午16:00</div>
+        </div>  
+      </div> -->
+    </div>  
+  </div>
+
+
+  
+<script>
+
+  const afk = document.getElementById("afk")
+
+  function append(data,start,end){
+
+    for(i=start;i<=end;i++){
+
+      let date = new Date(data[i]["time"])
+      date = date.toLocaleString('cn-TW', { minute: 'numeric' ,hour: 'numeric', hour12: true })
+      
+      const message = document.createElement("div")
+      const mesText = document.createTextNode(data[i]["message"])
+      message.appendChild(mesText)
+      message.classList.add("message")
+
+      const time = document.createElement("div")
+      const timeText = document.createTextNode(date)
+      time.appendChild(timeText)
+      time.classList.add("time")
+      
+      const fit = document.createElement("div")
+      fit.appendChild(message)
+      fit.appendChild(time)
+      fit.classList.add("fit")
+
+      const name = document.createElement("div")
+      const nameText = document.createTextNode(data[i]["userName"])
+      name.appendChild(nameText)
+      name.classList.add("name")
+
+      const content = document.createElement("div")
+      content.appendChild(name)
+      content.appendChild(fit)
+      content.classList.add("content")
+
+      const information = document.getElementById("information")
+      information.appendChild(content)
+    }
+
+  }
+
+
+ 
+  const url = "https://script.google.com/macros/s/AKfycbw0WE98i1beqwjoW1qZiubFOvOp9c53Smgdm_m53I12Pb5_T3Ckxu-P8ffXKOX9DHRJ/exec"
+  function post(data){
+
+    var parameter ={
+      "userName": "Joy",
+      "message":  "Hello!",
+    }
+
+    return fetch(url, {
+      redirect: "follow",
+      method: 'POST',
+      header:{
+          "Content-Type": "text/plain;charset=utf-8",
+        },
+      body: JSON.stringify(data),
+      })
+    .then((response) => response.text())
+    .then(text=>{
+      foo()
+      return console.log(text)
+    })
+  }
+
+  
+  async function get(){
+    return fetch(url)
+    .then(res=>res.json())
+    .then(data=>{
+      return data
+    })
+  }
+
+  const userName = document.querySelector("#userName")
+  const message =  document.querySelector("#message")
+  const input = document.getElementById("input")
+
+  input.onclick = function(){
+    var data ={
+      "userName": userName.value,
+      "message":  message.value,
+    }
+    post(data)
+    message.value = ""
+  }
+    
+
+  var count = 0
+  async function foo(){
+    const data = await get()
+    if(data.length-count===0){return}
+    append(data,count,data.length-1)
+    count = data.length
+  }
+  
+  
+  async function loadData(){
+    const data = await get()
+    append(data,0,data.length-1)
+    count = data.length
+  }
+
+
+  window.onload = function (){
+ 
+ (function($){
+   funObj = {
+     timeUserFun:'timeUserFun',
+   }
+   $[funObj.timeUserFun] = function(time){
+     var time = time || 2;
+     var userTime = time*60;
+     var objTime = {
+       init:0,
+       time:function(){
+         objTime.init += 1;
+         if(objTime.init == userTime){
+           // 用戶到達未操作事件 做一些處理
+           clearInterval(clock)
+           afk.classList.remove("disable")
+          console.log("用戶長時間沒有操作頁面,即將跳轉到登錄頁面");
+         }
+       },
+       eventFun:function(){
+         clearInterval(testUser);
+         objTime.init = 0;
+         testUser = setInterval(objTime.time,1000);
+       }
+     }
+
+     var testUser = setInterval(objTime.time,1000);
+
+     var body = document.querySelector('html');
+     body.addEventListener("click",objTime.eventFun);
+     body.addEventListener("keydown",objTime.eventFun);
+     body.addEventListener("mousemove",objTime.eventFun);
+     body.addEventListener("mousewheel",objTime.eventFun);
+   }
+ })(window)
+
+
+//   直接調用 參數代表分鐘數,可以有一位小數;
+  timeUserFun(1);
+}
+
+afk.onclick = function(){
+  this.classList.add("disable")
+  foo()
+  clock = setInterval(function(){
+    foo()
+  },5000)
+}
+
+  var clock = setInterval(function(){
+    foo()
+    console.log(1)
+  },5000)
+
+  
+
+  
+
+
+
+
+  async function sleep(ms = 0) {
+      return new Promise(r => setTimeout(r, ms));
+  }
+  async function start(){
+    var now = new Date()
+    var D =[{
+        "userName": "Admin",
+        "message":  "這是一個留言板喔~",
+        "time":now
+      },{
+        "userName": "Admin",
+        "message":  "請在這邊留言~",
+        "time":now
+      }
+    ]
+    append(D,0,0)
+    await sleep(700)
+    append(D,1,1)
+  }
+  
+  start()
+
+  loadData()
+
+  
+</script>    
+</body>
+</html>
