@@ -69,7 +69,7 @@
     /* height: 1vmin; */
     /* height: 1vmin; */
     color: rgba(96, 96, 96, 0.768);
-    font-size:1vmin;
+    font-size:1.5vmin;
     padding: 1vmin;
     /* line-height: 100%; */
   }
@@ -200,6 +200,7 @@
       const timeText = document.createTextNode(date)
       time.appendChild(timeText)
       time.classList.add("time")
+      time.id = "time" + row
       
       const fit = document.createElement("div")
       fit.appendChild(message)
@@ -241,10 +242,10 @@
         },
       body: JSON.stringify(data),
       })
-    .then((response) => response.text())
+    .then((response) => response.json())
     .then(text=>{
       foo()
-      return console.log(text)
+      return text
     })
   }
 
@@ -261,14 +262,33 @@
   const message =  document.querySelector("#message")
   const input = document.getElementById("input")
 
-  input.onclick = function(){
+  input.onclick = async function(){
     if(message.value===""){alert("請輸入訊息");return}
-    var data ={
+    var data =[{
+      "userName": userName.value,
+      "message":  message.value,
+      "time":""
+    }]
+    var postData ={
       "userName": userName.value,
       "message":  message.value,
     }
-    post(data)
+    append(data,0,0)
+    document.getElementById("time" + row).innerText = "發送中"
+    document.getElementById("row" + row).scrollIntoView()
     message.value = ""
+    const getReturn = await post(postData)
+    console.log(getReturn["status"])
+    let date = new Date(getReturn["date"])
+    date = date.toLocaleString('cn-TW', { minute: 'numeric' ,hour: 'numeric', hour12: true })
+    if(getReturn["status"]==="success"){
+      count = count + 1
+      document.getElementById("time" + row).innerText = date
+    } else {
+      document.getElementById("time" + row).innerText = "fail"
+    }
+    
+    
   }
     
 
