@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>留言板</title>
 </head>
 
 <style>
@@ -183,10 +183,11 @@
 
   const afk = document.getElementById("afk")
 
+  var row = 0 //計算資料筆數
   function append(data,start,end){
 
     for(i=start;i<=end;i++){
-
+      row = row + 1
       let date = new Date(data[i]["time"])
       date = date.toLocaleString('cn-TW', { minute: 'numeric' ,hour: 'numeric', hour12: true })
       
@@ -210,10 +211,11 @@
       name.appendChild(nameText)
       name.classList.add("name")
 
-      const content = document.createElement("div")
+      const content = document.createElement("div")      
       content.appendChild(name)
       content.appendChild(fit)
       content.classList.add("content")
+      content.id = "row" + row
 
       const information = document.getElementById("information")
       information.appendChild(content)
@@ -223,7 +225,7 @@
 
 
  
-  const url = "https://script.google.com/macros/s/AKfycbw0WE98i1beqwjoW1qZiubFOvOp9c53Smgdm_m53I12Pb5_T3Ckxu-P8ffXKOX9DHRJ/exec"
+  const url = "https://script.google.com/macros/s/AKfycbyQB38E3H6rrTKSsQ15z7qOVhTyKky6pdZ_W-3BELDx2vE010wIfbp5Ni_vf2rBz1KE/exec"
   function post(data){
 
     var parameter ={
@@ -260,6 +262,7 @@
   const input = document.getElementById("input")
 
   input.onclick = function(){
+    if(message.value===""){alert("請輸入訊息");return}
     var data ={
       "userName": userName.value,
       "message":  message.value,
@@ -275,6 +278,7 @@
     if(data.length-count===0){return}
     append(data,count,data.length-1)
     count = data.length
+    document.getElementById("row" + row).scrollIntoView()
   }
   
   
@@ -282,9 +286,10 @@
     const data = await get()
     append(data,0,data.length-1)
     count = data.length
+    document.getElementById("row" + row).scrollIntoView()
   }
 
-
+// afk檢測
   window.onload = function (){
  
  (function($){
@@ -334,7 +339,6 @@ afk.onclick = function(){
     foo()
   },5000)
 }
-
   var clock = setInterval(function(){
     foo()
     console.log(1)
@@ -346,7 +350,7 @@ afk.onclick = function(){
 
 
 
-
+// 初始推播
   async function sleep(ms = 0) {
       return new Promise(r => setTimeout(r, ms));
   }
@@ -371,7 +375,7 @@ afk.onclick = function(){
 
   loadData()
 
-  
+
 </script>    
 </body>
 </html>
