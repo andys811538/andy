@@ -216,6 +216,28 @@
   
 <script>
 
+  const mes = document.getElementById("message")
+  const userName = document.querySelector("#userName")
+  const message =  document.querySelector("#message")
+  const input = document.getElementById("input")
+
+
+  mes.addEventListener("keyup",function(e){
+    if(e.key==="Enter" && e.shiftKey){return}
+    if(e.key==="Enter"){
+      input.click()
+    }
+  })
+
+  userName.addEventListener("keyup",function(e){
+    if(e.key==="Enter"){
+      mes.focus()
+    }
+  })
+
+
+
+
   const afk = document.getElementById("afk")
   var lastContent
 
@@ -307,9 +329,7 @@
     })
   }
 
-  const userName = document.querySelector("#userName")
-  const message =  document.querySelector("#message")
-  const input = document.getElementById("input")
+
 
 
   input.onclick = async function(){
