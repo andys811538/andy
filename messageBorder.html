@@ -328,7 +328,7 @@
 
 
 
-/*  afk檢測
+
   window.onload = function (){   // afk檢測
  (function($){
    funObj = {
@@ -369,20 +369,20 @@
 //   直接調用 參數代表分鐘數,可以有一位小數;
   timeUserFun(1);
 }
-*/
+
 
 //更新資料
-// afk.onclick = function(){
-//   this.classList.add("disable")
-//   foo()
-//   clock = setInterval(function(){
-//     foo()
-//   },5000)
-// }
-//   var clock = setInterval(function(){
-//     foo()
-//     console.log(1)
-//   },5000)
+afk.onclick = function(){
+  this.classList.add("disable")
+  foo()
+  clock = setInterval(function(){
+    foo()
+  },5000)
+}
+  var clock = setInterval(function(){
+    foo()
+    console.log(1)
+  },5000)
 
   
 
