@@ -13,7 +13,7 @@
     margin: 0;
     padding: 0;
     font-family: "Helvetica", "Arial","LiHei Pro","黑體-繁","微軟正黑體", sans-serif;
-    font-size: 5vmin;
+    font-size: 3vmin;
     background-color: aliceblue;
   }
 
@@ -58,6 +58,7 @@
     text-align: left;
     word-wrap:break-word;
     word-break: break-all;
+    white-space: pre-line;
     margin: 5px;
     padding: 10px;
     background-color: rgb(132, 186, 233);
@@ -160,13 +161,13 @@
 
   <div class="main">
     <div class="information" id="information">
-      <!-- <div class="content">
+      <div class="content" id="number1">
         <div class="name">Admin</div>
         <div class="fit">
           <div class="message">這是一個留言板！</div>
           <div class="time">admin</div>
         </div>        
-      </div> -->
+      </div>
       <!-- <div class="content">
         <div class="name">Andyy</div>
         <div class="fit">
@@ -182,11 +183,13 @@
 <script>
 
   const afk = document.getElementById("afk")
+  var lastContent
 
   var row = 0 //計算資料筆數
-  function append(data,start,end){
-
+  function append(data,start,end,state=true){  
+    //state:true0 = 按照資料庫資料順序排列  state:false = 插入至最後一筆資料 
     for(i=start;i<=end;i++){
+
       row = row + 1
       let date = new Date(data[i]["time"])
       date = date.toLocaleString('cn-TW', { minute: 'numeric' ,hour: 'numeric', hour12: true })
@@ -200,7 +203,7 @@
       const timeText = document.createTextNode(date)
       time.appendChild(timeText)
       time.classList.add("time")
-      time.id = "time" + row
+      time.id = "time" + data[i]["number"]
       
       const fit = document.createElement("div")
       fit.appendChild(message)
@@ -216,18 +219,29 @@
       content.appendChild(name)
       content.appendChild(fit)
       content.classList.add("content")
-      content.id = "row" + row
+      content.id = "number" + data[i]["number"]
 
+      const number1 = document.getElementById("number1")      
       const information = document.getElementById("information")
-      information.appendChild(content)
+
+      lastContent = content
+
+      if(state===false){
+        information.appendChild(content)
+        return
+      }
+      //state=true
+      var target = document.getElementById("number" + (data[i]["number"] - 1))
+      information.insertBefore(content,target.nextSibling)
+
     }
 
   }
 
 
  
-  const url = "https://script.google.com/macros/s/AKfycbyQB38E3H6rrTKSsQ15z7qOVhTyKky6pdZ_W-3BELDx2vE010wIfbp5Ni_vf2rBz1KE/exec"
-  function post(data){
+  const url = "https://script.google.com/macros/s/AKfycbzgFyuWhSSRW--lcKig-kFlSpcpE0a8xNbl51zkameH7IAkx--pFs3QSp6FMkYgQt4/exec"
+  async function post(data){
 
     var parameter ={
       "userName": "Joy",
@@ -244,7 +258,6 @@
       })
     .then((response) => response.json())
     .then(text=>{
-      foo()
       return text
     })
   }
@@ -265,6 +278,7 @@
   input.onclick = async function(){
     if(message.value===""){alert("請輸入訊息");return}
     var data =[{
+      "number":"Temp",
       "userName": userName.value,
       "message":  message.value,
       "time":""
@@ -273,32 +287,35 @@
       "userName": userName.value,
       "message":  message.value,
     }
-    append(data,0,0)
-    document.getElementById("time" + row).innerText = "發送中"
-    document.getElementById("row" + row).scrollIntoView()
+    append(data,0,0,false)
+    document.getElementById("timeTemp").innerText = "發送中"
+    lastContent.scrollIntoView()
     message.value = ""
     const getReturn = await post(postData)
-    console.log(getReturn["status"])
+    console.log(getReturn)
     let date = new Date(getReturn["date"])
     date = date.toLocaleString('cn-TW', { minute: 'numeric' ,hour: 'numeric', hour12: true })
     if(getReturn["status"]==="success"){
       count = count + 1
-      document.getElementById("time" + row).innerText = date
+      document.getElementById("timeTemp").innerText = date
+      document.getElementById("timeTemp").id = "time" + getReturn["number"]
+      document.getElementById("numberTemp").id = "number" + getReturn["number"]
     } else {
-      document.getElementById("time" + row).innerText = "fail"
+      document.getElementById("timeTemp").innerText = "fail"
     }
     
+    upData()
     
   }
     
 
   var count = 0
-  async function foo(){
+  async function upData(){
     const data = await get()
     if(data.length-count===0){return}
     append(data,count,data.length-1)
     count = data.length
-    document.getElementById("row" + row).scrollIntoView()
+    lastContent.scrollIntoView()
   }
   
   
@@ -306,12 +323,13 @@
     const data = await get()
     append(data,0,data.length-1)
     count = data.length
-    document.getElementById("row" + row).scrollIntoView()
+    lastContent.scrollIntoView()
   }
 
-// afk檢測
-  window.onload = function (){
- 
+
+
+/*  afk檢測
+  window.onload = function (){   // afk檢測
  (function($){
    funObj = {
      timeUserFun:'timeUserFun',
@@ -351,18 +369,20 @@
 //   直接調用 參數代表分鐘數,可以有一位小數;
   timeUserFun(1);
 }
+*/
 
-afk.onclick = function(){
-  this.classList.add("disable")
-  foo()
-  clock = setInterval(function(){
-    foo()
-  },5000)
-}
-  var clock = setInterval(function(){
-    foo()
-    console.log(1)
-  },5000)
+//更新資料
+// afk.onclick = function(){
+//   this.classList.add("disable")
+//   foo()
+//   clock = setInterval(function(){
+//     foo()
+//   },5000)
+// }
+//   var clock = setInterval(function(){
+//     foo()
+//     console.log(1)
+//   },5000)
 
   
 
@@ -377,21 +397,23 @@ afk.onclick = function(){
   async function start(){
     var now = new Date()
     var D =[{
+        "number":"Admin1",
         "userName": "Admin",
         "message":  "這是一個留言板喔~",
         "time":now
       },{
+        "number":"Admin2",
         "userName": "Admin",
         "message":  "請在這邊留言~",
         "time":now
       }
     ]
-    append(D,0,0)
+    append(D,0,0,false)
     await sleep(700)
-    append(D,1,1)
+    append(D,1,1,false)
   }
   
-  start()
+  start()  //初始推播
 
   loadData()
 
