@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>留言板</title>
+    <script src="https://kit.fontawesome.com/c45d543d64.js" crossorigin="anonymous"></script>
 </head>
 
 <style>
@@ -70,32 +71,38 @@
     /* height: 1vmin; */
     /* height: 1vmin; */
     color: rgba(96, 96, 96, 0.768);
-    font-size:1.5vmin;
+    font-size:2vmin;
     padding: 1vmin;
     /* line-height: 100%; */
   }
 
   .form{
     position: fixed;
-    height: 28vh;
+    height: 15vh;
     width: 100%;
     bottom: 0;
     left: 0;
-    background-color: rgb(90, 93, 96);
+    background-color: rgb(159, 161, 163);
   }
 
   #userName{
     width: 15vmin;
     margin: 1vmin;
-    height: 4vh;
+    height: 5vmin;
     text-align: center;
     font-size: 5vmin;
   }
 
   #message{
-    width: 90%;
-    height: 20vh;
-    font-size: 5vmin;
+    padding: 5px;
+    padding-left: 20px;
+    margin-bottom: 10px;
+    margin-left: 1vw;
+    width: 80%;
+    height: 6vmin;
+    font-size: 4vmin;
+    border-radius: 4vmin;
+    resize: none;
   }
 
   button{
@@ -139,6 +146,32 @@
     display: none;
   }
 
+  .send{
+    width: 12%;
+    color: rgb(0, 119, 255);;
+    text-shadow: 0px 0px 0.5px black;
+    font-size: 6vmin;
+    text-align: center;    
+    cursor: pointer;
+    transition: all 0.1s;
+  }
+
+  .send:hover{
+    color: rgb(40, 139, 252);    
+    transform: scale(1.05)
+  }
+
+  .send:active{
+    color: rgb(47, 127, 219);
+    transform: scale(1.3)
+  }
+
+  .flexAround{
+    display: flex;
+    justify-content:center;
+    align-items: center;
+  }
+
 </style>
 
 <body>
@@ -152,10 +185,9 @@
       <div class="flexCenter">
         <div class="line1">
           <label for="userName">User Name: <input type="text" id="userName"></label>
-          <button id="input">input</button>
         </div>
       </div>
-      <div class="flexCenter"><textarea id="message" cols="30" rows="10"></textarea></div>
+      <div class="flexAround"><textarea id="message" cols="30" rows="2"></textarea><div class="send" id="input"><i class="fa-solid fa-paper-plane"></i></div></div>
     </div>
   </div>
 
@@ -309,7 +341,7 @@
       document.getElementById("timeTemp").innerText = "fail"
     }
     
-    upData()
+    await upData()
     
     clock = setInterval(function(){
       upData()
@@ -335,11 +367,6 @@
     count = data.length
     lastContent.scrollIntoView()
   }
-
-  function compareData(data){
-
-  }
-
 
   window.onload = function (){   // afk檢測
  (function($){
@@ -383,7 +410,7 @@
 }
 
 
-//更新資料
+更新資料
 afk.onclick = function(){
   this.classList.add("disable")
   upData()
