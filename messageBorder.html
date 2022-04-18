@@ -277,8 +277,9 @@
   const message =  document.querySelector("#message")
   const input = document.getElementById("input")
 
-  var inputNum = 0
+
   input.onclick = async function(){
+    clearInterval(clock)
     if(message.value===""){alert("請輸入訊息");return}
     var data =[{
       "number":"Temp",
@@ -295,7 +296,7 @@
     lastContent.scrollIntoView()
     message.value = ""
     const getReturn = await post(postData)
-    console.log(getReturn)
+    // console.log(getReturn)
     let date = new Date(getReturn["date"])
     date = date.toLocaleString('cn-TW', { minute: 'numeric' ,hour: 'numeric', hour12: true })
     if(getReturn["status"]==="success"){
@@ -310,6 +311,11 @@
     
     upData()
     
+    clock = setInterval(function(){
+      upData()
+      console.log(1)
+    },5000)
+
   }
     
 
