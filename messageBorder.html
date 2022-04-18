@@ -13,7 +13,7 @@
     margin: 0;
     padding: 0;
     font-family: "Helvetica", "Arial","LiHei Pro","黑體-繁","微軟正黑體", sans-serif;
-    font-size: 3vmin;
+    font-size: 4vmin;
     background-color: aliceblue;
   }
 
@@ -190,6 +190,8 @@
     //state:true0 = 按照資料庫資料順序排列  state:false = 插入至最後一筆資料 
     for(i=start;i<=end;i++){
 
+      if(document.getElementById("number" + data[i]["number"])){continue}
+
       row = row + 1
       let date = new Date(data[i]["time"])
       date = date.toLocaleString('cn-TW', { minute: 'numeric' ,hour: 'numeric', hour12: true })
@@ -275,6 +277,7 @@
   const message =  document.querySelector("#message")
   const input = document.getElementById("input")
 
+  var inputNum = 0
   input.onclick = async function(){
     if(message.value===""){alert("請輸入訊息");return}
     var data =[{
@@ -296,7 +299,8 @@
     let date = new Date(getReturn["date"])
     date = date.toLocaleString('cn-TW', { minute: 'numeric' ,hour: 'numeric', hour12: true })
     if(getReturn["status"]==="success"){
-      count = count + 1
+      // count = count + 1
+      inputNum = getReturn["number"]
       document.getElementById("timeTemp").innerText = date
       document.getElementById("timeTemp").id = "time" + getReturn["number"]
       document.getElementById("numberTemp").id = "number" + getReturn["number"]
@@ -326,7 +330,9 @@
     lastContent.scrollIntoView()
   }
 
+  function compareData(data){
 
+  }
 
 
   window.onload = function (){   // afk檢測
@@ -413,7 +419,7 @@ afk.onclick = function(){
     append(D,1,1,false)
   }
   
-  start()  //初始推播
+  // start()  //初始推播
 
   loadData()
 
