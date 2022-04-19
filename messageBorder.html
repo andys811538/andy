@@ -174,6 +174,24 @@
     align-items: center;
   }
 
+  .ymd{
+    margin-top: 1vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  .ymdStr{
+    text-align: center;
+    padding: 3px;
+    padding-left: 7px;
+    padding-right: 7px;
+    width: fit-content;
+    border-radius: 20px;
+    background-color: rgb(146, 146, 146);
+    color: aliceblue;
+    font-size: 2vmin;
+  }
 </style>
 
 <body>
@@ -202,13 +220,17 @@
           <div class="time">admin</div>
         </div>        
       </div>
-      <!-- <div class="content">
+
+      <!-- <div class="ymd"><div class="ymdStr">12月12日 周五</div></div>
+
+      <div class="content">
         <div class="name">Andyy</div>
         <div class="fit">
           <div class="message">Hello!</div>
           <div class="time">上午16:00</div>
-        </div>  
+        </div>          
       </div> -->
+
     </div>  
   </div>
 
@@ -235,7 +257,15 @@
     }
   })
 
+  function filterNum(id){
+    var n = id.replace("number","")
+    return Number(n)
+  }
 
+  function dayStr(day){
+    var w = ["周日","周一","周二","周三","周四","周五","周六"]
+    return w[day]
+  }
 
 
   const afk = document.getElementById("afk")
@@ -250,6 +280,8 @@
 
       row = row + 1
       let date = new Date(data[i]["time"])
+      let ymdValue = "y"+date.getFullYear() + "m" + (date.getMonth()+1) + "d" + date.getDate()
+      let ymdText = date.getMonth() + 1 + "月" + date.getDate() + "日 " + dayStr(date.getDay())
       date = date.toLocaleString('cn-TW', { minute: 'numeric' ,hour: 'numeric', hour12: true })
       
       const message = document.createElement("div")
@@ -284,13 +316,43 @@
 
       lastContent = content
 
-      if(state===false){
-        information.appendChild(content)
-        return
+      if(document.getElementById(ymdValue)){       
+      
+        if(state===false){
+          information.appendChild(content)
+          return
+        }
+
+        // console.log(information.lastChild.id)
+        if(filterNum(information.lastChild.id)>(data[i]["number"])){
+          
+          // console.log("有下一個",data[i]["number"])
+          information.insertBefore(content,information.lastChild)
+          continue 
+
+        }
+
+        if(document.getElementById("number" + (data[i]["number"] - 1))){
+          var target = document.getElementById("number" + (data[i]["number"] - 1))
+          information.insertBefore(content,target.nextSibling)
+          // console.log("沒有下一個",data[i]["number"])
+          continue        
+        }
+
+        continue
       }
-      //state=true
-      var target = document.getElementById("number" + (data[i]["number"] - 1))
-      information.insertBefore(content,target.nextSibling)
+
+      const ymd = document.createElement("div")
+      const ymdStr = document.createElement("div")
+      ymdStr.append(ymdText)
+      ymd.append(ymdStr)
+      ymd.id = ymdValue
+      ymd.classList.add("ymd")
+      ymdStr.classList.add("ymdStr")
+
+      information.append(ymd)
+
+      information.insertBefore(content,ymd.nextSibling)
 
     }
 
@@ -333,13 +395,13 @@
 
 
   input.onclick = async function(){
-    clearInterval(clock)
+    // clock(false)
     if(message.value===""){alert("請輸入訊息");return}
     var data =[{
       "number":"Temp",
       "userName": userName.value,
       "message":  message.value,
-      "time":""
+      "time":new Date()
     }]
     var postData ={
       "userName": userName.value,
@@ -359,17 +421,11 @@
       document.getElementById("timeTemp").innerText = date
       document.getElementById("timeTemp").id = "time" + getReturn["number"]
       document.getElementById("numberTemp").id = "number" + getReturn["number"]
+      // console.log("number" + getReturn["number"],"post")
     } else {
       document.getElementById("timeTemp").innerText = "fail"
-    }
-    
-    await upData()
-    
-    clock = setInterval(function(){
-      upData()
-      console.log(1)
-    },5000)
-
+    }   
+    clock(true)
   }
     
 
@@ -383,14 +439,14 @@
   }
   
   
-  async function loadData(){
-    const data = await get()
-    append(data,0,data.length-1)
-    count = data.length
-    lastContent.scrollIntoView()
-  }
+  // async function loadData(){
+  //   const data = await get()
+  //   append(data,0,data.length-1)
+  //   count = data.length
+  //   lastContent.scrollIntoView()
+  // }
 
-  window.onload = function (){   // afk檢測
+  function afkCheck(){   // afk檢測
  (function($){
    funObj = {
      timeUserFun:'timeUserFun',
@@ -403,9 +459,9 @@
        time:function(){
          objTime.init += 1;
          if(objTime.init == userTime){
-           // 用戶到達未操作事件 做一些處理
-           clearInterval(clock)
-           afk.classList.remove("disable")
+          // 用戶到達未操作事件 做一些處理
+          clock(false)
+          afk.classList.remove("disable")
           console.log("用戶長時間沒有操作頁面,即將跳轉到登錄頁面");
          }
        },
@@ -425,8 +481,6 @@
      body.addEventListener("mousewheel",objTime.eventFun);
    }
  })(window)
-
-
 //   直接調用 參數代表分鐘數,可以有一位小數;
   timeUserFun(1);
 }
@@ -435,17 +489,22 @@
 // 更新資料
 afk.onclick = function(){
   this.classList.add("disable")
-  upData()
-  clock = setInterval(function(){
-    upData()
-  },5000)
+  clock(true)
 }
-  var clock = setInterval(function(){
-    upData()
-    console.log(1)
-  },5000)
 
-  
+
+  var timeClock
+  async function clock(state=true){
+      await upData()
+      if(state===true){
+          timeClock = setInterval(async function(){
+            await upData()
+            console.log(1)
+          },5000)
+          return
+      }   
+          clearInterval(timeClock)
+  }
 
   
 
@@ -476,7 +535,17 @@ afk.onclick = function(){
   
   // start()  //初始推播
 
-  loadData()
+  
+  // loadData()
+
+  clock(true)
+
+  afkCheck()
+
+  upData()
+
+
+
 
 
 </script>    
