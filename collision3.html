@@ -36,12 +36,22 @@
         font-weight: bold;
     }
 
+    .collapse{    
+
+        transform-origin: 97.5vw 2.5vmin;
+        transform: scale(0);
+        visibility: collapse;      
+
+    }
+
     .wrapper{
+        position: fixed;
         height: 100vh;
         width: 100vw;
         display: flex;
-        justify-content: center;
+        justify-content:center;
         align-items: center;
+        transition: all 0.7s;
     }
     
     .option{    
@@ -49,8 +59,6 @@
         position: relative;    
         padding-bottom: 2vmin;
         font-size: large;        
-        font-family: 'Courier New', Courier, monospace;
-        font-weight: bold;
         color: rgb(18, 18, 17);        
         width: 85vmin;
         margin: auto;
@@ -67,13 +75,13 @@
         width: 40px;
         height: 20px;
         border-radius: 5px;
+        margin-right: 10px;
         text-align: center;
     }
     .OK{
         background-color: rgba(43, 141, 252, 0.885);
-        font-family: 'Courier New', Courier, monospace;
+        font-family:  'Montserrat', "Microsoft Yahei", "Noto Sans CJK SC", 'Noto Sans TC', "Droid Sans Fallback";
         font-size: large;
-        font-weight: 500;
         color:aliceblue;
         width: 20%;
         height: 15%;
@@ -86,7 +94,7 @@
         transform: scale(1.05);
         background-color: rgb(42, 128, 225);
     }
-    .OK:focus{
+    .OK:active{
         transform: scale(1.05);
         background-color: rgb(42, 128, 225);
     }
@@ -150,20 +158,16 @@
 
     }
 
-    .collapse{    
-        transform: translate(-45vmin,calc(-1 * var(--h) / 2 - 0vh)) scale(0);
-        top: 0;
-        left: 100%;
-        visibility: collapse;        
-    }
+
 
 
     .hidden{
         visibility: hidden;
     }
 
-    .statuBar{
+    .statuBar{        
         position: fixed;
+        z-index: 2;
         font-size: 5vmin;
         width: fit-content;        
         color: aliceblue;
@@ -214,7 +218,7 @@
         <canvas id="myCanvas"></canvas>
     </div>
 
-    <div class="wrapper">
+    <div class="wrapper" id="wrapper">
         <div id="option" class="option">
             <div id="topBar" class="topBar">
                 <div class="gear" ><i class="fa-solid fa-gear"></i></div>
@@ -239,7 +243,7 @@
                     </div>
                     <div>
                         <div><label for="velocity">球速：</label></div>
-                        <div><input id="velocity" min="0" max="5" step="0.1" value="2.5" type="range" disabled="false"></div>
+                        <div><input id="velocity" min="0.1" max="15" step="0.1" value="8" type="range" disabled="false"></div>
                     </div>
                     <div>
                         <div><label for="restitution">彈性係數：</label></div>
@@ -270,6 +274,7 @@
     const randomMass = document.getElementById("randomMass")
     const cancle = document.getElementById("cancle")
     const option = document.getElementById("option")
+    const wrapper = document.getElementById("wrapper")
     const topBar = document.getElementById("topBar")
     const content = document.getElementById("content")
     const statuBar = document.getElementById("statuBar")
@@ -278,11 +283,11 @@
     const ballColor = document.getElementById("ballColor")
     
     cancle.onclick = function(){       
-        option.classList.add("collapse")
+        wrapper.classList.add("collapse")
     }
 
     statuBar.onclick = function(){
-        option.classList.remove("collapse")
+        wrapper.classList.remove("collapse")
     }
 
     var ballSize = 9
@@ -345,11 +350,12 @@
 
     const optionStyle = getComputedStyle(option)
 
-    document.querySelector("body").style.setProperty("--h",optionStyle.height)
+    document.querySelector("body").style.setProperty("--h",optionStyle.top)
+
 
     function ok(){
         start(num)
-        option.classList.add("collapse")
+        wrapper.classList.add("collapse")
     }
 
     function getRandom(rnd) {
@@ -483,7 +489,7 @@
         for (i = 1; i <= num; i++) {
             if(sizeState===false){
                 r[i] = ballSize} else {
-                r[i] = Math.abs(getRandom(49)) + 1}  
+                r[i] = Math.abs(getRandom(49)) + 3}  
     
             pos[i] = new position(boundX / 2 + r[i], boundY / 2 + r[i])
             v[i] = new vector(initialV()[0], initialV()[1])
