@@ -12,6 +12,7 @@
 <style>
 
     body {
+        
         margin: 0;
         background-color: black;        
     }
@@ -34,18 +35,27 @@
         font-family: 'Courier New', Courier, monospace;
         font-weight: bold;
     }
+
+    .wrapper{
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
     
-    .option{
+    .option{    
+        font-family:  'Montserrat', "Microsoft Yahei", "Noto Sans CJK SC", 'Noto Sans TC', "Droid Sans Fallback";
+        position: relative;    
         padding-bottom: 2vmin;
         font-size: large;        
         font-family: 'Courier New', Courier, monospace;
         font-weight: bold;
-        color: rgb(18, 18, 17);
-        position: fixed;
+        color: rgb(18, 18, 17);        
         width: 85vmin;
         margin: auto;
-        top: 20vh;
-        left: calc( (100vw - 85vmin) / 2 );
+        /* top: 20vh; */
+        /* left: calc( (100vw - 85vmin) / 2 ); */
         text-align: center;
         border: 1px solid white;
         border-radius: 10px;
@@ -53,7 +63,7 @@
         transition: all 0.7s;
 
     }
-    .number{
+    .number{        
         width: 40px;
         height: 20px;
         border-radius: 5px;
@@ -138,7 +148,6 @@
         width: auto;
         text-align: center;
 
-
     }
 
     .collapse{    
@@ -187,6 +196,7 @@
         border-radius: 50%;
     }
 
+
     @media only screen and (max-width: 470px) {
         .content{
             display: block;            
@@ -203,45 +213,49 @@
     <div id="bound" class="bound">
         <canvas id="myCanvas"></canvas>
     </div>
-    <div id="option" class="option">
-        <div id="topBar" class="topBar">
-            <div class="gear" ><i class="fa-solid fa-gear"></i></div>
-            <div>Option</div>
-            <div class="title"></div>
-            <div id="cancle" class="cancle"><i class="fa-solid fa-circle-xmark"></i></div>
-        </div>
-        <div><input id="number" min="1" max="999" class="number" type="number" value="3">Please input the number of balls</div>
-        <div id="content" class="content">     
-            
-            <div class="rightContent">
-                    <div><input id="randomSize" type="checkbox" checked="true"><label for="randomSize">Random Size</label></div>
-                    <div><input id="randomVel" type="checkbox" checked="true"><label for="randomVel">Random Velocity</label></div>                                 
-                    <div><input id="randomMass" type="checkbox" checked="true"><label for="randomMass">Random Mass</label></div>                         
-                    <div><input id="randomColor" type="checkbox" ><label for="randomColor">Random Color</label></div>                         
-            </div>
 
-            <div class="leftContent">
-                <div>
-                    <div><label id="labelSize" for="size">Size:</label></div>
-                    <div><input id="size" min="0" max="50" step="2" value="25" type="range" disabled="false"></div>
+    <div class="wrapper">
+        <div id="option" class="option">
+            <div id="topBar" class="topBar">
+                <div class="gear" ><i class="fa-solid fa-gear"></i></div>
+                <div>選項</div>
+                <div class="title"></div>
+                <div id="cancle" class="cancle"><i class="fa-solid fa-circle-xmark"></i></div>
+            </div>
+            <div><input id="number" min="1" max="999" class="number" type="number" value="3">請輸入球的數量</div>
+            <div id="content" class="content">     
+                
+                <div class="rightContent">
+                        <div><input id="randomSize" type="checkbox" checked="true"><label for="randomSize">隨機大小</label></div>
+                        <div><input id="randomVel" type="checkbox" checked="true"><label for="randomVel">隨機速度</label></div>                                 
+                        <div><input id="randomMass" type="checkbox" checked="true"><label for="randomMass">隨機質量</label></div>                         
+                        <div><input id="randomColor" type="checkbox" ><label for="randomColor">隨機顏色</label></div>                         
                 </div>
-                <div>
-                    <div><label for="velocity">Velocity:</label></div>
-                    <div><input id="velocity" min="0" max="5" step="0.1" value="2.5" type="range" disabled="false"></div>
-                </div>
-                <div>
-                    <div><label for="restitution">Restitution:</label></div>
-                    <div><input id="restitution"  min="0.1" max="1" step="0.05" value="1"  type="range" ></div>
-                </div>
-                <div>
-                    <div><label for="ballColor">Ball Color:</label></div>
-                    <div><input type="color" id="ballColor" value="#e66465" ></div>
-                </div>
-            </div>            
+
+                <div class="leftContent">
+                    <div>
+                        <div><label id="labelSize" for="size">大小：</label></div>
+                        <div><input id="size" min="0" max="50" step="2" value="25" type="range" disabled="false"></div>
+                    </div>
+                    <div>
+                        <div><label for="velocity">球速：</label></div>
+                        <div><input id="velocity" min="0" max="5" step="0.1" value="2.5" type="range" disabled="false"></div>
+                    </div>
+                    <div>
+                        <div><label for="restitution">彈性係數：</label></div>
+                        <div><input id="restitution"  min="0.1" max="1" step="0.05" value="1"  type="range" ></div>
+                    </div>
+                    <div>
+                        <div><label for="ballColor">球的顏色：</label></div>
+                        <div><input type="color" id="ballColor" value="#e66465" ></div>
+                    </div>
+                </div>            
+            </div>
+            
+            <div><input onclick="ok()" class="OK" type="button" value="開始！"></div>
         </div>
-           
-        <div><input onclick="ok()" class="OK" type="button" value="Start!"></div>
     </div>
+
     <div id="statuBar" class="statuBar"><i class="fa-solid fa-gear"></i></div>
     <!-- <div id="time" class="time">123456</div> -->
 
