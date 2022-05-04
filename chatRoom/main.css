@@ -1,0 +1,166 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-family: "Helvetica", "Arial","LiHei Pro","黑體-繁","微軟正黑體", sans-serif;
+    font-size: 4vmin;
+    background-image: linear-gradient(-32.4deg,#a4e9e4,#a0b0f6,#debfee,#96e0fc);
+    background-size: 400% 400%;
+    background-attachment: fixed;
+    animation: back 7s ease-in-out infinite;
+    /* background-position: bottom center; */
+    /* background-color: rgb(33, 110, 177); */
+  }
+
+
+  .main{
+    /* border: 1px solid black; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .information{
+    background-color: rgba(255, 255, 255, 0);
+    width: 95%;
+    /* border: 1px solid black; */
+    border-radius: 2vmin;
+    text-align: left;
+    margin-top: 1vh;
+    margin-bottom: 22vmin;
+    margin-top: 11vmin;
+  }
+
+  .content{    
+    display: flex;
+    align-items:center;
+  }
+
+  .name{
+    width: 17%;
+    margin: 10px;
+    margin-top: 15px;
+    text-align: center;
+  }
+  .meName{
+      width: 0;
+  }
+
+  .fit{
+    width: 83%;
+    display: flex;
+    justify-content: left;
+    align-items: flex-end;
+  }
+
+  .me{
+    flex-direction:row-reverse;
+    justify-content: right;
+    text-align: right;
+  }
+
+  .message{
+    /* width: 80%; */
+    text-align: center;
+    word-wrap:break-word;
+    word-break: break-all;
+    white-space: pre-line;
+    margin: 5px;
+    padding: 10px;
+    background-color: rgba(220, 217, 217, 0.788);
+
+    border-radius: 3vmin;
+  }
+
+  .meMessage{
+    background-color: rgb(112, 198, 175);
+
+  }
+
+  .time{
+    width: 20%;
+    /* height: 1vmin; */
+    /* height: 1vmin; */
+    color: rgba(96, 96, 96, 0.768);
+    font-size:2vmin;
+    padding: 1vmin;
+    /* line-height: 100%; */
+  }
+
+  .form{
+    position: fixed;
+    /* height: 15vh; */
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    /* background-color: rgb(255, 255, 255); */
+    backdrop-filter: blur(1000px);
+    height: 10vmin;
+    box-shadow: 0 0px 4px rgb(59, 59, 59);
+  }
+
+  #message{
+    padding: 5px;
+    padding-left: 20px;
+    height: 5vmin;
+    margin-left: 1vw;
+    width: 80%;
+    /* height: 6vmin; */
+    font-size: 4vmin;
+    border-radius: 5vmin;
+    overflow-y:hidden;
+    resize: none;
+  }
+
+  button{
+    font-size: 5vmin;
+  }
+
+
+  .flexCenter{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .disable{
+    display: none;
+  }
+
+  .send{
+    width: 12%;
+    color: rgb(0, 119, 255);;
+    text-shadow: 0px 0px 0.5px black;
+    font-size: 6vmin;
+    text-align: center;    
+    cursor: pointer;
+    transition: all 0.1s;
+  }
+
+  .send:hover{
+    color: rgb(40, 139, 252);    
+    transform: scale(1.05)
+  }
+
+  .send:active{
+    color: rgb(47, 127, 219);
+    transform: scale(1.3)
+  }
+
+  .ymd{
+    margin-top: 1vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  .ymdStr{
+    text-align: center;
+    padding: 3px;
+    padding-left: 7px;
+    padding-right: 7px;
+    width: fit-content;
+    border-radius: 20px;
+    background-color: rgb(170, 170, 170);
+    color: aliceblue;
+    font-size: 2vmin;
+  }  

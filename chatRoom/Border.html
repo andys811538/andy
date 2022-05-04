@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>留言板</title>
+    <script src="https://kit.fontawesome.com/c45d543d64.js" crossorigin="anonymous"></script>    
+    <link rel="stylesheet" type="text/css" href="loadAnimation.css">
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <link rel="stylesheet" type="text/css" href="login.css">
+</head>
+
+
+<body>
+
+
+  <div class="topBar"><span id="userShow"></span><div id="user" class="user"><i class="fa-solid fa-circle-user"></i></div></div>
+  <div class="singUpCont">
+    <div class="singUpArea">
+      <div class="chatIconContainer flexCenter">
+        <div class="chatIcon"><i class="fa-solid fa-comments"></i></div>
+      </div>
+      <div class="welcome" >Welcome</div>      
+      <!-- <div class="flexCenter signInOrUp">
+        <div class="signInUp signSelected" id="signIn">sign in</div>
+        <div class="signInUp" id="signUp">sign up</div>
+      </div> -->
+      <div class="flexCenter">
+        <div class="account">
+          <input required placeholder="Email" type="enail" id="account" class="inputAccount">
+        </div>
+      </div>
+      <div class="flexCenter">
+        <div class="account ">
+          <input required minlength="6" maxlength="30" placeholder="Password" type="password" id="pass" class="inputAccount">
+        </div>
+      </div>
+      <div class="flexCenter ">
+        <div class="account disapear" id="checkPasswordContainer">
+          <input required minlength="6" maxlength="30" placeholder="Check Passwaord" type="password" id="checkPass" class="inputAccount">
+        </div>
+      </div>
+      <div class="flexCenter ">
+        <div class="account disapear" id="yourNameContainer">
+          <input required minlength="6" maxlength="30" placeholder="Your UserName" type="text" id="yourUserName" class="inputAccount">
+        </div>
+      </div>
+      <div class="flexCenter" >
+        <div class="remenberWrapper" id="remember">
+          <label for="remenberMe" class="checkboxContainer">記住我<input type="checkbox" id="remenberMe"><span class="checkmark"></span></label>
+        </div>
+      </div>
+      <div class="flexCenter ">
+        <div for="login" class="submit"><button id="login">登入</button></div>
+      </div>      
+      <div class="flexCenter">
+        <div class="forgotPassword">
+          <div id="forgotPassword">忘記密碼？</div>
+        </div>        
+      </div>
+      <div class="flexCenter" id="haveAccount">還沒有帳號嗎?</div>
+      <div class="flexCenter">
+        <div class="register">
+          <div id="register">註冊</div>
+        </div>        
+      </div>
+
+    </div>
+  </div>
+
+  <div class="form flexCenter">
+      <textarea id="message" cols="30" rows="2"></textarea>
+      <div class="send" id="input"><i class="fa-solid fa-paper-plane"></i></div>
+  </div>
+
+  <div class="main">
+    <div class="information" id="information">
+      <div class="content" id="number1">
+        <div class="name">Admin</div>
+        <div class="fit">
+          <div class="message">這是一個留言板！</div>
+          <div class="time">admin</div>
+        </div>        
+      </div>
+
+      <!-- <div class="ymd"><div class="ymdStr">12月12日 周五</div></div>
+
+      <div class="content">
+        <div class="name">Andyy</div>
+        <div class="fit">
+          <div class="message">Hello!</div>
+          <div class="time">上午16:00</div>
+        </div>          
+      </div> -->
+
+    <div id="loadAnimation">
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="load">loading<spam>.</spam><spam>.</spam><spam>.</spam></div>
+    </div>  
+
+    </div>  
+  </div>
+
+
+  <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-analytics.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-auth.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyCthKc-3g7wEQHRS5T4GHO9OKsu7MXN-aY",
+      authDomain: "myproject-78584.firebaseapp.com",
+      databaseURL:"https://myproject-78584-default-rtdb.firebaseio.com/",
+      projectId: "myproject-78584",
+      storageBucket: "myproject-78584.appspot.com",
+      messagingSenderId: "43190087980",
+      appId: "1:43190087980:web:cbb2bcd921d917f02efc89",
+      measurementId: "G-MV67347978"
+    };
+    firebase.initializeApp(firebaseConfig)
+    const analytics = firebase.analytics()
+    const db = firebase.database()
+  </script>
+
+
+  
+  <script src="login.js"></script>
+  <script src="main.js"></script>    
+</body>
+</html>
