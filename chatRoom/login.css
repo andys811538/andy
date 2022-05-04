@@ -205,16 +205,6 @@
     
   }
 
-  input:-webkit-autofill,
-  input:-webkit-autofill:hover,
-  input:-webkit-autofill:focus,
-  input:-webkit-autofill:active
-  input:-internal-autofill-selected{
-    border: none !important;
-    -webkit-text-fill-color: #1b1b1b !important;
-    -webkit-box-shadow: 0 0 0 1000px rgba(255,255,255,0) inset !important;
-    transition: background-color 5000s ease-in-out 0s !important;
-}
 
 .forgotPassword{
   text-align: center;
@@ -290,4 +280,20 @@
   opacity: 0;
   display: none !important;   
 }
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    border: none !important;
+    -webkit-text-fill-color: #1b1b1b !important;
+    -webkit-box-shadow: 0 0 0 1000px rgba(255,255,255,0) inset !important;
+    transition: background-color 5000s ease-in-out 0s !important;
+}
 
+  input:-internal-autofill-selected{    
+    background-image: none !important;
+    background-color: transparent !important;
+    color: #3b4043 !important;
+}
+
+    
