@@ -7,6 +7,7 @@
     justify-content: flex-end;
     align-items: center;    
     z-index: 7;
+    user-select: none;
   }
 
 .topBarShadow{
@@ -88,8 +89,11 @@
     height: 2.5em;
     width: 100%;
     /* border: 2px solid rgba(122, 135, 144, 0.448); */
-    background-color: transparent;                
-    transition: all .5s;
+    background-color: transparent;    
+    transform-origin: bottom center;            
+    transition: height .5s linear,
+                font-size .5s linear,
+                opacity 0.1s linear;
     color: #3b4043;
     /* animation:resetBackground .1s forwards */
    }
@@ -97,7 +101,7 @@
     margin-top: 1em;
     padding-left: 1em;
     padding-right: 1em;
-    border-radius: 2.5em;
+    border-radius: 100vmax;
     width: 70%;
     border: 0.1em solid #393939be;
     background-image:linear-gradient(#0084ff,#0084ff);
@@ -106,7 +110,7 @@
     background-repeat:no-repeat;
     background-color: rgba(165, 206, 251, 0.4);
     opacity: 1;
-    transition: all .5s;
+    /* transition: opacity .5s linear; */
   }
 
 
@@ -293,6 +297,17 @@
 
 .disapear{
   opacity: 0;
-  display: none !important;   
+  /* visibility: hidden; */
+  font-size: 0;
+  /* display: none !important;    */
 }
 
+@media screen and (min-width: 502px) {
+
+.singUpArea{
+  width: 452px;
+  font-size: 16px;
+}
+
+
+}
