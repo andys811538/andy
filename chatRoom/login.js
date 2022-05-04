@@ -70,11 +70,8 @@ login.onclick = async function () {
     if (signState === 'signUp') {
       firebase.auth()
         .createUserWithEmailAndPassword(account.value, pass.value)
-        .then(function () {
-          const user = firebase.auth().currentUser
-          user.updateProfile({
-            displayName: "Andy"
-          }).then(res => console.log(res))
+        .then(function () {      
+          console.log("create success")
         }).catch(function (error) {
           console.log(error.message)
         });
@@ -114,10 +111,16 @@ function checkCookie() {
 var email = null
 var displayName = null
 var uid = null
-firebase.auth().onAuthStateChanged((user) => {
+var AuthStateChanged = firebase.auth().onAuthStateChanged(async(user) => {
   if (user) {
     // User is signed in, see docs for a list of available properties
     // https://firebase.google.com/docs/reference/js/firebase.User
+    if(signState==="signUp" && !yourUserName.value==""){
+      await user.updateProfile({
+        displayName : yourUserName.value
+      }).then(res => console.log("displayName create success"))
+      location.reload()
+    }
     email = user.email
     displayName = user.displayName;
     uid = user.uid

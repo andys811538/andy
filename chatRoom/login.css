@@ -72,6 +72,12 @@
     color: #0066c6;
   }
 
+  @keyframes resetBackground {
+    to{
+      background-color: transparent;
+    }
+  }
+
 
   .inputAccount{
     z-index: 2;
@@ -85,7 +91,8 @@
     background-color: transparent;                
     transition: all .5s;
     color: #3b4043;
-  }
+    /* animation:resetBackground .1s forwards */
+   }
   .account{
     margin-top: 1em;
     padding-left: 1em;

@@ -184,12 +184,6 @@
   var postReturn = {status:"", key:"", number:""}  
   input.onclick = async function(){
     if(message.value===""){alert("請輸入訊息");return}
-    var data =[{
-      "number":"Temp",
-      "userName": displayName,
-      "message":  message.value,
-      "time":new Date()
-    }]
     var postData ={
       time:firebase.database.ServerValue.TIMESTAMP,
       userName:displayName,
