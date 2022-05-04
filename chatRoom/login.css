@@ -71,10 +71,6 @@
     border-radius: .6em;
     color: #0066c6;
   }
-    @keyframe resetBg{
-        to{
-             background-color: transparent;
-        }
 
   .inputAccount{
     z-index: 2;
@@ -88,7 +84,6 @@
     background-color: transparent;                
     transition: all .5s;
     color: #3b4043;
-      animation: resetBg .1s forward
   }
   .account{
     margin-top: 1em;
