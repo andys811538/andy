@@ -72,6 +72,7 @@
     color: #0066c6;
   }
 
+
   .inputAccount{
     z-index: 2;
     border: none;
@@ -203,7 +204,15 @@
     transform: scale(1.05);
     
   }
-
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active  {
+    border: none;
+    -webkit-text-fill-color: #1b1b1b;
+    -webkit-box-shadow: 0 0 0 1000px rgba(255,255,255,0) inset;
+    transition: background-color 5000s ease-in-out 0s;
+}
 
 .forgotPassword{
   text-align: center;
@@ -280,15 +289,3 @@
   display: none !important;   
 }
 
-  input:-webkit-autofill,
-  input:-webkit-autofill:hover,
-  input:-webkit-autofill:focus,
-  input:-webkit-autofill:active {
-    -webkit-text-fill-color: #1b1b1b !important;
-    -webkit-box-shadow: 0 0 0 1000px rgba(255,255,255,0) inset !important;
-    transition: background-color 5000s ease-in-out 0s !important;
-}
-
-
-
-    
