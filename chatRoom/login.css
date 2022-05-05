@@ -297,7 +297,7 @@
 
 .disapear{
   opacity: 0;
-  /* visibility: hidden; */
+  visibility: hidden;
   font-size: 0;
   /* display: none !important;    */
 }
