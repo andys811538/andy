@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>    
+    <link rel="stylesheet" href="style/loadAnimation.css">
+    <link rel="stylesheet" href="style/index.css">
+    <link rel="stylesheet" href="style/menu.css">
+    <link rel="stylesheet" href="css/all.css">
+</head>
+
+<style>
+    .toolBox{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        left: 50px;
+        top: 2px;
+        width: 70px;
+        height: 50px;
+        position: fixed;
+        z-index: 100;
+        border-radius: 7px;
+        background-color: rgba(0, 0, 0, 0.122);
+        backdrop-filter: blur(2px);
+        user-select: none;
+        display: none;
+    }
+</style>
+
+<body>
+
+    <div id="toolBox" class="toolBox">
+        <input type="button" value="load" id="loadButton">
+    </div>
+
+    <div class="container">
+        <header class="topBar">
+            <nav>
+                <div class="menu">
+                    <label class="menu-expand" for="menu-toggle">
+                        <i class="fa-solid fa-bars"></i>
+                    </label>  
+                    <div class="menu-wrapper">              
+                        <input id="menu-toggle" class="menu-toggle" type="checkbox">
+                        <label class="menu-ouside" for="menu-toggle"></label>
+                        <div class="menu-content">
+                            <label class="menu-collapse" for="menu-toggle">
+                                <i class="fa-solid fa-angle-left"></i>
+                            </label>
+                            <div>
+                                <ul>
+                                    <li>List 1</li>
+                                    <li>List 2</li>
+                                    <li>List 3</li>
+                                    <li>List 4</li>
+                                    <li>List 5</li>
+                                </ul>
+                            </div>
+                        </div>                
+                    </div>
+                </div>
+                <div class="users-count">線上人數</div>
+                <div class="user-icon">
+                    <img src="cat.png" alt="">
+                </div>
+            </nav>
+        </header>
+
+        <div id="information" class="information">     
+            
+
+
+            <div class="message-wrapper">
+                <div data-ymds="y2022m4d30" class="ymds">
+                    <div>4月30日 週六</div>
+                </div>
+                <div data-username="歡歡"  class="userIcon">
+                    <img src="cat.png" alt="">
+                </div>
+                <div class="message">╮╮ 　　　　╭．★．☆．╮
+                    　╰╰ 　　╭．●．○．●．╮
+                    ┌──┐　 ╰～～～～～～～╯
+                    │奶　├╮ ｜幸福甜蜜小蛋糕｜
+                    │　茶├╯ ｜＝＝＝＝＝＝＝｜
+                    ╰──╯ 　╰───────╯</div>
+                <div class="timestamp">下午14:20</div>
+            </div>
+
+            <div data-email="me" class="message-wrapper">
+                <div data-ymds="y2022m5d1" class="ymds">
+                    <div>5月1日 週六</div>
+                </div>
+                <div data-username="歡歡"  class="userIcon">
+                    <img src="cat.png" alt="">
+                </div>
+                <div class="message">╮╮ 　　　　╭．★．☆．╮
+                    　╰╰ 　　╭．●．○．●．╮
+                    ┌──┐　 ╰～～～～～～～╯
+                    │奶　├╮ ｜幸福甜蜜小蛋糕｜
+                    │　茶├╯ ｜＝＝＝＝＝＝＝｜
+                    ╰──╯ 　╰───────╯</div>
+                <div class="timestamp">下午14:20</div>
+            </div>            
+
+            <div data-email="me" class="message-wrapper">
+                <div class="ymds">
+                    <div></div>
+                </div>
+                <div data-username="歡歡" class="userIcon">
+                    <img src="cat.png" alt="">
+                </div>
+                <div class="message">嗨嗨嗨~ Hello!</div>
+                <div class="timestamp">下午14:20</div>
+            </div>
+
+            <div data-email="me" class="message-wrapper">
+                <div class="ymds">
+                    <div></div>
+                </div>
+                <div data-username="歡歡" class="userIcon">
+                    <img src="cat.png" alt="">
+                </div>
+                <div class="message">嗨嗨嗨~ Hello!</div>
+                <div class="timestamp">下午14:20</div>
+            </div>
+
+            <div data-email="joy@gmail.com" class="message-wrapper">
+                <div class="ymds">
+                    <div></div>
+                </div>
+                <div data-username="歡歡" class="userIcon">
+                    <img src="cat.png" alt="">
+                </div>
+                <div class="message">嗨嗨嗨~ Hello!</div>
+                <div class="timestamp">下午14:20</div>
+            </div>
+
+            <div data-email="joy@gmail.com" class="message-wrapper">
+                <div class="ymds">
+                    <div></div>
+                </div>
+                <div data-username="" class="userIcon">
+                    <img src="cat.png" alt="">
+                </div>
+                <div class="message">嗨嗨嗨~ Hello!</div>
+                <div class="timestamp">下午14:20</div>
+            </div>
+
+        </div>
+
+        <footer class="bottomBar">
+            <textarea placeholder=" "></textarea><span></span>       
+        </footer>
+
+    </div>  
+
+    <dialog id="loaded">
+        <div class="loadAnimation">
+            <div class="ball"></div>
+            <div class="ball"></div>
+            <div class="ball"></div>
+            <div class="ball"></div>
+            <div class="ball"></div>
+            <div class="ball"></div>
+            <div class="ball"></div>
+            <div class="ball"></div>
+        </div>
+    </dialog>
+    
+</body>
+<script src="script/message.js"></script>
+<script src="script/effect.js"></script>
+<script>
+    
+ 
+    
+    const toolBox = document.getElementById("toolBox")
+
+    const loadButton = document.getElementById("loadButton")
+
+    loadButton.addEventListener("click",()=>{
+        loaded.showModal()
+    })
+
+    function drag(target){
+        const body = document.body
+        var before_x,    before_y,
+            after_x,     after_y,
+            result_x,    result_y,
+            result_left, result_top,
+            left,        top
+
+        var state = false
+        target.addEventListener("mousedown",e=>{
+            left = target.offsetLeft
+            top = target.offsetTop
+            before_x = e.x
+            before_y = e.y
+            state = true
+        })
+
+        body.addEventListener("mousemove",e=>{
+            if(state===false){return}
+            after_x = e.x
+            after_y = e.y
+            result_x = after_x - before_x
+            result_y = after_y - before_y
+            result_left = result_x + left
+            result_top = result_y + top
+            toolBox.style.setProperty("left",`${result_left}px`)
+            toolBox.style.setProperty("top",`${result_top}px`)
+        })
+
+        body.addEventListener("mouseup",e=>{
+            state = false
+        })    
+    }   
+
+    drag(toolBox)
+
+
+
+</script>
+
+</html>

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/all.css">
+    <!-- <script src="https://kit.fontawesome.com/c45d543d64.js" crossorigin="anonymous"></script> -->
+</head>
+
+<style>
+
+body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100vh;
+        background:
+            linear-gradient(150deg, hsla(210, 80%, 70%,0.8),hsla(150, 80%, 70%,0) 70%),
+            linear-gradient(310deg, hsla(360, 80%, 70%,0.8),hsla(320, 80%, 70%,0) 70%),
+            linear-gradient(26deg, hsla(50, 80%, 70%,0.8),hsla(120, 80%, 70%,0) 70%);
+        background-repeat: no-repeat;
+        background-size: 130% 120%;
+        background-attachment: fixed;
+        animation: back-move 10s linear infinite;
+    }
+
+
+    nav{
+        height: 50px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    nav>div{
+        height: 100%;
+        width: 33.3%;
+        background-color: rgba(0, 0, 0, 0.117);
+    }
+
+
+
+/* =================================================================================== 
+    * menu
+    * 以checkbox作為menu開關
+    A. menu開關樣式
+        a. checkbox 設為隱藏
+        b. collapse 樣式
+        c. expand 樣式
+        d. outside menu範圍外樣式
+    B. menu開關實現
+        a. focus 生成menu
+        b. checked 顯示menu
+        d. checked 顯示outside
+    C. menu內容
+
+======================================================================================= */
+
+
+
+
+
+/* --------------------------------------------------------------------------------------
+    A. menu開關樣式
+        a. checkbox 設為隱藏
+        b. collapse 樣式
+        c. expand 樣式
+        d. outside menu範圍外樣式
+----------------------------------------------------------------------------------------*/
+    
+    /* a. checkbox */
+    .menu-toggle{
+        all: initial;
+        width: 0;
+    }
+
+    /* b. collapse */
+    .menu-collapse{
+        position: absolute;
+        right: 0;
+        display: block;
+        width: 50px;
+        height: 50px;
+        text-align: center;
+    }
+
+    .menu-collapse>i{        
+        line-height: 50px;
+        font-size: 32px;
+    }
+
+    /* c. expand */
+    .menu-expand{
+        text-align: center;
+        display: block;
+        width: 50px;
+        height: 50px;
+    }
+
+    .menu-expand>i{
+        line-height: 50px;
+        font-size: 32px;
+    }
+
+    /* d. outside menu範圍外樣式 */
+    .menu-ouside{
+        display: none;
+        background-color: rgba(0, 0, 0, 0.2);
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;        
+    }
+
+/*--------------------------------------------------------------------------------
+    B. menu開關實現
+        a. focus 生成menu
+        b. checked 顯示menu
+        d. checked 顯示outside
+----------------------------------------------------------------------------------*/
+
+    /*a. focus 生成menu*/
+    .menu-toggle:focus~.menu-content{
+        display: block;
+    }
+
+    /* b. checked 顯示menu*/
+    .menu-toggle:checked~.menu-content{
+        display: block;
+        opacity: 1;
+        transform: translateX(0%);
+        pointer-events: all;
+    }
+
+    /* d. checked 顯示outside*/
+    .menu-toggle:checked~.menu-ouside{
+        display: block;        
+    }
+
+/*--------------------------------------------------------------------------------
+  C. menu內容
+----------------------------------------------------------------------------------*/    
+
+    .menu-wrapper>.menu-content{
+        display: none;
+        opacity: 0;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 200px;
+        height: 100vh;
+        font-size: 1.2em;
+        font-weight: bold;
+        font-family: 'Courier New', Courier, monospace;
+        background-color: hsl(200, 70%, 70%);
+        box-shadow: 0 0 10px 1px hsl(200, 90%, 20%);
+        pointer-events: none;
+        transform: translateX(-100%);
+        transition: 
+            1.1s opacity,
+            1s transform ;
+
+    }
+/* ============================================================================================ */
+
+</style>
+
+<body>
+
+<nav>
+    <div>
+        <div class="menu">
+
+            <div class="menu-wrapper">
+                <label class="menu-expand" for="menu-toggle">
+                    <i class="fa-solid fa-bars"></i>
+                </label>                
+                <input id="menu-toggle" class="menu-toggle" type="checkbox">
+                <label class="menu-ouside" for="menu-toggle"></label>
+                <div class="menu-content">
+                    <label class="menu-collapse" for="menu-toggle">
+                        <i class="fa-solid fa-angle-left"></i>
+                    </label>
+                    <div>
+                        <ul>
+                            <li>List 1</li>
+                            <li>List 2</li>
+                            <li>List 3</li>
+                            <li>List 4</li>
+                            <li>List 5</li>
+                        </ul>
+                    </div>
+                </div>                
+            </div>
+
+
+
+        </div>        
+    </div>
+    <div></div>
+    <div></div>
+</nav>
+
+
+<div></div>
+<div></div>
+
+
+
+    
+
+</body>
+
+</html>

@@ -1,0 +1,413 @@
+   /* ==============================================================================
+
+    A. topBar style
+    B. message-wrapper
+    C. bottomBar style
+
+   ================================================================================== */
+   
+   @import url(https://fonts.googleapis.com/earlyaccess/notosanstc.css);
+
+    @keyframes back-move {
+        0%{background-position:0% 0%}
+        25%{background-position:0% 100%}
+        50%{background-position:100% 100%}
+        75%{background-position:100% 0%}
+        100%{background-position:0% 0%}
+    }
+
+    body{
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100vh;
+        background:
+            linear-gradient(150deg, hsla(210, 80%, 70%,0.8),hsla(150, 80%, 70%,0) 70%),
+            linear-gradient(310deg, hsla(360, 80%, 70%,0.8),hsla(320, 80%, 70%,0) 70%),
+            linear-gradient(26deg, hsla(50, 80%, 70%,0.8),hsla(120, 80%, 70%,0) 70%);
+        background-repeat: no-repeat;
+        background-size: 130% 120%;
+        background-attachment: fixed;
+
+        animation: back-move 10s linear infinite;
+    }
+    
+
+
+    /*---------------------------------------------------------- 
+    A. topBar style
+        a.  left area
+        b.  middle area
+        c.  right area    
+    B. message-wrapper        
+    C. bottomBar style
+    
+    ------------------------------------------------------------*/
+    .container{
+        height: 100vh;
+    }
+    
+    header.topBar{
+        z-index: 1;
+        position: relative;
+        width: 100%;
+        height: 50px;
+        background-color: rgba(40, 40, 40, 0.1);
+        backdrop-filter: blur(3px);
+        box-shadow: 0 0 3px 1px rgba(128, 128, 128, 0.772);
+        font-family: 'Noto Sans TC', sans-serif;
+        font-size: 1.2em;
+    }
+    .topBar>nav{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .topBar>nav>div{
+        width: 33.3%;
+    }
+
+    /* a.  left area */
+    .menu{
+        text-align: left;
+        color: hsl(200, 70%, 10%);
+        font-size: 1.5em;
+        line-height: 100%;        
+    }
+
+    .menu>.menu-expand{
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
+        transition: 
+            transform .1s,
+            color .2s
+        ;
+    }
+
+
+    
+    @media (hover: hover){        
+        .menu>.menu-expand:hover{
+            color: hsl(200, 70%, 20%);
+            transform: scale(1.1);
+        }
+    }
+
+    .menu>.menu-expand:active{
+        color: hsl(200, 70%, 30%);
+        transform: scale(1.05);
+    }
+
+    /* b.  middle area */
+    .users-count{
+        text-align: center;
+        user-select: none;
+    }
+
+    /* c.  right area */
+    .user-icon{
+        text-align: right;
+        padding: 2.5px;
+        height: 45px;
+    }
+    .user-icon>img{
+        cursor: pointer;
+        width: 45px;
+        height: 45px;
+        border-radius: 100%;
+        -webkit-tap-highlight-color: transparent;
+        transition: transform .1s;
+    }
+
+    
+    @media (hover: hover){        
+        .user-icon>img:hover{
+            box-shadow: 
+            0 0 4px .5px hsl(0, 70%, 90%);
+            transform: scale(1.05);
+        }        
+    }
+
+    .user-icon>img:active{
+        box-shadow: 
+        0 0 4px .5px hsl(0, 70%, 100%);
+        transform: scale(1.02);     
+    }
+    
+    /*---------------------------------------------------------- 
+     B. message-wrapper    
+        a. other side message
+        b. me message
+    ------------------------------------------------------------*/
+
+    .information {  
+        position:relative;
+        margin: auto;
+        background-color: rgba(0, 0, 0, 0.02);
+        padding-left: 5px;
+        width: auto;      
+        max-width: 1000px;  
+        max-height: calc(100% - 100px);
+        min-height: calc(100% - 100px);
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        font-family: 'Noto Sans TC', sans-serif;
+        overflow-y:scroll;        
+    }
+
+    .information::-webkit-scrollbar{
+        width: 5px;
+    }
+
+    .scrolling::-webkit-scrollbar-thumb{
+        background: rgba(57, 57, 57, 0.4);        
+    }
+
+    /*  a. other side message */
+    .message-wrapper{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        padding-top: 1.5ch;
+    }
+    .message-wrapper:nth-child(1){
+        padding-top: 2.5ch;
+    }
+    .message-wrapper:nth-last-child(1){
+        padding-bottom: 5ch;
+    }
+
+    .ymds{
+        text-align: center;
+        flex-basis: 100%;           
+    }
+    .ymds>div{
+        margin: auto;
+        text-align: center;
+        color: aliceblue;
+        font-weight: 100;
+        font-size: .8em;        
+        padding-left: .5ch;
+        padding-right: .5ch;
+        background-color: hsla(0, 0%, 60%,0.5);
+        border-radius: 9ch;
+        width: 12ch;
+    }
+
+    .userIcon{
+        position: relative;
+        margin-left: 7px;
+        height: 40px;
+        flex-basis: 40px;
+        align-self:flex-start;
+        
+    }
+
+    .userIcon>img{
+        width: 40px;
+    }
+
+    .userIcon::after{
+        content:attr(data-username);
+        position: absolute;
+        top: 0;
+        left: 100%;
+        width: fit-content;
+        transform: translateX(2ch);     
+        font-size: .6em;
+    }
+    
+
+
+    .userIcon[data-username=""]{
+        visibility: hidden;
+    }
+    .userIcon[data-username=""]+.message{
+        margin-top: 0;
+    }
+
+
+    .message{
+        position: relative;
+        flex-basis: auto;
+        max-width: 65%;
+        font-size: 1em;
+        margin-top: 2.5ch;
+        margin-left:1ch ;
+        padding: .5ch;
+        padding-left: 1.5ch;
+        padding-right: 1.5ch;
+        word-wrap: break-word;
+        white-space: pre-line;
+        border-radius:2ch;        
+        background-color: hsla(0, 0%, 60%,0.2);
+        backdrop-filter: blur(2px);
+        z-index: -1;
+    }
+
+
+    .timestamp{
+        font-size: .5em;
+        flex-basis: 10ch;
+        align-self: flex-end;
+        text-align: center;
+        border-radius: 3ch;
+    }
+
+    /* b. me message */
+
+    .message-wrapper[data-email="me"]{
+        flex-direction: row-reverse;
+    }
+    .message-wrapper[data-email="me"]>.ymds{
+        margin-bottom: 0ch;
+    }
+    .message-wrapper[data-email="me"]>.ymds>div{
+        margin-bottom: 1.5ch;
+    }
+
+    .message-wrapper[data-email="me"]>.ymds>div:empty{
+        margin-bottom: 0ch;
+    }
+    .message-wrapper[data-email="me"]>.userIcon{
+        display: none;
+    }
+    .message-wrapper[data-email="me"]>.message{
+        margin-right: 2ch;
+        margin-top: 0ch;
+        background-color: hsla(150,75%,70%,0.8);
+    }
+    .message-wrapper[data-email="me"]>.message::after{
+        content: "";
+    }
+
+
+    /* scrollBar */
+
+
+
+
+    /*---------------------------------------------------------- 
+     C. bottomBar style
+        a. textarea
+    ------------------------------------------------------------*/
+    .bottomBar{
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        height: 50px;
+        background-color: rgba(40, 40, 40, 0.15);
+        backdrop-filter: blur(5px);
+        box-shadow: 0px -1px 20px 2px rgba(67, 67, 67, 0.454);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* a. textarea */
+
+    .bottomBar>textarea{
+
+        font-size: 20px;
+        width: 70%;
+        height: 25px;
+        max-width: 800px;
+        padding: 5px;
+        padding-left: 2ch;
+        padding-right: 5ch;
+        border-radius: 20px;        
+        resize: none;
+        border: 1px solid black;
+        outline: none;
+        background-color: rgba(255, 255, 255, 0.1);
+        overflow: hidden;
+        transition: border .3s;
+    }
+
+    @media(hover: hover){
+        .bottomBar>textarea:hover{
+            border: 1px solid hsl(200,80%,30%);
+        }
+    }
+
+    .bottomBar>textarea:focus{
+        border: 1px solid hsl(210,100%,20%);
+        box-shadow: 0px 0px 2px hsl(200,80%,80%) ;
+    }
+
+    .bottomBar>span{
+        position: relative;
+        height: 35px;
+    }
+
+    .bottomBar>span::before{
+        position: absolute;
+        cursor: pointer;
+        content: "\f061";
+        font-family: "Font Awesome 6 Free";
+        line-height: 35px;
+        top: 0px;
+        left: -2.5ch;
+        padding-left: .5ch;
+        color: hsl(200,70%,40%);
+        background-color: hsla(0,70%,10%,0.1);
+        border-radius: 0 100vh 100vh 0;
+        font-size: 2em;
+        width: 2ch;        
+        font-weight: 900;
+        opacity: 1;
+        transition: 
+            font-size .5s,
+            opacity .5s;
+    }
+
+    .bottomBar>span::after{
+        position: absolute;
+        cursor: pointer;
+        content: "\f061";
+        font-family: "Font Awesome 6 Free";
+        color: transparent;
+        border-left: 1px hsl(200,50%,40%) solid;
+        font-size: 2em;
+        height: 30px;
+        top: 2.5px;
+        left: -2.5ch;
+        opacity: 1;
+        transition: 
+            opacity .5s,
+            left .45s;
+    }
+
+
+    
+    @media(hover: hover){
+        .bottomBar>span:hover::before{
+            background-color: hsla(0,70%,10%,0.05);
+            color: hsl(200,70%,45%);
+            text-shadow: 0px 0px 2px hsl(200,70%,85%);
+        }
+        
+        .bottomBar>span:hover::after{
+            border-left: 1px hsl(200,50%,45%) solid;
+        }
+    }
+    
+    .bottomBar>span:active::before{
+        background-color: hsla(0,70%,80%,0.5);
+        color: hsl(200,70%,45%);
+        text-shadow: 0px 0px 2px hsl(200,70%,85%);
+    }
+
+    .bottomBar>textarea:placeholder-shown+span::before{
+        opacity: 0;
+        font-size: 0em;
+    } 
+
+    .bottomBar>textarea:placeholder-shown+span::after{
+        opacity: 0;
+        left:0
+    } 
+
+

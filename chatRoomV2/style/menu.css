@@ -1,0 +1,164 @@
+/* =================================================================================== 
+    * menu
+    * 以checkbox作為menu開關
+    A. menu開關樣式
+        a. checkbox 設為隱藏
+        b. collapse 樣式
+        c. expand 樣式
+        d. outside menu範圍外樣式
+    B. menu開關實現
+        a. focus 生成menu
+        b. checked 顯示menu
+        d. checked 顯示outside
+    C. menu內容
+
+======================================================================================= */
+
+
+
+
+
+/* --------------------------------------------------------------------------------------
+    A. menu開關樣式
+        a. checkbox 設為隱藏
+        b. collapse 樣式
+        c. expand 樣式
+        d. outside menu範圍外樣式
+        e. 效果
+----------------------------------------------------------------------------------------*/
+    
+    
+
+    .menu-wrapper{
+        z-index: 9;
+    }
+    /* a. checkbox */
+    .menu-toggle{
+        all: initial;
+        width: 0;
+    }
+
+    /* b. collapse */
+    .menu-collapse{
+        cursor: pointer;
+        position: absolute;
+        right: 0;
+        display: block;
+        width: 50px;
+        height: 50px;
+        text-align: center;
+        transition: 
+            color .3s,
+            transform .3s;
+    }
+
+    .menu-collapse>i{        
+        line-height: 50px;
+        /* font-size: 32px; */
+    }
+
+    /* c. expand */
+    .menu-expand{
+        text-align: center;
+        display: block;
+        width: 50px;
+        height: 50px;
+    }
+
+    .menu-expand>i{
+        line-height: 50px;
+        /* font-size: 32px; */
+    }
+
+    /* d. outside menu範圍外樣式 */
+    .menu-ouside{
+        display: none;
+        background-color: rgba(0, 0, 0, 0.2);
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;        
+    }
+
+    /* e. 效果 */
+    @media (hover: hover){        
+        .menu-collapse:hover{
+            color: hsl(200, 70%, 20%);
+            transform: scale(1.1);
+        }
+    }
+
+    .menu-collapse:active{
+        color: hsl(200, 70%, 30%);
+        transform: scale(1.05);
+    }
+
+    @keyframes left {
+        0%{transform: scaleX(1);}
+        100%{transform: scaleX(-1);}
+    }
+
+    @keyframes right {
+        0%{transform: scaleX(-1);}
+        100%{transform: scaleX(1);}
+    }
+
+    .menu-toggle:checked~.menu-content>.menu-collapse{
+        animation: right .4s forwards;
+    }
+
+    .menu-toggle:not(checked)~.menu-content>.menu-collapse{
+        animation: left .4s forwards;
+    }
+
+/*--------------------------------------------------------------------------------
+    B. menu開關實現
+        a. focus 生成menu
+        b. checked 顯示menu
+        d. checked 顯示outside
+----------------------------------------------------------------------------------*/
+
+    /*a. focus 生成menu*/
+    .menu-toggle:focus~.menu-content{
+        display: block;
+    }
+
+    /* b. checked 顯示menu*/
+    .menu-toggle:checked~.menu-content{
+        display: block;
+        opacity: 1;
+        transform: translateX(0%);
+        pointer-events: all;
+    }
+
+    /* d. checked 顯示outside*/
+    .menu-toggle:checked~.menu-ouside{
+        display: block;     
+    }
+
+/*--------------------------------------------------------------------------------
+  C. menu內容
+----------------------------------------------------------------------------------*/    
+
+    .menu-wrapper>.menu-content{       
+        display: none;
+        opacity: 0;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 300px;
+        height: 100vh;
+        font-size: 1.2em;
+        font-weight: bold;
+        background:
+            linear-gradient(-20deg, hsl(13, 72%, 79%),hsl(211, 22%, 70%) 70%);
+        /* background-color: hsl(200, 40%, 60%); */
+        box-shadow: 0 0 10px 1px hsl(200, 10%, 10%);
+        pointer-events: none;
+        transform: translateX(-100%);
+        transition: 
+            1.1s opacity,
+            1s transform ;
+    }
+/* ============================================================================================ */
