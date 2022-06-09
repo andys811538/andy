@@ -95,15 +95,23 @@
         color: hsl(200, 70%, 10%);
         font-size: 1.5em;
         line-height: 100%;        
+        display: flex;
+        justify-content: left;
+        align-items: center;
     }
 
-    .menu>.menu-expand{
+    .menu>.menu-expand{        
         cursor: pointer;
         -webkit-tap-highlight-color: transparent;
         transition: 
             transform .1s,
             color .2s
         ;
+    }
+
+    .menu>.menu-expand>i{        
+        line-height: 50px;
+
     }
 
 
@@ -128,14 +136,16 @@
 
     /* c.  right area */
     .user-icon{
-        text-align: right;
-        padding: 2.5px;
-        height: 45px;
+        display: flex;
+        justify-content: right;
+        align-items: center;
     }
-    .user-icon>img{
+
+    .user-icon>.menu-expand>img{
         cursor: pointer;
         width: 45px;
-        height: 45px;
+        height: 45px;        
+        line-height: 50px;
         border-radius: 100%;
         -webkit-tap-highlight-color: transparent;
         transition: transform .1s;
@@ -143,14 +153,14 @@
 
     
     @media (hover: hover){        
-        .user-icon>img:hover{
+        .user-icon>.menu-expand>img:hover{
             box-shadow: 
             0 0 4px .5px hsl(0, 70%, 90%);
             transform: scale(1.05);
         }        
     }
 
-    .user-icon>img:active{
+    .user-icon>.menu-expand>img:active{
         box-shadow: 
         0 0 4px .5px hsl(0, 70%, 100%);
         transform: scale(1.02);     
