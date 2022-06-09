@@ -22,6 +22,11 @@
         100%{background-position:0% 0%}
     }
 
+    :root {
+        --app-height: 100%;
+    }
+    
+
     body{
         margin: 0;
         padding: 0;
@@ -37,8 +42,20 @@
 
         animation: back-move 10s linear infinite;
     }
-    
 
+    html,
+    body {
+        padding: 0;
+        margin: 0;
+        overflow: hidden;
+        width: 100vw;
+        height: 100vh;
+
+    }
+
+    @media not all and (hover: hover) {
+        body {height: var(--app-height);}
+    }
 
     /*---------------------------------------------------------- 
     A. topBar style
@@ -47,8 +64,9 @@
         c.  right area        
     ------------------------------------------------------------*/
     .container{
-        height: 100vh;
-        max-height: -webkit-fill-available
+        /* width: 100vw; */
+        height: 100%;
+
     }
     
     header.topBar{
