@@ -1,8 +1,14 @@
    /* ==============================================================================
 
     A. topBar style
+        a.  left area
+        b.  middle area
+        c.  right area    
     B. message-wrapper
+        a. other side message
+        b. me message
     C. bottomBar style
+        a. textarea
 
    ================================================================================== */
    
@@ -38,10 +44,7 @@
     A. topBar style
         a.  left area
         b.  middle area
-        c.  right area    
-    B. message-wrapper        
-    C. bottomBar style
-    
+        c.  right area        
     ------------------------------------------------------------*/
     .container{
         height: 100vh;
@@ -295,7 +298,7 @@
     ------------------------------------------------------------*/
     .bottomBar{
         position: relative;
-        bottom: 0;
+        /* bottom: 0; */
         width: 100%;
         height: 50px;
         background-color: rgba(40, 40, 40, 0.15);
@@ -364,8 +367,8 @@
     }
 
     .bottomBar>span::after{
-        position: absolute;
-        cursor: pointer;
+        position: absolute;     
+        cursor: pointer;   
         content: "\f061";
         font-family: "Font Awesome 6 Free";
         color: transparent;
@@ -376,6 +379,7 @@
         left: -2.5ch;
         opacity: 1;
         transition: 
+            font-size .5s,
             opacity .5s,
             left .45s;
     }
@@ -390,7 +394,7 @@
         }
         
         .bottomBar>span:hover::after{
-            border-left: 1px hsl(200,50%,45%) solid;
+            border-left: 1px hsl(200,50%,45%) solid;            
         }
     }
     
@@ -407,7 +411,7 @@
 
     .bottomBar>textarea:placeholder-shown+span::after{
         opacity: 0;
-        left:0
+        left:0;
+        font-size: 0em;
+        cursor:auto;  
     } 
-
-
