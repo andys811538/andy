@@ -47,7 +47,8 @@
         c.  right area        
     ------------------------------------------------------------*/
     .container{
-        height: 100%;
+        height: 100vh;
+        max-height: -webkit-fill-available
     }
     
     header.topBar{
