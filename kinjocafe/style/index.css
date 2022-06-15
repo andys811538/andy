@@ -1,0 +1,90 @@
+
+
+
+@import url('https://fonts.googleapis.com/css2?family=Hachi+Maru+Pop&display=swap');
+
+@font-face{
+    font-family: Seto;
+    src: url("font/setofont.ttf");
+    font-style: normal;
+    font-weight: normal;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100vh;
+    background: 
+        linear-gradient(100deg, hsla(200,70%,60%,0.9),hsla(150, 80%, 70%,0) 70%),
+        linear-gradient(1200deg, hsla(0,70%,60%,0.9),hsla(150, 80%, 70%,0) 70%),
+        linear-gradient(70deg, hsla(100,70%,60%,0.9),hsla(150, 80%, 70%,0) 70%);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 130% 120%;
+    background-attachment: fixed;
+    overflow-y: scroll;
+}
+
+::-webkit-scrollbar{
+    width: 0;
+}
+
+header {
+    display: flex;
+    justify-content:center;
+    align-items:flex-end;
+    font-family: "Hachi Maru Pop", Seto, "微軟正黑體";
+    background-color: rgba(0, 0, 0, 0.087);
+    padding-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+header #title {  
+    font-size:7em;
+    line-height: 100%;
+    margin: 10px;
+}
+
+header #subtitle{
+    font-size: 1.5em;
+    font-weight: 600;
+    margin-bottom: .2em;
+}
+
+.main{
+    font-family: "微軟正黑體";
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+
+.main ul[data-kind]{
+    position: relative;
+    padding: .5ch 2ch;
+    list-style:none;
+    width: 100%;
+    max-width: 500px;
+}
+
+.main ul[data-kind]::before{
+    font-size: 2em;
+    content: attr(data-kind);
+}
+
+.main .dish{    
+    font-size: 1.5em;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.main .dish::after{
+    content: "$" attr(data-price);    
+}
+
+
+
