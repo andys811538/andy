@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">    
     <title>kinjo café</title>
     <link rel="stylesheet" href="style/index.css">
+    <link rel="stylesheet" href="style/menu.css">
+    <link rel="stylesheet" href="fontawesome/all.css">
 </head>
 
 <body>
@@ -26,12 +28,36 @@
         </ul> -->
     </div>
 
+    <div class="menu">
+
+        <div class="menu-wrapper">
+            <input id="menu-toggle-A" class="menu-toggle" type="checkbox">
+            <label class="menu-expand" for="menu-toggle-A">
+            </label>                           
+            <div class="menu-frame menu-custom-A">
+                <label class="menu-collapse" for="menu-toggle-A">
+                    <i class="fa-solid fa-xmark"></i>
+                </label>
+                <div class="menu-content">
+                    <header>
+                        <h1></h1>
+                    </header>
+                    <div>
+                      
+                    </div>
+                    <footer>
+                        <input id="addItem" type="button" value="加入">
+                    </footer>
+                </div>
+            </div>                
+        </div>
+    </div> 
+
+
+
 
 
 <script>
-
-
-
     var menu = {
         title:"鄰里",
         subtitle:"kinjo café",
@@ -254,7 +280,7 @@
             }],
             note:["餐點皆附有50元飲品 差價可補差額"]
         },{
-            name:"PASTA.RISOTTO 義大利麵.燉飯.焗烤",
+            name:"PASTA RISOTTO\r\n義大利麵 燉飯 焗烤",
             dish:[{
                 name:"清炒蒜辣培根",
                 price:160,
@@ -477,7 +503,7 @@
                 note:[""]
             },{
                 name:"白醬奶油雞肉",
-                price:0,
+                price:180,
                 select:[{
                     name:"主食",
                     option:[{
@@ -701,7 +727,7 @@
             }],
             note:[""]
         },{
-            name:"DUTCH BABY PANCAKES 荷蘭寶貝鬆餅",
+            name:"DUTCH BABY PANCAKES\r\n荷蘭寶貝鬆餅",
             dish:[{
                 name:"香蕉巧可力",
                 price:150,
@@ -1273,43 +1299,9 @@
             }],            
             note:[]
         }]
-    }
-    
-    const title = document.getElementById("title")
-    const subtitle = document.getElementById("subtitle")
-    const address = document.getElementById("address")
-    const phone = document.getElementById("phone")
-    const main = document.getElementById("main")
-
-    title.textContent = menu.title
-    subtitle.textContent = menu.subtitle
-    address.textContent = menu.address
-    phone.textContent = menu.phone
-
-    function generation(data){
-        data.kind.forEach(kind=>{
-            const ul = document.createElement("ul")
-            ul.setAttribute("data-kind",kind.name)
-            ul.classList.add("kind")
-
-            kind.dish.forEach(dish=>{
-                const li = document.createElement("li")
-                li.classList.add("dish")
-                li.setAttribute("data-price",dish.price)
-                li.textContent = dish.name
-                ul.append(li)
-            })
-
-            main.append(ul)
-
-
-        })
-    }
-
-    generation(menu)
-
-    </script>
-
+    }    
+</script>
+<script src="script/effect.js"></script>
 </body>
 
 </html>

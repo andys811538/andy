@@ -24,10 +24,12 @@ body{
     background-size: 130% 120%;
     background-attachment: fixed;
     overflow-y: scroll;
+    scroll-behavior: smooth;
 }
 
 ::-webkit-scrollbar{
     width: 0;
+    height: 0;
 }
 
 header {
@@ -53,38 +55,92 @@ header #subtitle{
 }
 
 .main{
-    font-family: "微軟正黑體";
+    font-family: "微軟正黑體";    
     display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: start;
+    align-content: center;
+    flex-wrap: wrap;    
 }
 
 
-.main ul[data-kind]{
+
+.main .kind{
     position: relative;
     padding: .5ch 2ch;
     list-style:none;
-    width: 100%;
     max-width: 500px;
+
 }
 
-.main ul[data-kind]::before{
+.main h1{
+    font-size: 2em;
+    font-family: "微軟正黑體";
+    font-weight: 600;
+    white-space: pre-line;
+    margin: .5ch 0;
+    cursor: default;
+}
+/* .main ul[data-kind]::before{
     font-size: 2em;
     content: attr(data-kind);
-}
+    word-break: keep-all;
+    white-space: pre-line;
+} */
 
-.main .dish{    
+.main .dish{   
+    position: relative; 
     font-size: 1.5em;
-    width: 100%;
+    width: 400px;
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     align-items: center;
+    cursor:default;
+    transform: scale(.98);
+    transition: all .3s;
 }
 
-.main .dish::after{
+
+.main .dish:active{
+    transform: scale(.97);
+}
+
+@media (hover: hover){
+    .main .dish:hover{
+        transform: scale(1);
+        outline: 1px black solid;
+    }
+}
+
+/* .main .dish::before{
+
+    content: attr(data-note);
+} */
+
+.main .dish[data-note]::after{
+    content: attr(data-note);    
+    margin: 0 1ch;
+    padding: 0em 1ch;
+    font-size: .6em;
+    border-radius: 100vh;
+    color: rgba(215, 231, 250, 0.825);
+    background-color: rgba(0, 0, 0, 0.344);
+}
+
+.main .dish::before{
+    position: absolute;
+    right: 0;
+    display: inline;
     content: "$" attr(data-price);    
 }
 
 
 
+
+
+dialog{
+    position: fixed;
+    width: 300px;
+    height: 500px;
+    background-color: blueviolet;
+}

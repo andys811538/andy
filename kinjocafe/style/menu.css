@@ -1,0 +1,240 @@
+/* =================================================================================== 
+    * menu
+    * 以checkbox作為menu開關 
+    * 以JS開關    
+
+    const target = document.querySelector("#menu-toggle-A")
+    function toggleMenu(target){
+        const transition = target.parentElement.getElementsByClassName("menu-frame")[0]
+        target.setAttribute("data-show","")        
+        setTimeout(function(){
+            target.click()
+            transition.addEventListener("transitionend",()=>{
+                target.removeAttribute("data-show")
+            })
+        },1)        
+    }
+
+    A. menu開關樣式
+        a. checkbox 設為隱藏
+        b. collapse 樣式
+        c. expand 樣式
+        d. outside menu範圍外樣式
+    B. menu開關實現
+        a. focus 生成menu
+        b. checked 顯示menu
+        d. checked 顯示outside
+    C. menu內容
+
+======================================================================================= */
+
+
+
+
+
+/* --------------------------------------------------------------------------------------
+    A. menu開關樣式
+        a. checkbox 設為隱藏
+        b. collapse 樣式
+        c. expand 樣式
+        d. outside menu範圍外樣式
+----------------------------------------------------------------------------------------*/
+    
+    /* a. checkbox */
+    .menu-toggle{
+        all: initial;
+        width: 0px;
+        height: 0px;
+    }
+
+    .menu-toggle:focus{
+        border: 5px solid blue;
+        background-color: aquamarine;
+    }
+
+    /* b. collapse */
+    .menu-collapse{
+        cursor: pointer;
+        position: absolute;
+        right: 0;
+        width: 50px;
+        height: 50px;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 32px;
+        transition: all .25s;
+        z-index: 1;
+    }
+
+    .menu-collapse:hover{
+        font-size: 36px;
+        background: radial-gradient(hsla(200,100%,80%,1), hsla(0,60%,70%,0) 70% );        
+        border-radius: 100vh;
+    }
+    .menu-collapse:active{
+        font-size: 30px;
+    }
+
+
+    /* c. expand */
+    .menu-expand{
+        cursor: pointer;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 0;
+        height: 0;
+        font-size: 32px;
+        transition: all .25s;
+    }
+
+    .menu-expand:hover{
+        font-size: 36px;
+        background: radial-gradient(hsla(200,100%,80%,1), hsla(0,60%,70%,0) 70% );        
+        border-radius: 100vh;
+    }
+    .menu-expand:active{
+        font-size: 30px;
+    }
+
+    .menu-toggle:focus-visible~.menu-expand,
+    .menu-toggle:focus-visible~.menu-frame>.menu-collapse{
+        background: radial-gradient(hsla(200,100%,80%,1), hsla(0,60%,70%,0) 70% ); 
+        font-size: 36px;
+    }
+
+
+
+
+    /* d. outside menu範圍外樣式 */
+    .menu-expand::before{
+        cursor:auto;
+        display: none;
+        content: "";
+        background-color: rgba(0, 0, 0, 0.25);
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;   
+    }
+
+
+/*--------------------------------------------------------------------------------
+    B. menu開關實現
+        a. focus 生成menu
+        b. checked 顯示menu
+        d. checked 顯示outside
+----------------------------------------------------------------------------------*/
+
+    /*a. focus 生成menu*/
+    .menu-toggle[data-show]~.menu-frame,
+    .menu-toggle:focus~.menu-frame{
+        display: block;
+    }
+
+    /* b. checked 顯示menu*/
+    .menu-toggle:checked~.menu-frame{
+        display: block;
+        opacity: 1;
+        transform: translateX(0%) translateY(0%);
+        pointer-events: all;
+    }
+
+    /* d. checked 顯示outside*/
+    .menu-toggle:checked~.menu-expand::before{
+        display: block;        
+    }
+
+
+/*--------------------------------------------------------------------------------
+  C. menu內容
+----------------------------------------------------------------------------------*/    
+
+    .menu-wrapper>.menu-frame{
+        display: none;
+        opacity: 0;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 300px;
+        height: 100vh;
+        font-size: 1.2em;
+        font-weight: bold;
+        font-family: 'Courier New', Courier, monospace;
+        background-color: hsl(200, 70%, 70%);
+        box-shadow: 0 0 10px 1px hsl(200, 90%, 20%);
+        pointer-events: none;
+        transform: translateX(-100%);
+        transition: 
+            .5s opacity,
+            1s transform ;
+    }
+
+    .menu-wrapper>.menu-custom-A{
+        top: 10%;
+        left: 5%;
+        width: 90%;
+        max-width: 500px;
+        height: 80%;
+        font-size: 1.2em;
+        font-weight: bold;
+        font-family: 'Courier New', Courier, monospace;
+        background-color: hsl(200, 39%, 95%);        
+    }
+
+    .menu-content{
+        position: relative;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: column;
+        
+    }
+
+    .menu header{
+        width: 100%;
+        margin-top: 0;
+        padding: 2ch 0 1ch 0;
+        text-align: center;
+        background-color: rgba(128, 128, 128, 0.531);
+    }
+
+    .menu-content h1{
+        width: 100%;
+        font-family: "微軟正黑體";       
+        
+    }
+
+    .menu-content footer{
+        /* position: absolute; */
+        /* bottom: 0; */
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.133);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /* z-index: 1; */
+    }
+
+    .menu-content #addItem{
+        font-size: 1.5em;
+        padding: .25ch .5ch;
+        height: 50px;
+        margin: 25px;
+    }
+
+
+    .menu-content > div {
+        height: auto;
+        word-break: break-all;
+        font-size: 5em;
+        background-color: rgba(46, 43, 43, 0.084);
+        overflow-y: scroll;
+
+    }
