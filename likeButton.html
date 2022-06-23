@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+
+    body{
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .like-button{
+        width: 50px;
+        height: 50px;
+        /* border: 1px dotted black; */
+        transform: scale(1);
+    }
+
+    .like-button input[type=checkbox]{
+        position: absolute;
+        top: -10px;
+        width: 0;
+    }
+
+    .like-button label{
+        position: relative;
+        width: 0;
+    }
+
+
+
+    .like-button .like{
+        fill: white;
+        width: 50px;
+        aspect-ratio: 1/1;      
+        transition: .5s fill;  
+    }
+
+    @keyframes scale {
+        0%{transform: scale(1)}
+        20%{transform: scale(.9)}
+        66%{transform: scale(1.1)}
+        100%{transform: scale(1)}
+    }
+    @keyframes fill {
+        0%{fill: white;}
+        100%{fill: hsl(0, 70%, 60%)}
+    }
+
+    @keyframes notfill {
+        0%{fill: white;}
+        100%{fill: hsl(0, 70%, 60%)}
+    }
+
+    .like-button .toggle:checked+.like{
+        animation: 
+            scale .6s ease-in-out forwards,
+            fill .1s linear forwards;
+        fill: hsl(0, 70%, 60%);
+    }
+    .like-button .toggle+.like path{
+        transition: 
+            stroke .5s,
+            stroke-width .25s,
+            filter .25s;
+        stroke: hsl(0, 80%, 60%);
+        stroke-width: 2px;
+        filter:drop-shadow(0px 0px 3px hsla(0, 80%, 50%,0));
+    }
+    .like-button .toggle:checked+.like path{
+        /* stroke: transparent; */
+        stroke-width: 0px;
+    }
+    .like-button .toggle:checked~span:nth-child(n){
+        animation: 
+            forwards moveY 1s cubic-bezier(.51,0,.47,1),
+            forwards moveX 1s linear;
+    }
+    .like-button label>span{
+        position: absolute;
+        opacity: 0;
+        top: 0;
+        left: 45%;
+        width: 5px;
+        height: 5px;
+        background-color: hsl(0, 70%, 60%);
+    }
+
+    #box1{
+        --l:-15%;
+        top: 0;
+    }
+    #box2{
+        --l:0%;
+        top: 0;
+    }
+    #box3{
+        --l:15%;
+        top: 0;
+    }
+
+    @keyframes moveY {
+        0%{transform:translateY(0);opacity: 0;}
+        50%{transform:translateY(calc(-1000% + (10% + var(--l)) * -6));opacity: 1}
+        100%{transform:translateY(0);opacity: 0}
+    }
+
+    @keyframes moveX {
+        0%{left:calc(45% + var(--l))}
+        100%{left:calc(6 * var(--l))}
+    }
+
+    .like-button .like path:hover{
+        filter:drop-shadow(0px 0px 3px hsla(0, 80%, 80%,1));
+    }
+
+    div{
+        /* border: 1px dotted black; */
+    }
+
+
+
+
+</style>
+
+<body>
+
+    <div class="like-button">        
+        <label name="bind" >
+            <input name="bind" type="checkbox" class="toggle">
+            <svg class="like" viewbox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="
+                        M20 60
+                        C36 74 36 74 50 90
+                        C64 74 64 74 80 60
+                        C105 35 75 5 50 30
+                        C25 5 -5 35 20 60
+                    "
+                    stroke-linejoin="round"
+                    stroke="black" stroke-width="2" fill-opacity="1"
+                />
+            </svg>
+            <span id="box1"></span>
+            <span id="box2"></span>
+            <span id="box3"></span>
+        </label>
+    </div>
+
+
+</body>
+<script>
+
+   var like = document.getElementById("mysvg")
+   like.addEventListener("click",()=>{
+        // like.classList.add("click")
+   })
+
+</script>
+</html>
