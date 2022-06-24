@@ -39,7 +39,7 @@
 
 
 
-    .like-button .like{
+    .like-button #like{
         fill: white;
         width: 50px;
         aspect-ratio: 1/1;      
@@ -62,13 +62,13 @@
         100%{fill: hsl(0, 70%, 60%)}
     }
 
-    .like-button .toggle:checked+.like{
+    .like-button .toggle:checked+#like{
         animation: 
             scale .6s ease-in-out forwards,
             fill .1s linear forwards;
         fill: hsl(0, 70%, 60%);
     }
-    .like-button .toggle+.like path{
+    .like-button .toggle+#like path{
         transition: 
             stroke .5s,
             stroke-width .25s,
@@ -77,7 +77,7 @@
         stroke-width: 2px;
         filter:drop-shadow(0px 0px 3px hsla(0, 80%, 50%,0));
     }
-    .like-button .toggle:checked+.like path{
+    .like-button .toggle:checked+#like path{
         /* stroke: transparent; */
         stroke-width: 0px;
     }
@@ -93,7 +93,10 @@
         left: 45%;
         width: 5px;
         height: 5px;
-        background-color: hsl(0, 70%, 60%);
+        fill: hsl(0, 70%, 60%);
+        display: flex;
+        align-content: center;
+        justify-content: center;
     }
 
     #box1{
@@ -109,6 +112,15 @@
         top: 0;
     }
 
+    .like-button span svg{
+        animation: infinite linear 2s spin;
+    }
+
+    @keyframes spin {
+        0%{transform: rotate(0);}
+        100%{transform: rotate(3turn);}
+    }
+
     @keyframes moveY {
         0%{transform:translateY(0);opacity: 0;}
         50%{transform:translateY(calc(-1000% + (10% + var(--l)) * -6));opacity: 1}
@@ -120,13 +132,11 @@
         100%{left:calc(6 * var(--l))}
     }
 
-    .like-button .like path:hover{
+    .like-button #like:hover{
         filter:drop-shadow(0px 0px 3px hsla(0, 80%, 80%,1));
     }
 
-    div{
-        /* border: 1px dotted black; */
-    }
+
 
 
 
@@ -138,8 +148,9 @@
     <div class="like-button">        
         <label name="bind" >
             <input name="bind" type="checkbox" class="toggle">
-            <svg class="like" viewbox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg">
-                <path
+            <svg id="like" viewbox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <path id="heart"
                     d="
                         M20 60
                         C36 74 36 74 50 90
@@ -149,11 +160,26 @@
                     "
                     stroke-linejoin="round"
                     stroke="black" stroke-width="2" fill-opacity="1"
-                />
+                    />
+                </defs>
+                <use xlink:href="#heart"></use>
             </svg>
-            <span id="box1"></span>
-            <span id="box2"></span>
-            <span id="box3"></span>
+            <span id="box1">
+                <svg viewbox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                    <use xlink:href="#heart"></use>
+                </svg>
+            </span>
+            <span id="box2">
+                <svg viewbox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                    <use xlink:href="#heart"></use>
+                </svg>
+            </span>
+            <span id="box3">
+                <svg viewbox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                    <use xlink:href="#heart"></use>
+                </svg>
+            </span>
+
         </label>
     </div>
 
@@ -161,10 +187,6 @@
 </body>
 <script>
 
-   var like = document.getElementById("mysvg")
-   like.addEventListener("click",()=>{
-        // like.classList.add("click")
-   })
 
 </script>
 </html>
