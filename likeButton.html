@@ -72,24 +72,23 @@
         transition: 
             stroke .5s,
             stroke-width .25s,
-            filter .25s;
+            filter 5s ease-in;
         stroke: hsl(0, 80%, 60%);
         stroke-width: 2px;
         filter:drop-shadow(0px 0px 3px hsla(0, 80%, 50%,0));
     }
     .like-button .toggle:checked+#like path{
-        /* stroke: transparent; */
         stroke-width: 0px;
     }
-    .like-button .toggle:checked~span:nth-child(n){
+    .like-button .toggle:checked~.box{
         animation: 
             forwards moveY 1s cubic-bezier(.51,0,.47,1),
             forwards moveX 1s linear;
     }
-    .like-button label>span{
+    .like-button label .box{
         position: absolute;
         opacity: 0;
-        top: 0;
+        top: -100%;
         left: 45%;
         width: 5px;
         height: 5px;
@@ -99,51 +98,62 @@
         justify-content: center;
     }
 
-    #box1{
-        --l:-15%;
-        top: 0;
+    .like-button .box:nth-child(3){
+        --end-left:20%;
+        --end-top:-770%;
     }
-    #box2{
-        --l:0%;
-        top: 0;
+    .like-button .box:nth-child(4){
+        --end-left:-30%;
+        --end-top:-600%;
     }
-    #box3{
-        --l:15%;
-        top: 0;
+    .like-button .box:nth-child(5){
+        --end-left:100%;
+        --end-top:-720%;
     }
 
-    .like-button span svg{
-        animation: infinite linear 2s spin;
+    .like-button .toggle:checked~ .box svg{
+        animation: forwards linear 2s spin;
     }
 
     @keyframes spin {
         0%{transform: rotate(0);}
-        100%{transform: rotate(3turn);}
+        100%{transform: rotate(4turn);}
     }
 
     @keyframes moveY {
         0%{transform:translateY(0);opacity: 0;}
-        50%{transform:translateY(calc(-1000% + (10% + var(--l)) * -6));opacity: 1}
+        50%{transform:translateY(var(--end-top));opacity: 1}
         100%{transform:translateY(0);opacity: 0}
     }
 
     @keyframes moveX {
-        0%{left:calc(45% + var(--l))}
-        100%{left:calc(6 * var(--l))}
+        0%{left:50%}
+        100%{left:var(--end-left)}
     }
 
-    .like-button #like:hover{
+    .like-button #like use:hover{
         filter:drop-shadow(0px 0px 3px hsla(0, 80%, 80%,1));
     }
 
 
-
-
-
-
 </style>
 
+
+
 <body>
+
+    <div>
+        <svg viewbox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg">
+            <path id ="p1" d="
+                M33.734 18.352 
+                L33.734 56.312 
+                L18.788 56.312 
+                L18.788 18.471
+                Z
+            "/>
+            <path id ="p2"/>
+        </svg>
+    </div>
 
     <div class="like-button">        
         <label name="bind" >
@@ -160,21 +170,23 @@
                     "
                     stroke-linejoin="round"
                     stroke="black" stroke-width="2" fill-opacity="1"
-                    />
+                    />                    
                 </defs>
+                <polygon id ="p1" />
+                <polygon id ="p2" />
                 <use xlink:href="#heart"></use>
             </svg>
-            <span id="box1">
+            <span class="box">
                 <svg viewbox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg">
                     <use xlink:href="#heart"></use>
                 </svg>
             </span>
-            <span id="box2">
+            <span class="box">
                 <svg viewbox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg">
                     <use xlink:href="#heart"></use>
                 </svg>
             </span>
-            <span id="box3">
+            <span class="box">
                 <svg viewbox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg">
                     <use xlink:href="#heart"></use>
                 </svg>
