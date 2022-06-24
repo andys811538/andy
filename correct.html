@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        background-color: hsl(200, 30%, 70%);
+    }
+    .correct{
+        position: relative;
+        width: 300px;
+        height: 300px;
+        border: 1px solid black;
+        border-radius: 100vh;
+        background-color: hsl(200, 90%, 90%);
+    }
+    .correct::after{
+        position: absolute;
+        top: 50%;
+        left: 0%;
+        width: 100%;
+        font-size: 3em;
+        font-family: 'Courier New', Courier, monospace;
+        text-align: center;
+        transform: translate(0%,-50%) rotate(20deg);
+        content: "hover me";
+        clip-path: circle(55%);
+    }
+
+
+    @keyframes dash {
+        0%{stroke-dasharray: 230;stroke-dashoffset: 230;opacity: 0;}
+        100%{stroke-dasharray: 120;stroke-dashoffset: 130;opacity: 1;}
+    }
+
+    #correct{
+        opacity: 0;
+        stroke: hsl(200, 70%, 60%);    
+        transform: translate(-8px,-2px);
+    }
+
+    .correct:hover #correct{
+        animation: dash .5s forwards linear;
+    }
+
+</style>
+<body>
+
+    <div class="correct">
+        <svg  viewbox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg">
+            <path id="correct" 
+                d="
+                    M20 60
+                    L49.59 85.31
+                    L90.94 23.02
+                    L49.59 85.31
+                    Z
+                "
+                stroke-width="15"
+            />
+        </svg>
+    </div>
+
+</body>
+</html>
