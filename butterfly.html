@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+
+<style>
+    body {
+        margin: 0;
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .butterfly {
+        width: 300px;
+        height: 300px;
+        border: 1px black dashed;
+    }
+
+    @keyframes p1 {
+        0%{
+            d:path("M33.147 6.621  ,L21.526 47.674, L44.895 69.147, Z");    
+            fill: hsl(0,70%,50%);        
+        }
+        100%{
+            d:path("M30.116 8.011 , L18.747 45.779 ,L44.895 69.147, Z ");
+            fill: hsl(0,80%,60%);
+        }
+    }
+    @keyframes p2 {
+        0%{
+            d:path("M20.642 52.095 ,L17.232 81.274, L44.137 70.663, Z");
+            fill: hsl(0,70%,55%);    
+    }
+        100%{
+            d:path("M19.758 52.853, L14.958 77.232 ,L44.137 70.663, Z ");
+            fill: hsl(0,80%,60%);
+    }
+    }
+    @keyframes p3 {
+        0%{
+            d:path("M48.305 65.737 ,L32.895 78.874, L54.874 68.137, Z");
+            fill: hsl(350,80%,40%);
+    }
+        100%{
+            d:path("M48.305 65.737, L32.895 78.874 ,L54.874 68.137, Z ");
+            fill: hsl(350,80%,40%);
+    }
+    }
+    @keyframes p4 {
+        0%{
+            d:path("M51.968 14.074 ,L29.863 53.484, L45.526 69.526, Z");
+            fill: hsl(0,70%,55%);
+    }
+        100%{
+            d:path("M61.568 22.663, L36.179 58.537 ,L45.526 69.526, Z ");
+            fill: hsl(0,70%,60%);
+    }
+    }
+    @keyframes p5 {
+        0%{
+            d:path("M29.105 57.526 ,L16.347 79    , L43.632 71.421, Z");
+            fill: hsl(0,70%,55%);
+    }
+        100%{
+            d:path("M34.411 61.568, L19.379 80.895 ,L43.632 71.421, Z ");
+            fill: hsl(0,80%,60%);
+    }
+    }
+
+    #butterfly path{
+        stroke: black;
+        fill: hsl(0,70%,60%);
+    }
+
+    #p1{
+
+        animation: p1 1s alternate-reverse infinite ease-in-out;
+    }
+    #p2{
+
+        animation: p2 1s alternate-reverse infinite ease-in-out;
+    }
+    #p3{
+        animation: p3 1s alternate-reverse infinite ease-in-out;
+    }
+    #p4{
+        animation: p4 1s alternate-reverse infinite ease-in-out;
+    }
+    #p5{
+        animation: p5 1s alternate-reverse infinite ease-in-out;
+    }
+
+    
+</style>
+
+<!-- "M30.116 8.011 , L18.747 45.779 ,L44.895 69.147, Z "
+"M19.758 52.853, L14.958 77.232 ,L44.137 70.663, Z "
+"M48.305 65.737, L32.895 78.874 ,L54.874 68.137, Z "
+"M61.568 22.663, L36.179 58.537 ,L45.526 69.526, Z "
+"M34.411 61.568, L19.379 80.895 ,L43.632 71.421, Z "
+
+
+
+d:path("M33.147 6.621  ,L21.526 47.674, L44.895 69.147 Z")
+d:path("M20.642 52.095 ,L17.232 81.274, L44.137 70.663 Z")
+d:path("M48.305 65.737 ,L32.895 78.874, L54.874 68.137 Z")
+d:path("M51.968 14.074 ,L29.863 53.484, L45.526 69.526 Z")
+d:path("M29.105 57.526 ,L16.347 79    , L43.632 71.421 Z") -->
+
+<body>
+
+    <div class="butterfly">
+        <svg id="butterfly" viewbox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg">
+
+            <path id="p1"; />
+            <path id="p2" />
+            <path id="p3" />
+            <path id="p4" />
+            <path id="p5" />
+
+        </svg>
+    </div>
+
+    <!-- <?xml version="1.0" encoding="iso-8859-1"?>
+    <svg version="1.1" id="&#x5716;&#x5C64;_1" xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100"
+        style="enable-background:new 0 0 100 100;" xml:space="preserve">
+        <image style="display:none;overflow:visible;" width="446" height="436"
+            xlink:href="../../../../Desktop/&#x65B0;&#x589E;&#x8CC7;&#x6599;&#x593E;/__-0.png"
+            transform="matrix(0.2294 0 0 0.2294 0 0)">
+        </image>
+        <image style="display:none;overflow:visible;" width="446" height="436"
+            xlink:href="../../../../Desktop/&#x65B0;&#x589E;&#x8CC7;&#x6599;&#x593E;/__-3.png"
+            transform="matrix(0.2294 0 0 0.2294 0 0)">
+        </image>
+        <path d="M37.705 6.126,L24.821 51.347,L47.053 70.674,Z" />
+        <path d="M24.063 53.747,L10.926 77.116,L45.789 71.053,Z" />
+        <path d="M49.326 67.389,L33.284 80.4,L57.916 68.905,Z" />
+        <path d="M46.8 9.789,L28.863 51.221,L47.811 70.168,Z" />
+        <path d="M29.368 56.653,L13.579 77.495,L46.547 71.305,Z" />
+        
+        <path d="M26.589 12.695,L17.621 48.568,L47.053 70.674,Z" />
+        <path d="M19.263 54.758,L8.274  4.716,L45.789 71.053,Z" />
+        <path d="M49.326 67.389,L31.642 81.411,L57.916 68.905,Z" />
+        <path d="M37.832 68.147,L18.758 84.189,L46.547 71.305,Z" />
+        <path d="M73.074 34.674,L40.484 65.874,L47.811 70.168,Z" />
+    </svg> -->
+
+</body>
+
+</html>
