@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>loveStar</title>
+</head>
+
+
+<style>
+    body {
+        margin: 0;
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        background-color: #333;
+    }
+
+    .butterfly {
+        position: relative;
+        width: 300px;
+        height: 300px;
+        border: 5px rgb(200, 200, 200) dotted;
+        cursor: pointer;
+    }
+
+
+
+    @keyframes p1f{
+        0%{fill:#810008; d:path("M47.768 38.105,L52.126 38.105, L50.705 74.295,Z")}
+        100%{fill:#77AEDE; d:path("M33.779 53.989, L49.316 32.137, L48.558 64.726, Z")}
+    }
+    @keyframes p2f{
+        0%{fill:#C10D22; d:path("M50.705 74.295,L74.011 50.516, L50.611 38.105,Z")}
+        100%{fill:#4F87B0; d:path("M48.558 64.726, L73.063 74.832, L65.105 53.105, Z")}
+    }
+    @keyframes p3f{
+        0%{fill:#9B0015; d:path("M74.011 50.516,L57.337 32.232, L50.611 38.105,Z")}
+        100%{fill:#5F9FD0; d:path("M65.105 53.105, L57.526 36.053, L48.558 64.726, Z")}
+    }
+    @keyframes p4f{
+        0%{fill:#C10D22; d:path("M74.2   37.916,L74.011 50.516, L57.337 32.232,Z")}
+        100%{fill:#4F87B0; d:path("M81.147 37.063, L65.105 53.105, L57.526 36.053, Z")}
+    }
+    @keyframes p5f{
+        0%{fill:#B80A20; d:path("M69.084 32.705,L74.2   37.916, L57.337 32.232,Z")}
+        100%{fill:#77AEDE; d:path("M57.526 36.053, L48.558 64.726, L49.474 16.221, Z")}
+    }
+    @keyframes p6f{
+        0%{fill:#C10D22; d:path("M50.516 74.579,L23.705 50.042, L48.432 38.105,Z")}            
+        100%{fill:#4F87B0; d:path("M48.558 64.726, L24.937 74.958, L33.779 53.989, Z")}
+    }
+    @keyframes p7f{
+        0%{fill:#9B0015; d:path("M23.705 50.042,L41.989 32.137, L48.147 38.105,Z")}
+        100%{fill:#5F9FD0; d:path("M33.779 53.989, L44.642 27.337, L49.316 32.137, Z")}
+    }
+    @keyframes p8f{
+        0%{fill:#C10D22; d:path("M23.516 37.442,L23.705 50.042, L41.989 32.137,Z")}
+        100%{fill:#4F87B0; d:path("M17.232 36.558, L33.779 53.989, L40.726 36.684, Z")}
+    }
+    @keyframes p9f{
+        0%{fill:#B80A20; d:path("M28.632 32.232,L23.516 37.442, L41.989 32.137,Z")}
+        100%{fill:#6FA3D1; d:path("M44.642 27.337, L49.316 32.137, L49.474 16.221, Z")}
+    }
+
+    @keyframes p1b{
+        0%{fill:#810008; d:path("M47.768 38.105,L52.126 38.105, L50.705 74.295,Z")}
+        100%{fill:#77AEDE; d:path("M33.779 53.989, L49.316 32.137, L48.558 64.726, Z")}
+    }
+    @keyframes p2b{
+        0%{fill:#C10D22; d:path("M50.705 74.295,L74.011 50.516, L50.611 38.105,Z")}
+        100%{fill:#4F87B0; d:path("M48.558 64.726, L73.063 74.832, L65.105 53.105, Z")}
+    }
+    @keyframes p3b{
+        0%{fill:#9B0015; d:path("M74.011 50.516,L57.337 32.232, L50.611 38.105,Z")}
+        100%{fill:#5F9FD0; d:path("M65.105 53.105, L57.526 36.053, L48.558 64.726, Z")}
+    }
+    @keyframes p4b{
+        0%{fill:#C10D22; d:path("M74.2   37.916,L74.011 50.516, L57.337 32.232,Z")}
+        100%{fill:#4F87B0; d:path("M81.147 37.063, L65.105 53.105, L57.526 36.053, Z")}
+    }
+    @keyframes p5b{
+        0%{fill:#B80A20; d:path("M69.084 32.705,L74.2   37.916, L57.337 32.232,Z")}
+        100%{fill:#77AEDE; d:path("M57.526 36.053, L48.558 64.726, L49.474 16.221, Z")}
+    }
+    @keyframes p6b{
+        0%{fill:#C10D22; d:path("M50.516 74.579,L23.705 50.042, L48.432 38.105,Z")}            
+        100%{fill:#4F87B0; d:path("M48.558 64.726, L24.937 74.958, L33.779 53.989, Z")}
+    }
+    @keyframes p7b{
+        0%{fill:#9B0015; d:path("M23.705 50.042,L41.989 32.137, L48.147 38.105,Z")}
+        100%{fill:#5F9FD0; d:path("M33.779 53.989, L44.642 27.337, L49.316 32.137, Z")}
+    }
+    @keyframes p8b{
+        0%{fill:#C10D22; d:path("M23.516 37.442,L23.705 50.042, L41.989 32.137,Z")}
+        100%{fill:#4F87B0; d:path("M17.232 36.558, L33.779 53.989, L40.726 36.684, Z")}
+    }
+    @keyframes p9b{
+        0%{fill:#B80A20; d:path("M28.632 32.232,L23.516 37.442, L41.989 32.137,Z")}
+        100%{fill:#6FA3D1; d:path("M44.642 27.337, L49.316 32.137, L49.474 16.221, Z")}
+    }
+
+
+
+    #butterfly path{
+        fill: hsl(0,70%,60%);
+    }
+
+    #p1{ animation: p1f 2.1s forwards ease-in-out; }
+    #p2{ animation: p2f 2.2s forwards ease-in-out; }
+    #p3{ animation: p3f 2s forwards ease-in-out; }
+    #p4{ animation: p4f 2s forwards ease-in-out; }
+    #p5{ animation: p5f 1.9s forwards ease-in-out; }
+    #p6{ animation: p6f 2s forwards ease-in-out; }
+    #p7{ animation: p7f 2s forwards ease-in-out; }
+    #p8{ animation: p8f 1.8s forwards ease-in-out; }
+    #p9{ animation: p9f 2s forwards ease-in-out; }
+
+    #toggle:checked + svg #p1{ animation: p1b 1.9s reverse forwards ease-in-out; }
+    #toggle:checked + svg #p2{ animation: p2b 1.8s reverse forwards ease-in-out; }
+    #toggle:checked + svg #p3{ animation: p3b 2s reverse forwards ease-in-out; }
+    #toggle:checked + svg #p4{ animation: p4b 1.8s reverse forwards ease-in-out; }
+    #toggle:checked + svg #p5{ animation: p5b 2.2s reverse forwards ease-in-out; }
+    #toggle:checked + svg #p6{ animation: p6b 2s reverse forwards ease-in-out; }
+    #toggle:checked + svg #p7{ animation: p7b 2.1s reverse forwards ease-in-out; }
+    #toggle:checked + svg #p8{ animation: p8b 1.7s reverse forwards ease-in-out; }
+    #toggle:checked + svg #p9{ animation: p9b 2s reverse forwards ease-in-out; }
+
+    @keyframes spin{
+        0%{transform: rotate(-45deg) translate(-50%,-20%);}
+        100%{transform: rotate(45deg) translate(0%,0%)}
+    }
+
+    .butterfly > div {
+        position: absolute;    
+        top: -30%;
+        left: 20%;    
+        font-size: 3em;
+        color: #fefefe;
+        height: 0;
+        text-align: center;
+        z-index: -1;
+        line-height: 300px;
+        animation: spin 3s infinite alternate-reverse ease-in-out;
+    }
+
+    #toggle{width: 0;}
+    
+</style>
+
+<body>
+
+    <label onclick="clickMe()" class="butterfly">
+        <input type="checkbox" id="toggle">
+        <svg id="butterfly" viewbox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg">
+
+            <path id="p1"; />
+            <path id="p2" />
+            <path id="p3" />
+            <path id="p4" />
+            <path id="p5" />
+            <path id="p6" />
+            <path id="p7" />
+            <path id="p8" />
+            <path id="p9" />
+
+        </svg>
+
+        <div>hover me</div>
+
+    </label>
+
+
+<script>
+
+function clickMe(){
+    
+}
+
+
+</script>
+
+</body>
+
+</html>
