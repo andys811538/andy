@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="shape.css">
+</head>
+<style>
+  
+
+
+    body {
+        margin: 0;
+        width: 100%;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .stage {
+        position: relative;
+        margin: 1em;
+        width: 80vmin;
+        height: 80vmin;
+        border: 1px blue dashed;
+        background-color: hsl(195, 70%, 90%);
+    }
+
+    .stage div{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: inherit;
+        height: inherit;
+    }
+
+    .stage div {
+        transition: all 1.7s cubic-bezier(1, -0.97, .8, 1.22);
+    }
+
+    .stage div:nth-child(n) {
+        transition-delay: calc(var(--n) * 0.03s);
+    }
+
+    #file {
+        margin: 3em;
+    }
+
+    select {
+        font-size: 2em;
+        text-align: center;
+    }
+</style>
+
+<body>
+
+
+
+
+    <div class="stage">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+
+    <!-- <input type="file" id="file"> -->
+
+    <select name="shape" id="shape">
+        <option value="origin">--</option>
+        <!-- <option value="dinosuar">恐龍</option>
+        <option value="crab">螃蟹</option>
+        <option value="fox">狐狸</option>
+        <option value="dog">狗</option>
+        <option value="fish">魚</option> -->
+        <option value="lamo">羊駝</option>
+    </select>
+
+
+
+
+
+
+</body>
+<script>
+
+    function initial(){
+        const div = document.querySelectorAll(".stage div")
+        div.forEach((e, i) => {
+            let className = e.classList[0]
+            e.classList.add(`origin-${i}`)
+        })
+    }
+    initial()
+
+    function addVarToCss(){
+        const div = document.querySelectorAll(".stage div")
+        div.forEach((e, i) => {
+            e.style = `--n:${i+1}`
+        })
+    }
+    addVarToCss()
+
+    const shape = document.getElementById("shape")
+    shape.addEventListener("change", e => {
+        addClass(e.target.value)
+    })
+
+    function addClass(name) {
+        const div = document.querySelectorAll(".stage div")
+        div.forEach((e, i) => {
+            let className = e.classList[0]
+            e.classList.add(`${name}-${i}`)
+            e.classList.remove(`${className}`)
+        })
+    }
+
+
+    // function addClass(name){
+    //     const path = document.querySelectorAll(".stage>svg path")
+    //     path.forEach((e,i)=>{
+    //         e.classList.add(`${name}-${i}`)
+    //     })
+    // }
+
+
+//     function getData(){
+//         var code =""
+//         const file = document.getElementById("file")        
+//         file.addEventListener("change",e=>{
+//             const reader = new FileReader()
+//             const data = e.target.files[0]
+//             const name = data.name.replace(/(\.[\w]*)/,"")
+//             reader.onload = function(e){
+//                 var str = e.target.result
+//                 str = str.replaceAll(new RegExp(/[\n\r\t]/g),"")
+//                 const matches = str.matchAll(/fill:(#[\d\w]*?);.*?points="(.*?)"/g)
+//                 const match = Array.from(matches)
+
+//                 var style = document.createElement('style');
+//                 style.type = 'text/css';
+//                 style.innerText = console.log(generalCode(match,name));
+//                 document.getElementsByTagName('head')[0].appendChild(style);
+
+//                 addClass(name)
+
+//             }
+//             reader.readAsText(data)
+//         })
+//     }
+
+//     getData()
+
+//     function process(array){
+//         const fill = array[1]
+//         const pathes = array[2].matchAll(/([0-9\.]*?),([0-9\.]*)/g)
+//         const path = Array.from(pathes)
+//         return {
+//             fill,
+//             d:`${path[0][1]}% ${path[0][2]}%, ${path[1][1]}% ${path[1][2]}%, ${path[2][1]}% ${path[2][2]}%`
+//         }
+//     }
+    
+
+//     function generalCode(array,name){
+//         let code = ""
+//         array.forEach((a,i)=>{
+//                     code = code + 
+//     //==================================================================${process(a).fill}
+// `
+//     .${name}-${i}{
+//         background-color:transparent;
+//         clip-path: polygon(${process(a).d})
+//     }
+// `
+//     //===================================================================                   
+//         })
+//         return code
+//     }
+
+
+
+
+
+</script>
+
+</html>
