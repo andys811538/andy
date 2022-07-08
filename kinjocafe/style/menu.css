@@ -43,6 +43,9 @@
     /* a. checkbox */
     .menu-toggle{
         all: initial;
+        position: fixed;
+        top: 0;
+        left: -10px;
         width: 0px;
         height: 0px;
     }
@@ -191,7 +194,7 @@
         height: 100%;
         width: 100%;
         display: flex;
-        justify-content: space-between;
+        /* justify-content: space-between; */
         align-items: center;
         flex-direction: column;
         
@@ -199,26 +202,28 @@
 
     .menu header{
         width: 100%;
+        height: 15%;
         margin-top: 0;
-        padding: 2ch 0 1ch 0;
+        padding: 0;
         text-align: center;
         background-color: rgba(128, 128, 128, 0.531);
     }
 
     .menu-content h1{
         width: 100%;
-        font-family: "微軟正黑體";       
-        
+        font-family: "微軟正黑體";               
     }
 
     .menu-content footer{
         /* position: absolute; */
         /* bottom: 0; */
         width: 100%;
+        height: 15%;
         background-color: rgba(0, 0, 0, 0.133);
         display: flex;
         justify-content: center;
         align-items: center;
+        flex-direction: column;
         /* z-index: 1; */
     }
 
@@ -230,11 +235,30 @@
     }
 
 
-    .menu-content > div {
-        height: auto;
+    .menu-content > .container {
+        height: 70%;
+        width: 100%;
         word-break: break-all;
-        font-size: 5em;
-        background-color: rgba(46, 43, 43, 0.084);
         overflow-y: scroll;
+        display: flex;
+        justify-content: start;
+        align-items: flex-start;
+        flex-direction: column;
+        background-color: white;
+    }
 
+    .menu-content > .container div{
+        width: 100%;
+        display: flex;
+        justify-content: start;
+        align-items: flex-start;
+        flex-direction: column;
+        margin: 1ch 0;
+        padding: 0 2ch;
+        background-color: rgb(215, 215, 215);
+    }
+
+    .menu-content h2{
+        padding: 0;
+        margin: 0;          
     }

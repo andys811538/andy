@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>kinjo café</title>
     <link rel="stylesheet" href="style/index.css">
     <link rel="stylesheet" href="style/menu.css">
+    <link rel="stylesheet" href="style/numberInput.css">
     <link rel="stylesheet" href="fontawesome/all.css">
 </head>
 
@@ -28,12 +30,23 @@
         </ul> -->
     </div>
 
+    
+    <footer id="footer">        
+        <div class="toggle"><i class="fa-solid fa-angle-up"></i></div>
+        <ol id="cart">
+        </ol>
+    </footer>
+
+
+
+
+
     <div class="menu">
 
         <div class="menu-wrapper">
             <input id="menu-toggle-A" class="menu-toggle" type="checkbox">
             <label class="menu-expand" for="menu-toggle-A">
-            </label>                           
+            </label>
             <div class="menu-frame menu-custom-A">
                 <label class="menu-collapse" for="menu-toggle-A">
                     <i class="fa-solid fa-xmark"></i>
@@ -42,1266 +55,428 @@
                     <header>
                         <h1></h1>
                     </header>
-                    <div>
-                      
+                    <div class="container">
+
+
                     </div>
+
                     <footer>
-                        <input id="addItem" type="button" value="加入">
+                        <!-- <div class="number-input">
+                            <button class="down" onclick="this.parentNode.querySelector('input[type=number]').stepDown()"></button>
+                            <input type="number" min="0" value="0">
+                            <button class="up" onclick="this.parentNode.querySelector('input[type=number]').stepUp()"></button>
+                        </div> -->
+                        <input onclick="addItem()" id="addItem" type="button" value="加入">
                     </footer>
                 </div>
-            </div>                
+            </div>
         </div>
-    </div> 
+    </div>
 
 
 
 
+    <script>
 
-<script>
-    var menu = {
-        title:"鄰里",
-        subtitle:"kinjo café",
-        address:"台南市郡安路四段52號",
-        phone:"06-2520155",
-        kind:[{
-            name:"APPETIZER 開胃點心",
-            dish:[{
-                name:"炸薯條",
-                price:50
-            },{
-                name:"古早味甜不辣",
-                price:40
-            },{
-                name:"炸豆腐",
-                price:55
-            },{
-                name:"日式炸雞",
-                price:85
-            }
-            ,{
-                name:"椒鹽花枝",
-                price:95
-            }
-            ,{
-                name:"水牛城辣雞翅",
-                price:105,
-                note:"辣"
-            }],    
-            note:[]
-        },{
-            name:"HOT POT 小火鍋",
-            dish:[{
-                name:"港式沙茶鍋",
-                price:240,
-                select:[{
-                    name:"肉類",
-                    option:[{
-                        name:"豬肉",
-                        price:0
-                    },{
-                        name:"牛肉",
-                        price:0 
-                    },{
-                        name:"雞肉",
-                        price:0 
-                    }]
-                }],                            
-                note:[""]
-            },{
-                name:"日式味噌鍋",
-                price:240,
-                select:[{
-                    name:"肉類",
-                    option:[{
-                        name:"豬肉",
-                        price:0
-                    },{
-                        name:"牛肉",
-                        price:0 
-                    },{
-                        name:"雞肉",
-                        price:0 
-                    }]
-                }],                
-                note:[""]
-            },{
-                name:"養一頭牛奶鍋",
-                price:250,
-                select:[{
-                    name:"肉類",
-                    option:[{
-                        name:"豬肉",
-                        price:0
-                    },{
-                        name:"牛肉",
-                        price:0 
-                    },{
-                        name:"雞肉",
-                        price:0 
-                    }]
-                }],                
-                note:[""]
-            },{
-                name:"剝皮辣椒鍋",
-                price:250,
-                select:[{
-                    name:"肉類",
-                    option:[{
-                        name:"豬肉",
-                        price:0
-                    },{
-                        name:"牛肉",
-                        price:0 
-                    },{
-                        name:"雞肉",
-                        price:0 
-                    }]
-                }],                
-                note:["辣"]
-            },{
-                name:"麻油香鍋",
-                price:250,
-                select:[{
-                    name:"肉類",
-                    option:[{
-                        name:"豬肉",
-                        price:0
-                    },{
-                        name:"牛肉",
-                        price:0 
-                    },{
-                        name:"雞肉",
-                        price:0 
-                    }]
-                }],                
-                note:[""]
-            },{
-                name:"和風咖哩鍋",
-                price:260,
-                select:[{
-                    name:"肉類",
-                    option:[{
-                        name:"豬肉",
-                        price:0
-                    },{
-                        name:"牛肉",
-                        price:0 
-                    },{
-                        name:"雞肉",
-                        price:0 
-                    }]
-                }],                
-                note:["辣"]
-            },{
-                name:"橘黃南瓜鍋",
-                price:260,
-                select:[{
-                    name:"肉類",
-                    option:[{
-                        name:"豬肉",
-                        price:0
-                    },{
-                        name:"牛肉",
-                        price:0 
-                    },{
-                        name:"雞肉",
-                        price:0 
-                    }]
-                }],                
-                note:[""]
-            },{
-                name:"西西里番茄鍋",
-                price:260,
-                select:[{
-                    name:"肉類",
-                    option:[{
-                        name:"豬肉",
-                        price:0
-                    },{
-                        name:"牛肉",
-                        price:0 
-                    },{
-                        name:"雞肉",
-                        price:0 
-                    }]
-                }],                
-                note:[""]
-            },{
-                name:"韓式泡菜部隊鍋",
-                price:270,
-                select:[{
-                    name:"肉類",
-                    option:[{
-                        name:"豬肉",
-                        price:0
-                    },{
-                        name:"牛肉",
-                        price:0 
-                    },{
-                        name:"雞肉",
-                        price:0 
-                    }]
-                }],                
-                note:["辣"]
-            },{
-                name:"時蔬牛奶鍋",
-                price:260,
-                select:[{
-                    name:"肉類",
-                    option:[{
-                        name:"豬肉",
-                        price:0
-                    },{
-                        name:"牛肉",
-                        price:0 
-                    },{
-                        name:"雞肉",
-                        price:0 
-                    }]
-                }],                
-                note:["可素食"]
-            },{
-                name:"食蔬葷菇鍋",
-                price:260,
-                select:[{
-                    name:"肉類",
-                    option:[{
-                        name:"豬肉",
-                        price:0
-                    },{
-                        name:"牛肉",
-                        price:0 
-                    },{
-                        name:"雞肉",
-                        price:0 
-                    }]
-                }],                
-                note:["可素食"]
-            }],
-            note:["餐點皆附有50元飲品 差價可補差額"]
-        },{
-            name:"PASTA RISOTTO\r\n義大利麵 燉飯 焗烤",
-            dish:[{
-                name:"清炒蒜辣培根",
-                price:160,
-                select:[{
-                    name:"主食",
-                    option:[{
-                        name:"義大利麵",
-                        price:0
-                    },{
-                        name:"燉飯",
-                        price:0 
-                    },{
-                        name:"焗烤飯",
-                        price:20 
-                    },{
-                        name:"焗烤斜管麵",
-                        price:20 
-                    }]
-                }],                
-                note:[""]
-            },{
-                name:"蒜味鮮蝦",
-                price:170,
-                select:[{
-                    name:"主食",
-                    option:[{
-                        name:"義大利麵",
-                        price:0
-                    },{
-                        name:"燉飯",
-                        price:0 
-                    },{
-                        name:"焗烤飯",
-                        price:20 
-                    },{
-                        name:"焗烤斜管麵",
-                        price:20 
-                    }]
-                }],                
-                note:[""]
-            },{
-                name:"白酒蛤蜊",
-                price:170,
-                select:[{
-                    name:"主食",
-                    option:[{
-                        name:"義大利麵",
-                        price:0
-                    },{
-                        name:"燉飯",
-                        price:0 
-                    },{
-                        name:"焗烤飯",
-                        price:20 
-                    },{
-                        name:"焗烤斜管麵",
-                        price:20 
-                    }]
-                }],                
-                note:[""]
-            },{
-                name:"羅勒青醬鮮蝦",
-                price:180,
-                select:[{
-                    name:"主食",
-                    option:[{
-                        name:"義大利麵",
-                        price:0
-                    },{
-                        name:"燉飯",
-                        price:0 
-                    },{
-                        name:"焗烤飯",
-                        price:20 
-                    },{
-                        name:"焗烤斜管麵",
-                        price:20 
-                    }]
-                }],                
-                note:[""]
-            },{
-                name:"羅勒青醬雞肉",
-                price:180,
-                select:[{
-                    name:"主食",
-                    option:[{
-                        name:"義大利麵",
-                        price:0
-                    },{
-                        name:"燉飯",
-                        price:0 
-                    },{
-                        name:"焗烤飯",
-                        price:20 
-                    },{
-                        name:"焗烤斜管麵",
-                        price:20 
-                    }]
-                }],                
-                note:[""]
-            },{
-                name:"羅勒青醬蛤蠣",
-                price:180,
-                select:[{
-                    name:"主食",
-                    option:[{
-                        name:"義大利麵",
-                        price:0
-                    },{
-                        name:"燉飯",
-                        price:0 
-                    },{
-                        name:"焗烤飯",
-                        price:20 
-                    },{
-                        name:"焗烤斜管麵",
-                        price:20 
-                    }]
-                }],                
-                note:[""]
-            },{
-                name:"白醬時蔬野菇",
-                price:170,
-                select:[{
-                    name:"主食",
-                    option:[{
-                        name:"義大利麵",
-                        price:0
-                    },{
-                        name:"燉飯",
-                        price:0 
-                    },{
-                        name:"焗烤飯",
-                        price:20 
-                    },{
-                        name:"焗烤斜管麵",
-                        price:20 
-                    }]
-                }],                
-                note:["可素食"]
-            },{
-                name:"南瓜海鮮",
-                price:180,
-                select:[{
-                    name:"主食",
-                    option:[{
-                        name:"義大利麵",
-                        price:0
-                    },{
-                        name:"燉飯",
-                        price:0 
-                    },{
-                        name:"焗烤飯",
-                        price:20 
-                    },{
-                        name:"焗烤斜管麵",
-                        price:20 
-                    }]
-                }],                
-                note:[""]
-            },{
-                name:"南瓜雞肉",
-                price:180,
-                select:[{
-                    name:"主食",
-                    option:[{
-                        name:"義大利麵",
-                        price:0
-                    },{
-                        name:"燉飯",
-                        price:0 
-                    },{
-                        name:"焗烤飯",
-                        price:20 
-                    },{
-                        name:"焗烤斜管麵",
-                        price:20 
-                    }]
-                }],                
-                note:[""]
-            },{
-                name:"南瓜時蔬野菇",
-                price:180,
-                select:[{
-                    name:"主食",
-                    option:[{
-                        name:"義大利麵",
-                        price:0
-                    },{
-                        name:"燉飯",
-                        price:0 
-                    },{
-                        name:"焗烤飯",
-                        price:20 
-                    },{
-                        name:"焗烤斜管麵",
-                        price:20 
-                    }]
-                }],                
-                note:["可素食"]
-            },{
-                name:"白醬奶油培根",
-                price:170,
-                select:[{
-                    name:"主食",
-                    option:[{
-                        name:"義大利麵",
-                        price:0
-                    },{
-                        name:"燉飯",
-                        price:0 
-                    },{
-                        name:"焗烤飯",
-                        price:20 
-                    },{
-                        name:"焗烤斜管麵",
-                        price:20 
-                    }]
-                }],                
-                note:[""]
-            },{
-                name:"白醬奶油雞肉",
-                price:180,
-                select:[{
-                    name:"主食",
-                    option:[{
-                        name:"義大利麵",
-                        price:0
-                    },{
-                        name:"燉飯",
-                        price:0 
-                    },{
-                        name:"焗烤飯",
-                        price:20 
-                    },{
-                        name:"焗烤斜管麵",
-                        price:20 
-                    }]
-                }],                
-                note:[""]
-            },{
-                name:"西西里番茄燻腸",
-                price:170,
-                select:[{
-                    name:"主食",
-                    option:[{
-                        name:"義大利麵",
-                        price:0
-                    },{
-                        name:"燉飯",
-                        price:0 
-                    },{
-                        name:"焗烤飯",
-                        price:20 
-                    },{
-                        name:"焗烤斜管麵",
-                        price:20 
-                    }]
-                }],                
-                note:[""]
-            },{
-                name:"西西里番茄雞肉",
-                price:180,
-                select:[{
-                    name:"主食",
-                    option:[{
-                        name:"義大利麵",
-                        price:0
-                    },{
-                        name:"燉飯",
-                        price:0 
-                    },{
-                        name:"焗烤飯",
-                        price:20 
-                    },{
-                        name:"焗烤斜管麵",
-                        price:20 
-                    }]
-                }],                
-                note:[""]
-            },{
-                name:"西西里番茄海鮮",
-                price:180,
-                select:[{
-                    name:"主食",
-                    option:[{
-                        name:"義大利麵",
-                        price:0
-                    },{
-                        name:"燉飯",
-                        price:0 
-                    },{
-                        name:"焗烤飯",
-                        price:20 
-                    },{
-                        name:"焗烤斜管麵",
-                        price:20 
-                    }]
-                }],                
-                note:[""]
-            },{
-                name:"和風咖哩海鮮",
-                price:180,
-                select:[{
-                    name:"主食",
-                    option:[{
-                        name:"義大利麵",
-                        price:0
-                    },{
-                        name:"燉飯",
-                        price:0 
-                    },{
-                        name:"焗烤飯",
-                        price:20 
-                    },{
-                        name:"焗烤斜管麵",
-                        price:20 
-                    }]
-                }],                
-                note:["辣"]
-            },{
-                name:"和風咖哩牛五花",
-                price:190,
-                select:[{
-                    name:"主食",
-                    option:[{
-                        name:"義大利麵",
-                        price:0
-                    },{
-                        name:"燉飯",
-                        price:0 
-                    },{
-                        name:"焗烤飯",
-                        price:20 
-                    },{
-                        name:"焗烤斜管麵",
-                        price:20 
-                    }]
-                }],                
-                note:["辣"]
-            },{
-                name:"啵啵泡菜雞肉",
-                price:190,
-                select:[{
-                    name:"主食",
-                    option:[{
-                        name:"義大利麵",
-                        price:0
-                    },{
-                        name:"燉飯",
-                        price:0 
-                    },{
-                        name:"焗烤飯",
-                        price:20 
-                    },{
-                        name:"焗烤斜管麵",
-                        price:20 
-                    }]
-                }],                
-                note:["辣"]
-            },{
-                name:"啵啵泡菜鮮蝦",
-                price:190,
-                select:[{
-                    name:"",
-                    option:[{
+        // var choice = {
+        //     slot1:{
+        //         name: "肉類",
+        //         option: [{
+        //             name: "豬肉",
+        //             price: 0
+        //         }, {
+        //             name: "牛肉",
+        //             price: 0
+        //         }, {
+        //             name: "雞肉",
+        //             price: 0
+        //         }]
+        //     },
+        //     slot2:{
+        //         name: "主食",
+        //         option: [{
+        //             name: "義大利麵",
+        //             price: 0
+        //         }, {
+        //             name: "燉飯",
+        //             price: 0
+        //         }, {
+        //             name: "焗烤飯",
+        //             price: 20
+        //         }, {
+        //             name: "焗烤斜管麵",
+        //             price: 20
+        //         }]
+        //     },
+        //     slot3:{
+        //         name: "溫度",
+        //         option: [{
+        //             name: "正常冰"
+        //         }, {
+        //             name: "少冰"
+        //         }, {
+        //             name: "微冰"
+        //         }, {
+        //             name: "去冰"
+        //         }, {
+        //             name: "溫"
+        //         }, {
+        //             name: "熱"
+        //         }]
+        //     },
+        //     slot4:{
+        //         name: "甜度",
+        //         option: [{
+        //             name: "正常糖"
+        //         }, {
+        //             name: "少糖"
+        //         }, {
+        //             name: "半糖"
+        //         }, {
+        //             name: "微糖"
+        //         }, {
+        //             name: "無糖"
+        //         }]
+        //     }
+            
+        // }
 
-                    }]
-                }],
-                option:[{
-                    name:"義大利麵",
-                    price:0
-                },{
-                    name:"燉飯",
-                    price:0 
-                },{
-                    name:"焗烤飯",
-                    price:20 
-                },{
-                    name:"焗烤斜管麵",
-                    price:20 
-                }],
-                note:["辣"]
-            },{
-                name:"迷迭香奶油鮭魚",
-                price:190,
-                select:[{
-                    name:"種類",
-                    option:[{
-                        name:"義大利麵",
-                        price:0
-                    },{
-                        name:"燉飯",
-                        price:0 
-                    },{
-                        name:"焗烤飯",
-                        price:20 
-                    },{
-                        name:"焗烤斜管麵",
-                        price:20
-                    }]
-                }],
-                note:[""]
-            }],
-            note:["餐點皆附有50元飲品 差價可補差額"]
-        },{
-            name:"BURRITOS 塔可烤餅",
-            dish:[{
-                name:"田園鮮蔬",
-                price:95,
-                note:["可素食"]
-            },{
-                name:"番茄瑪格麗特",
-                price:95,
-                note:[""]
-            },{
-                name:"打拋雞肉",
-                price:110,
-                note:[""]
-            },{
-                name:"羅勒青醬鮪魚",
-                price:110,
-                note:[""]
-            }],
-            note:[]
-        },{
-            name:"SALAD 沙拉",
-            dish:[{
-                name:"堅果鮮蔬沙拉",
-                price:85,
-                note:[""]
-            },{
-                name:"嫩煎鮮蔬沙拉",
-                price:95,
-                note:[""]
-            },{
-                name:"香燻雞肉沙拉",
-                price:95,
-                note:[""]
-            },{
-                name:"南洋鮪魚沙拉",
-                price:95,
-                note:[""]
-            }],
-            note:[""]
-        },{
-            name:"DUTCH BABY PANCAKES\r\n荷蘭寶貝鬆餅",
-            dish:[{
-                name:"香蕉巧可力",
-                price:150,
-                note:[""]
-            },{
-                name:"焦糖脆糖",
-                price:150,
-                note:[""]
-            },{
-                name:"肉桂蜂蜜蘋果",
-                price:150,
-                note:[""]
-            },{
-                name:"綜合莓果",
-                price:170,
-                note:[""]
-            }],
-            note:["製作時間需25分鐘"]
-        },{
-            name:"COFFEE 咖啡",
-            dish:[{
-                name:"純黑咖啡",
-                price:50,
-                select:[{
-                    name:"溫度",
-                    option:[{
-                        name:"正常冰"
-                    },{
-                        name:"少冰"
-                    },{
-                        name:"微冰"
-                    },{
-                        name:"去冰"
-                    },{
-                        name:"溫"
-                    },{
-                        name:"熱"
-                    }]
-                },{
-                    name:"甜度",
-                    option:[{
-                        name:"正常糖"
-                    },{
-                        name:"少糖"
-                    },{
-                        name:"半糖"
-                    },{
-                        name:"微糖"
-                    },{
-                        name:"無糖"
-                    }]
-                }]
-            },{
-                name:"原味拿鐵",
-                price:70,
-                select:[{
-                    name:"溫度",
-                    option:[{
-                        name:"正常冰"
-                    },{
-                        name:"少冰"
-                    },{
-                        name:"微冰"
-                    },{
-                        name:"去冰"
-                    },{
-                        name:"溫"
-                    },{
-                        name:"熱"
-                    }]
-                },{
-                    name:"甜度",
-                    option:[{
-                        name:"正常糖"
-                    },{
-                        name:"少糖"
-                    },{
-                        name:"半糖"
-                    },{
-                        name:"微糖"
-                    },{
-                        name:"無糖"
-                    }]
-                }]
-            },{
-                name:"卡布奇諾",
-                price:70,
-                select:[{
-                    name:"溫度",
-                    option:[{
-                        name:"正常冰"
-                    },{
-                        name:"少冰"
-                    },{
-                        name:"微冰"
-                    },{
-                        name:"去冰"
-                    },{
-                        name:"溫"
-                    },{
-                        name:"熱"
-                    }]
-                },{
-                    name:"甜度",
-                    option:[{
-                        name:"正常糖"
-                    },{
-                        name:"少糖"
-                    },{
-                        name:"半糖"
-                    },{
-                        name:"微糖"
-                    },{
-                        name:"無糖"
-                    }]
-                }]
-            },{
-                name:"咖啡冰淇淋",
-                price:80,
-                select:[{
-                    name:"溫度",
-                    option:[{
-                        name:"正常冰"
-                    },{
-                        name:"少冰"
-                    },{
-                        name:"微冰"
-                    },{
-                        name:"去冰"
-                    },{
-                        name:"溫"
-                    },{
-                        name:"熱"
-                    }]
-                },{
-                    name:"甜度",
-                    option:[{
-                        name:"正常糖"
-                    },{
-                        name:"少糖"
-                    },{
-                        name:"半糖"
-                    },{
-                        name:"微糖"
-                    },{
-                        name:"無糖"
-                    }]
-                }]
-            },{
-                name:"鄰里咖啡",
-                price:75,
-                select:[{
-                    name:"溫度",
-                    option:[{
-                        name:"正常冰"
-                    },{
-                        name:"少冰"
-                    },{
-                        name:"微冰"
-                    },{
-                        name:"去冰"
-                    },{
-                        name:"溫"
-                    },{
-                        name:"熱"
-                    }]
-                },{
-                    name:"甜度",
-                    option:[{
-                        name:"正常糖"
-                    },{
-                        name:"少糖"
-                    },{
-                        name:"半糖"
-                    },{
-                        name:"微糖"
-                    },{
-                        name:"無糖"
-                    }]
-                }]
-            },{
-                name:"黑糖瑪奇朵",
-                price:80,
-                select:[{
-                    name:"溫度",
-                    option:[{
-                        name:"正常冰"
-                    },{
-                        name:"少冰"
-                    },{
-                        name:"微冰"
-                    },{
-                        name:"去冰"
-                    },{
-                        name:"溫"
-                    },{
-                        name:"熱"
-                    }]
-                },{
-                    name:"甜度",
-                    option:[{
-                        name:"正常糖"
-                    },{
-                        name:"少糖"
-                    },{
-                        name:"半糖"
-                    },{
-                        name:"微糖"
-                    },{
-                        name:"無糖"
-                    }]
-                }]
-            },{
-                name:"摩卡脆片",
-                price:80,
-                select:[{
-                    name:"溫度",
-                    option:[{
-                        name:"正常冰"
-                    },{
-                        name:"少冰"
-                    },{
-                        name:"微冰"
-                    },{
-                        name:"去冰"
-                    },{
-                        name:"溫"
-                    },{
-                        name:"熱"
-                    }]
-                },{
-                    name:"甜度",
-                    option:[{
-                        name:"正常糖"
-                    },{
-                        name:"少糖"
-                    },{
-                        name:"半糖"
-                    },{
-                        name:"微糖"
-                    },{
-                        name:"無糖"
-                    }]
-                }]
-            },{
-                name:"焦糖瑪奇朵",
-                price:80,
-                select:[{
-                    name:"溫度",
-                    option:[{
-                        name:"正常冰"
-                    },{
-                        name:"少冰"
-                    },{
-                        name:"微冰"
-                    },{
-                        name:"去冰"
-                    },{
-                        name:"溫"
-                    },{
-                        name:"熱"
-                    }]
-                },{
-                    name:"甜度",
-                    option:[{
-                        name:"正常糖"
-                    },{
-                        name:"少糖"
-                    },{
-                        name:"半糖"
-                    },{
-                        name:"微糖"
-                    },{
-                        name:"無糖"
-                    }]
-                }]
-            }],
-            note:[]
-        },{
-            name:"TEA 茶",
-            dish:[{
-                name:"日式玄米茶",
-                price:50,
-                select:[{
-                    name:"溫度",
-                    option:[{
-                        name:"正常冰"
-                    },{
-                        name:"少冰"
-                    },{
-                        name:"微冰"
-                    },{
-                        name:"去冰"
-                    },{
-                        name:"溫"
-                    },{
-                        name:"熱"
-                    }]
-                },{
-                    name:"甜度",
-                    option:[{
-                        name:"正常糖"
-                    },{
-                        name:"少糖"
-                    },{
-                        name:"半糖"
-                    },{
-                        name:"微糖"
-                    },{
-                        name:"無糖"
-                    }]
-                }]
-            },{
-                name:"產地紅茶",
-                price:50,
-                select:[{
-                    name:"溫度",
-                    option:[{
-                        name:"正常冰"
-                    },{
-                        name:"少冰"
-                    },{
-                        name:"微冰"
-                    },{
-                        name:"去冰"
-                    },{
-                        name:"溫"
-                    },{
-                        name:"熱"
-                    }]
-                },{
-                    name:"甜度",
-                    option:[{
-                        name:"正常糖"
-                    },{
-                        name:"少糖"
-                    },{
-                        name:"半糖"
-                    },{
-                        name:"微糖"
-                    },{
-                        name:"無糖"
-                    }]
-                }]
-            },{
-                name:"雷蒙紅茶",
-                price:60,
-                select:[{
-                    name:"溫度",
-                    option:[{
-                        name:"正常冰"
-                    },{
-                        name:"少冰"
-                    },{
-                        name:"微冰"
-                    },{
-                        name:"去冰"
-                    },{
-                        name:"溫"
-                    },{
-                        name:"熱"
-                    }]
-                },{
-                    name:"甜度",
-                    option:[{
-                        name:"正常糖"
-                    },{
-                        name:"少糖"
-                    },{
-                        name:"半糖"
-                    },{
-                        name:"微糖"
-                    },{
-                        name:"無糖"
-                    }]
-                }]
-            },{
-                name:"雷蒙玄米茶",
-                price:60,
-                select:[{
-                    name:"溫度",
-                    option:[{
-                        name:"正常冰"
-                    },{
-                        name:"少冰"
-                    },{
-                        name:"微冰"
-                    },{
-                        name:"去冰"
-                    },{
-                        name:"溫"
-                    },{
-                        name:"熱"
-                    }]
-                },{
-                    name:"甜度",
-                    option:[{
-                        name:"正常糖"
-                    },{
-                        name:"少糖"
-                    },{
-                        name:"半糖"
-                    },{
-                        name:"微糖"
-                    },{
-                        name:"無糖"
-                    }]
-                }]
-            },{
-                name:"柚香冰茶",
-                price:70,
-                select:[{
-                    name:"溫度",
-                    option:[{
-                        name:"正常冰"
-                    },{
-                        name:"少冰"
-                    },{
-                        name:"微冰"
-                    },{
-                        name:"去冰"
-                    },{
-                        name:"溫"
-                    },{
-                        name:"熱"
-                    }]
-                },{
-                    name:"甜度",
-                    option:[{
-                        name:"正常糖"
-                    },{
-                        name:"少糖"
-                    },{
-                        name:"半糖"
-                    },{
-                        name:"微糖"
-                    },{
-                        name:"無糖"
-                    }]
-                }]
-            },{
-                name:"雷蒙龍眼蜜茶",
-                price:70,
-                select:[{
-                    name:"溫度",
-                    option:[{
-                        name:"正常冰"
-                    },{
-                        name:"少冰"
-                    },{
-                        name:"微冰"
-                    },{
-                        name:"去冰"
-                    },{
-                        name:"溫"
-                    },{
-                        name:"熱"
-                    }]
-                },{
-                    name:"甜度",
-                    option:[{
-                        name:"正常糖"
-                    },{
-                        name:"少糖"
-                    },{
-                        name:"半糖"
-                    },{
-                        name:"微糖"
-                    },{
-                        name:"無糖"
-                    }]
-                }]
-            },{
-                name:"冰淇淋紅茶",
-                price:70,
-                select:[{
-                    name:"溫度",
-                    option:[{
-                        name:"正常冰"
-                    },{
-                        name:"少冰"
-                    },{
-                        name:"微冰"
-                    },{
-                        name:"去冰"
-                    },{
-                        name:"溫"
-                    },{
-                        name:"熱"
-                    }]
-                },{
-                    name:"甜度",
-                    option:[{
-                        name:"正常糖"
-                    },{
-                        name:"少糖"
-                    },{
-                        name:"半糖"
-                    },{
-                        name:"微糖"
-                    },{
-                        name:"無糖"
-                    }]
-                }]
-            },{
-                name:"蜂蜜蘋果茶",
-                price:70,
-                select:[{
-                    name:"溫度",
-                    option:[{
-                        name:"正常冰"
-                    },{
-                        name:"少冰"
-                    },{
-                        name:"微冰"
-                    },{
-                        name:"去冰"
-                    },{
-                        name:"溫"
-                    },{
-                        name:"熱"
-                    }]
-                },{
-                    name:"甜度",
-                    option:[{
-                        name:"正常糖"
-                    },{
-                        name:"少糖"
-                    },{
-                        name:"半糖"
-                    },{
-                        name:"微糖"
-                    },{
-                        name:"無糖"
-                    }]
-                }]
-            },{
-                name:"繽紛水果茶",
-                price:80,
-                select:[{
-                    name:"溫度",
-                    option:[{
-                        name:"正常冰"
-                    },{
-                        name:"少冰"
-                    },{
-                        name:"微冰"
-                    },{
-                        name:"去冰"
-                    },{
-                        name:"溫"
-                    },{
-                        name:"熱"
-                    }]
-                },{
-                    name:"甜度",
-                    option:[{
-                        name:"正常糖"
-                    },{
-                        name:"少糖"
-                    },{
-                        name:"半糖"
-                    },{
-                        name:"微糖"
-                    },{
-                        name:"無糖"
-                    }]
-                }]
-            }],            
-            note:[]
-        }]
-    }    
-</script>
-<script src="script/effect.js"></script>
+
+        // var menu = {
+        //     title: "鄰里",
+        //     subtitle: "kinjo café",
+        //     address: "台南市郡安路四段52號",
+        //     phone: "06-2520155",
+        //     kind: [{
+        //         name: "APPETIZER 開胃點心",
+        //         dish: [{
+        //             name: "炸薯條",
+        //             price: 50
+        //         }, {
+        //             name: "古早味甜不辣",
+        //             price: 40
+        //         }, {
+        //             name: "炸豆腐",
+        //             price: 55
+        //         }, {
+        //             name: "日式炸雞",
+        //             price: 85
+        //         }
+        //             , {
+        //             name: "椒鹽花枝",
+        //             price: 95
+        //         }
+        //             , {
+        //             name: "水牛城辣雞翅",
+        //             price: 105,
+        //             note: "辣"
+        //         }],
+        //         note: []
+        //     }, {
+        //         name: "HOT POT 小火鍋",
+        //         dish: [{
+        //             name: "港式沙茶鍋",
+        //             price: 240,
+        //             select: [choice.slot1],
+        //             note: [""]
+        //         }, {
+        //             name: "日式味噌鍋",
+        //             price: 240,
+        //             select: [choice.slot1],
+        //             note: [""]
+        //         }, {
+        //             name: "養一頭牛奶鍋",
+        //             price: 250,
+        //             select: [choice.slot1],
+        //             note: [""]
+        //         }, {
+        //             name: "剝皮辣椒鍋",
+        //             price: 250,
+        //             select: [choice.slot1],
+        //             note: ["辣"]
+        //         }, {
+        //             name: "麻油香鍋",
+        //             price: 250,
+        //             select: [choice.slot1],
+        //             note: [""]
+        //         }, {
+        //             name: "和風咖哩鍋",
+        //             price: 260,
+        //             select: [choice.slot1],
+        //             note: ["辣"]
+        //         }, {
+        //             name: "橘黃南瓜鍋",
+        //             price: 260,
+        //             select: [choice.slot1],
+        //             note: [""]
+        //         }, {
+        //             name: "西西里番茄鍋",
+        //             price: 260,
+        //             select: [choice.slot1],
+        //             note: [""]
+        //         }, {
+        //             name: "韓式泡菜部隊鍋",
+        //             price: 270,
+        //             select: [choice.slot1],
+        //             note: ["辣"]
+        //         }, {
+        //             name: "時蔬牛奶鍋",
+        //             price: 260,
+        //             select: [choice.slot1],
+        //             note: ["可素食"]
+        //         }, {
+        //             name: "食蔬葷菇鍋",
+        //             price: 260,
+        //             select: [choice.slot1],
+        //             note: ["可素食"]
+        //         }],
+        //         note: ["餐點皆附有50元飲品 差價可補差額"]
+        //     }, {
+        //         name: "PASTA RISOTTO\r\n義大利麵 燉飯 焗烤",
+        //         dish: [{
+        //             name: "清炒蒜辣培根",
+        //             price: 160,
+        //             select: [choice.slot2],
+        //             note: [""]
+        //         }, {
+        //             name: "蒜味鮮蝦",
+        //             price: 170,
+        //             select: [choice.slot2],
+        //             note: [""]
+        //         }, {
+        //             name: "白酒蛤蜊",
+        //             price: 170,
+        //             select: [choice.slot2],
+        //             note: [""]
+        //         }, {
+        //             name: "羅勒青醬鮮蝦",
+        //             price: 180,
+        //             select: [choice.slot2],
+        //             note: [""]
+        //         }, {
+        //             name: "羅勒青醬雞肉",
+        //             price: 180,
+        //             select: [choice.slot2],
+        //             note: [""]
+        //         }, {
+        //             name: "羅勒青醬蛤蠣",
+        //             price: 180,
+        //             select: [choice.slot2],
+        //             note: [""]
+        //         }, {
+        //             name: "白醬時蔬野菇",
+        //             price: 170,
+        //             select: [choice.slot2],
+        //             note: ["可素食"]
+        //         }, {
+        //             name: "南瓜海鮮",
+        //             price: 180,
+        //             select: [choice.slot2],
+        //             note: [""]
+        //         }, {
+        //             name: "南瓜雞肉",
+        //             price: 180,
+        //             select: [choice.slot2],
+        //             note: [""]
+        //         }, {
+        //             name: "南瓜時蔬野菇",
+        //             price: 180,
+        //             select: [choice.slot2],
+        //             note: ["可素食"]
+        //         }, {
+        //             name: "白醬奶油培根",
+        //             price: 170,
+        //             select: [choice.slot2],
+        //             note: [""]
+        //         }, {
+        //             name: "白醬奶油雞肉",
+        //             price: 180,
+        //             select: [choice.slot2],
+        //             note: [""]
+        //         }, {
+        //             name: "西西里番茄燻腸",
+        //             price: 170,
+        //             select: [choice.slot2],
+        //             note: [""]
+        //         }, {
+        //             name: "西西里番茄雞肉",
+        //             price: 180,
+        //             select: [choice.slot2],
+        //             note: [""]
+        //         }, {
+        //             name: "西西里番茄海鮮",
+        //             price: 180,
+        //             select: [choice.slot2],
+        //             note: [""]
+        //         }, {
+        //             name: "和風咖哩海鮮",
+        //             price: 180,
+        //             select: [choice.slot2],
+        //             note: ["辣"]
+        //         }, {
+        //             name: "和風咖哩牛五花",
+        //             price: 190,
+        //             select: [choice.slot2],
+        //             note: ["辣"]
+        //         }, {
+        //             name: "啵啵泡菜雞肉",
+        //             price: 190,
+        //             select: [choice.slot2],
+        //             note: ["辣"]
+        //         }, {
+        //             name: "啵啵泡菜鮮蝦",
+        //             price: 190,
+        //             select: [choice.slot2],
+        //             note: ["辣"]
+        //         }, {
+        //             name: "迷迭香奶油鮭魚",
+        //             price: 190,
+        //             select: [choice.slot2],
+        //             note: [""]
+        //         }],
+        //         note: ["餐點皆附有50元飲品 差價可補差額"]
+        //     }, {
+        //         name: "BURRITOS 塔可烤餅",
+        //         dish: [{
+        //             name: "田園鮮蔬",
+        //             price: 95,
+        //             note: ["可素食"]
+        //         }, {
+        //             name: "番茄瑪格麗特",
+        //             price: 95,
+        //             note: [""]
+        //         }, {
+        //             name: "打拋雞肉",
+        //             price: 110,
+        //             note: [""]
+        //         }, {
+        //             name: "羅勒青醬鮪魚",
+        //             price: 110,
+        //             note: [""]
+        //         }],
+        //         note: []
+        //     }, {
+        //         name: "SALAD 沙拉",
+        //         dish: [{
+        //             name: "堅果鮮蔬沙拉",
+        //             price: 85,
+        //             note: [""]
+        //         }, {
+        //             name: "嫩煎鮮蔬沙拉",
+        //             price: 95,
+        //             note: [""]
+        //         }, {
+        //             name: "香燻雞肉沙拉",
+        //             price: 95,
+        //             note: [""]
+        //         }, {
+        //             name: "南洋鮪魚沙拉",
+        //             price: 95,
+        //             note: [""]
+        //         }],
+        //         note: [""]
+        //     }, {
+        //         name: "DUTCH BABY PANCAKES\r\n荷蘭寶貝鬆餅",
+        //         dish: [{
+        //             name: "香蕉巧可力",
+        //             price: 150,
+        //             note: [""]
+        //         }, {
+        //             name: "焦糖脆糖",
+        //             price: 150,
+        //             note: [""]
+        //         }, {
+        //             name: "肉桂蜂蜜蘋果",
+        //             price: 150,
+        //             note: [""]
+        //         }, {
+        //             name: "綜合莓果",
+        //             price: 170,
+        //             note: [""]
+        //         }],
+        //         note: ["製作時間需25分鐘"]
+        //     }, {
+        //         name: "COFFEE 咖啡",
+        //         dish: [{
+        //             name: "純黑咖啡",
+        //             price: 50,
+        //             select: [choice.slot3,choice.slot4]
+        //         }, {
+        //             name: "原味拿鐵",
+        //             price: 70,
+        //             select: [choice.slot3,choice.slot4]
+        //         }, {
+        //             name: "卡布奇諾",
+        //             price: 70,
+        //             select: [choice.slot3,choice.slot4]
+        //         }, {
+        //             name: "咖啡冰淇淋",
+        //             price: 80,
+        //             select: [choice.slot3,choice.slot4]
+        //         }, {
+        //             name: "鄰里咖啡",
+        //             price: 75,
+        //             select: [choice.slot3,choice.slot4]
+        //         }, {
+        //             name: "黑糖瑪奇朵",
+        //             price: 80,
+        //             select: [choice.slot3,choice.slot4]
+        //         }, {
+        //             name: "摩卡脆片",
+        //             price: 80,
+        //             select: [choice.slot3,choice.slot4]
+        //         }, {
+        //             name: "焦糖瑪奇朵",
+        //             price: 80,
+        //             select: [choice.slot3,choice.slot4]
+        //         }],
+        //         note: []
+        //     }, {
+        //         name: "TEA 茶",
+        //         dish: [{
+        //             name: "日式玄米茶",
+        //             price: 50,
+        //             select: [choice.slot3,choice.slot4]
+        //         }, {
+        //             name: "產地紅茶",
+        //             price: 50,
+        //             select: [choice.slot3,choice.slot4]
+        //         }, {
+        //             name: "雷蒙紅茶",
+        //             price: 60,
+        //             select: [choice.slot3,choice.slot4]
+        //         }, {
+        //             name: "雷蒙玄米茶",
+        //             price: 60,
+        //             select: [choice.slot3,choice.slot4]
+        //         }, {
+        //             name: "柚香冰茶",
+        //             price: 70,
+        //             select: [choice.slot3,choice.slot4]
+        //         }, {
+        //             name: "雷蒙龍眼蜜茶",
+        //             price: 70,
+        //             select: [choice.slot3,choice.slot4]
+        //         }, {
+        //             name: "冰淇淋紅茶",
+        //             price: 70,
+        //             select: [choice.slot3,choice.slot4]
+        //         }, {
+        //             name: "蜂蜜蘋果茶",
+        //             price: 70,
+        //             select: [choice.slot3,choice.slot4]
+        //         }, {
+        //             name: "繽紛水果茶",
+        //             price: 80,
+        //             select: [choice.slot3,choice.slot4]
+
+        //         }],
+        //         note: []
+        //     }]
+        // }    
+    </script>
+    <script src="script/data.js"></script>
+    <script src="script/effect.js"></script>
 </body>
 
 </html>
