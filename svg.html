@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ah-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+
+body{
+    margin: 0;
+    height: 100vh;
+    background-color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+div{
+    height: 300px;
+    width: 300px;
+    border-radius: 100vh;
+    background-color: #dadada;
+    transform: rotate(-35deg);
+}
+@keyframes dash {
+    100%{stroke-dashoffset:0;}
+    0%{stroke-dashoffset:330;}
+}
+svg path{
+    stroke-dasharray:330;
+    animation: dash 3s infinite ease-in-out;
+}
+
+</style>
+<body>
+    <div>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+            <path d="M50 100, L50 0, Z" stroke="#333" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M50 100, L50 65, L100 65" fill="transparent" stroke="#333" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M50 100, L50 35, L0 35" fill="transparent" stroke="#333" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </div>
+
+</body>
+</html>
