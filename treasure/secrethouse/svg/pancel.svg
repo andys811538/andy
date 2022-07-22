@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Generator: Adobe Illustrator 24.2.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Pancel" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 47.726 392" style="enable-background:new 0 0 47.726 392;" xml:space="preserve">
+<g>
+	<polygon style="fill:#55473F;" points="1.926,2.937 1.279,319.443 27.142,390.707 47.257,321.167 45.789,2.779 	"/>
+	<path style="fill:#FBE6D1;" d="M1.926,2.937l43.863-0.158l1.467,318.388l-13.025,45.307c-6.378-2.44-11.473-1.852-15.632,0.947
+		L1.279,319.443L1.926,2.937z"/>
+	<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="1.2795" y1="162.3316" x2="47.2565" y2="162.3316">
+		<stop  offset="0" style="stop-color:#F4C79D"/>
+		<stop  offset="0.2501" style="stop-color:#F5C9A1"/>
+		<stop  offset="0.2827" style="stop-color:#EDA661"/>
+		<stop  offset="0.4889" style="stop-color:#EDA661"/>
+		<stop  offset="0.5025" style="stop-color:#EA9443"/>
+		<stop  offset="0.7345" style="stop-color:#EA9443"/>
+		<stop  offset="0.7548" style="stop-color:#DE8C42"/>
+		<stop  offset="1" style="stop-color:#CD8141"/>
+	</linearGradient>
+	<path style="fill:url(#SVGID_1_);" d="M1.926,2.937l43.863-0.158l1.467,318.388c-8.183-6.927-15.775-5.458-23.035,0.717
+		c-6.479-8.383-13.997-9.122-22.942-2.441L1.926,2.937z"/>
+</g>
+</svg>

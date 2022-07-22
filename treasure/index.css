@@ -1,0 +1,69 @@
+   
+/* ==================================================== */
+#locker{
+    /* display: none; */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 100px;
+}
+#locker_toggle{
+    fill:#BEBDBF;
+    transition: transform .3s,fill .3s;
+}
+svg:active #locker_toggle{
+    transform: translateY(19%);
+    fill: #9a9a9a !important;
+}
+
+/* ==================================================== */
+#gift{
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+#ribbon_rope{
+    stroke: black;
+    stroke-width: 5px;
+    stroke-dasharray: 480;
+    stroke-dashoffset: 0;        
+}
+@keyframes line {
+    to{stroke-dashoffset: 480}
+}
+.ani-ribbon_rope{
+    animation:line 1.5s linear forwards
+}
+#ribbon{
+    stroke-dasharray: 210;
+    stroke-dashoffset: 0;
+}
+@keyframes line-2{
+    to{stroke-dashoffset: -210}
+}
+.ani-ribbon{
+    animation:line-2 0.7s linear forwards;
+}
+#gift_cover{
+    transform-origin: left;    
+}
+@keyframes open-gift {
+    to{transform: rotate(-40deg) translateY(-15%) ;}
+}
+.ani-gift-cover{
+    animation: open-gift 2s forwards;
+}
+
+
+/* ================================ */
+
+#safe_box{
+    display: none;
+}
+#safe_door{
+   
+}
