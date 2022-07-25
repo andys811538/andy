@@ -7,314 +7,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="ui.css">
 </head>
 
-<style>
-
-    
-    body {
-        margin: 0;
-        padding: 0;
-        width: 100vw;
-        height: 100vh;
-        background-color: rgb(237, 215, 215);
-        user-select: none;
-    }
-
-    header {
-        position: fixed;
-        top: 10px;
-        left: 0;
-        width: 100vw;
-        height: 80px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 2;
-    }
-
-    header .dialog {
-        position: relative;
-        margin: auto;        
-        opacity: 0;
-        width: 70%;
-        padding: 35px 70px;
-        height: 90%;
-        max-height: 90%;
-        background-color: hsla(0, 0%, 90%, .2);
-        border: 4px rgba(51, 51, 51, 0.543) solid;
-        border-radius: 15px;
-        box-shadow:
-            -5px 5px 10px hsla(0, 0%, 10%, .3),
-            -5px 5px 10px hsla(0, 0%, 90%, .3);
-        box-sizing: border-box;
-        display: flex;
-        align-items: center;
-        transition: opacity .3s;
-    }
-
-    header .dialog[data-state="running"] {
-        opacity: 1;
-    }
-
-    header .dialog[data-state="finish"] {
-        opacity: 1;
-    }
-
-    header .dialog p {
-        position: relative;
-        height: 4.5ch;     
-        overflow-y: scroll;
-        margin-left: 5px;
-        font-size: 26px;
-        font-family: 微軟正黑體;
-        word-break: break-all;
-        word-wrap: break-word;
-    }
-
-    header .dialog p::-webkit-scrollbar{
-        width: 0;
-        height: 0;
-    }
-
-    header .dialog[data-state="finish"]::after {
-        position: absolute;
-        content: "next";
-        right: 0;
-        bottom: 0;
-        padding: 5px 15px;
-    }
-
-    
-    .hideText {
-        display: none ;
-    }
-
-    header .dialog[data-next="true"] > p span{
-        display: inline !important;
-    }
-
-    header .chose {
-        opacity: 0;
-        pointer-events: none;
-        position: absolute;
-        right: 0;
-        bottom: -10px;
-        transform: translate(4px,100%);
-        width: 110px;
-        height: 100%;
-        border: 4px rgba(51, 51, 51, 0.543) solid;
-        background-color: hsla(0, 0%, 40%, .1);
-        border-radius: 15px;
-        box-shadow:
-            -5px 5px 10px hsla(0, 0%, 10%, .3),
-            -5px 5px 10px hsla(0, 0%, 90%, .3);
-        box-sizing: border-box;
-    }
-
-    header .chose[data-show="true"]{
-        opacity: 1;
-        pointer-events: all;
-    }
-
-    header .chose div{
-        width: 100%;
-        height: 50%;
-        font-size: 26px;
-        text-align: center;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    header .chose div::before{
-        content: "<";
-        color: transparent;
-        transition: color .05s;
-        
-    }
-    header .chose div::after{
-        content: ">";
-        color: transparent;
-        transition: color .05s;
-    }
-
-    header .chose div:hover::before{
-        content: "<";
-        color: #333;
-        transform: translateX(-5px);
-    }
-    header .chose div:hover::after{
-        content: ">";
-        color: #333;
-        transform: translateX(5px);
-    }
-
-
-
-    div.stage {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%,-50%);
-        height: 100vh;
-        aspect-ratio: 2/1;
-        background-color: #66a2fa;
-        z-index: 1;
-    }
-
-    .interaction {
-        position: absolute;
-        top: 100px;
-        left: 50%;
-        transform: translate(-50%, 0px);
-        width: 65vh;
-        height: 65vh;
-        /* border: 3px solid #222; */
-        background-color: rgb(255, 255, 255);
-        border-radius: 15px;
-        box-shadow:
-            -10px -10px 20px hsla(0, 0%, 10%, .3),
-            10px 10px 20px hsla(0, 0%, 50%, .3);
-        z-index: 1;
-        transition: opacity .3s;
-    }
-
-    .interaction[data-state="close"] {
-        opacity: 0;
-    }
-
-    .interaction[data-state="open"] {
-        opacity: 1;
-    }
-
-    .password {
-        display: none;
-        user-select: none;
-    }
-
-    .password > div {
-        background-color: #333;
-        padding: 5%;
-        display: grid;
-        width: 100%;
-        aspect-ratio: 1/1.5;
-        box-sizing: border-box;
-        grid-template-columns: repeat(3, 1fr);
-        grid-template-rows: repeat(4, 1fr);
-        grid-gap: 3%;
-        border-radius: 5% / 3.4%;
-    }
-
-    .password .pass-show {
-        all: initial;   
-        width: 100%;
-        /* height: 70px; */
-        overflow: hidden;
-        background-color: #666;
-        border-radius: 15px;
-        grid-column: 1 / 4;
-        grid-row: 1 / 2;
-        font-size: 10vmin;
-        font-family: 'Courier New', Courier, monospace;
-        font-weight: bold;
-        text-align: center;
-        color: white;
-        pointer-events: none;
-        line-height: 100%;
-    }
-
-    .pass-show:invalid{
-        background-color: rgb(216, 63, 63);
-    }
-
-    .pass-show::selection{
-        background-color: #666;
-        color: white;
-    }
-
-    .password button {
-        margin: auto;
-        width: 85%;
-        aspect-ratio: 1 / 1;
-        appearance: none;
-        border: none;
-        border-radius: 5px;
-        background-color: #333;
-        color: #ddd;
-        font-size: 3vmin;
-        font-weight: bold;
-        box-shadow:
-            5px 5px 10px hsla(0, 0%, 10%, .5),
-            -5px -5px 10px hsla(0, 0%, 50%, .3);
-        transition: box-shadow 1s;
-    }
-
-    .password button:active {
-        box-shadow:
-            inset 5px 5px 10px hsla(0, 0%, 10%, .3),
-            inset -5px -5px 10px hsla(0, 0%, 50%, .3);
-    }
-
-    @keyframes show-item {
-        from{opacity: 0;}
-        to{opacity: 1;}
-    }
-    .show-item{
-        display: block;
-        position: fixed;
-        top: 100px;
-        left: 50%;
-        transform: translate(-50%, 0);
-        width: 40vmin;
-        padding: 10px;
-        z-index: 9;
-        margin: auto;
-        animation: .3s show-item forwards;
-    }
-
-    .disable{
-        filter: brightness(70%) opacity(.7);
-        pointer-events: none;
-    }
-
-    @media screen and (orientation: portrait) {
-        body {
-            position: absolute;
-            margin: 0;
-            padding: 0;
-            top: 0;
-            left: 100vw;
-            transform: rotate(90deg);
-            width: 100vh;
-            height: 100vw;
-            transform-origin: 0% 0%;
-        }
-
-        header {
-        width: 100vh;
-        height: 80px;
-        }
-
-        div.stage {
-            height: 100vw;
-            aspect-ratio: 2/1;
-        }
-
-        .interaction {
-            width: 65vw;
-            height: 65vw;
-        }
-
-    }
-
-
-</style>
 
 <body>
 
     <header>
         <div class="dialog">
             <p></p>
+            <div class="next">               
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                    viewBox="0 0 384 512" style="overflow:visible;enable-background:new 0 0 384 512;" xml:space="preserve">
+                    <defs>
+                    </defs>
+                    <path d="M0,352c0,88.38,71.63,160,160,160h64c88.38,0,160-71.63,160-160V224H0V352z"/>
+                    <path id="next_left" d="M176,0h-16C71.63,0,0,71.62,0,160v32h176V0z"/>
+                    <path id="next_right"d="M224,0h-16v192h176v-32C384,71.62,312.4,0,224,0z"/>
+                </svg>
+            </div>
             <div class="chose">
                 <div data-type="button" class="yes">是</div>
                 <div data-type="button" class="no">否</div>
@@ -325,29 +36,110 @@
 
     <div class="stage">
 
-
-        <div class="password">
-            <div>
-                <textarea maxlength="6" class="pass-show"></textarea>
-                <button onclick="password(this,'number')">1</button>
-                <button onclick="password(this,'number')">2</button>
-                <button onclick="password(this,'number')">3</button>
-                <button onclick="password(this,'number')">4</button>
-                <button onclick="password(this,'number')">5</button>
-                <button onclick="password(this,'number')">6</button>
-                <button onclick="password(this,'number')">7</button>
-                <button onclick="password(this,'number')">8</button>
-                <button onclick="password(this,'number')">9</button>
-                <button onclick="password(this,'reset')" >重置</button>
-                <button onclick="password(this,'number')">0</button>
-                <button class="submit" onclick="password(this,'ok')">確認</button>
-            </div>
+        <div class="background">
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                viewBox="0 0 699.916 348.568"
+                style="overflow:visible;enable-background:new 0 0 699.916 348.568;" xml:space="preserve">
+                <defs>            
+                        <pattern  x="350.053" y="173.779" width="300" height="270.022" patternUnits="userSpaceOnUse" id="star_x5F_pattern" viewBox="17.382 -287.336 300 270.022" style="overflow:visible;">
+                        <g>
+                            <rect x="17.382" y="-287.336" style="fill:none;" width="300" height="270.022"/>
+                            <polygon style="fill:#CFDA91;stroke:#3E3A39;stroke-width:0.25;stroke-miterlimit:10;" points="332.028,-4.599 320.331,-7.881 
+                                310.873,-0.255 310.521,-12.222 300.284,-18.645 311.764,-22.759 314.895,-34.355 322.342,-24.931 334.514,-25.673 
+                                327.636,-15.736 			"/>
+                            <polygon style="fill:#CFDA91;stroke:#3E3A39;stroke-width:0.25;stroke-miterlimit:10;" points="32.028,-4.599 20.331,-7.881 
+                                10.873,-0.255 10.521,-12.222 0.284,-18.645 11.764,-22.759 14.895,-34.355 22.342,-24.931 34.514,-25.673 27.636,-15.736 			"/>
+                            <polygon style="fill:#CFDA91;stroke:#3E3A39;stroke-width:0.25;stroke-miterlimit:10;" points="182.028,-49.603 170.331,-52.885 
+                                160.873,-45.259 160.521,-57.225 150.284,-63.649 161.764,-67.763 164.895,-79.358 172.342,-69.934 184.514,-70.677 
+                                177.636,-60.739 			"/>
+                            <polygon style="fill:#CFDA91;stroke:#3E3A39;stroke-width:0.25;stroke-miterlimit:10;" points="332.028,-94.606 320.331,-97.888 
+                                310.873,-90.263 310.521,-102.229 300.284,-108.653 311.764,-112.766 314.895,-124.362 322.342,-114.938 334.514,-115.681 
+                                327.636,-105.743 			"/>
+                            <polygon style="fill:#CFDA91;stroke:#3E3A39;stroke-width:0.25;stroke-miterlimit:10;" points="32.028,-94.606 20.331,-97.888 
+                                10.873,-90.263 10.521,-102.229 0.284,-108.653 11.764,-112.766 14.895,-124.362 22.342,-114.938 34.514,-115.681 
+                                27.636,-105.743 			"/>
+                            <polygon style="fill:#CFDA91;stroke:#3E3A39;stroke-width:0.25;stroke-miterlimit:10;" points="182.028,-139.61 
+                                170.331,-142.892 160.873,-135.266 160.521,-147.233 150.284,-153.656 161.764,-157.77 164.895,-169.366 172.342,-159.942 
+                                184.514,-160.684 177.636,-150.747 			"/>
+                            <polygon style="fill:#CFDA91;stroke:#3E3A39;stroke-width:0.25;stroke-miterlimit:10;" points="332.028,-184.614 
+                                320.331,-187.896 310.873,-180.27 310.521,-192.236 300.284,-198.66 311.764,-202.774 314.895,-214.369 322.342,-204.945 
+                                334.514,-205.688 327.636,-195.75 			"/>
+                            <polygon style="fill:#CFDA91;stroke:#3E3A39;stroke-width:0.25;stroke-miterlimit:10;" points="32.028,-184.614 20.331,-187.896 
+                                10.873,-180.27 10.521,-192.236 0.284,-198.66 11.764,-202.774 14.895,-214.369 22.342,-204.945 34.514,-205.688 27.636,-195.75 
+                                            "/>
+                            <polygon style="fill:#CFDA91;stroke:#3E3A39;stroke-width:0.25;stroke-miterlimit:10;" points="182.028,-229.617 
+                                170.331,-232.899 160.873,-225.274 160.521,-237.24 150.284,-243.664 161.764,-247.777 164.895,-259.373 172.342,-249.949 
+                                184.514,-250.692 177.636,-240.754 			"/>
+                            <polygon style="fill:#CFDA91;stroke:#3E3A39;stroke-width:0.25;stroke-miterlimit:10;" points="332.028,-274.621 
+                                320.331,-277.903 310.873,-270.277 310.521,-282.244 300.284,-288.667 311.764,-292.781 314.895,-304.377 322.342,-294.953 
+                                334.514,-295.695 327.636,-285.758 			"/>
+                            <polygon style="fill:#CFDA91;stroke:#3E3A39;stroke-width:0.25;stroke-miterlimit:10;" points="32.028,-274.621 20.331,-277.903 
+                                10.873,-270.277 10.521,-282.244 0.284,-288.667 11.764,-292.781 14.895,-304.377 22.342,-294.953 34.514,-295.695 
+                                27.636,-285.758 			"/>
+                        </g>
+                    </pattern>
+                </defs>
+                <g id="background">
+                    <rect x="0.126" y="232.105" style="fill:#C7D3D3;" width="699.789" height="116.463"/>
+                    <rect style="fill:#F9D2D4;" width="699.789" height="232.358"/>
+                    <rect style="fill:url(#star_x5F_pattern);" width="699.789" height="232.358"/>
+                    <path style="fill:#E4A272;" d="M128.021,232.171l167.684,0.943c0.208,0.001,0.379,0.176,0.375,0.384
+                        c-0.528,26.119-32.964,37.765-47.111,44.207l-30.063,5.558c-17.684,0-22.358-0.884-29.811-2.147
+                        c-21.496-1.886-61.257-22.411-61.453-48.567C127.641,232.341,127.813,232.169,128.021,232.171z"/>
+                </g>
+                <g id="window" transform="matrix(1.33333,0,0,1.33333,0,0)">
+                    <g transform="matrix(7.21298,0,0,7.21298,-2549.81,-2762.39)">
+                        <g transform="matrix(1,0,0,1,-0.49489,10.5582)">
+                            <path style="fill-rule:evenodd;clip-rule:evenodd;fill:#C7B097;" d="M376.671,384.825c0-1.899,1.542-3.441,3.441-3.441
+                                s3.441,1.542,3.441,3.441v6.38h-6.881V384.825z"/>
+                        </g>
+                        <g transform="matrix(0.900106,0,0,0.90082,44.2938,58.3525)">
+                            <path style="fill-rule:evenodd;clip-rule:evenodd;fill:#3A3E46;" d="M369.129,374.363c0-1.899,1.542-3.441,3.441-3.441
+                                s3.441,1.542,3.441,3.441v6.38h-6.881V374.363z"/>
+                        </g>
+                        <path style="fill-rule:evenodd;clip-rule:evenodd;fill:#484851;" d="M382.743,396.141c0-1.899-1.542-3.441-3.441-3.441
+                            c-0.452,0-0.884,0.087-1.28,0.246c0.472-0.292,1.028-0.46,1.623-0.46c1.709,0,3.097,1.389,3.097,3.099V396.141z"/>
+                        <rect x="376.549" y="397.221" style="fill-rule:evenodd;clip-rule:evenodd;fill:#484851;" width="6.194" height="0.344"/>
+                        <g transform="matrix(1,0,0,1,75.5454,-815.541)">
+                            <path style="fill-rule:evenodd;clip-rule:evenodd;fill:#484851;" d="M307.015,1210.076c0.118,0.328,0.183,0.682,0.183,1.051
+                                v5.747h-0.344v-6.798H307.015z"/>
+                        </g>
+                        <g transform="matrix(1,0,0,1,75.5454,-815.541)">
+                            <path style="fill-rule:evenodd;clip-rule:evenodd;fill:#484851;" d="M303.789,1208.043v8.83h-0.344v-8.776
+                                C303.557,1208.073,303.672,1208.055,303.789,1208.043z"/>
+                        </g>
+                        <g transform="matrix(1.02273,0,0,0.666744,-10.0775,184.543)">
+                            <rect x="377.965" y="318.513" style="fill-rule:evenodd;clip-rule:evenodd;fill:#C7B097;" width="6.194" height="0.516"/>
+                        </g>
+                        <g transform="matrix(8.83144e-17,-1.44228,0.666744,4.08263e-17,137.936,1122.54)">                    
+                            <rect x="503.024" y="359" transform="matrix(-2.535182e-06 -1 1 -2.535182e-06 140.9235 865.3652)" style="fill-rule:evenodd;clip-rule:evenodd;fill:#C7B097;" width="0.239" height="6.3"/>
+                        </g>
+                    </g>
+                </g>
+            </svg>
         </div>
+
+        
+        <div class="password">
+            <textarea maxlength="6" class="pass-show"></textarea>
+            <button onclick="password(this,'number')">1</button>
+            <button onclick="password(this,'number')">2</button>
+            <button onclick="password(this,'number')">3</button>
+            <button onclick="password(this,'number')">4</button>
+            <button onclick="password(this,'number')">5</button>
+            <button onclick="password(this,'number')">6</button>
+            <button onclick="password(this,'number')">7</button>
+            <button onclick="password(this,'number')">8</button>
+            <button onclick="password(this,'number')">9</button>
+            <button onclick="password(this,'reset')" >重置</button>
+            <button onclick="password(this,'number')">0</button>
+            <button class="submit" onclick="password(this,'ok')">確認</button>
+        </div>
+        
 
         <div data-state="close" class="interaction">
 
         </div>    
-
     </div>
 
 
@@ -371,7 +163,7 @@
     </svg>
 
     <svg id="gift" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-        width="300.126px" height="279.893px" viewBox="0 0 300.126 279.893"
+        viewBox="0 0 300.126 279.893"
         style="overflow:visible;enable-background:new 0 0 300.126 279.893;" xml:space="preserve">
         <defs>
             <pattern x="-107.084" y="-90.181" width="70.561" height="91.442" patternUnits="userSpaceOnUse"
@@ -452,336 +244,6 @@
 
 </body>
 
-<script>
-
-    var option = {
-        messageDelay:120
-    }
-
-
-    async function sleep(ms) {
-        return new Promise(resolve => {
-            setTimeout(resolve, ms)
-        })
-    }
-
-    async function message(text) {
-        
-        return new Promise(resolve=>{
-            const dialog = document.querySelector(".dialog")
-            dialog.dataset.state = "running"
-            dialog.dataset.next = "false"
-            if (document.querySelector(".dialog > p")) {
-                document.querySelector(".dialog > p").remove()
-            }
-            var msg = document.createElement("p")
-            document.querySelector(".dialog").append(msg)
-            msg = document.querySelector(".dialog > p")
-            let t = []
-            for (let i = 0; i < text.length; i++) {
-                t[i] = document.createElement("span")
-                t[i].innerText = text[i]
-                t[i].className = "hideText"
-                msg.appendChild(t[i])
-            }
-
-            i = 0
-            const type = setInterval(function () {
-                if(dialog.dataset.state === "finish"){                    
-                    clearInterval(type)
-                    dialog.dataset.next = "true"                    
-                    dialog.querySelector("p").lastChild.scrollIntoView()
-                    return
-                }
-                if (i >= text.length) {
-                    clearInterval(type)
-                    dialog.dataset.state = "finish"
-                    dialog.dataset.next = "true"
-                    return
-                }
-                t[i].className = ""
-                t[i].scrollIntoView()
-                i = i + 1
-            }, option.messageDelay)
-
-            document.body.addEventListener("click",function myclick(){
-                if(dialog.dataset.next==="true"){
-                    document.body.removeEventListener("click",myclick)
-                    resolve()
-                }
-            })
-        })
-        
-        
-    }
-
-    function OpenGift() {
-        const ribbon = document.getElementById("ribbon")
-        const ribbon_rope = document.getElementById("ribbon_rope")
-        const gift_cover = document.getElementById("gift_cover")
-        ribbon.addEventListener("animationend", function ribbonAni(){
-            gift_cover.classList.add("ani-gift-cover")
-            ribbon.removeEventListener("animationend",ribbonAni)
-        })
-        ribbon_rope.addEventListener("animationend", function ribbon_ropeAni(){
-            ribbon.classList.add("ani-ribbon")
-            ribribbon_ropebon.removeEventListener("animationend",ribbon_ropeAni)
-        })
-        ribbon_rope.classList.add("ani-ribbon_rope")
-
-    }
-
-    const locker = document.getElementById("locker")
-    drag(locker)
-    function drag(element) {
-        const headTitle = document.head.querySelector("title")
-        let state = false,
-            beforeX = 0,
-            beforeY = 0,
-            originX = 0,
-            originY = 0,
-            x = 0,
-            y = 0,
-            boundX = 0,
-            boundY = 0
-
-        element.addEventListener("mousedown", e => {
-            const css = window.getComputedStyle(element)
-            if (css.position != "absolute" && css.position != "fixed") {
-                console.log("position needs absolute or fixed")
-                return
-            }
-            beforeX = e.x
-            beforeY = e.y
-            originX = parseInt(css.left)
-            originY = parseInt(css.top)
-            boundX = window.innerWidth
-            boundY = window.innerHeight
-            state = true
-
-        })
-
-        window.addEventListener("mouseup", e => {
-            state = false
-        })
-
-        window.addEventListener("mousemove", e => {
-
-            if (!state) { return }
-
-            x = originX + e.x - beforeX
-            y = originY + e.y - beforeY
-
-            if (x < 0) { x = 0 }
-            if (x > boundX) { x = boundX }
-            if (y < 0) { y = 0 }
-            if (y > boundY) { y = boundY }
-
-            element.style.left = `${x}px`
-            element.style.top = `${y}px`
-            headTitle.innerText = `${x}px : ${y}px`
-        })
-
-        element.addEventListener("touchstart", e => {
-            const css = window.getComputedStyle(element)
-            if (css.position != "absolute" && css.position != "fixed") {
-                console.log("position needs absolute or fixed")
-                return
-            }
-            beforeX = e.targetTouches[0].clientX
-            beforeY = e.targetTouches[0].clientY
-            originX = parseInt(css.left)
-            originY = parseInt(css.top)
-            boundX = window.innerWidth
-            boundY = window.innerHeight
-            state = true
-        })
-
-        window.addEventListener("touchend", e => {
-            state = false
-        })
-
-        window.addEventListener("touchmove", e => {
-
-            if (!state) { return }
-
-            x = originX + e.targetTouches[0].clientX - beforeX
-            y = originY + e.targetTouches[0].clientY - beforeY
-
-            if (x < 0) { x = 0 }
-            if (x > boundX) { x = boundX }
-            if (y < 0) { y = 0 }
-            if (y > boundY) { y = boundY }
-
-            element.style.left = `${x}px`
-            element.style.top = `${y}px`
-
-        })
-
-    }
-
-    document.body.addEventListener("click", e => {        
-        if(e.target.nodeName==="BUTTON" ||e.target.dataset.type==="button"){return}
-        const dialog = document.querySelector(".dialog")
-        if (dialog.dataset.state === "running") {
-            dialog.dataset.state = "finish"
-            return
-        }
-        if(dialog.dataset.state === "complete"){
-            dialog.dataset.state = ""
-        }
-    })
-
-    function interaction() {
-        const interaction = document.querySelector(".interaction")
-        state = interaction.dataset.state
-        interaction.addEventListener("trasitionend", function foo() {
-            if (state = "open") { return }
-            interaction.style.display = "none"
-            interaction.removeEventListener("trasitionend",foo())
-        })
-
-        if (state === "close") {
-            interaction.dataset.state = "open"
-        } else
-        if (state === "open") {
-            interaction.dataset.state = "close"
-        }
-
-    }   
-
-    // document.addEventListener("readystatechange",e=>{
-    //     console.log(e.target.readyState)
-    // })
-
-
-    async function chose(){
-        const choseFrame = document.querySelector(".dialog .chose")
-        choseFrame.dataset.show="true"
-        const yes = document.querySelector(".dialog .chose .yes")
-        const no = document.querySelector(".dialog .chose .no")
-        return new Promise(resolve=>{
-
-            yes.addEventListener("click",function foo(){
-                yes.removeEventListener("click",foo)
-                choseFrame.dataset.show=""
-                resolve("yes")
-            })
-            no.addEventListener("click",function foo(){
-                no.removeEventListener("click",foo)
-                choseFrame.dataset.show=""
-                resolve("no")
-            })
-
-        })
-
-
-    }
-
-    async function password(target,process){
-        const parent = target.parentElement
-        const textarea = parent.querySelector('textarea')
-        if(process==="number"){
-            if(textarea.value.length>=4){
-                textarea.childNodes[0].remove()
-            }
-            textarea.append(target.innerText) 
-            return
-        }
-        if(process==="reset"){
-            textarea.innerText = ""
-            return
-        }
-        if(process==="ok"){               
-
-        }               
-    }
-
-    async function getSerialNumber(){
-        const password = document.querySelector(".password")
-        const passShow = document.querySelector(".password .pass-show")
-        const submit = document.querySelector(".password .submit")        
-        show(password,"show")
-        return new Promise(resolve=>{
-            submit.addEventListener("click",async function submit_click(){                
-                if(passShow.value.length<4){
-                    passShow.innerText = ""
-                    message("請輸入4位數邀請碼！")
-                    return
-                }
-                submit.removeEventListener("click",submit_click)
-                show(password,"hide")
-                let pass = passShow.value
-                passShow.innerText = ""
-                message("驗證邀請碼中~")
-                var data = {
-                    pass
-                }
-                const url = 'https://script.google.com/macros/s/AKfycbxF4sCS7DVjTg2T0ZvUUpzbxL44sq86Zez5xZImyVd0dLHTRQJBh7c7EaNRf8ExjC69/exec'
-                fetch(url, {
-                    header:{
-                        "Content-Type": "application/json;charset=utf-8",
-                        },
-                    method: 'POST',
-                    body: JSON.stringify(data),
-                    })
-                    .then((response) =>  response.json())
-                    .then(text=>{
-                    return resolve(text)
-                })
-            })
-        })
-
-        
-    }
-
-    function show(targetElement,state="show"){     
-      
-        if(state==="show"){
-            interaction() 
-            targetElement.classList.add("show-item")
-        } else
-        if(state==="hide"){
-            interaction() 
-            targetElement.classList.remove("show-item")
-        } 
-    }
-    
-
-    ini()
-    async function ini() {
-        const dialog = document.querySelector(".dialog")      
-        state = dialog.dataset.state
-        await message("歡迎來到密室之尋寶遊戲！")
-        while(true){
-            await message("首先請先輸入您的邀請碼。")        
-
-            // const password = document.querySelector(".password")
-            // show(password,"show")
-            let get = await getSerialNumber()
-            console.log(get.serialNumber)
-            if(get.serialNumber==="wrong password"){
-                await message("您輸入的邀請碼錯誤。")   
-                await message("錯誤的邀請碼，將無法獲得通關獎品。")  
-                await message("是否要再輸入一次邀請碼？")  
-                let chose_result = await chose()
-                if(chose_result==="yes"){
-                    continue
-                }   
-            } else
-            if(get.serialNumber){
-                await message("驗證成功！")                
-            }
-            break
-        }
-
-        console.log("開始遊戲")
-        await message("開始遊戲")
-        dialog.dataset.state = ""
-
-    }
-    
-
-</script>
+<script src="indes.js"></script>
 
 </html>
