@@ -16,7 +16,7 @@
         -webkit-user-select: none;
         -ms-user-select: none;
         overscroll-behavior: none;
-
+        touch-action: none
     }
 
     header {
