@@ -390,6 +390,7 @@
 
     @media screen and (orientation: portrait) {
         body {
+            position: fixed;
             margin: 0;
             padding: 0;
             transform: translateX(100vw) rotate(90deg);
