@@ -59,8 +59,119 @@ svg:active #locker_toggle{
 }
 
 
-/* ================================ */
+
+
+
+
+
+/* ========================================================= */
+
+.stage .background #sofa{
+    position: absolute;
+    top: 53.22%;
+    left: 18.14%;
+    width: 21.17%;
+    z-index: 99;
+}
+
+/* ========================================================= */
+
+#switch{
+    position: absolute;
+    width: 2.64%;
+    height: 4.54%;
+    left: 21.96%;
+    top: 46.88%;
+    z-index: 99;
+}
+
+
+/* ========================================================= */
+
+#lamp{
+    position: absolute;
+    width: 6.42%;
+    height: 40.25%;
+    left: 39.33%;
+    top: 33.89%;
+    z-index: 10;
+}
+
+#clock{
+    position: absolute;
+    width: 3.89%;
+    height: 8.64%;
+    left: 77.89%;
+    top: 28.08%;
+    z-index: 10;
+}
+
+#closet{
+    position: absolute;
+    width: 13.54%;
+    height: 42.22%;
+    left: 3.13%;
+    top: 30.84%;
+    z-index: 10;
+}
+
+#bed{
+    position: absolute;
+    width: 24.79%;
+    height: 22.58%;
+    left: 67.10%;
+    top: 54.53%;
+    z-index: 10;
+}
+
+#plant{
+    position: absolute;
+    width: 5.19%;
+    height: 11.16%;
+    left: 76.81%;
+    top: 44.93%;
+    z-index: 10;
+}
 
 #safe_box{
-    display: none;
+    position: absolute;
+    width: 6.32%;
+    height: 14.12%;
+    left: 52.8%;
+    top: 58.91%;
+    z-index: 11;
+}
+
+#border{
+    position: absolute;
+    width: 11.38%;
+    height: 19.23%;
+    left: 51.12%;
+    top: 24.89%;
+    z-index: 10;
+}
+
+#table{
+    position: absolute;
+    width: 19.10%;
+    height: 28.40%;
+    left: 46.3%;
+    top: 45.04%;
+    z-index: 10;
+}
+
+#pancel{
+    position: absolute;
+    width: 0.29%;
+    height: 4.23%;
+    left: 49.52%;
+    top: 45.73%;
+    z-index: 11;
+}
+
+.interaction .actor{
+    max-width: 100%;
+    max-height: 100%;
+    padding: 40px;
+    box-sizing: border-box;
 }

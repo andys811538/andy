@@ -2,7 +2,8 @@
 
 
 var option = {
-    messageDelay:120
+    messageDelay:120,
+    dialogClick:true
 }
 
 
@@ -79,9 +80,9 @@ function OpenGift() {
 }
 
 const locker = document.getElementById("locker")
-drag(locker)
+// drag(locker)
 function drag(element) {
-    const headTitle = document.head.querySelector("title")
+
     let state = false,
         beforeX = 0,
         beforeY = 0,
@@ -93,23 +94,34 @@ function drag(element) {
         boundY = 0
 
     element.addEventListener("mousedown", e => {
-        const css = window.getComputedStyle(element)
+        element.style.position = "fixed"
+        
+        const css = window.getComputedStyle(element)        
         if (css.position != "absolute" && css.position != "fixed") {
             console.log("position needs absolute or fixed")
             return
         }
+        if(element.dataset.drag!="true"){return}
+
+
         beforeX = e.x
         beforeY = e.y
         originX = parseInt(css.left)
         originY = parseInt(css.top)
         boundX = window.innerWidth
         boundY = window.innerHeight
+        console.log(1)
+
         state = true
 
     })
 
     window.addEventListener("mouseup", e => {
         state = false
+        element.style.position = null
+        element.style.top = null
+        element.style.left = null
+        element.style.transform = null
     })
 
     window.addEventListener("mousemove", e => {
@@ -126,26 +138,35 @@ function drag(element) {
 
         element.style.left = `${x}px`
         element.style.top = `${y}px`
-        headTitle.innerText = `${x}px : ${y}px`
     })
 
     element.addEventListener("touchstart", e => {
+        element.style.position = "fixed"
         const css = window.getComputedStyle(element)
         if (css.position != "absolute" && css.position != "fixed") {
             console.log("position needs absolute or fixed")
             return
         }
+        if(element.dataset.drag!="true"){return}
+        
+
         beforeX = e.targetTouches[0].clientX
         beforeY = e.targetTouches[0].clientY
         originX = parseInt(css.left)
         originY = parseInt(css.top)
         boundX = window.innerWidth
         boundY = window.innerHeight
+
+        
         state = true
     })
 
     window.addEventListener("touchend", e => {
         state = false
+        element.style.position = null
+        element.style.top = null
+        element.style.left = null
+        element.style.transform = null
     })
 
     window.addEventListener("touchmove", e => {
@@ -167,8 +188,12 @@ function drag(element) {
 
 }
 
-document.body.addEventListener("click", e => {        
-    if(e.target.nodeName==="BUTTON" ||e.target.dataset.type==="button"){return}
+document.body.addEventListener("click", e => {
+    if(
+        e.target.nodeName==="BUTTON"||
+        e.target.dataset.type==="button"||
+        option.dialogClick===false){return}
+    option.dialogClick=true
     const dialog = document.querySelector(".dialog")
     if (dialog.dataset.state === "running") {
         dialog.dataset.state = "finish"
@@ -182,20 +207,29 @@ document.body.addEventListener("click", e => {
 function interaction() {
     const interaction = document.querySelector(".interaction")
     state = interaction.dataset.state
-    interaction.addEventListener("trasitionend", function foo() {
-        if (state = "open") { return }
-        interaction.style.display = "none"
-        interaction.removeEventListener("trasitionend",foo())
+    interaction.addEventListener("transitionend", function foo(e) {
+        interaction.removeEventListener("transitionend",foo)
+        if (state === "close") { return }
+        if( state === "open"){
+            interaction.style.display = "none"
+            if(document.querySelector("#copy-element")){
+                document.querySelector("#copy-element").remove()
+            }
+        }
+       
     })
 
     if (state === "close") {
         interaction.dataset.state = "open"
+        interaction.removeAttribute("style")
     } else
     if (state === "open") {
-        interaction.dataset.state = "close"
+        interaction.dataset.state = "close"        
     }
 
 }   
+
+
 
 // document.addEventListener("readystatechange",e=>{
 //     console.log(e.target.readyState)
@@ -284,28 +318,82 @@ async function getSerialNumber(){
 
 function show(targetElement,state="show"){     
     const inter = document.querySelector(".interaction")
-    const stage = document.querySelector(".stage")
+    const stage_background = document.querySelector(".stage .background")
     if(state==="show"){
         interaction() 
         inter.append(targetElement)
     } else
     if(state==="hide"){
         interaction() 
-        stage.append(targetElement)
+        stage_background.append(targetElement)
     } 
 }
 
+function copy(targetElement){
+    const inter = document.querySelector(".interaction")
+    const copyElement = targetElement.cloneNode(true)
+    copyElement.id = "copy-element"
+    inter.dataset.content = targetElement.id
+    inter.append(copyElement)
 
+}
+
+function addActor(){    
+
+    const actor = [
+        ["sofa","這是沙發。","你累了嗎？"],
+        ["lamp","這是檯燈"],
+        ["clock","這是時鐘"],
+        ["closet","這是櫥櫃"],
+        ["bed","這是床"],
+        ["plant","這是植物"],
+        ["safe_box","這是保險箱"],
+        ["border","這是布告欄"],
+        ["table","這是桌子"],
+        ["pancel","這是鉛筆"],
+        ["switch","這是開關"],
+    ]
+        
+    actor.forEach(i=>{
+        const target = document.getElementById(i[0])
+        target.addEventListener("click",async()=>{
+            if(document.querySelector("#copy-element")){return}    
+            option.dialogClick=false
+            const dialog = document.querySelector(".dialog")   
+            const close_btn = document.querySelector(".interaction .close_btn")
+            close_btn.classList.add("disable")
+            interaction()
+            copy(target)
+            for(let j = 1; j<i.length; j++){
+                await message(i[j])
+            }
+            close_btn.classList.remove("disable")
+            dialog.dataset.state = ""
+        })
+    })
+
+} 
+
+
+addActor()
 ini()
 async function ini() {
+
+    const close_btn = document.querySelector(".interaction .close_btn")    
     const stage = document.querySelector(".stage")
-    stage.scroll((stage.scrollWidth-stage.clientWidth)/2,0)
+    const stage_background = document.querySelector(".stage .background")
     const dialog = document.querySelector(".dialog")      
+    const switcher = document.getElementById("switch")
+    const toolBox = document.querySelector("footer .toolBox")
+    stage.scroll((stage.scrollWidth-stage.clientWidth)/2,0)
+    stage_background.classList.add("dark")
+    toolBox.style.display = "none"
     // let state = dialog.dataset.state
     await message("歡迎來到密室之尋寶遊戲！")
     while(true){
         await message("請先輸入您的邀請碼。")        
 
+        close_btn.classList.add("disable")
 
         let get = await getSerialNumber()
         console.log(get.serialNumber)
@@ -324,8 +412,21 @@ async function ini() {
         break
     }
 
-    console.log("開始遊戲")
-    await message("開始遊戲")
-    dialog.dataset.state = ""
+    await message("進入教學")
+    toolBox.removeAttribute("style")
+    copy(switcher)
+    interaction()
+    close_btn.classList.add("disable")
+    await message("這是一個開關")
+    await message("房間似乎有點暗。")
+    await message("請拖曳左下角的手掌工具，來打開開關。")
+    
 
+
+    close_btn.classList.remove("disable")
+    dialog.dataset.state = ""
+    stage_background.classList.remove("dark")
 }
+
+const hand = document.getElementById("hand")
+drag(hand)

@@ -12,6 +12,9 @@
         height: 100vh;
         background-color: rgb(237, 215, 215);
         user-select: none;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
     }
 
     header {
@@ -35,8 +38,11 @@
         padding: 35px 70px;
         height: 90%;
         max-height: 90%;
-        background-color: hsla(0, 0%, 90%, .2);
-        border: 4px rgba(51, 51, 51, 0.543) solid;
+        background-color: hsla(0, 0%, 20%, .6);
+        color: #eee;
+        font-weight: bold;
+        backdrop-filter: blur(2px);
+        border: 2px #ddd solid;
         border-radius: 15px;
         box-shadow:
             -5px 5px 10px hsla(0, 0%, 10%, .3),
@@ -57,7 +63,7 @@
 
     header .dialog p {
         position: relative;
-        height: 4.5ch;     
+        height: 5ch;     
         overflow-y: scroll;
         margin-left: 5px;
         font-size: 22px;
@@ -80,11 +86,11 @@
         padding: 5px 10px;
     }
     header .dialog svg{
-        fill: hsl(195,70%,20%);
+        fill: rgb(196, 230, 243);
     }
     @keyframes next-left-ani {
-        from{fill: hsl(195,70%,20%);}
-        to{fill: hsl(195,50%,40%);}
+        from{fill: rgb(196, 230, 243);}
+        to{fill: rgb(58, 71, 80);}
     }
 
     header .dialog #next_left{
@@ -158,6 +164,63 @@
         transform: translateX(5px);
     }
 
+    footer{
+        position: fixed;
+        bottom: 25px;
+        left: 0;
+        height: 80px;
+        width: 100vw;
+        background-color: transparent;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        justify-content: left;
+        pointer-events: none;
+    }
+
+    footer .toolBox{        
+        position: relative;
+        height: inherit;
+        width: 100%;
+        display: flex;
+        justify-content: start;
+        align-items: center;
+    }
+
+    footer .toolBox .item{
+        position: absolute;
+        width: 60px;
+        height: 60px;
+        background-color: hsla(0, 0%, 20%, .6);
+        border: #ddd 2px solid;
+        border-radius: 10px;
+        box-sizing: border-box;
+        box-shadow: 
+            5px 5px 10px hsla(0, 0%, 10%, .3),
+            -5px -5px 10px hsla(0, 0%, 90%, .1);
+        pointer-events: all;
+    }
+
+    footer .toolBox .item > * {
+        position: fixed;
+        max-width: 60px;
+        max-height: 60px;
+        padding: 7px;
+        box-sizing: border-box;        
+    }
+
+    footer .toolBox .item:nth-child(1){
+        left: 40px;
+    }
+    footer .toolBox .item:nth-child(2){
+        left: 140px;
+    }
+    footer .toolBox .item:nth-child(3){
+        right: 140px;
+    }
+    footer .toolBox .item:nth-child(4){
+        right: 40px;
+    }
 
 
     div.stage {
@@ -170,7 +233,7 @@
         overflow-y: hidden;
     }
     div.stage::-webkit-scrollbar{
-        height: 15px;
+        height: 25px;
     }
     div.stage::-webkit-scrollbar-track{
         background-color: #666;
@@ -180,6 +243,7 @@
         border-radius: 15px;
     }
     div.stage .background{
+        position: relative;
         margin: auto;
         transform: translateY(1px);        
         height: 100vh;
@@ -192,10 +256,11 @@
         top: 100px;
         left: 50%;
         transform: translate(-50%, 0px);
-        width: calc(100vh - 120px);
-        height: calc(100vh - 120px);
+        width: calc(100vh - 150px);
+        height: calc(100vh - 150px);
         /* border: 3px solid #222; */
-        background-color: rgb(255, 255, 255);
+        background-color: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(3px);
         border-radius: 15px;
         box-shadow:
             -10px -10px 20px hsla(0, 0%, 10%, .3),
@@ -205,6 +270,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        font-size: calc(100vh - 120px);
     }
 
     .interaction[data-state="close"] {
@@ -215,7 +281,20 @@
         opacity: 1;
     }
 
-    .stage > .password{
+    .interaction .close_btn{
+        position: absolute;
+        top: -85%;
+        right: 1%;
+        width: 10%;
+        height: 10%;
+        fill: hsl(0, 50%, 50%);
+    }
+
+    .interaction .close_btn:hover{
+        fill: hsl(0, 70%, 60%)
+    }
+
+    .stage .background .password{
         display: none;
     }
 
@@ -230,28 +309,26 @@
         grid-template-rows: repeat(4, 1fr);
         grid-gap: 3%;
         border-radius: 5% / 3.4%;
+        font-size: 63%;
     }
 
     .password .pass-show {
-        all: initial;   
+        all: initial;
         width: 100%;
-        /* height: 70px; */
         overflow: hidden;
         background-color: #666;
         border-radius: 15px;
         grid-column: 1 / 4;
         grid-row: 1 / 2;
-        font-size: 10vmin;
+        font-size: 25%;
         font-family: 'Courier New', Courier, monospace;
         font-weight: bold;
         text-align: center;
         color: white;
         pointer-events: none;
-        line-height: 100%;
-    }
-
-    .pass-show:invalid{
-        background-color: rgb(216, 63, 63);
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .pass-show::selection{
@@ -268,7 +345,7 @@
         border-radius: 5px;
         background-color: #333;
         color: #ddd;
-        font-size: 3vmin;
+        font-size: 8%;
         font-weight: bold;
         box-shadow:
             5px 5px 10px hsla(0, 0%, 10%, .5),
@@ -300,7 +377,12 @@
     }
 
     .disable{
-        filter: brightness(70%) opacity(.7);
+        filter: brightness(60%) opacity(.7);
+        pointer-events: none;
+    }
+
+    .dark{
+        filter: brightness(20%) blur(2px);
         pointer-events: none;
     }
 
@@ -323,6 +405,11 @@
             height: 80px;
         }
 
+        footer{
+            width: 100vh;
+        }
+
+
         div.stage {
             height: 100vw;
             width: 100vh;
@@ -341,6 +428,11 @@
         .interaction {
             width: calc(100vw - 120px);
             height: calc(100vw - 120px);
+        }
+
+        .interaction .close_btn{
+            top: -127%;
+            right: 1%;
         }
 
     }
