@@ -15,7 +15,6 @@
         -moz-user-select: none;
         -webkit-user-select: none;
         -ms-user-select: none;
-        overscroll-behavior: none;
         touch-action: none
     }
 
@@ -251,6 +250,7 @@
         height: 100vh;
         width: 200vh;
         max-width: 200vh;
+        transition: all .7s;
     }
 
     .interaction {

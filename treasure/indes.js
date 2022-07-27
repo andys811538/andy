@@ -426,6 +426,7 @@ async function ini() {
     close_btn.classList.remove("disable")
     dialog.dataset.state = ""
     stage_background.classList.remove("dark")
+    interaction()
 }
 
 const hand = document.getElementById("hand")
