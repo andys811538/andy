@@ -3,12 +3,12 @@
 
 <head>
     <meta charset="UTF-8">
-    <eta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Treasure</title>
     <link rel="stylesheet" href="index.css">
     <link rel="stylesheet" href="ui.css">
-    <link rel="manifest" href="manifest.json"/>
+    <link rel="manifest" href="/manifest.json" />
 </head>
 
 
@@ -1048,7 +1048,7 @@
                 </g>
             </svg>
 
-            <svg class="actor" id="switch" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+            <svg class="actor turn-off" id="switch" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                 x="0px" y="0px" viewBox="0 0 20.063 16.149"
                 style="overflow:visible;enable-background:new 0 0 20.063 16.149;" xml:space="preserve">
                 <defs>
@@ -1061,13 +1061,11 @@
                     </a>
                     <rect x="3.819" y="3.588" style="fill:#3E3A39;" width="12.314" height="8.972" />
                     <rect x="4.073" y="3.841" style="fill:#B5B5B6;" width="11.862" height="8.444" />
-                    <path id="off_1_" style="display:none;fill:#EFEFEF;" d="M15.939,12.33H4.041V7.527c0-1.574,1.276-2.85,2.85-2.85h6.353
+                    <path id="off" d="M15.939,12.33H4.041V7.527c0-1.574,1.276-2.85,2.85-2.85h6.353
             c1.489,0,2.696,1.207,2.696,2.696V12.33z" />
-                    <path id="on_1_" style="fill:#EFEFEF;"
-                        d="M13.747,11.494H6.231c-1.192,0-2.158-0.966-2.158-2.158V4
+                    <path id="on" d="M13.747,11.494H6.231c-1.192,0-2.158-0.966-2.158-2.158V4
             c0-0.088,0.071-0.159,0.159-0.159h11.581c0.088,0,0.159,0.071,0.159,0.159v5.269C15.972,10.498,14.975,11.494,13.747,11.494z" />
-                    <path id="light_1_" style="fill:#34B078;"
-                        d="M11.659,5.505H8.404c-0.095,0-0.172-0.077-0.172-0.172V5.069
+                    <path id="light" d="M11.659,5.505H8.404c-0.095,0-0.172-0.077-0.172-0.172V5.069
             c0-0.095,0.077-0.172,0.172-0.172h3.256c0.095,0,0.172,0.077,0.172,0.172v0.264C11.831,5.428,11.754,5.505,11.659,5.505z" />
                 </g>
             </svg>
@@ -2659,13 +2657,8 @@
 
 
         <div data-state="close" style="display: none;" class="interaction">
-            <span onclick="interaction()" class="close_btn">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                    <!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
-                    <path
-                        d="M0 256C0 114.6 114.6 0 256 0C397.4 0 512 114.6 512 256C512 397.4 397.4 512 256 512C114.6 512 0 397.4 0 256zM175 208.1L222.1 255.1L175 303C165.7 312.4 165.7 327.6 175 336.1C184.4 346.3 199.6 346.3 208.1 336.1L255.1 289.9L303 336.1C312.4 346.3 327.6 346.3 336.1 336.1C346.3 327.6 346.3 312.4 336.1 303L289.9 255.1L336.1 208.1C346.3 199.6 346.3 184.4 336.1 175C327.6 165.7 312.4 165.7 303 175L255.1 222.1L208.1 175C199.6 165.7 184.4 165.7 175 175C165.7 184.4 165.7 199.6 175 208.1V208.1z" />
-                </svg>
-            </span>
+            <div onclick="interaction()" class="close_frame">                
+            </div>
         </div>
     </div>
 
@@ -2673,7 +2666,7 @@
     <footer>
         <div class="toolBox">
             <div class="item">
-                <svg id="hand" data-drag="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="fill: #f3ad7a;"><!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M480 128v208c0 97.05-78.95 176-176 176h-37.72c-53.42 0-103.7-20.8-141.4-58.58l-113.1-113.1C3.906 332.5 0 322.2 0 312C0 290.7 17.15 272 40 272c10.23 0 20.47 3.906 28.28 11.72L128 343.4V64c0-17.67 14.33-32 32-32s32 14.33 32 32l.0729 176C192.1 248.8 199.2 256 208 256s16.07-7.164 16.07-16L224 32c0-17.67 14.33-32 32-32s32 14.33 32 32l.0484 208c0 8.836 7.111 16 15.95 16S320 248.8 320 240L320 64c0-17.67 14.33-32 32-32s32 14.33 32 32l.0729 176c0 8.836 7.091 16 15.93 16S416 248.8 416 240V128c0-17.67 14.33-32 32-32S480 110.3 480 128z"/></svg>
+                <svg id="hand" data-drag="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="fill: #f3ad7a"><!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path style="pointer-events: none;" d="M480 128v208c0 97.05-78.95 176-176 176h-37.72c-53.42 0-103.7-20.8-141.4-58.58l-113.1-113.1C3.906 332.5 0 322.2 0 312C0 290.7 17.15 272 40 272c10.23 0 20.47 3.906 28.28 11.72L128 343.4V64c0-17.67 14.33-32 32-32s32 14.33 32 32l.0729 176C192.1 248.8 199.2 256 208 256s16.07-7.164 16.07-16L224 32c0-17.67 14.33-32 32-32s32 14.33 32 32l.0484 208c0 8.836 7.111 16 15.95 16S320 248.8 320 240L320 64c0-17.67 14.33-32 32-32s32 14.33 32 32l.0729 176c0 8.836 7.091 16 15.93 16S416 248.8 416 240V128c0-17.67 14.33-32 32-32S480 110.3 480 128z"/></svg>
             </div>
             <div class="item"></div>
             <div class="item"></div>

@@ -75,6 +75,9 @@ svg:active #locker_toggle{
 }
 
 /* ========================================================= */
+.actor{
+    transition: all 3s;
+}
 
 #switch{
     position: absolute;
@@ -82,7 +85,31 @@ svg:active #locker_toggle{
     height: 4.54%;
     left: 21.96%;
     top: 46.88%;
-    z-index: 99;
+    z-index: 99;    
+}
+
+ #light{
+    fill:#34B078
+}
+ #on{
+    opacity: 1;
+    fill:#EFEFEF
+}
+ #off{
+    opacity:0;
+    fill:#EFEFEF
+}
+
+.turn-off #light{
+    fill:hsl(0,70%,60%)
+}
+.turn-off  #on{
+    opacity: 0;
+    fill:#EFEFEF
+}
+.turn-off  #off{
+    opacity:1;
+    fill:#EFEFEF
 }
 
 

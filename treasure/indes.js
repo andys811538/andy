@@ -1,10 +1,27 @@
-
+window.onload = function(){
+    setTimeout(function(){
+        document.body.requestFullscreen()
+    },1000)
+    
+}
 
 
 var option = {
     messageDelay:120,
-    dialogClick:true
+    dialogClick:true,
+    currentTool:"",    
 }
+
+var answer = {
+    hand:{
+        question:"switch",
+        result:function(){
+            const copyElement = document.querySelector("#copy-element")            
+            copyElement.classList.toggle("turn-off")
+        }
+    }
+}
+
 
 
 async function sleep(ms) {
@@ -95,7 +112,7 @@ function drag(element) {
 
     element.addEventListener("mousedown", e => {
         element.style.position = "fixed"
-        
+        element.style.pointerEvents = "none"
         const css = window.getComputedStyle(element)        
         if (css.position != "absolute" && css.position != "fixed") {
             console.log("position needs absolute or fixed")
@@ -110,8 +127,7 @@ function drag(element) {
         originY = parseInt(css.top)
         boundX = window.innerWidth
         boundY = window.innerHeight
-        console.log(1)
-
+        option.currentTool=e.target.id
         state = true
 
     })
@@ -122,6 +138,8 @@ function drag(element) {
         element.style.top = null
         element.style.left = null
         element.style.transform = null
+        element.style.pointerEvents = null
+        option.currentTool=null
     })
 
     window.addEventListener("mousemove", e => {
@@ -131,24 +149,20 @@ function drag(element) {
         x = originX + e.x - beforeX
         y = originY + e.y - beforeY
 
-        if (x < 0) { x = 0 }
-        if (x > boundX) { x = boundX }
-        if (y < 0) { y = 0 }
-        if (y > boundY) { y = boundY }
-
         element.style.left = `${x}px`
         element.style.top = `${y}px`
     })
 
     element.addEventListener("touchstart", e => {
+
         element.style.position = "fixed"
+        element.style.pointerEvents = "none"
         const css = window.getComputedStyle(element)
         if (css.position != "absolute" && css.position != "fixed") {
             console.log("position needs absolute or fixed")
             return
         }
-        if(element.dataset.drag!="true"){return}
-        
+        if(element.dataset.drag!="true"){return}        
 
         beforeX = e.targetTouches[0].clientX
         beforeY = e.targetTouches[0].clientY
@@ -156,9 +170,9 @@ function drag(element) {
         originY = parseInt(css.top)
         boundX = window.innerWidth
         boundY = window.innerHeight
-
-        
+        option.currentTool=e.target.id
         state = true
+        
     })
 
     window.addEventListener("touchend", e => {
@@ -167,22 +181,27 @@ function drag(element) {
         element.style.top = null
         element.style.left = null
         element.style.transform = null
+        option.currentTool = null
+        element.style.pointerEvents = null
     })
 
-    window.addEventListener("touchmove", e => {
-
+    window.addEventListener("pointermove", e => {
         if (!state) { return }
 
-        x = originX + e.targetTouches[0].clientX - beforeX
-        y = originY + e.targetTouches[0].clientY - beforeY
+        if(window.innerWidth>window.innerHeight){
+            x = originX + e.x - beforeX
+            y = originY + e.y- beforeY
+        }
+        if(window.innerWidth<window.innerHeight){
+            x = originX + (e.y - beforeY)
+            y = originY - (e.x - beforeX)
+        }
 
-        if (x < 0) { x = 0 }
-        if (x > boundX) { x = boundX }
-        if (y < 0) { y = 0 }
-        if (y > boundY) { y = boundY }
-
+        
         element.style.left = `${x}px`
         element.style.top = `${y}px`
+
+
 
     })
 
@@ -226,7 +245,6 @@ function interaction() {
     if (state === "open") {
         interaction.dataset.state = "close"        
     }
-
 }   
 
 
@@ -335,11 +353,9 @@ function copy(targetElement){
     copyElement.id = "copy-element"
     inter.dataset.content = targetElement.id
     inter.append(copyElement)
-
 }
 
 function addActor(){    
-
     const actor = [
         ["sofa","這是沙發。","你累了嗎？"],
         ["lamp","這是檯燈"],
@@ -354,21 +370,19 @@ function addActor(){
         ["switch","這是開關"],
     ]
         
-    actor.forEach(i=>{
+    actor.forEach(i=>{        
         const target = document.getElementById(i[0])
-        target.addEventListener("click",async()=>{
+        target.addEventListener("click",async()=>{            
             if(document.querySelector("#copy-element")){return}    
             option.dialogClick=false
             const dialog = document.querySelector(".dialog")   
-            const close_btn = document.querySelector(".interaction .close_btn")
-            close_btn.classList.add("disable")
             interaction()
             copy(target)
             for(let j = 1; j<i.length; j++){
                 await message(i[j])
             }
-            close_btn.classList.remove("disable")
-            dialog.dataset.state = ""
+
+            dialog.dataset.state = ""            
         })
     })
 
@@ -379,12 +393,13 @@ addActor()
 ini()
 async function ini() {
 
-    const close_btn = document.querySelector(".interaction .close_btn")    
+   
     const stage = document.querySelector(".stage")
     const stage_background = document.querySelector(".stage .background")
     const dialog = document.querySelector(".dialog")      
     const switcher = document.getElementById("switch")
     const toolBox = document.querySelector("footer .toolBox")
+
     stage.scroll((stage.scrollWidth-stage.clientWidth)/2,0)
     stage_background.classList.add("dark")
     toolBox.style.display = "none"
@@ -393,7 +408,7 @@ async function ini() {
     while(true){
         await message("請先輸入您的邀請碼。")        
 
-        close_btn.classList.add("disable")
+
 
         let get = await getSerialNumber()
         console.log(get.serialNumber)
@@ -416,14 +431,13 @@ async function ini() {
     toolBox.removeAttribute("style")
     copy(switcher)
     interaction()
-    close_btn.classList.add("disable")
+
     await message("這是一個開關")
     await message("房間似乎有點暗。")
     await message("請拖曳左下角的手掌工具，來打開開關。")
     
 
 
-    close_btn.classList.remove("disable")
     dialog.dataset.state = ""
     stage_background.classList.remove("dark")
     interaction()
@@ -431,3 +445,23 @@ async function ini() {
 
 const hand = document.getElementById("hand")
 drag(hand)
+
+
+
+const inter = document.querySelector(".interaction")
+window.addEventListener("pointermove",e=>{
+    if(!option.currentTool){return}   
+    if(!e.target.classList.contains("interaction")){
+        inter.style.outline = null
+        return
+    }   
+    inter.style.outline = "hsl(200,70%,60%) 3px solid"    
+})
+window.addEventListener("pointerup",function foo(){
+    inter.style.outline = null
+    if(!answer[option.currentTool]){return}
+    if(answer[option.currentTool].question===inter.dataset.content){
+        answer[option.currentTool].result()
+    }    
+})
+
