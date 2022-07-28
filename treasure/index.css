@@ -59,10 +59,44 @@ svg:active #locker_toggle{
 }
 
 
+@keyframes shine {
+    0%{        
+        transform: scale(1);
+    }
+    100%{
+        transform: scale(1.2);
+    }
+}
+.shine-finger{
+    animation: shine .3s 4 linear;    
+}
 
+@keyframes ani-index_finger {
+    from{
+        opacity: 1;
+        transform: translate(30%,40%);
+    }
+    to{     
+        opacity: .5;
+        transform: translate(calc(30% + 50vmax - 70px),calc(40% - 50vmin + 75px));
+    }
+}
+.move-finger{
+    animation: ani-index_finger 2s infinite .5s;   
+    
+}
 
-
-
+#index_finger{
+    opacity: 0;
+    display: none;
+    position: fixed;
+	fill:#efefefc1;
+	stroke:#3E3A39;
+	stroke-width:4;
+	stroke-miterlimit:10;
+    transform: translate(30%,40%);   
+    pointer-events: none; 
+}
 
 /* ========================================================= */
 

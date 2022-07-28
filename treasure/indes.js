@@ -17,7 +17,7 @@ function detectClass(className){
 
 
 var option = {
-    messageDelay:40,
+    messageDelay:90,
     dialogClick:true,
     dialogPause:false,
     currentTool:"",    
@@ -367,6 +367,23 @@ function show(targetElement,state="show"){
     } 
 }
 
+function tutorialAni(state){
+    
+    const finger = document.getElementById("index_finger")
+    const hand = document.getElementById("hand")   
+    if(state==="go"){
+        hand.classList.add("shine-finger")
+        hand.onanimationend = function(){        
+            finger.style.display = "block"
+            finger.classList.add("move-finger")
+        }
+    }
+    if(state==="stop"){
+        hand.classList.remove("shine-finger")
+        finger.classList.remove("move-finger")
+    }
+}
+
 function copy(targetElement){
     const inter = document.querySelector(".interaction")
     const copyElement = targetElement.cloneNode(true)
@@ -416,8 +433,31 @@ function addActor(){
 } 
 
 
-addActor()
-ini()
+function toolBox(){
+    const hand = document.getElementById("hand")
+    drag(hand)
+}
+
+function solveQuestion(){
+    const inter = document.querySelector(".interaction")
+    window.addEventListener("pointermove",e=>{
+        if(!option.currentTool){return}  
+        if(!e.target.classList.contains("interaction")){
+            inter.style.outline = null
+            return
+        }   
+        inter.style.outline = "hsl(200,70%,60%) 3px solid"    
+    })
+    inter.addEventListener("pointerup",function foo(e){        
+        inter.style.outline = null
+        if(!answer[option.currentTool]){return}
+        if(answer[option.currentTool].question===inter.dataset.content){
+            answer[option.currentTool].result()
+        }    
+    })
+}
+
+
 async function ini() {
 
    
@@ -464,8 +504,9 @@ async function ini() {
     await message("房間似乎有點暗。")
     option.dialogPause = true
     toolBox.removeAttribute("style")  
+    tutorialAni("go")
     await message("請拖曳左下角的手掌工具，來打開開關。") 
-    
+    tutorialAni("stop")
     await message("恩～似乎明亮了許多！")
     await message("這個房間藏有一個寶物，接下來請用您過人的腦袋找到他吧！")
     
@@ -475,25 +516,26 @@ async function ini() {
     stage_background.classList.remove("disable")
 }
 
-const hand = document.getElementById("hand")
-drag(hand)
+
+function startScenes(){
+    const start  = document.querySelector(".start")
+    const stage = document.querySelector(".stage")
+    const header = document.querySelector("header")
+    const footer = document.querySelector("footer")    
+    const elements = [stage,header,footer]
+    elements.forEach(elemenet=>{
+        elemenet.style.display = "none"
+    })
+    start.style.display = "block"
+
+}
 
 
+// startScenes()
+addActor()
+toolBox()
+solveQuestion()
+ini()
 
-const inter = document.querySelector(".interaction")
-window.addEventListener("pointermove",e=>{
-    if(!option.currentTool){return}  
-    if(!e.target.classList.contains("interaction")){
-        inter.style.outline = null
-        return
-    }   
-    inter.style.outline = "hsl(200,70%,60%) 3px solid"    
-})
-inter.addEventListener("pointerup",function foo(e){        
-    inter.style.outline = null
-    if(!answer[option.currentTool]){return}
-    if(answer[option.currentTool].question===inter.dataset.content){
-        answer[option.currentTool].result()
-    }    
-})
+
 
