@@ -527,11 +527,26 @@ function startScenes(){
         elemenet.style.display = "none"
     })
     start.style.display = "block"
-
+    start.onclick = function(){
+        var elem = document.documentElement;
+        if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+        } else if (elem.msRequestFullscreen) {
+        elem.msRequestFullscreen();
+        } else if (elem.mozRequestFullScreen) {
+        elem.mozRequestFullScreen();
+        } else if (elem.webkitRequestFullscreen) {
+        elem.webkitRequestFullscreen();
+        }
+        start.style= null
+        elements.forEach(elemenet=>{
+            elemenet.style = null
+        })        
+    }
 }
 
 
-// startScenes()
+startScenes()
 addActor()
 toolBox()
 solveQuestion()

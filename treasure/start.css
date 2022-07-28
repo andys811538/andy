@@ -1,7 +1,28 @@
+@keyframes back-move {
+    0%{background-position:0% 0%}
+    25%{background-position:0% 100%}
+    50%{background-position:100% 100%}
+    75%{background-position:100% 0%}
+    100%{background-position:0% 0%}
+}
+
 .start{
     display: none;
     width: 100vmax;
     height: 100vmin;
-    background-color: aliceblue;
+    background:
+            linear-gradient(150deg, hsla(210, 80%, 70%,0.8),hsla(150, 80%, 70%,0) 70%),
+            linear-gradient(310deg, hsla(360, 80%, 70%,0.8),hsla(320, 80%, 70%,0) 70%),
+            linear-gradient(26deg, hsla(50, 80%, 70%,0.8),hsla(120, 80%, 70%,0) 70%);
+    background-repeat: no-repeat;
+    background-size: 130% 120%;
+    background-attachment: fixed;
+    animation: back-move 3s linear infinite;
+    font-size: 14vmax;
+    text-align: center;
+    line-height: 100vmin;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    color: #222;
 }
 
