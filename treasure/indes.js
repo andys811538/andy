@@ -1,14 +1,25 @@
-window.onload = function(){
-    setTimeout(function(){
-        document.body.requestFullscreen()
-    },1000)
-    
+// const open = document.getElementById("open")
+// open.onclick = function(){
+//     document.documentElement.requestFullscreen()
+// }
+
+function detectClass(className){
+    return new Promise((resolve) => {
+        setInterval(function(){
+            // if(!document.getElementById("copy-element")){return}
+            if(document.getElementById("copy-element").classList.contains(className)){
+                resolve("123")
+                return
+            }
+        },50)
+    })
 }
 
 
 var option = {
-    messageDelay:120,
+    messageDelay:40,
     dialogClick:true,
+    dialogPause:false,
     currentTool:"",    
 }
 
@@ -16,8 +27,13 @@ var answer = {
     hand:{
         question:"switch",
         result:function(){
-            const copyElement = document.querySelector("#copy-element")            
+            const copyElement = document.querySelector("#copy-element") 
+            const stage_background = document.querySelector(".stage .background")           
             copyElement.classList.toggle("turn-off")
+            document.getElementById("switch")
+            .classList.toggle("turn-off")
+            stage_background.classList.toggle("dark")
+            option.dialogPause = false            
         }
     }
 }
@@ -34,6 +50,7 @@ async function message(text) {
     
     return new Promise(resolve=>{
         const dialog = document.querySelector(".dialog")
+        const inter = document.querySelector(".interaction")
         dialog.dataset.state = "running"
         dialog.dataset.next = "false"
         if (document.querySelector(".dialog > p")) {
@@ -69,12 +86,21 @@ async function message(text) {
             i = i + 1
         }, option.messageDelay)
 
-        document.body.addEventListener("click",function myclick(){
+        document.body.addEventListener("click",function myclick(e){
+            if(option.dialogPause===true){return}
             if(dialog.dataset.next==="true"){
                 document.body.removeEventListener("click",myclick)
                 resolve()
             }
         })
+
+        inter.addEventListener("pointerup",()=>{
+            if(!answer[option.currentTool]){return}
+            if(answer[option.currentTool].question===inter.dataset.content){
+                resolve()
+            }              
+        })
+
     })
     
     
@@ -96,8 +122,6 @@ function OpenGift() {
 
 }
 
-const locker = document.getElementById("locker")
-// drag(locker)
 function drag(element) {
 
     let state = false,
@@ -106,55 +130,52 @@ function drag(element) {
         originX = 0,
         originY = 0,
         x = 0,
-        y = 0,
-        boundX = 0,
-        boundY = 0
+        y = 0
 
-    element.addEventListener("mousedown", e => {
-        element.style.position = "fixed"
-        element.style.pointerEvents = "none"
-        const css = window.getComputedStyle(element)        
-        if (css.position != "absolute" && css.position != "fixed") {
-            console.log("position needs absolute or fixed")
-            return
-        }
-        if(element.dataset.drag!="true"){return}
+    // element.addEventListener("mousedown", e => {
+    //     element.style.position = "fixed"
+    //     element.style.pointerEvents = "none"
+    //     const css = window.getComputedStyle(element)        
+    //     if (css.position != "absolute" && css.position != "fixed") {
+    //         console.log("position needs absolute or fixed")
+    //         return
+    //     }
+    //     if(element.dataset.drag!="true"){return}
 
 
-        beforeX = e.x
-        beforeY = e.y
-        originX = parseInt(css.left)
-        originY = parseInt(css.top)
-        boundX = window.innerWidth
-        boundY = window.innerHeight
-        option.currentTool=e.target.id
-        state = true
+    //     beforeX = e.x
+    //     beforeY = e.y
+    //     originX = parseInt(css.left)
+    //     originY = parseInt(css.top)
+    //     boundX = window.innerWidth
+    //     boundY = window.innerHeight
+    //     option.currentTool=e.target.id
+    //     state = true
 
-    })
+    // })
 
-    window.addEventListener("mouseup", e => {
-        state = false
-        element.style.position = null
-        element.style.top = null
-        element.style.left = null
-        element.style.transform = null
-        element.style.pointerEvents = null
-        option.currentTool=null
-    })
+    // window.addEventListener("mouseup", e => {
+    //     state = false
+    //     element.style.position = null
+    //     element.style.top = null
+    //     element.style.left = null
+    //     element.style.transform = null
+    //     element.style.pointerEvents = null
+    //     option.currentTool=null
+    // })
 
-    window.addEventListener("mousemove", e => {
+    // window.addEventListener("mousemove", e => {
 
-        if (!state) { return }
+    //     if (!state) { return }
 
-        x = originX + e.x - beforeX
-        y = originY + e.y - beforeY
+    //     x = originX + e.x - beforeX
+    //     y = originY + e.y - beforeY
 
-        element.style.left = `${x}px`
-        element.style.top = `${y}px`
-    })
+    //     element.style.left = `${x}px`
+    //     element.style.top = `${y}px`
+    // })
 
-    element.addEventListener("touchstart", e => {
-
+    element.addEventListener("pointerdown", e => {
         element.style.position = "fixed"
         element.style.pointerEvents = "none"
         const css = window.getComputedStyle(element)
@@ -162,10 +183,9 @@ function drag(element) {
             console.log("position needs absolute or fixed")
             return
         }
-        if(element.dataset.drag!="true"){return}        
-
-        beforeX = e.targetTouches[0].clientX
-        beforeY = e.targetTouches[0].clientY
+        if(element.dataset.drag!="true"){return}       
+        beforeX = e.x
+        beforeY = e.y
         originX = parseInt(css.left)
         originY = parseInt(css.top)
         boundX = window.innerWidth
@@ -175,7 +195,7 @@ function drag(element) {
         
     })
 
-    window.addEventListener("touchend", e => {
+    window.addEventListener("pointerup", e => {
         state = false
         element.style.position = null
         element.style.top = null
@@ -186,8 +206,8 @@ function drag(element) {
     })
 
     window.addEventListener("pointermove", e => {
+        element.releasePointerCapture(e.pointerId)
         if (!state) { return }
-
         if(window.innerWidth>window.innerHeight){
             x = originX + e.x - beforeX
             y = originY + e.y- beforeY
@@ -372,16 +392,23 @@ function addActor(){
         
     actor.forEach(i=>{        
         const target = document.getElementById(i[0])
+        const close_frame = document.querySelector(".interaction .close_frame")
         target.addEventListener("click",async()=>{            
             if(document.querySelector("#copy-element")){return}    
             option.dialogClick=false
             const dialog = document.querySelector(".dialog")   
+            const stage_background = document.querySelector(".stage .background")
             interaction()
             copy(target)
+            close_frame.classList.add("disable")
+            stage_background.classList.add("disable")
             for(let j = 1; j<i.length; j++){
+                if(j===i.length-1){
+                    close_frame.classList.remove("disable")
+                }
                 await message(i[j])
-            }
-
+            }            
+            stage_background.classList.remove("disable")
             dialog.dataset.state = ""            
         })
     })
@@ -399,9 +426,10 @@ async function ini() {
     const dialog = document.querySelector(".dialog")      
     const switcher = document.getElementById("switch")
     const toolBox = document.querySelector("footer .toolBox")
-
-    stage.scroll((stage.scrollWidth-stage.clientWidth)/2,0)
-    stage_background.classList.add("dark")
+    const close_frame =  document.querySelector(".interaction .close_frame")
+    stage_background.classList.add("disable")
+    close_frame.classList.add("disable")
+    stage.scroll((stage.scrollWidth-stage.clientWidth)/2,0)    
     toolBox.style.display = "none"
     // let state = dialog.dataset.state
     await message("歡迎來到密室之尋寶遊戲！")
@@ -428,19 +456,23 @@ async function ini() {
     }
 
     await message("進入教學")
-    toolBox.removeAttribute("style")
+    
     copy(switcher)
     interaction()
 
     await message("這是一個開關")
     await message("房間似乎有點暗。")
-    await message("請拖曳左下角的手掌工具，來打開開關。")
+    option.dialogPause = true
+    toolBox.removeAttribute("style")  
+    await message("請拖曳左下角的手掌工具，來打開開關。") 
     
-
-
+    await message("恩～似乎明亮了許多！")
+    await message("這個房間藏有一個寶物，接下來請用您過人的腦袋找到他吧！")
+    
     dialog.dataset.state = ""
-    stage_background.classList.remove("dark")
     interaction()
+    close_frame.classList.remove("disable")
+    stage_background.classList.remove("disable")
 }
 
 const hand = document.getElementById("hand")
@@ -450,14 +482,14 @@ drag(hand)
 
 const inter = document.querySelector(".interaction")
 window.addEventListener("pointermove",e=>{
-    if(!option.currentTool){return}   
+    if(!option.currentTool){return}  
     if(!e.target.classList.contains("interaction")){
         inter.style.outline = null
         return
     }   
     inter.style.outline = "hsl(200,70%,60%) 3px solid"    
 })
-window.addEventListener("pointerup",function foo(){
+inter.addEventListener("pointerup",function foo(e){        
     inter.style.outline = null
     if(!answer[option.currentTool]){return}
     if(answer[option.currentTool].question===inter.dataset.content){
