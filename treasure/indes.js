@@ -3,6 +3,30 @@
 //     document.documentElement.requestFullscreen()
 // }
 
+Height()
+function Height(){
+    let vh = window.innerHeight;
+    let vmin = 0
+    calcHeight()
+    window.addEventListener("resize", function(){
+        calcHeight()
+    });
+    function calcHeight(){
+        vh = window.innerHeight;
+        if(innerHeight>=innerWidth){
+            vmin = innerWidth
+        } else {
+            vmin = innerHeight
+        }
+        document.documentElement.style.setProperty('--vh', `${vh}px`);    
+        document.documentElement.style.setProperty('--vmin', `${vmin}px`); 
+    }
+}
+
+
+
+function checkReadyState(win=window){return new Promise(resolve=>{const clock = setInterval(function(){let target = win.document.readyState;if(target==="complete"){clearInterval(clock);console.log("complete");resolve();}},50);});};
+
 function detectClass(className){
     return new Promise((resolve) => {
         setInterval(function(){
@@ -14,7 +38,6 @@ function detectClass(className){
         },50)
     })
 }
-
 
 var option = {
     messageDelay:90,
@@ -546,11 +569,15 @@ function startScenes(){
 }
 
 
-startScenes()
-addActor()
-toolBox()
-solveQuestion()
-ini()
 
 
 
+
+async function workFlow(){
+    await checkReadyState()
+    startScenes()
+    addActor()
+    toolBox()
+    solveQuestion()
+    ini()
+}
