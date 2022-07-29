@@ -630,7 +630,7 @@ function startScenes(){
 }
 
 
-document.querySelector(".background").classList.remove("dark")
+// document.querySelector(".background").classList.remove("dark")
 
 workFlow()
 
