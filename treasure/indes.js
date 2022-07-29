@@ -467,12 +467,15 @@ function solveQuestion(){
         if(!option.currentTool){return}  
         if(!e.target.classList.contains("interaction")){
             inter.style.outline = null
+            inter.style.backgroundColor = null
             return
         }   
         inter.style.outline = "hsl(200,70%,60%) 3px solid"    
+        inter.style.backgroundColor = "rgba(255, 255, 255, 0.85)"    
     })
     inter.addEventListener("pointerup",function foo(e){        
         inter.style.outline = null
+        inter.style.backgroundColor = null
         if(!answer[option.currentTool]){return}
         if(answer[option.currentTool].question===inter.dataset.content){
             answer[option.currentTool].result()
@@ -571,10 +574,9 @@ function startScenes(){
 
 
 
-
+workFlow()
 
 async function workFlow(){
-    await checkReadyState()
     startScenes()
     addActor()
     toolBox()
