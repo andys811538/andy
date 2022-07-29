@@ -23,7 +23,25 @@ function Height(){
     }
 }
 
+setClockTime()
+function setClockTime(){
+    time()
+    setInterval(time,1000)
+    function time(){
+        let current = new Date(Date.now())
+        let h = current.getHours()
+        let m = current.getMinutes()
+        let s = current.getSeconds()
+        let hour = h + (m*60+30)/3600
+        let min = m + s/60
+        let sec = s
+    
+        document.documentElement.style.setProperty('--hour', `${hour*30}deg`)
+        document.documentElement.style.setProperty('--sec', `${sec*6}deg`)
+        document.documentElement.style.setProperty('--min', `${min*6}deg`)
+    }
 
+}
 
 function checkReadyState(win=window){return new Promise(resolve=>{const clock = setInterval(function(){let target = win.document.readyState;if(target==="complete"){clearInterval(clock);console.log("complete");resolve();}},50);});};
 
@@ -267,6 +285,7 @@ document.body.addEventListener("click", e => {
 })
 
 function interaction() {
+    // setClockTime()
     const interaction = document.querySelector(".interaction")
     state = interaction.dataset.state
     interaction.addEventListener("transitionend", function foo(e) {
@@ -407,7 +426,7 @@ function tutorialAni(state){
     }
 }
 
-function copy(targetElement){
+function copy(targetElement){    
     const inter = document.querySelector(".interaction")
     const copyElement = targetElement.cloneNode(true)
     copyElement.id = "copy-element"
@@ -415,22 +434,37 @@ function copy(targetElement){
     inter.append(copyElement)
 }
 
+function getTime(){
+    const current = new Date(Date.now())
+    return current.toLocaleString("zh-TW",{
+        hour12:true,
+        hour:"numeric",
+        minute:"numeric",
+    })
+}
+
+
+
+
+
 function addActor(){    
+
     const actor = [
         ["sofa","這是沙發。","你累了嗎？"],
         ["lamp","這是檯燈"],
-        ["clock","這是時鐘"],
+        ["clock","Func()"],
         ["closet","這是櫥櫃"],
         ["bed","這是床"],
         ["plant","這是植物"],
         ["safe_box","這是保險箱"],
         ["border","這是布告欄"],
         ["table","這是桌子"],
-        ["pancel","這是鉛筆"],
+        // ["pancel","這是鉛筆"],
         ["switch","這是開關"],
     ]
-        
-    actor.forEach(i=>{        
+
+
+actor.forEach(i=>{        
         const target = document.getElementById(i[0])
         const close_frame = document.querySelector(".interaction .close_frame")
         target.addEventListener("click",async()=>{            
@@ -442,12 +476,19 @@ function addActor(){
             copy(target)
             close_frame.classList.add("disable")
             stage_background.classList.add("disable")
+
             for(let j = 1; j<i.length; j++){
                 if(j===i.length-1){
                     close_frame.classList.remove("disable")
                 }
+
+                if(i[j]==="Func()"){
+                    await message("現在時刻是 " + getTime() + " 分")
+                    continue
+                }
                 await message(i[j])
-            }            
+            }          
+
             stage_background.classList.remove("disable")
             dialog.dataset.state = ""            
         })
@@ -459,6 +500,23 @@ function addActor(){
 function toolBox(){
     const hand = document.getElementById("hand")
     drag(hand)
+    const pancel = document.getElementById("pancel")
+    pancel.onclick = function(){
+        drag(pancel)
+        const target = checkToolBox()
+        target.append(pancel)
+        pancel.onclick = null
+    }
+
+
+    function checkToolBox(){
+        const boxs = document.querySelectorAll(".toolBox .item")
+        for(let i = 0;i<boxs.length;i++){
+            if(boxs[i].dataset.exist==="false"){                
+                return boxs[i]
+            }
+        }
+    }
 }
 
 function solveQuestion(){
@@ -572,7 +630,7 @@ function startScenes(){
 }
 
 
-
+document.querySelector(".background").classList.remove("dark")
 
 workFlow()
 

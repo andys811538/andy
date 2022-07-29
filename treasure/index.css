@@ -179,6 +179,24 @@ svg:active #locker_toggle{
     z-index: 10;
 }
 
+.hourHand{
+    transform: rotate(calc(var(--hour) - 90deg));
+    transform-origin: center center;
+    animation: 86400s hour infinite linear;
+}
+
+.minHand{
+    transform: rotate(calc(var(--min) - 90deg));
+    transform-origin: center center;
+    animation: 3600s min infinite linear;
+}
+
+.secondHand{
+    transform: rotate(calc(var(--sec) - 90deg));
+    transform-origin: center center;
+}
+
+
 #closet{
     position: absolute;
     width: 13.54%;
@@ -240,6 +258,13 @@ svg:active #locker_toggle{
     left: 49.52%;
     top: 45.73%;
     z-index:9;
+}
+
+.toolBox #pancel{
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
 
 #interaction .actor{
