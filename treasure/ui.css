@@ -15,7 +15,8 @@
         -moz-user-select: none;
         -webkit-user-select: none;
         -ms-user-select: none;
-        touch-action: none
+        touch-action: none;
+        overflow-y: hidden;
     }
 
     header {
@@ -207,8 +208,14 @@
         max-width: 60px;
         max-height: 60px;
         padding: 7px;
-        box-sizing: border-box;                
+        box-sizing: border-box;    
+        pointer-events: all;            
     }
+
+    footer .toolBox .item > * * {
+        pointer-events: none; 
+    }
+    
 
     footer .toolBox .item:nth-child(1){
         left: 40px;
@@ -251,7 +258,7 @@
         height: var(--vh);
         width: calc(var(--vh)*2);
         max-width: calc(var(--vh)*2);
-        transition: all .7s;
+        transition: filter .7s;
     }
 
     .interaction {
@@ -271,7 +278,7 @@
         box-shadow:
             -10px -10px 20px hsla(0, 0%, 10%, .3),
             10px 10px 20px hsla(0, 0%, 50%, .3);
-        z-index: 1;
+        z-index: 2;
         transition: 
             opacity .3s,
             background-color .15s;
@@ -296,25 +303,36 @@
         opacity: 1;
     }
 
-    .interaction[data-state="open"]::before{
+    .interaction[data-outline]::after{
         position: absolute;
         content: "";
-        width: 100%;
-        height: 100%;
-        border-radius:15px;
-        -webkit-border-radius:15px;
-        z-index: 0;
+        top: -5px;
+        left: -5px;
+        box-sizing: border-box;
+        width: calc(100% + 10px);
+        height: calc(100% + 10px);
+        border: 6px hsla(200,70%,60%,0) solid;
+        border-radius: 22px;
+        z-index: 2;
+        transition: border .15s;
     }
 
-    .interaction .close_frame{
+    .interaction[data-outline="true"]::after{
+        border: 6px hsla(200,70%,60%,1) solid;
+    }
+
+
+    .interaction + .close_frame{
         display: none;
         position: absolute;
         width: 100vmax;
         height: 100vmax;
-        z-index: -1;
+        z-index: 1;
+        top: 0;
+        left: 0;
     }
 
-    .interaction[data-state="open"] .close_frame{
+    .interaction[data-state="open"] + .close_frame{
         display: block;
     }
 
@@ -342,26 +360,26 @@
         grid-template-rows: repeat(4, 1fr);
         grid-gap: 3%;
         border-radius: 5% / 3.4%;
-        font-size: 66%;
+        font-size: 63%;
         z-index: 3;
     }
 
     .password .pass-show {
         all: initial;
         width: 100%;
-        height: 100%;
+        height: min(calc((var(--vmin) - 120px) / 7.2),60px);        
         overflow: hidden;
         background-color: #666;
         border-radius: 5px;
         grid-column: 1 / 4;
         grid-row: 1 / 2;
-        font-size: 20%;
+        font-size: min(15%,60px);
         font-family: 'Courier New', Courier, monospace;
         font-weight: bold;
         text-align: center;
         color: white;
         pointer-events: none;
-        line-height: 100%;
+        line-height: min(calc((var(--vmin) - 120px) / 7.2),60px) ;        
     }
 
     .pass-show::selection{
@@ -371,17 +389,19 @@
 
     .password button {
         margin: auto;
-        width: 92%;
+        width: 80%;
         aspect-ratio: 1 / 1;
-        min-width: 5.2ch;
-        max-height: 5ch;
         appearance: none;
         border: none;
         border-radius: 5px;
         background-color: #333;
         color: #ddd;
-        font-size: 8%;
+        fill: #ddd;
         font-weight: bold;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
         box-shadow:
             5px 5px 10px hsla(0, 0%, 10%, .5),
             -5px -5px 10px hsla(0, 0%, 50%, .3);
@@ -428,6 +448,7 @@
             width: var(--vh);
             height: 100vw;
             transform-origin: 0% 0%;
+            overflow-x: hidden;
         }
 
 

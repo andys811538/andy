@@ -111,7 +111,6 @@ svg:active #locker_toggle{
 /* ========================================================= */
 .actor{
     pointer-events: none;
-    transition: all 3s;
 }
 
 .actor .target{
@@ -133,17 +132,17 @@ svg:active #locker_toggle{
 
 .light{
     fill:#34B078;
-    transition: fill .2s;
+    transition: fill .3s;
 }
 .on{
     opacity: 1;
     fill:#EFEFEF;
-    transition: opacity .2s;
+    transition: opacity .3s;
 }
 .off{
     opacity:0;
     fill:#EFEFEF;
-    transition: opacity .2s;
+    transition: opacity .3s;
 }
 
 .turn-off .light{
@@ -224,6 +223,13 @@ svg:active #locker_toggle{
     z-index: 10;
 }
 
+.toolBox #plant{
+    top: initial;
+    left: initial;
+    width: 100%;
+    height: 100%;         
+}
+
 #safe_box{
     position: absolute;
     width: 6.32%;
@@ -260,16 +266,33 @@ svg:active #locker_toggle{
     z-index:9;
 }
 
+
 .toolBox #pancel{
-    top: 0;
-    left: 0;
+    top: initial;
+    left: initial;
     width: 100%;
     height: 100%;
 }
+
+
 
 #interaction .actor{
     max-width: 100%;
     max-height: 100%;
     padding: 40px;
     box-sizing: border-box;
+}
+
+
+#note{
+    position: absolute;
+    width: 1.69%;
+    height: 4.32%;
+    left: 59.30%;
+    top: 37.80%;
+    z-index: 12;
+}
+
+.scribble{
+    display: none;
 }

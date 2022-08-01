@@ -1292,8 +1292,7 @@
             <svg class="actor" id="border" version="1.1" xmlns="http://www.w3.org/2000/svg"
                 xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 85.376 67.321"
                 style="overflow:visible;enable-background:new 0 0 85.376 67.321;" xml:space="preserve">
-                <defs>
-                </defs>
+
                 <g class="target" id="border-group_1_">
                     <g id="border_2_">
                         <polyline style="fill:none;stroke:#7A6A56;stroke-miterlimit:10;"
@@ -1333,20 +1332,26 @@
                         <rect x="35.733" y="41.197" transform="matrix(0.9998 0.0176 -0.0176 0.9998 0.7337 -0.7105)"
                             style="fill:#5C5A5A;" width="9.826" height="0.083" />
                     </g>
-                    <g id="note2_1_">
-                        <rect x="61.604" y="45.417" transform="matrix(0.9992 -0.041 0.041 0.9992 -2.1066 2.8202)"
-                            style="fill:#DCDDDD;" width="12.082" height="14.62" />
-                        <circle style="fill:#1FAF6F;" cx="67.387" cy="46.427" r="0.518" />
-                        <rect x="62.591" y="48.404" transform="matrix(0.9992 -0.041 0.041 0.9992 -1.9311 2.8108)"
-                            style="fill:#5C5A5A;" width="9.826" height="0.083" />
-                        <rect x="62.692" y="50.869" transform="matrix(0.9992 -0.041 0.041 0.9992 -2.0321 2.817)"
-                            style="fill:#5C5A5A;" width="9.826" height="0.083" />
-                        <rect x="62.793" y="53.333" transform="matrix(0.9992 -0.041 0.041 0.9992 -2.1332 2.8232)"
-                            style="fill:#5C5A5A;" width="9.826" height="0.083" />
-                        <rect x="62.895" y="55.798" transform="matrix(0.9992 -0.041 0.041 0.9992 -2.2342 2.8295)"
-                            style="fill:#5C5A5A;" width="9.826" height="0.083" />
-                        <rect x="62.996" y="58.263" transform="matrix(0.9992 -0.041 0.041 0.9992 -2.3353 2.8357)"
-                            style="fill:#5C5A5A;" width="9.826" height="0.083" />
+                    <g id="noteCopy">
+                        <rect x="61.604" y="45.417" transform="matrix(0.9992 -0.041 0.041 0.9992 -2.1066 2.8202)" style="fill:#DCDDDD;" width="12.082" height="14.62"/>
+                        <g class="writing">
+                            <g>
+                                <image style="overflow:visible;pointer-events:none" width="333" height="331" xlink:href="data:image/png;base64,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" transform="matrix(0.24 0 0 0.24 27.9143 13.4669)"></image>
+                            </g>
+                            <polyline class="scribble" style="fill:none;stroke:#595757;stroke-width:0.75;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" points="			62.806,51.235 65.506,49.025 62.869,52.088 66.374,49.12 63.043,52.956 66.927,49.483 63.643,53.525 67.48,50.004 64.164,54.062 			67.953,50.509 64.669,54.788 68.506,50.998 65.095,55.498 69.548,50.951 65.443,56.193 70.101,51.488 65.932,57.314 			70.859,51.741 66.69,57.567 71.68,52.214 67.48,57.772 71.553,53.588 68.585,57.693 71.739,54.69 69.864,57.441 71.964,55.956 			71.348,57.093 		"/>
+                            <g style="opacity:0.59;">
+                                <path style="fill:#EFEFEF;" d="M64.295,51.86c-0.015,0.03-0.033,0.066-0.055,0.106c-0.022,0.041-0.036,0.065-0.043,0.073				c-0.019,0.023-0.05,0.033-0.093,0.031c-0.043-0.002-0.08-0.016-0.111-0.043c-0.019-0.016-0.022-0.05-0.01-0.102				c0.012-0.053,0.038-0.11,0.077-0.174c0.147-0.251,0.4-0.617,0.758-1.1l0.518-0.703c-0.3,0.025-0.584,0.021-0.852-0.013				c-0.07-0.009-0.115-0.022-0.134-0.038c-0.021-0.018-0.032-0.038-0.033-0.062c-0.001-0.024,0.004-0.042,0.014-0.055				c0.023-0.027,0.071-0.036,0.146-0.027c0.164,0.021,0.321,0.028,0.471,0.023c0.15-0.006,0.304-0.016,0.463-0.032l0.081-0.007				l0.003-0.003l0.04-0.047l0.026-0.031c0.012-0.014,0.023-0.021,0.033-0.02c0.008,0,0.014,0.001,0.018,0.004				c0.018,0.004,0.035,0.014,0.052,0.028c0.041,0.035,0.069,0.07,0.084,0.103c0.014,0.034,0.011,0.063-0.01,0.088				s-0.058,0.044-0.111,0.056c-0.032,0.059-0.068,0.114-0.108,0.166c-0.099,0.127-0.284,0.377-0.553,0.751				c-0.27,0.374-0.444,0.622-0.522,0.745C64.407,51.641,64.358,51.735,64.295,51.86z"/>
+                                <path style="fill:#EFEFEF;" d="M65.161,52.87c-0.15-0.127-0.218-0.28-0.204-0.462c0.014-0.181,0.096-0.361,0.248-0.54				c0.181-0.215,0.391-0.41,0.63-0.584c0.239-0.175,0.478-0.313,0.717-0.415c-0.017-0.014-0.027-0.033-0.031-0.058				c-0.004-0.025,0.002-0.046,0.018-0.065c0.023-0.027,0.06-0.039,0.112-0.034c0.052,0.004,0.104,0.02,0.156,0.047				c0.008-0.001,0.023-0.004,0.044-0.008c0.022-0.005,0.042,0.001,0.061,0.017c0.021,0.018,0.037,0.038,0.05,0.061				c0.013,0.023,0.017,0.041,0.015,0.052c0.067,0.039,0.131,0.084,0.191,0.135c0.142,0.12,0.236,0.266,0.284,0.438				c0.047,0.172,0.046,0.354-0.005,0.545c-0.051,0.191-0.147,0.371-0.29,0.54c-0.155,0.183-0.357,0.327-0.607,0.43				c-0.25,0.103-0.502,0.148-0.756,0.135C65.539,53.088,65.328,53.011,65.161,52.87z M67.019,51.216				c-0.048-0.041-0.117-0.088-0.206-0.143l-0.074-0.046c-0.24,0.09-0.484,0.228-0.733,0.415c-0.248,0.186-0.456,0.377-0.621,0.573				c-0.111,0.131-0.176,0.261-0.197,0.388c-0.02,0.127,0.025,0.238,0.136,0.331c0.127,0.107,0.3,0.162,0.52,0.164				c0.22,0.002,0.438-0.041,0.655-0.129c0.217-0.088,0.386-0.204,0.508-0.348c0.107-0.127,0.18-0.269,0.217-0.425				c0.037-0.156,0.037-0.304,0-0.444C67.188,51.412,67.119,51.3,67.019,51.216z"/>
+                                <path style="fill:#EFEFEF;" d="M67.908,55.115c-0.044-0.037-0.014-0.139,0.089-0.305c0.103-0.166,0.254-0.384,0.452-0.652				c-0.059-0.036-0.163-0.092-0.312-0.17c-0.149-0.078-0.288-0.148-0.417-0.21c-0.454-0.223-0.705-0.355-0.753-0.396				c-0.015-0.012-0.025-0.041-0.032-0.086c-0.007-0.045-0.001-0.078,0.016-0.099c0.019-0.023,0.053-0.035,0.101-0.037				c0.062-0.001,0.232-0.02,0.512-0.055c0.247-0.034,0.468-0.06,0.664-0.076c0.2-0.017,0.531-0.071,0.994-0.162				c0.154-0.03,0.251-0.048,0.292-0.054c0.057-0.009,0.102-0.019,0.135-0.033c0.033-0.013,0.056-0.021,0.069-0.024				c0.013-0.003,0.027,0.001,0.042,0.014c0.025,0.021,0.041,0.056,0.05,0.106c0.008,0.05,0.001,0.088-0.022,0.115				c-0.005,0.006-0.023,0.014-0.053,0.025c-0.039,0.017-0.077,0.044-0.112,0.082c-0.062,0.065-0.305,0.349-0.729,0.851				c-0.072,0.085-0.123,0.148-0.152,0.187l0.073,0.04c0.146,0.081,0.265,0.15,0.354,0.208c0.018,0.012,0.044,0.01,0.076-0.005				c0.033-0.016,0.055-0.018,0.068-0.007c0.023,0.019,0.035,0.052,0.037,0.099c0.002,0.046-0.009,0.083-0.031,0.11				c-0.03,0.036-0.065,0.048-0.106,0.037c-0.041-0.011-0.105-0.047-0.193-0.107l-0.268-0.178l-0.104-0.067				c-0.167,0.227-0.312,0.456-0.436,0.687c-0.054,0.094-0.089,0.15-0.105,0.169c-0.019,0.023-0.049,0.034-0.09,0.034				C67.975,55.155,67.939,55.141,67.908,55.115z M68.266,53.195c-0.366,0.045-0.693,0.088-0.982,0.13l0.252,0.133				c0.132,0.076,0.224,0.126,0.274,0.151c0.149,0.076,0.321,0.17,0.514,0.279l0.231,0.126c0.062-0.086,0.113-0.153,0.151-0.198				c0.116-0.138,0.247-0.289,0.393-0.456c0.145-0.166,0.238-0.27,0.277-0.312c-0.073,0.01-0.215,0.03-0.427,0.059				C68.737,53.135,68.509,53.165,68.266,53.195z"/>
+                                <path style="fill:#EFEFEF;" d="M69.081,56.383c-0.037-0.032-0.056-0.064-0.056-0.095c0-0.032,0.011-0.06,0.032-0.085				c0.035-0.042,0.102-0.032,0.2,0.03c0.321,0.199,0.629,0.317,0.924,0.354c0.295,0.037,0.532-0.05,0.71-0.26				c0.201-0.238,0.16-0.475-0.121-0.713c-0.09-0.076-0.18-0.141-0.272-0.195c-0.092-0.054-0.206-0.116-0.343-0.186				c-0.169-0.032-0.28-0.056-0.331-0.071c-0.052-0.015-0.093-0.036-0.125-0.062c-0.019-0.016-0.027-0.04-0.025-0.072				c0.002-0.032,0.014-0.061,0.035-0.086c0.032-0.038,0.072-0.05,0.122-0.037c0.089,0.026,0.162,0.049,0.218,0.072				c0.088,0.035,0.181,0.064,0.28,0.087c0.258,0.058,0.484,0.082,0.677,0.074c0.193-0.008,0.335-0.067,0.426-0.175				c0.078-0.092,0.1-0.181,0.068-0.267c-0.033-0.086-0.104-0.176-0.215-0.269c-0.169-0.143-0.371-0.231-0.606-0.265				c-0.067-0.01-0.129-0.012-0.188-0.006c-0.059,0.006-0.102,0.015-0.13,0.027c-0.042,0.011-0.078,0.004-0.109-0.023				c-0.065-0.055-0.073-0.11-0.026-0.166c0.032-0.037,0.119-0.057,0.264-0.058c0.144-0.001,0.306,0.027,0.486,0.087				c0.18,0.059,0.346,0.153,0.498,0.281c0.148,0.125,0.236,0.254,0.265,0.387c0.029,0.133-0.009,0.261-0.113,0.384				c-0.086,0.102-0.233,0.168-0.442,0.197c-0.209,0.029-0.414,0.028-0.616-0.003l0.01,0.014c0.081,0.039,0.144,0.073,0.188,0.1				c0.045,0.027,0.104,0.072,0.177,0.133c0.154,0.13,0.246,0.281,0.275,0.451c0.029,0.171-0.021,0.332-0.149,0.484				c-0.199,0.236-0.457,0.349-0.773,0.341c-0.316-0.008-0.674-0.114-1.074-0.316C69.161,56.442,69.114,56.412,69.081,56.383z"/>
+                            </g>
+                        </g>
+                        <circle style="fill:#1FAF6F;" cx="67.387" cy="46.427" r="0.518"/>
+                        <rect x="62.591" y="48.404" transform="matrix(0.9992 -0.041 0.041 0.9992 -1.9311 2.8108)" style="fill:#5C5A5A;" width="9.826" height="0.083"/>
+                        <rect x="62.692" y="50.869" transform="matrix(0.9992 -0.041 0.041 0.9992 -2.0321 2.817)" style="fill:#5C5A5A;" width="9.826" height="0.083"/>
+                        <rect x="62.793" y="53.333" transform="matrix(0.9992 -0.041 0.041 0.9992 -2.1332 2.8232)" style="fill:#5C5A5A;" width="9.826" height="0.083"/>
+                        <rect x="62.895" y="55.798" transform="matrix(0.9992 -0.041 0.041 0.9992 -2.2342 2.8295)" style="fill:#5C5A5A;" width="9.826" height="0.083"/>
+                        <rect x="62.996" y="58.263" transform="matrix(0.9992 -0.041 0.041 0.9992 -2.3353 2.8357)" style="fill:#5C5A5A;" width="9.826" height="0.083"/>
                     </g>
                     <g id="note_1_">
                         <rect x="41.366" y="39.762" transform="matrix(0.9992 -0.0405 0.0405 0.9992 -1.8691 1.9604)"
@@ -1363,6 +1368,28 @@
                         <rect x="42.755" y="52.608" transform="matrix(0.9992 -0.0405 0.0405 0.9992 -2.095 1.9755)"
                             style="fill:#5C5A5A;" width="9.826" height="0.083" />
                     </g>
+                </g>
+            </svg>
+
+
+            <svg id=note version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 12.672 15.104"	 style="overflow:visible;enable-background:new 0 0 12.672 15.104;" xml:space="preserve">
+                <g id="note2_1_">
+                <rect x="0.295" y="0.242" transform="matrix(0.9992 -0.041 0.041 0.9992 -0.3045 0.2664)" style="fill:#DCDDDD;" width="12.082" height="14.62"/>
+                <g class="writing">
+                <polyline class="scribble" style="fill:none;stroke:#595757;stroke-width:0.75;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" points="			1.496,6.06 4.196,3.85 1.56,6.913 5.065,3.944 1.733,7.781 5.617,4.307 2.333,8.35 6.17,4.829 2.854,8.886 6.644,5.334 			3.36,9.613 7.196,5.823 3.786,10.323 8.238,5.776 4.133,11.018 8.791,6.313 4.623,12.139 9.549,6.565 5.381,12.392 10.37,7.039 			6.17,12.597 10.244,8.413 7.275,12.518 10.43,9.515 8.554,12.265 10.654,10.781 10.038,11.918 		"/>
+                <g style="opacity:0.59;">
+                <path style="fill:#DEDFDF;" d="M2.985,6.685c-0.015,0.03-0.033,0.066-0.055,0.106C2.909,6.832,2.894,6.856,2.887,6.865				c-0.019,0.023-0.05,0.033-0.093,0.031c-0.043-0.002-0.08-0.016-0.111-0.043c-0.019-0.016-0.022-0.05-0.01-0.102				c0.012-0.053,0.038-0.11,0.077-0.174c0.147-0.251,0.4-0.617,0.758-1.1l0.518-0.703C3.727,4.8,3.442,4.795,3.175,4.762				C3.104,4.752,3.06,4.74,3.041,4.724C3.02,4.706,3.009,4.685,3.008,4.661C3.007,4.637,3.012,4.619,3.022,4.606				C3.045,4.579,3.094,4.57,3.168,4.579C3.332,4.6,3.489,4.608,3.639,4.602c0.15-0.006,0.304-0.016,0.463-0.032l0.081-0.007				L4.185,4.56l0.04-0.047l0.026-0.031c0.012-0.014,0.023-0.021,0.033-0.02c0.008,0,0.014,0.001,0.018,0.004				C4.32,4.471,4.337,4.48,4.354,4.494c0.041,0.035,0.069,0.07,0.084,0.103c0.014,0.034,0.011,0.063-0.01,0.088				C4.407,4.71,4.37,4.729,4.317,4.741C4.285,4.8,4.249,4.855,4.209,4.907C4.109,5.033,3.925,5.284,3.655,5.658				C3.386,6.032,3.212,6.28,3.133,6.403C3.098,6.466,3.049,6.56,2.985,6.685z"/>
+                <path style="fill:#DEDFDF;" d="M3.852,7.695c-0.15-0.127-0.218-0.28-0.204-0.462c0.014-0.181,0.096-0.361,0.248-0.54				c0.181-0.215,0.391-0.41,0.63-0.584c0.239-0.175,0.478-0.313,0.717-0.415C5.225,5.679,5.215,5.66,5.211,5.635				C5.207,5.61,5.213,5.589,5.229,5.57c0.023-0.027,0.06-0.039,0.112-0.034c0.052,0.004,0.104,0.02,0.156,0.047				c0.008-0.001,0.023-0.004,0.044-0.008c0.022-0.005,0.042,0.001,0.061,0.017c0.021,0.018,0.037,0.038,0.05,0.061				C5.665,5.675,5.67,5.693,5.667,5.704c0.067,0.039,0.131,0.084,0.191,0.135C6,5.959,6.094,6.105,6.142,6.277				s0.046,0.354-0.005,0.545c-0.051,0.191-0.147,0.371-0.29,0.54C5.692,7.545,5.49,7.688,5.24,7.791				C4.991,7.895,4.738,7.94,4.484,7.926C4.229,7.913,4.018,7.836,3.852,7.695z M5.71,6.04C5.661,6,5.593,5.952,5.503,5.898				L5.429,5.852c-0.24,0.09-0.484,0.228-0.733,0.415C4.448,6.453,4.241,6.644,4.076,6.84C3.965,6.971,3.899,7.101,3.879,7.228				c-0.02,0.127,0.025,0.238,0.136,0.331c0.127,0.107,0.3,0.162,0.52,0.164c0.22,0.002,0.438-0.041,0.655-0.129				C5.407,7.506,5.577,7.39,5.698,7.246c0.107-0.127,0.18-0.269,0.217-0.425c0.037-0.156,0.037-0.304,0-0.444				C5.878,6.237,5.809,6.125,5.71,6.04z"/>
+                <path style="fill:#DEDFDF;" d="M6.599,9.94C6.555,9.903,6.584,9.801,6.688,9.634c0.103-0.166,0.254-0.384,0.452-0.652				C7.08,8.947,6.976,8.89,6.827,8.813C6.679,8.735,6.539,8.665,6.41,8.603C5.956,8.38,5.705,8.248,5.657,8.207				C5.643,8.195,5.632,8.167,5.625,8.122C5.618,8.077,5.624,8.044,5.642,8.023C5.661,8,5.695,7.988,5.743,7.986				c0.062-0.001,0.232-0.02,0.512-0.055c0.247-0.034,0.468-0.06,0.664-0.076c0.2-0.017,0.531-0.071,0.994-0.162				c0.154-0.03,0.251-0.048,0.292-0.054C8.262,7.63,8.307,7.619,8.34,7.605c0.033-0.013,0.056-0.021,0.069-0.024				c0.013-0.003,0.027,0.001,0.042,0.014C8.475,7.616,8.492,7.651,8.5,7.701c0.008,0.05,0.001,0.088-0.022,0.115				C8.473,7.822,8.455,7.83,8.425,7.841C8.386,7.858,8.348,7.885,8.313,7.923C8.251,7.988,8.007,8.271,7.583,8.774				C7.511,8.859,7.46,8.921,7.431,8.961l0.073,0.04c0.146,0.081,0.265,0.15,0.354,0.208c0.018,0.012,0.044,0.01,0.076-0.005				C7.967,9.189,7.99,9.187,8.002,9.197c0.023,0.019,0.035,0.052,0.037,0.099c0.002,0.046-0.009,0.083-0.031,0.11				c-0.03,0.036-0.065,0.048-0.106,0.037C7.862,9.431,7.797,9.395,7.709,9.335L7.441,9.157L7.337,9.091				C7.17,9.318,7.025,9.546,6.901,9.778c-0.054,0.094-0.089,0.15-0.105,0.169C6.777,9.969,6.747,9.98,6.707,9.98				C6.666,9.98,6.63,9.966,6.599,9.94z M6.956,8.019c-0.366,0.045-0.693,0.088-0.982,0.13l0.252,0.133				C6.359,8.358,6.45,8.408,6.501,8.433c0.149,0.076,0.321,0.17,0.514,0.279l0.231,0.126c0.062-0.086,0.113-0.153,0.151-0.198				C7.514,8.501,7.644,8.349,7.79,8.183c0.145-0.166,0.238-0.27,0.277-0.312C7.995,7.881,7.852,7.9,7.64,7.93				C7.427,7.96,7.2,7.989,6.956,8.019z"/>
+                <path style="fill:#DEDFDF;" d="M7.771,11.208c-0.037-0.032-0.056-0.064-0.056-0.095c0-0.032,0.011-0.06,0.032-0.085				c0.035-0.042,0.102-0.032,0.2,0.03c0.321,0.199,0.629,0.317,0.924,0.354c0.295,0.037,0.532-0.05,0.71-0.26				c0.201-0.238,0.16-0.475-0.121-0.713c-0.09-0.076-0.18-0.141-0.272-0.195c-0.092-0.054-0.206-0.116-0.343-0.186				c-0.169-0.032-0.28-0.056-0.331-0.071C8.461,9.972,8.42,9.952,8.389,9.925C8.37,9.909,8.362,9.885,8.364,9.853				c0.002-0.032,0.014-0.061,0.035-0.086C8.43,9.73,8.471,9.718,8.52,9.731C8.609,9.757,8.682,9.78,8.738,9.803				c0.088,0.035,0.181,0.064,0.28,0.087c0.258,0.058,0.484,0.082,0.677,0.074c0.193-0.008,0.335-0.067,0.426-0.175				c0.078-0.092,0.1-0.181,0.068-0.267c-0.033-0.086-0.104-0.176-0.215-0.269C9.806,9.109,9.604,9.02,9.369,8.986				C9.303,8.976,9.24,8.974,9.181,8.98s-0.102,0.015-0.13,0.027C9.01,9.018,8.974,9.011,8.942,8.984				C8.878,8.93,8.869,8.874,8.917,8.818C8.948,8.781,9.036,8.761,9.18,8.76c0.144-0.001,0.306,0.027,0.486,0.087				c0.18,0.059,0.346,0.153,0.498,0.281c0.148,0.125,0.236,0.254,0.265,0.387c0.029,0.133-0.009,0.261-0.113,0.384				c-0.086,0.102-0.233,0.168-0.442,0.197c-0.209,0.029-0.414,0.028-0.616-0.003l0.01,0.014c0.081,0.039,0.144,0.073,0.188,0.1				c0.045,0.027,0.104,0.072,0.177,0.133c0.154,0.13,0.246,0.281,0.275,0.451c0.029,0.171-0.021,0.332-0.149,0.484				c-0.199,0.236-0.457,0.349-0.773,0.341c-0.316-0.008-0.674-0.114-1.074-0.316C7.852,11.267,7.804,11.236,7.771,11.208z"/>
+                </g>
+                </g>
+                <circle style="fill:#1FAF6F;" cx="6.077" cy="1.252" r="0.518"/>
+                <rect x="1.282" y="3.229" transform="matrix(0.9992 -0.041 0.041 0.9992 -0.129 0.2569)" style="fill:#5C5A5A;" width="9.826" height="0.083"/>
+                <rect x="1.383" y="5.693" transform="matrix(0.9992 -0.041 0.041 0.9992 -0.23 0.2632)" style="fill:#5C5A5A;" width="9.826" height="0.083"/>
+                <rect x="1.484" y="8.158" transform="matrix(0.9992 -0.041 0.041 0.9992 -0.3311 0.2694)" style="fill:#5C5A5A;" width="9.826" height="0.083"/>
+                <rect x="1.585" y="10.623" transform="matrix(0.9992 -0.041 0.041 0.9992 -0.4321 0.2756)" style="fill:#5C5A5A;" width="9.826" height="0.083"/>
+                <rect x="1.686" y="13.087" transform="matrix(0.9992 -0.041 0.041 0.9992 -0.5332 0.2819)" style="fill:#5C5A5A;" width="9.826" height="0.083"/>
                 </g>
             </svg>
 
@@ -1573,26 +1600,25 @@
 
         <div class="password">
             <textarea maxlength="6" class="pass-show"></textarea>
-            <button onclick="password(this,'number')">1</button>
-            <button onclick="password(this,'number')">2</button>
-            <button onclick="password(this,'number')">3</button>
-            <button onclick="password(this,'number')">4</button>
-            <button onclick="password(this,'number')">5</button>
-            <button onclick="password(this,'number')">6</button>
-            <button onclick="password(this,'number')">7</button>
-            <button onclick="password(this,'number')">8</button>
-            <button onclick="password(this,'number')">9</button>
-            <button onclick="password(this,'reset')">重置</button>
-            <button onclick="password(this,'number')">0</button>
-            <button class="submit" onclick="password(this,'ok')">確認</button>
+            <button onclick="password(this,'number')"><svg width="100%" height="100%" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="50">1</text></svg></button>
+            <button onclick="password(this,'number')"><svg width="100%" height="100%" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="50">2</text></svg></button>
+            <button onclick="password(this,'number')"><svg width="100%" height="100%" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="50">3</text></svg></button>
+            <button onclick="password(this,'number')"><svg width="100%" height="100%" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="50">4</text></svg></button>
+            <button onclick="password(this,'number')"><svg width="100%" height="100%" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="50">5</text></svg></button>
+            <button onclick="password(this,'number')"><svg width="100%" height="100%" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="50">6</text></svg></button>
+            <button onclick="password(this,'number')"><svg width="100%" height="100%" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="50">7</text></svg></button>
+            <button onclick="password(this,'number')"><svg width="100%" height="100%" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="50">8</text></svg></button>
+            <button onclick="password(this,'number')"><svg width="100%" height="100%" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="50">9</text></svg></button>
+            <button onclick="password(this,'reset')"><svg width="100%" height="100%" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="50">重製</text></svg></button>
+            <button onclick="password(this,'number')"><svg width="100%" height="100%" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="50">0</text></svg></button>
+            <button class="submit" onclick="password(this,'ok')"><svg width="100%" height="100%" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="50">確認</text></svg></button>
         </div>
 
 
 
-        <div data-state="close" style="display: none;" class="interaction">
-            <div onclick="interaction()" class="close_frame">
-            </div>
-        </div>
+        <div data-state="close" style="display: none;" class="interaction"></div>
+        <div class="close_frame" onclick="interaction()" ></div>
+
     </div>
 
 

@@ -21,7 +21,9 @@ function Height(){
         document.documentElement.style.setProperty('--vh', `${vh}px`);    
         document.documentElement.style.setProperty('--vmin', `${vmin}px`); 
     }
+
 }
+
 
 setClockTime()
 function setClockTime(){
@@ -173,48 +175,6 @@ function drag(element) {
         x = 0,
         y = 0
 
-    // element.addEventListener("mousedown", e => {
-    //     element.style.position = "fixed"
-    //     element.style.pointerEvents = "none"
-    //     const css = window.getComputedStyle(element)        
-    //     if (css.position != "absolute" && css.position != "fixed") {
-    //         console.log("position needs absolute or fixed")
-    //         return
-    //     }
-    //     if(element.dataset.drag!="true"){return}
-
-
-    //     beforeX = e.x
-    //     beforeY = e.y
-    //     originX = parseInt(css.left)
-    //     originY = parseInt(css.top)
-    //     boundX = window.innerWidth
-    //     boundY = window.innerHeight
-    //     option.currentTool=e.target.id
-    //     state = true
-
-    // })
-
-    // window.addEventListener("mouseup", e => {
-    //     state = false
-    //     element.style.position = null
-    //     element.style.top = null
-    //     element.style.left = null
-    //     element.style.transform = null
-    //     element.style.pointerEvents = null
-    //     option.currentTool=null
-    // })
-
-    // window.addEventListener("mousemove", e => {
-
-    //     if (!state) { return }
-
-    //     x = originX + e.x - beforeX
-    //     y = originY + e.y - beforeY
-
-    //     element.style.left = `${x}px`
-    //     element.style.top = `${y}px`
-    // })
 
     element.addEventListener("pointerdown", e => {
         element.style.position = "fixed"
@@ -231,9 +191,7 @@ function drag(element) {
         originY = parseInt(css.top)
         boundX = window.innerWidth
         boundY = window.innerHeight
-        option.currentTool=e.target.id
-        state = true
-        
+        state = true        
     })
 
     window.addEventListener("pointerup", e => {
@@ -242,7 +200,6 @@ function drag(element) {
         element.style.top = null
         element.style.left = null
         element.style.transform = null
-        option.currentTool = null
         element.style.pointerEvents = null
     })
 
@@ -398,9 +355,9 @@ async function getSerialNumber(){
 
 function show(targetElement,state="show"){     
     const inter = document.querySelector(".interaction")
-    const stage_background = document.querySelector(".stage .background")
+    const stage_background = document.querySelector(".stage .background")    
     if(state==="show"){
-        interaction() 
+        interaction()         
         inter.append(targetElement)
     } else
     if(state==="hide"){
@@ -459,14 +416,14 @@ function addActor(){
         ["safe_box","這是保險箱"],
         ["border","這是布告欄"],
         ["table","這是桌子"],
-        // ["pancel","這是鉛筆"],
+        ["note","一張紙條","上面好像留有什麼痕跡"],
         ["switch","這是開關"],
     ]
 
 
 actor.forEach(i=>{        
         const target = document.getElementById(i[0])
-        const close_frame = document.querySelector(".interaction .close_frame")
+        const close_frame = document.querySelector(".interaction + .close_frame")
         target.addEventListener("click",async()=>{            
             if(document.querySelector("#copy-element")){return}    
             option.dialogClick=false
@@ -497,22 +454,52 @@ actor.forEach(i=>{
 } 
 
 
+
 function toolBox(){
     const hand = document.getElementById("hand")
     drag(hand)
     const pancel = document.getElementById("pancel")
-    pancel.onclick = function(){
-        drag(pancel)
-        const target = checkToolBox()
-        target.append(pancel)
-        pancel.onclick = null
+    const plant = document.getElementById("plant")
+    
+
+    tool(pancel)
+    tool(plant)
+
+    function tool(element){
+        element.onclick = function(){
+            const target = checkToolBox()
+            const footer = document.querySelector("footer")
+            const stage = document.querySelector(".stage")
+            const stage_background = document.querySelector(".stage .background")
+
+            element.onclick = null
+            element.dataset.drag = "true"        
+            drag(element)
+            element.style.transition = "1s all"
+            element.style.position = "fixed"
+            element.style.zIndex = "999"
+            element.style.width = `${target.offsetWidth}px`
+            element.style.height = `${target.offsetHeight}px`
+            element.style.top = `${target.offsetTop + footer.offsetTop}px`
+            element.style.left = `${target.offsetLeft + stage.scrollLeft - stage_background.offsetLeft}px`
+            element.style.padding = "7px"
+            element.style.boxSizing = "border-box"
+    
+            element.ontransitionend = transitionend
+            function transitionend(){
+                target.append(element)
+                element.style = null
+                element.ontransitionend = null
+            }        
+        }
     }
 
 
     function checkToolBox(){
         const boxs = document.querySelectorAll(".toolBox .item")
         for(let i = 0;i<boxs.length;i++){
-            if(boxs[i].dataset.exist==="false"){                
+            if(boxs[i].dataset.exist==="false"){  
+                boxs[i].dataset.exist = "true"        
                 return boxs[i]
             }
         }
@@ -521,24 +508,47 @@ function toolBox(){
 
 function solveQuestion(){
     const inter = document.querySelector(".interaction")
-    window.addEventListener("pointermove",e=>{
+    window.addEventListener("pointerdown",down)
+    
+    function down(e){
+        option.currentTool=e.target.id
+        if(!option.currentTool){return} 
+        window.addEventListener("pointermove",move)
+        window.addEventListener("pointerup",up)
+        inter.dataset.outline = false
+    }
+
+    function move(e){
         if(!option.currentTool){return}  
         if(!e.target.classList.contains("interaction")){
-            inter.style.outline = null
+            inter.dataset.outline = false
             inter.style.backgroundColor = null
             return
         }   
-        inter.style.outline = "hsl(200,70%,60%) 3px solid"    
+        inter.dataset.outline = "true" 
         inter.style.backgroundColor = "rgba(255, 255, 255, 0.85)"    
-    })
-    inter.addEventListener("pointerup",function foo(e){        
-        inter.style.outline = null
+    }
+
+    function up(e){
+        inter.removeAttribute("data-outline")
         inter.style.backgroundColor = null
-        if(!answer[option.currentTool]){return}
-        if(answer[option.currentTool].question===inter.dataset.content){
-            answer[option.currentTool].result()
+        window.removeEventListener("pointermove",move)
+        window.removeEventListener("pointerup",up)
+
+        if(!e.target.classList.contains("interaction")){
+             option.currentTool=null 
+             return
+            }
+        if(!answer[option.currentTool]){
+            option.currentTool=null 
+            return
+        }
+        
+        if(answer[option.currentTool].question===inter.dataset.content){            
+            answer[option.currentTool].result()            
         }    
-    })
+        option.currentTool=null
+    }
 }
 
 
@@ -550,7 +560,7 @@ async function ini() {
     const dialog = document.querySelector(".dialog")      
     const switcher = document.getElementById("switch")
     const toolBox = document.querySelector("footer .toolBox")
-    const close_frame =  document.querySelector(".interaction .close_frame")
+    const close_frame =  document.querySelector(".interaction + .close_frame")
     stage_background.classList.add("disable")
     close_frame.classList.add("disable")
     stage.scroll((stage.scrollWidth-stage.clientWidth)/2,0)    
@@ -630,14 +640,14 @@ function startScenes(){
 }
 
 
-// document.querySelector(".background").classList.remove("dark")
+document.querySelector(".background").classList.remove("dark")
 
 workFlow()
 
 async function workFlow(){
-    startScenes()
+    // startScenes()
     addActor()
     toolBox()
     solveQuestion()
-    ini()
+    // ini()
 }
