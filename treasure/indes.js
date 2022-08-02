@@ -63,7 +63,8 @@ var option = {
     messageDelay:90,
     dialogClick:true,
     dialogPause:false,
-    currentTool:"",    
+    currentTool:"",   
+    safeBoxPassword:0 
 }
 
 var answer = {
@@ -77,6 +78,15 @@ var answer = {
             .classList.toggle("turn-off")
             stage_background.classList.toggle("dark")
             option.dialogPause = false            
+        }
+    },
+    pancel:{
+        question:"note",
+        result:function(){
+            const note_scribble = document.querySelector("#note .scribble")
+            const copyElement_scribble = document.querySelector("#copy-element .scribble")
+            note_scribble.classList.add("scribble-go")
+            copyElement_scribble.classList.add("scribble-go")
         }
     }
 }
@@ -303,7 +313,7 @@ async function password(target,process){
         if(textarea.value.length>=4){
             textarea.childNodes[0].remove()
         }
-        textarea.append(target.innerText) 
+        textarea.append(target.dataset.value) 
         return
     }
     if(process==="reset"){
@@ -401,7 +411,40 @@ function getTime(){
 }
 
 
+function safeBoxPassWord(target,state){
+    const copyElement = document.getElementById("copy-element").querySelector(".box_door")
+    const safe = document.querySelector(".box_door")
+    if(state==="input"){
+        const texts = target.parentElement.querySelectorAll("text")
+        let result = ""
+        texts.forEach(text=>{
+            result+=text.childNodes[0].data
+        })
+        option.safeBoxPassword = result
+        if(result==="1043"){
+            copyElement.classList.add("open-door")
+            safe.classList.add("open-door")
+        }
+        return
+    }
 
+    const text = target.parentElement.querySelector("text")
+    const number = Number(text.childNodes[0].data)    
+    step = Number(target.dataset.step)
+
+    text.childNodes[0].data
+    = number + step
+
+    if(number + step<0){
+        text.childNodes[0].data = 9
+
+    }
+    if(number + step>9){
+        text.childNodes[0].data = 0
+
+    }
+    
+}
 
 
 function addActor(){    
@@ -453,43 +496,51 @@ actor.forEach(i=>{
 
 } 
 
-
-
 function toolBox(){
     const hand = document.getElementById("hand")
     drag(hand)
     const pancel = document.getElementById("pancel")
-    const plant = document.getElementById("plant")
+    const key = document.getElementById("key")
     
-
+    tool(key)
     tool(pancel)
-    tool(plant)
+
 
     function tool(element){
-        element.onclick = function(){
+        element.onclick = async function(e){
+            e.stopPropagation()
             const target = checkToolBox()
             const footer = document.querySelector("footer")
             const stage = document.querySelector(".stage")
             const stage_background = document.querySelector(".stage .background")
-
+            const position = getPosition(element)
             element.onclick = null
-            element.dataset.drag = "true"        
-            drag(element)
-            element.style.transition = "1s all"
+            element.dataset.drag = "true"  
+            
+            element.style.top = position.top + "px"
+            element.style.left = position.left + "px"
+            element.style.width = position.w + "px"
+            element.style.height = position.h + "px"
+            
+            await sleep(0)
+            
             element.style.position = "fixed"
+            element.style.transition = "1s all"
             element.style.zIndex = "999"
             element.style.width = `${target.offsetWidth}px`
             element.style.height = `${target.offsetHeight}px`
+
             element.style.top = `${target.offsetTop + footer.offsetTop}px`
             element.style.left = `${target.offsetLeft + stage.scrollLeft - stage_background.offsetLeft}px`
             element.style.padding = "7px"
             element.style.boxSizing = "border-box"
-    
+            
             element.ontransitionend = transitionend
             function transitionend(){
                 target.append(element)
                 element.style = null
                 element.ontransitionend = null
+                drag(element)
             }        
         }
     }
@@ -645,9 +696,42 @@ document.querySelector(".background").classList.remove("dark")
 workFlow()
 
 async function workFlow(){
-    // startScenes()
+    startScenes()
     addActor()
     toolBox()
     solveQuestion()
-    // ini()
+    ini()
+}
+
+
+function getPosition(target){
+    const css = window.getComputedStyle(target)
+    let w = 0
+    let h = 0
+    let top = 0
+    let left = 0
+
+    if(target.nodeName==="svg"){
+        w = parseInt(css.width) 
+        h = parseInt(css.height) 
+    } else {
+        w = target.offsetWidth
+        h = target.offsetHeight
+    }
+
+
+    while(target){
+        if(target.nodeName==="svg"){
+            top+=parseInt(css.top) 
+            left+=parseInt(css.left) 
+            target = target.parentElement
+            continue
+        }
+        top+=target.offsetTop
+        left+=target.offsetLeft
+        target = target.offsetParent
+    }
+
+    return {w,h,top,left}
+
 }

@@ -289,11 +289,24 @@
         outline: 3px transparent solid;
     }
 
-    .interaction > svg {
+    /* .interaction > svg {
+        max-height: 95%;
+        max-width: 95%;
+    } */
+
+    .interaction #copy-element{
+        position: absolute;
+        height:95%;
+        width: 95%;
         max-height: 95%;
         max-width: 95%;
     }
 
+    .interaction #copy-element svg{
+        position: absolute;
+        max-height: 100%;
+        max-width: 100%;
+    }
 
     .interaction[data-state="close"] {
         opacity: 0;
