@@ -149,6 +149,7 @@ async function message(text) {
         }, option.messageDelay)
 
         document.body.addEventListener("click",function myclick(e){
+            // if(!e.target.classList.contains("stage")){return}
             if(option.dialogPause===true){return}
             if(dialog.dataset.next==="true"){
                 document.body.removeEventListener("click",myclick)
@@ -156,12 +157,12 @@ async function message(text) {
             }
         })
 
-        inter.addEventListener("pointerup",()=>{
-            if(!answer[option.currentTool]){return}
-            if(answer[option.currentTool].question===inter.dataset.content){
-                resolve()
-            }              
-        })
+        // inter.addEventListener("pointerup",()=>{
+        //     if(!answer[option.currentTool]){return}
+        //     if(answer[option.currentTool].question===inter.dataset.content){
+        //         resolve()
+        //     }              
+        // })
 
     })
     
@@ -479,14 +480,20 @@ function addActor(){
             close_frame.classList.add("disable")
             stage_background.classList.add("disable")
 
-            for(let j = 1; j<i.length; j++){                
+
+            for(let j = 1; j<i.length; j++){ 
+
+                // if(j===i.length-1){
+                    
+                // }
+
                 if(i[j]==="Func()"){
                     await message("現在時刻是 " + getTime() + " 分")
                     continue
                 }
                 await message(i[j])
             }          
-            interaction()
+            // interaction()
             close_frame.classList.remove("disable")
             stage_background.classList.remove("disable")
             dialog.dataset.state = ""            

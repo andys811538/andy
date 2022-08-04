@@ -445,8 +445,12 @@
         animation: .3s show-item forwards;
     }
 
-    .disable{
+    .disable{        
         pointer-events: none;
+    }
+
+    .disable * {
+        pointer-events: none !important;
     }
 
     .dark{
