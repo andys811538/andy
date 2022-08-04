@@ -479,18 +479,15 @@ function addActor(){
             close_frame.classList.add("disable")
             stage_background.classList.add("disable")
 
-            for(let j = 1; j<i.length; j++){
-                if(j===i.length-1){
-                    close_frame.classList.remove("disable")
-                }
-
+            for(let j = 1; j<i.length; j++){                
                 if(i[j]==="Func()"){
                     await message("現在時刻是 " + getTime() + " 分")
                     continue
                 }
                 await message(i[j])
             }          
-
+            interaction()
+            close_frame.classList.remove("disable")
             stage_background.classList.remove("disable")
             dialog.dataset.state = ""            
         })
@@ -729,7 +726,7 @@ function getPosition(target){
 workFlow()
 
 async function workFlow(){
-    // startScenes()
+    startScenes()
     addActor()
     toolBox()
     solveQuestion()
