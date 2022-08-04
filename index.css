@@ -17,52 +17,45 @@ svg:active #locker_toggle{
     fill: #9a9a9a !important;
 }
 
-/* ==================================================== */
-#gift{
+
+@keyframes shine {
+    0%{        
+        transform: scale(1);
+    }
+    100%{
+        transform: scale(1.2);
+    }
+}
+.shine-finger{
+    animation: shine .3s 4 linear;    
+}
+
+@keyframes ani-index_finger {
+    from{
+        opacity: 1;
+        transform: translate(30%,40%);
+    }
+    to{     
+        opacity: .5;
+        transform: translate(calc(30% + 50vmax - 70px),calc(40% - 50vmin + 75px));
+    }
+}
+.move-finger{
+    animation: ani-index_finger 2s infinite .5s;   
+    
+}
+
+#index_finger{
+    opacity: 0;
     display: none;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
+    position: fixed;
+	fill:#efefefc1;
+	stroke:#3E3A39;
+	stroke-width:4;
+	stroke-miterlimit:10;
+    transform: translate(30%,40%);   
+    pointer-events: none; 
 }
-
-#ribbon_rope{
-    stroke: black;
-    stroke-width: 5px;
-    stroke-dasharray: 480;
-    stroke-dashoffset: 0;        
-}
-@keyframes line {
-    to{stroke-dashoffset: 480}
-}
-.ani-ribbon_rope{
-    animation:line 1.5s linear forwards
-}
-#ribbon{
-    stroke-dasharray: 210;
-    stroke-dashoffset: 0;
-}
-@keyframes line-2{
-    to{stroke-dashoffset: -210}
-}
-.ani-ribbon{
-    animation:line-2 0.7s linear forwards;
-}
-#gift_cover{
-    transform-origin: left;    
-}
-@keyframes open-gift {
-    to{transform: rotate(-40deg) translateY(-15%) ;}
-}
-.ani-gift-cover{
-    animation: open-gift 2s forwards;
-}
-
-
-
-
-
-
 
 /* ========================================================= */
 
@@ -75,6 +68,17 @@ svg:active #locker_toggle{
 }
 
 /* ========================================================= */
+.actor{
+    pointer-events: none;
+}
+
+.actor .target{
+    pointer-events: visibleFill
+}
+
+.disable .actor .target{
+    pointer-events: none
+}
 
 #switch{
     position: absolute;
@@ -82,7 +86,35 @@ svg:active #locker_toggle{
     height: 4.54%;
     left: 21.96%;
     top: 46.88%;
-    z-index: 99;
+    z-index: 99;    
+}
+
+.light{
+    fill:#34B078;
+    transition: fill .3s;
+}
+.on{
+    opacity: 1;
+    fill:#EFEFEF;
+    transition: opacity .3s;
+}
+.off{
+    opacity:0;
+    fill:#EFEFEF;
+    transition: opacity .3s;
+}
+
+.turn-off .light{
+    fill:hsl(0,70%,60%)
+}
+.turn-off .on{
+    opacity: 0;
+    fill:#EFEFEF
+}
+.turn-off .off{
+    opacity:1;
+    fill:#EFEFEF;
+    
 }
 
 
@@ -106,14 +138,115 @@ svg:active #locker_toggle{
     z-index: 10;
 }
 
+.hourHand{
+    transform: rotate(calc(var(--hour) - 90deg));
+    transform-origin: center center;
+    animation: 86400s hour infinite linear;
+}
+
+.minHand{
+    transform: rotate(calc(var(--min) - 90deg));
+    transform-origin: center center;
+    animation: 3600s min infinite linear;
+}
+
+.secondHand{
+    transform: rotate(calc(var(--sec) - 90deg));
+    transform-origin: center center;
+}
+
+
 #closet{
     position: absolute;
     width: 13.54%;
     height: 42.22%;
     left: 3.13%;
     top: 30.84%;
-    z-index: 10;
 }
+
+.doorR{
+    position: absolute;
+    top: 6%;
+    left: 50%;
+    width: 41%;
+    height: 61%;
+    transform-style: preserve-3d;
+    transform-origin: 98% 50%;
+    transform: perspective(1000px) rotateY(0deg) ;
+    transition:  transform 2.5s ease-out;
+}
+
+.open .doorR{
+    transform: perspective(1000px) rotateY(76deg) ;
+}
+.open .doorL{
+    transform: perspective(1000px) rotateY(-76deg) ;
+}
+
+
+.doorL{
+    position: absolute;
+    top: 6%;
+    left: 10%;
+    width: 41%;
+    height: 61%;
+    z-index: 12;
+    transform-style: preserve-3d;
+    transform-origin: 0% 50%;
+    transform: perspective(1000px) rotateY(0deg) ;
+    transition:  transform 2.5s ease-out;
+}
+
+#copy-element .doorL{
+    left: 13%;
+}
+
+/* ==================================================== */
+#gift{
+    position: absolute;
+    top: 39%;
+    left: 27%;
+    width: 48%;
+}
+
+#copy-element #gift{
+    top: 35%;
+}
+
+.ribbon_rope{
+    stroke: black;
+    stroke-width: 5px;
+    stroke-dasharray: 480;
+    stroke-dashoffset: 0;    
+    transition: 1.5s stroke-dashoffset linear ;    
+}
+
+.ribbon{
+    stroke-dasharray: 210;
+    stroke-dashoffset: 0;
+    transition: 0.7s stroke-dashoffset linear 1.5s;  
+}
+
+.gift_cover{
+    transform: rotate(0deg) translateY(0) ;
+    transform-origin: left;  
+    transition: 2s ease-in-out 2.2s;  
+}
+
+.untie .ribbon_rope{
+    stroke-dashoffset: 480
+}
+
+.untie .ribbon{
+    stroke-dashoffset: -210
+}
+
+.untie .gift_cover{
+    transform: rotate(-40deg) translateY(-15%) ;
+}
+
+
+/* ==================================================== */
 
 #bed{
     position: absolute;
@@ -133,6 +266,15 @@ svg:active #locker_toggle{
     z-index: 10;
 }
 
+.toolBox #plant{
+    top: initial;
+    left: initial;
+    width: 100%;
+    height: 100%;         
+}
+
+
+
 #safe_box{
     position: absolute;
     width: 6.32%;
@@ -141,6 +283,72 @@ svg:active #locker_toggle{
     top: 58.91%;
     z-index: 11;
 }
+
+
+
+.key{
+    position: absolute;
+    width: 30%;
+    top: 41%;
+    left: 27%;       
+}
+
+.toolBox #key{
+    top: initial;
+    left: initial;
+    width: 100%;
+    height: 100%;
+}
+
+.box_door{
+    position: absolute;
+    top: 12.1%;
+    left: 13.1%;
+    width: 73.24%;
+    height: 68.26%;
+
+    transform-style: preserve-3d;
+    transform-origin: 98% 50%;
+    transform: perspective(1000px) rotateY(0deg) ;
+    transition:  transform 2.5s ease-out 1.9s;
+}
+
+.box_door .left:active,
+.box_door .right:active{
+    filter: brightness(70%);
+}
+
+.box_door .button{
+    fill:#7D2A2C;
+    transition: .1s fill 1.5s;
+}
+
+.box_door .button:active{
+    filter: brightness(115%);
+}
+
+.open-door{
+    transform: perspective(1000px) rotateY(76deg) 
+}
+.open-door .button{
+    fill:hsl(150,100%,20%)
+}
+
+.input{
+    transform-origin: 32% 49%;
+    transform: rotate(0deg);
+    transition:  transform 1.5s ease-in-out;
+}
+.open-door .input{
+    transform: rotate(0.25turn);
+}
+
+.background .pass,
+.background .input{
+    pointer-events: none;
+}
+
+
 
 #border{
     position: absolute;
@@ -160,18 +368,76 @@ svg:active #locker_toggle{
     z-index: 10;
 }
 
-#pancel{
+/* #pancel{
     position: absolute;
     width: 0.29%;
     height: 4.23%;
     left: 49.52%;
     top: 45.73%;
-    z-index: 11;
-}
+    z-index:9;
+} */
 
-.interaction .actor{
+
+
+
+
+#interaction .actor{
     max-width: 100%;
     max-height: 100%;
     padding: 40px;
     box-sizing: border-box;
+}
+
+
+#note{
+    position: absolute;
+    width: 1.69%;
+    height: 4.32%;
+    left: 59.27%;
+    top: 37.4%;
+    z-index: 12;
+}
+
+.scribble{
+    stroke-dasharray: 137.849;
+    stroke-dashoffset: 137.849;    
+    transition: stroke-dashoffset 2.5s linear;
+}
+
+.scribble-go{
+    stroke-dashoffset: 0;
+    /* animation: scribbleGo 2.5s forwards linear; */
+}
+
+/* @keyframes scribbleGo {
+    to{stroke-dashoffset: 0;}
+} */
+
+
+
+#penHolder{
+    position: absolute;
+    width: 1.6%;
+    height: 7.2%;
+    top: 46.1%;
+    left: 48.64%;
+}
+
+#penHolder .container{
+    position: absolute;
+}
+
+#pancel{
+    position: absolute;
+    width: 21.58%;
+    height: 67.89%;
+    left: 47.52%;
+    top: -1.27%;
+}
+
+.toolBox #pancel{
+    top: initial;
+    left: initial;
+    width: 100%;
+    height: 100%;
 }
