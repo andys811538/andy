@@ -1,7 +1,4 @@
-// const open = document.getElementById("open")
-// open.onclick = function(){
-//     document.documentElement.requestFullscreen()
-// }
+
 
 Height()
 function Height(){
@@ -69,8 +66,7 @@ var option = {
 
 var answer = {
     hand:{
-        question:"switch",
-        result:function(){
+        "switch":function(){
             const copyElement = document.querySelector("#copy-element") 
             const stage_background = document.querySelector(".stage .background")           
             copyElement.classList.toggle("turn-off")
@@ -78,17 +74,30 @@ var answer = {
             .classList.toggle("turn-off")
             stage_background.classList.toggle("dark")
             option.dialogPause = false            
+        },
+        "gift":function(){
+            const copyElement = document.querySelector("#copy-element") 
+            const gift = document.querySelector("#gift")
+            copyElement.classList.add("untie")
+            gift.classList.add("untie")
         }
     },
     pancel:{
-        question:"note",
-        result:function(){
+        "note":function(){
             const note_scribble = document.querySelector("#note .scribble")
             const copyElement_scribble = document.querySelector("#copy-element .scribble")
             note_scribble.classList.add("scribble-go")
             copyElement_scribble.classList.add("scribble-go")
         }
-    }
+    },
+    key:{
+        "closet":function(){
+            const closet = document.getElementById("closet")
+            const copyElement = document.querySelector("#copy-element")
+            closet.classList.add("open")
+            copyElement.classList.add("open")
+        }
+    },  
 }
 
 
@@ -159,21 +168,6 @@ async function message(text) {
     
 }
 
-function OpenGift() {
-    const ribbon = document.getElementById("ribbon")
-    const ribbon_rope = document.getElementById("ribbon_rope")
-    const gift_cover = document.getElementById("gift_cover")
-    ribbon.addEventListener("animationend", function ribbonAni(){
-        gift_cover.classList.add("ani-gift-cover")
-        ribbon.removeEventListener("animationend",ribbonAni)
-    })
-    ribbon_rope.addEventListener("animationend", function ribbon_ropeAni(){
-        ribbon.classList.add("ani-ribbon")
-        ribbon_rope.removeEventListener("animationend",ribbon_ropeAni)
-    })
-    ribbon_rope.classList.add("ani-ribbon_rope")
-
-}
 
 function drag(element) {
 
@@ -276,11 +270,6 @@ function interaction() {
     }
 }   
 
-
-
-// document.addEventListener("readystatechange",e=>{
-//     console.log(e.target.readyState)
-// })
 
 
 async function chose(){
@@ -396,7 +385,18 @@ function tutorialAni(state){
 function copy(targetElement){    
     const inter = document.querySelector(".interaction")
     const copyElement = targetElement.cloneNode(true)
+    const css = window.getComputedStyle(targetElement)
+    const w = parseInt(css.width),h = parseInt(css.height);
+    const aspectRatio = parseInt(css.width) / parseInt(css.height)
+
+    if(w>h){
+        copyElement.style.width = "100%"
+    } else {
+        copyElement.style.height = "100%"
+    }
+    
     copyElement.id = "copy-element"
+    copyElement.style.aspectRatio = aspectRatio
     inter.dataset.content = targetElement.id
     inter.append(copyElement)
 }
@@ -412,6 +412,7 @@ function getTime(){
 
 
 function safeBoxPassWord(target,state){
+
     const copyElement = document.getElementById("copy-element").querySelector(".box_door")
     const safe = document.querySelector(".box_door")
     if(state==="input"){
@@ -461,10 +462,11 @@ function addActor(){
         ["table","這是桌子"],
         ["note","一張紙條","上面好像留有什麼痕跡"],
         ["switch","這是開關"],
+        ["penHolder","這是一個筆筒"],
+        ["gift","這是一個禮物"]
     ]
 
-
-actor.forEach(i=>{        
+    actor.forEach(i=>{        
         const target = document.getElementById(i[0])
         const close_frame = document.querySelector(".interaction + .close_frame")
         target.addEventListener("click",async()=>{            
@@ -501,7 +503,7 @@ function toolBox(){
     drag(hand)
     const pancel = document.getElementById("pancel")
     const key = document.getElementById("key")
-    
+
     tool(key)
     tool(pancel)
 
@@ -595,8 +597,8 @@ function solveQuestion(){
             return
         }
         
-        if(answer[option.currentTool].question===inter.dataset.content){            
-            answer[option.currentTool].result()            
+        if(answer[option.currentTool][inter.dataset.content]){            
+            answer[option.currentTool][inter.dataset.content]()           
         }    
         option.currentTool=null
     }
@@ -690,20 +692,6 @@ function startScenes(){
     }
 }
 
-
-document.querySelector(".background").classList.remove("dark")
-
-workFlow()
-
-async function workFlow(){
-    startScenes()
-    addActor()
-    toolBox()
-    solveQuestion()
-    ini()
-}
-
-
 function getPosition(target){
     const css = window.getComputedStyle(target)
     let w = 0
@@ -735,3 +723,16 @@ function getPosition(target){
     return {w,h,top,left}
 
 }
+
+// document.querySelector(".background").classList.remove("dark")
+
+workFlow()
+
+async function workFlow(){
+    // startScenes()
+    addActor()
+    toolBox()
+    solveQuestion()
+    ini()
+}
+

@@ -296,10 +296,11 @@
 
     .interaction #copy-element{
         position: absolute;
-        height:95%;
-        width: 95%;
         max-height: 95%;
         max-width: 95%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     .interaction #copy-element svg{
