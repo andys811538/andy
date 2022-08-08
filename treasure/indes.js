@@ -484,14 +484,10 @@ function addActor(){
             copy(target)
             close_frame.classList.add("disable")
             stage_background.classList.add("disable")
-
-
+    
+    
             for(let j = 1; j<i.length; j++){ 
-
-                // if(j===i.length-1){
-                    
-                // }
-
+    
                 if(i[j]==="Func()"){
                     await message("現在時刻是 " + getTime() + " 分")
                     continue
@@ -501,78 +497,99 @@ function addActor(){
             // interaction()
             close_frame.classList.remove("disable")
             stage_background.classList.remove("disable")
-            dialog.dataset.state = ""            
+            dialog.dataset.state = ""                  
         })
     })
 
+
+
 } 
 
-function toolBox(){
+// function toolBox(){
     const hand = document.getElementById("hand")
     drag(hand)
-    const pancel = document.getElementById("pancel")
-    const key = document.getElementById("key")
 
-    tool(key)
-    tool(pancel)
+    // const pancel = document.getElementById("pancel")
+    // const key = document.getElementById("key")
+
+    // tool(key)
+    // tool(pancel)
 
     
-    function tool(element){
-        element.onclick = async function(e){
-            e.stopPropagation()
-            const target = checkToolBox()
-            const footer = document.querySelector("footer")
-            const stage = document.querySelector(".stage")
-            const stage_background = document.querySelector(".stage .background")
-            const position = getPosition(element)
-            element.onclick = null
-            element.dataset.drag = "true"  
-            
-            element.style.top = position.top + "px"
-            element.style.left = position.left - stage_background.offsetLeft + "px"
-            element.style.width = position.w + "px"
-            element.style.height = position.h + "px"
-            
-            await sleep(0)
-            
-            element.style.position = "fixed"
-            element.style.transition = "1s all"
-            element.style.zIndex = "999"
-            element.style.width = `${target.offsetWidth}px`
-            element.style.height = `${target.offsetHeight}px`
+async function tool(element){
+        window.event.stopPropagation()
+        const target = checkToolBox()
+        const footer = document.querySelector("footer")
+        const stage = document.querySelector(".stage")
+        const stage_background = document.querySelector(".stage .background")
+        const inter = document.querySelector(".interaction")
+        const position = getPosition(element)
 
-            element.style.top = `${target.offsetTop + footer.offsetTop}px`
-            element.style.left = `${target.offsetLeft + stage.scrollLeft - stage_background.offsetLeft}px`
-            element.style.padding = "7px"
-            element.style.boxSizing = "border-box"
-            
-            element.ontransitionend = transitionend
-            function transitionend(){
-                target.append(element)
-                element.style = null
-                element.ontransitionend = null
-                drag(element)
-            }        
+        let inter_x = 0,
+            inter_y = 0
+
+        element.onclick = null
+        element.dataset.drag = "true"  
+        
+        element.style.top = position.top + "px"
+        element.style.left = position.left - stage_background.offsetLeft + "px"
+        element.style.width = position.w + "px"
+        element.style.height = position.h + "px"
+        
+        if(inter.dataset.state==="open"){
+            stage_background.querySelector(`#${element.id}`).remove()
+            element.style.left = position.left + "px"
+            inter_x = inter.offsetLeft - inter.offsetWidth / 2
+            inter_y = inter.offsetTop - inter.offsetHeight / 2
+            console.log(inter.offsetWidth)
         }
-    }
 
+        await sleep(0)
+        
+        element.style.position = "fixed"
+        element.style.transition = "1s all"
+        element.style.zIndex = "999"
+        element.style.width = `${target.offsetWidth}px`
+        element.style.height = `${target.offsetHeight}px`
 
-    function checkToolBox(){
-        const boxs = document.querySelectorAll(".toolBox .item")
-        for(let i = 0;i<boxs.length;i++){
-            if(boxs[i].dataset.exist==="false"){  
-                boxs[i].dataset.exist = "true"        
-                return boxs[i]
-            }
+        element.style.top = `${target.offsetTop + footer.offsetTop  + inter_y}px`
+        element.style.left = `${target.offsetLeft + stage.scrollLeft - stage_background.offsetLeft + inter_x}px`
+
+        if(inter.dataset.state==="open"){
+            element.style.top = `${target.offsetTop + footer.offsetTop  - inter_y}px`
+            element.style.left = `${target.offsetLeft + stage.scrollLeft - inter_x}px`
+        }
+
+        element.style.padding = "7px"
+        element.style.boxSizing = "border-box"
+        
+        element.ontransitionend = transitionend
+        function transitionend(){
+            target.append(element)
+            element.style = null
+            element.ontransitionend = null
+            drag(element)
+        }        
+    
+}
+
+function checkToolBox(){
+    const boxs = document.querySelectorAll(".toolBox .item")
+    for(let i = 0;i<boxs.length;i++){
+        if(boxs[i].dataset.exist==="false"){  
+            boxs[i].dataset.exist = "true"        
+            return boxs[i]
         }
     }
 }
+
 
 function solveQuestion(){
     const inter = document.querySelector(".interaction")
     window.addEventListener("pointerdown",down)
     
     function down(e){
+        if(!e.target.dataset.drag){return}
         option.currentTool=e.target.id
         if(!option.currentTool){return} 
         window.addEventListener("pointermove",move)
@@ -715,13 +732,14 @@ function startScenes(){
 }
 
 function getPosition(target){
-    const css = window.getComputedStyle(target)
+    let css = window.getComputedStyle(target)
     let w = 0
     let h = 0
     let top = 0
     let left = 0
 
     if(target.nodeName==="svg"){
+        css = window.getComputedStyle(target)
         w = parseInt(css.width) 
         h = parseInt(css.height) 
     } else {
@@ -731,6 +749,22 @@ function getPosition(target){
 
 
     while(target){
+        css = window.getComputedStyle(target)
+
+        // if(css.transform!="none"){
+        //     let matric = css.transform.replaceAll(/[matrix\(\)\s]/g,"")
+        //     matric = matric.split(",",6)
+        //     let tx = Number(matric[4])
+        //     let ty = Number(matric[5])
+        //     left = left + tx
+        //     top = top + ty
+        //     console.log(left,top)
+        // }
+
+        if(css.position==="fixed"){
+            return {w,h,top,left}
+        }
+
         if(target.nodeName==="svg"){
             top+=parseInt(css.top) 
             left+=parseInt(css.left) 
@@ -753,7 +787,7 @@ workFlow()
 async function workFlow(){
     startScenes()
     addActor()
-    toolBox()
+    // toolBox()
     solveQuestion()
     ini()
 }
