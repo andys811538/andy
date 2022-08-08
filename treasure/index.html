@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="ui.css">
     <link rel="stylesheet" href="start.css">
     <link rel="manifest" href="manifest.json" />
+
 </head>
 
 
@@ -1588,7 +1589,7 @@
 
             <div class="actor" id="penHolder">
                 
-                <svg class="target" id="pancel" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 2.592 17.118" style="overflow:visible;enable-background:new 0 0 2.592 17.118;"	 xml:space="preserve">
+                <svg onclick="tool(this)" class="target" id="pancel" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 2.592 17.118" style="overflow:visible;enable-background:new 0 0 2.592 17.118;"	 xml:space="preserve">
                     <g>
                         <polygon style="fill:#55473F;" points="0.551,0 0,13.935 1.086,17.118 2.137,14.091 2.592,0.069 	"/>
                         <path style="fill:#FAE5D1;" d="M0.551,0l2.041,0.069L2.136,14.091l-0.681,1.972c-0.293-0.119-0.531-0.102-0.729,0.015L0,13.935		L0.551,0z"/>
@@ -1659,10 +1660,17 @@
             <button class="submit" onclick="password(this,'ok')"><svg width="100%" height="100%" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="50">確認</text></svg></button>
         </div>
 
-
-
         <div data-state="close" style="display: none;" class="interaction"></div>
         <div class="close_frame" onclick="interaction()" ></div>
+
+        <div class="gift-card">
+            <a class="header" download="giftcode" href="" >                
+                <div class="download"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Pro 6.1.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M480 352h-133.5l-45.25 45.25C289.2 409.3 273.1 416 256 416s-33.16-6.656-45.25-18.75L165.5 352H32c-17.67 0-32 14.33-32 32v96c0 17.67 14.33 32 32 32h448c17.67 0 32-14.33 32-32v-96C512 366.3 497.7 352 480 352zM432 456c-13.2 0-24-10.8-24-24c0-13.2 10.8-24 24-24s24 10.8 24 24C456 445.2 445.2 456 432 456zM233.4 374.6C239.6 380.9 247.8 384 256 384s16.38-3.125 22.62-9.375l128-128c12.49-12.5 12.49-32.75 0-45.25c-12.5-12.5-32.76-12.5-45.25 0L288 274.8V32c0-17.67-14.33-32-32-32C238.3 0 224 14.33 224 32v242.8L150.6 201.4c-12.49-12.5-32.75-12.5-45.25 0c-12.49 12.5-12.49 32.75 0 45.25L233.4 374.6z"/></svg></div>
+            </a>
+            <div class="container">                
+                <img id="giftImage" src="" alt="">
+            </div>           
+        </div>
 
     </div>
 
@@ -1685,11 +1693,8 @@
     </footer>
 
 
-    <svg id="locker" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 169.496 282.621" style="overflow:visible;enable-background:new 0 0 169.496 282.621;" xml:space="preserve">
-        <path id="locker_toggle" d="M17.066,154.74l0.126-99.032C18.329,28.93,47.889-0.352,86.54,0.003 c41.179,0.379,66.695,27.916,67.453,56.463l-0.379,70.105l-20.211,0.253l0.253-12.758c8.6-6.507,8.916-12.749,0-18.695l0.632-38.653 c-1.011-17.937-24.761-35.886-46.737-36.253C64.813,20.087,38.54,36.508,37.656,54.445l-0.379,100.168L17.066,154.74" />
-        <path style="fill:#DEAC34;" d="M14.55,146.104l140.859,0.851c7.304,0.044,13.216,5.949,13.271,13.252l0.816,109.52 c0.053,7.135-5.739,12.936-12.874,12.893L15.67,281.782c-8.738-0.052-15.767-7.202-15.669-15.94l1.191-106.609 C1.274,151.927,7.243,146.06,14.55,146.104z" />
-        <path style="fill:#4C5044;" d="M76.213,242.908l17.716,0.095l0.474-35.526c4.263-3.158,8.053-5.368,7.232-14.4 c-1.263-10.168-7.011-12.505-15.663-13.547c-12,1.042-14.919,5.495-16.768,13.168c-0.938,6.815,2.803,12.211,7.105,15.253 L76.213,242.908z" />
-    </svg>
+
+
 
 
 

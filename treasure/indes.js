@@ -75,11 +75,16 @@ var answer = {
             stage_background.classList.toggle("dark")
             option.dialogPause = false            
         },
-        "gift":function(){
+        "gift":async function(){
             const copyElement = document.querySelector("#copy-element") 
             const gift = document.querySelector("#gift")
+            const giftCard = document.querySelector(".gift-card")
+            giftCard.style.display = "block"    
+            await sleep(0)        
+            giftCard.classList.add("reward")
             copyElement.classList.add("untie")
             gift.classList.add("untie")
+
         }
     },
     pancel:{
@@ -335,7 +340,7 @@ async function getSerialNumber(){
             var data = {
                 pass
             }
-            const url = 'https://script.google.com/macros/s/AKfycbxF4sCS7DVjTg2T0ZvUUpzbxL44sq86Zez5xZImyVd0dLHTRQJBh7c7EaNRf8ExjC69/exec'
+            const url = 'https://script.google.com/macros/s/AKfycbzV9gI-psDRSnTF7LopFnwybb-ZjTkgY1OW6M4uWycZxyuCn4C3ri5td3c4rupopv8/exec'
             fetch(url, {
                 header:{
                     "Content-Type": "application/json;charset=utf-8",
@@ -511,7 +516,7 @@ function toolBox(){
     tool(key)
     tool(pancel)
 
-
+    
     function tool(element){
         element.onclick = async function(e){
             e.stopPropagation()
@@ -618,6 +623,7 @@ async function ini() {
     const switcher = document.getElementById("switch")
     const toolBox = document.querySelector("footer .toolBox")
     const close_frame =  document.querySelector(".interaction + .close_frame")
+    const giftImage = document.getElementById("giftImage")
     stage_background.classList.add("disable")
     close_frame.classList.add("disable")
     stage.scroll((stage.scrollWidth-stage.clientWidth)/2,0)    
@@ -641,6 +647,7 @@ async function ini() {
             }   
         } else
         if(get.serialNumber){
+            giftImage.src = get.serialNumber
             await message("驗證成功！")                
         }
         break
@@ -733,7 +740,7 @@ function getPosition(target){
 workFlow()
 
 async function workFlow(){
-    startScenes()
+    // startScenes()
     addActor()
     toolBox()
     solveQuestion()
