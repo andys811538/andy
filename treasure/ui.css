@@ -15,8 +15,9 @@
         -moz-user-select: none;
         -webkit-user-select: none;
         -ms-user-select: none;
-        touch-action: none;
-        overflow-y: hidden;
+        /* touch-action: none; */
+        overflow-y: hidden;        
+        touch-action: pinch-zoom;
     }
 
     header {
@@ -452,15 +453,15 @@
         top: 50%;
         left: 50%;
         width: 300px;
-        height: 75%;
-        transform: translate(-50%,-55%) scale(0.1);        
+        height: 85%;
+        transform: translate(-50%,-55%) scale(.1);        
         background-color: #fff;    
         border-radius: 15px;      
         z-index: 99;      
         opacity: 0;
         transition: 
             opacity .2s 3.7s,
-            transform 1s 3.7s cubic-bezier(.29,.98,.6,1.31);
+            transform 1.5s 3.7s cubic-bezier(.29,.98,.6,1.31);
     }
 
     .reward{
@@ -567,7 +568,6 @@
             height: 100vw;
             width: var(--vh);
             max-width: var(--vh);
-
         }
 
         body:fullscreen div.stage {

@@ -80,11 +80,11 @@ var answer = {
             const gift = document.querySelector("#gift")
             const giftCard = document.querySelector(".gift-card")
             giftCard.style.display = "block"    
-            await sleep(0)        
+            await sleep(10)        
             giftCard.classList.add("reward")
             copyElement.classList.add("untie")
             gift.classList.add("untie")
-
+            await message("恭喜您通關啦！請將獲得的獎勵下載來使用。")
         }
     },
     pancel:{
@@ -529,7 +529,7 @@ function toolBox(){
             element.dataset.drag = "true"  
             
             element.style.top = position.top + "px"
-            element.style.left = position.left + "px"
+            element.style.left = position.left - stage_background.offsetLeft + "px"
             element.style.width = position.w + "px"
             element.style.height = position.h + "px"
             
@@ -636,7 +636,7 @@ async function ini() {
 
 
         let get = await getSerialNumber()
-        console.log(get.serialNumber)
+        // console.log(get.serialNumber)
         if(get.serialNumber==="wrong password"){
             await message("您輸入的邀請碼錯誤。")   
             await message("錯誤的邀請碼，將無法獲得通關獎品。")  
@@ -647,7 +647,7 @@ async function ini() {
             }   
         } else
         if(get.serialNumber){
-            giftImage.src = get.serialNumber
+            getImage(get.serialNumber)
             await message("驗證成功！")                
         }
         break
@@ -700,6 +700,17 @@ function startScenes(){
         elements.forEach(elemenet=>{
             elemenet.style = null
         })        
+        start.innerText = "繼續遊戲"
+    }
+    
+
+    document.onfullscreenchange = function(){
+        if(!document.fullscreenElement){
+            elements.forEach(elemenet=>{
+                elemenet.style.display = "none"
+            })
+            start.style.display = "block"
+        }
     }
 }
 
@@ -735,15 +746,39 @@ function getPosition(target){
 
 }
 
-// document.querySelector(".background").classList.remove("dark")
+document.querySelector(".background").classList.remove("dark")
 
 workFlow()
 
 async function workFlow(){
-    // startScenes()
+    startScenes()
     addActor()
     toolBox()
     solveQuestion()
     ini()
 }
 
+
+
+function getImage(url){
+    const giftImage = document.getElementById("giftImage")
+    const download = document.querySelector(".gift-card a")
+    const canvas = document.createElement("canvas")
+    const ctx = canvas.getContext('2d')
+    const image = new Image()
+    image.src = url
+    image.crossOrigin = 'Anonymous'
+    image.onload = function(){
+        canvas.width = image.width
+        canvas.height = image.height
+        ctx.drawImage(image,0,0)
+        var data = canvas.toDataURL("image/png")
+        giftImage.src = data
+        download.href = data
+    }
+}
+
+
+
+
+    
