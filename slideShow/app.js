@@ -1,9 +1,13 @@
 
 
+var ani_run = false
 function slidShow(){
     const last = document.querySelector("#last")
     const next = document.querySelector("#next")
-    next.addEventListener("click",()=>{        
+    
+    next.addEventListener("click",()=>{ 
+        if(ani_run){return}
+        ani_run = true
         var item_0 = document.querySelector(".item-0")
         var item_1 = document.querySelector(".item-1")
         var item_2 = document.querySelector(".item-2")
@@ -17,8 +21,15 @@ function slidShow(){
             }
             e.className = "item-" + index
         })
+        item_0.addEventListener("transitionend",ani_run_state)
+        function ani_run_state(){
+            ani_run = false     
+            item_0.removeEventListener("transitionend",ani_run_state)   
+        }
     })
-    last.addEventListener("click",()=>{        
+    last.addEventListener("click",()=>{      
+        if(ani_run){return}  
+        ani_run = true
         var item_0 = document.querySelector(".item-0")
         var item_1 = document.querySelector(".item-1")
         var item_2 = document.querySelector(".item-2")
@@ -32,8 +43,12 @@ function slidShow(){
             }
             e.className = "item-" + index
         })
+        item_0.addEventListener("transitionend",ani_run_state)
+        function ani_run_state(){
+            ani_run = false     
+            item_0.removeEventListener("transitionend",ani_run_state)   
+        }
     })
-
 }
 
 slidShow()
