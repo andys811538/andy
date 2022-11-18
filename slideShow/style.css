@@ -1,0 +1,86 @@
+body{
+    margin: 0;
+    padding: 0;
+    background-color: #333;    
+}
+
+.slid-show{
+    border-radius: 15px;
+    position: relative;
+    margin: 40px auto;
+    width: 60%;
+    height: 150px;
+    background-color: rgba(255, 255, 255, 0.76);
+    overflow-x: scroll;
+    display: flex;
+    pointer-events: none;
+}
+
+.slid-show::-webkit-scrollbar{
+    width: 0;
+    height: 0;
+}
+
+.slid-show div[class*="item"]{
+    position: absolute;
+    width: 60%;
+    height: 100%;    
+    /* border: 1px solid black; */
+    text-align: center;
+    line-height: 200px;
+    transition: 0.5s all;
+}
+
+.slid-show img{
+    width: 100%;
+    padding: 0 5px;
+    box-sizing: border-box;
+}
+
+.slid-show .item-0{
+    opacity: 0;
+    left: -100%;
+    /* background-color: rgba(255, 0, 0, 0.6); */
+}
+.slid-show .item-1{
+    filter: blur(2px);
+    opacity: 0.8;
+    left: -40%;
+    /* background-color: rgba(255, 255, 0, 0.84); */
+}
+.slid-show .item-2{
+    left: 20%;
+    /* background-color: rgba(0, 255, 38, 0.703); */
+}
+.slid-show .item-3{
+    filter: blur(2px);
+    opacity: 0.8;
+    left: 80%;
+    /* background-color: rgba(0, 64, 255, 0.776); */
+}
+.slid-show .item-4{
+    opacity: 0;
+    left: 140%;
+    /* background-color: rgba(255, 0, 238, 0.626); */
+}
+
+
+.slid-show .controller{    
+    position: absolute;
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);    
+    pointer-events: all;
+}
+
+.slid-show .controller button{
+    color: rgba(51, 51, 51, 0.776);
+    font-size: 30px;
+    outline: none;
+    appearance: none;
+    background-color: transparent;
+    border: none;
+}
