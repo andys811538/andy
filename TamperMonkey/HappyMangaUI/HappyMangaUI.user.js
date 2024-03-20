@@ -1,11 +1,13 @@
 // ==UserScript==
 // @name         HappyMangaUI
 // @namespace    http://tampermonkey.net/
-// @version      2024-03-17
+// @version      0.1
 // @description  try to take over the world!
 // @author       You
 // @match        https://m.happymh.com/*
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
+// @updataURL    https://github.com/andys811538/andy/raw/main/TamperMonkey/HappyMangaUI/HappyMangaUI.user.js
+// @downloadURL    https://github.com/andys811538/andy/raw/main/TamperMonkey/HappyMangaUI/HappyMangaUI.user.js
 // @grant        none
 // ==/UserScript==
 
