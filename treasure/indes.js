@@ -647,28 +647,28 @@ async function ini() {
     toolBox.style.display = "none"
     // let state = dialog.dataset.state
     await message("歡迎來到密室之尋寶遊戲！")
-    while(true){
-        await message("請先輸入您的邀請碼。")        
+    // while(true){
+    //     await message("請先輸入您的邀請碼。")        
 
 
 
-        let get = await getSerialNumber()
-        // console.log(get.serialNumber)
-        if(get.serialNumber==="wrong password"){
-            await message("您輸入的邀請碼錯誤。")   
-            await message("錯誤的邀請碼，將無法獲得通關獎品。")  
-            await message("是否要再輸入一次邀請碼？")  
-            let chose_result = await chose()
-            if(chose_result==="yes"){
-                continue
-            }   
-        } else
-        if(get.serialNumber){
-            getImage(get.serialNumber)
-            await message("驗證成功！")                
-        }
-        break
-    }
+    //     let get = await getSerialNumber()
+    //     // console.log(get.serialNumber)
+    //     if(get.serialNumber==="wrong password"){
+    //         await message("您輸入的邀請碼錯誤。")   
+    //         await message("錯誤的邀請碼，將無法獲得通關獎品。")  
+    //         await message("是否要再輸入一次邀請碼？")  
+    //         let chose_result = await chose()
+    //         if(chose_result==="yes"){
+    //             continue
+    //         }   
+    //     } else
+    //     if(get.serialNumber){
+    //         getImage(get.serialNumber)
+    //         await message("驗證成功！")                
+    //     }
+    //     break
+    // }
 
     await message("進入教學")
     
