@@ -1,0 +1,243 @@
+body{
+    margin: 0;
+}
+
+.border-gray {
+    border-color: #ced4da !important;
+}
+
+#collapseSearchArea::-webkit-scrollbar {
+    height: 3px;
+    width: 7px;
+    background-color: #ddd;
+    border-radius: 20px;
+}
+
+#target:focus {
+    box-shadow: none;
+    border: #ced4da 1px solid;
+}
+
+.search-bar.input-group:focus-within {
+    box-shadow: 0 0 0 1px rgba(13, 109, 253, 0.47);
+    border-radius: 40vh;
+}
+
+#collapseSearchArea::-webkit-scrollbar-thumb {
+    background-color: #666;
+    border-radius: 20px;
+}
+
+.modal-body .container-fluid {
+    height: 100%;
+}
+
+#collapseSearchArea {
+    max-height: 80%;
+    overflow-y: auto;
+}
+
+#collapseSearchArea table th:nth-child(1) {
+    width: 4em;
+}
+
+#collapseSearchArea td {
+    transition: background-color .3s,
+        color .3s;
+}
+
+.active td {
+    background-color: hsl(218.18deg 91.67% 95.29%);
+}
+
+#add-item {
+    max-height: 8ch;
+    max-width: 80%;
+    overflow-y: auto;
+    text-align: center;
+    cursor: pointer;
+}
+
+#add-item::-webkit-scrollbar {
+    width: 5px;
+    background-color: #ddd;
+    border-radius: 20px;
+}
+
+#add-item::-webkit-scrollbar-thumb {
+    background-color: #666;
+    border-radius: 20px;
+}
+
+.add-check {
+    display: inline-block;
+    color: hsla(216, 70%, 50%, 1);
+    cursor: pointer;
+    position: relative;
+    width: 2ch;
+    height: 2ch;
+    border-radius: 50vh;
+    transition: background-color .35s;
+}
+
+.add-check:hover {
+    background-color: #3333331b;
+}
+
+.add-check input {
+    padding: 0;
+    margin: 0;
+    width: 0;
+    height: 0;
+    visibility: hidden;
+}
+
+.add-check div {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: color .35s,
+        transform .35s;
+}
+
+.add-check input:checked+div {
+    transform: translate(-50%, -50%) rotate(45deg);
+    color: hsla(354, 70%, 54%, 1);
+}
+
+#nutri-item{
+    max-height: 100%;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+}
+#nutri-item::-webkit-scrollbar{
+    width: 7px;
+    background-color: #ddd;
+    border-radius: 20px;
+}
+#nutri-item::-webkit-scrollbar-thumb{
+    background-color: #999;
+    border-radius: 20px;
+}
+
+.item-collapse-btn{
+    transition: transform .35s,
+                opacity .35s;
+}
+.item-collapse-btn.toggle{
+    transform: scaleY(-1);
+}
+
+
+
+#nutri-result{
+    transition: opacity .35s;
+    opacity: 0 ;
+}
+
+#nutri-result.show{
+    opacity: 1;
+}
+#show-result{
+    display: none;
+}
+
+.searchFood .table{
+    width: 100%;
+}
+
+@media (min-width:920px) {
+    .modal-body {
+        height: 85vh;
+    }
+}
+
+@media (max-width:600px) {
+
+    .searchFood{
+        overflow: auto;
+    }
+
+    .searchFood::-webkit-scrollbar{
+        height: 2px;
+        width: 0;
+    }
+
+    .searchFood .table{
+        width: 200%;
+    }
+
+    .searchFood .table .add{
+        width: 10%;
+    }
+
+    .searchFood .table .name{
+        width: 20%;
+    }
+
+    .searchFood .table .name{
+        width: 20%;
+    }
+
+    .searchFood .table .description{
+        width: 50%;
+    }
+
+    #nutri-item{
+        overscroll-behavior: auto;
+    }
+    #show-result{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background-color: #eff2f4;
+        border: #ced4da 1px solid;
+        border-radius: 15px 15px 0 0;
+        height: 0;
+        transform-origin: bottom;
+        transition: height .35s,opacity .35s;
+    }
+
+    #show-result *{
+        transform: scaleY(0);
+        transition: transform .35s;
+    }
+    #show-result.active *{
+        transform: scaleY(1);
+    }
+    #show-result.active{
+        height: 6ch;
+    }
+    #nutri-result{
+        position: fixed;
+        display: none !important;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        transition: opacity .35s;
+        opacity: 0;
+    }
+
+    #nutri-result.active{
+        display: flex !important;
+        opacity: 0;
+    }
+
+    #show-result.show{
+        width: 100%;
+        /* height: 100%; */
+        background-color: #333;
+        opacity: 0.3;
+        border: 100vmax #333 solid;
+    }
+    #show-result.show *{
+        display: none;
+    }
+
+}
+

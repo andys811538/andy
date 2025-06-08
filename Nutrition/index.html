@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"
+        integrity="sha512-XMVd28F1oH/O71fzwBnV7HucLxVwtxf26XV8P4wPk26EDxuGZ91N8bsOttmnomcCD3CS5ZMRL50H0GgOHvegtg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jszip-utils/0.1.0/jszip-utils.min.js'
+        integrity='sha512-3WaCYjK/lQuL0dVIRt1thLXr84Z/4Yppka6u40yEJT1QulYm9pCxguF6r8V84ndP5K03koI9hV1+zo/bUbgMtA=='
+        crossorigin='anonymous'></script>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css'
+        integrity='sha512-SbiR/eusphKoMVVXysTKG/7VseWii+Y3FdHrt0EpKgpToZeemhqHeZeLWLhJutz/2ut2Vw1uQEj2MbRF+TVBUA=='
+        crossorigin='anonymous' />
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.bundle.js'
+        integrity='sha512-gMrnU9iM+azBQtrSC8kTJy6+g+hjaIHnElQmb41QeHNTGYjbbtm0BptpIMgXYpS6iyWq9bPkxrcqgK8aqRsjAg=='
+        crossorigin='anonymous'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js'
+        integrity='sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ=='
+        crossorigin='anonymous'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.6.2/fuse.min.js"
+        integrity="sha512-Nqw1tH3mpavka9cQCc5zWWEZNfIPdOYyQFjlV1NvflEtQ0/XI6ZQ+H/D3YgJdqSUJlMLAPRj/oXlaHCFbFCjoQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.css'
+        integrity='sha512-Z0kTB03S7BU+JFU0nw9mjSBcRnZm2Bvm0tzOX9/OuOuz01XQfOpa0w/N9u6Jf2f1OAdegdIPWZ9nIZZ+keEvBw=='
+        crossorigin='anonymous' />
+    <link rel="stylesheet" href="nutrition.css">
+    <title>Nutrition</title>
+</head>
+
+
+<body>
+
+    <!-- Modal ------------------------------------------------------------->
+    <div class="modal fade" id="searchFood" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen-lg-down modal-xl modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title me-2" id="exampleModalLabel">食品搜尋</h5>
+                    <div id="add-item">
+                        <!-- <span class="badge rounded-pill bg-success fw-lighter">雞胸肉</span> -->
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body d-flex justify-content-center align-items-center">
+
+                    <div class="container-fluid d-flex justify-content-center align-items-center flex-column">
+                        <!-- <form class="row"> -->
+                        <div class="search-bar input-group mb-3">
+                            <div
+                                class="rounded-pill rounded-end input-group-text bg-white border border-gray border-end-0">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </div>
+                            <input id="target" type="text" class="form-control border-start-0">
+                            <button id="search" type="button" class="rounded-pill rounded-start btn btn-primary"
+                                value="sumbit" aria-expanded="false" aria-controls="collapseSearchArea">搜索</button>
+                        </div>
+                        <div class="collapse" id="collapseSearchArea">
+                            <div class="card searchFood mx-1">
+                                <table class="table">
+                                    <thead>
+                                        <tr class="">
+                                            <th class="text-center fs-6 add" scope="col">添加</th>
+                                            <th class="name" scope="col">名稱</th>
+                                            <th class="name2" scope="col">俗名</th>
+                                            <th class="description" scope="col">描述</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="searchResult">
+
+                                    </tbody>
+                                    <template id="data">
+                                        <tr class="align-middle">
+                                            <th scope="row" class="text-center align-middle"><label
+                                                    class="add-check"><input type="checkbox"
+                                                        onclick="tableActive(this.parentElement.parentElement.parentElement);addItem(this)">
+                                                    <div class=""><i class="fa-solid fa-plus"></i></div>
+                                                </label></th>
+                                            <td class="td-name align-middle small"></td>
+                                            <td class="align-middle small"></td>
+                                            <td class="align-middle small"></td>
+                                        </tr>
+                                    </template>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">取消</button>
+                    <button onclick="add()" type="button" class="btn btn-primary btn-sm">添加</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -------------------------------------------------------------->
+
+    <div class="container">
+        <h1 class="m-5 mx-auto text-center">營養計算</h1>
+        <div class="text-center mb-4">
+            <input type="button" value="添加食品" class="btn btn-outline-primary rounded-pill" data-bs-toggle="modal"
+                data-bs-target="#searchFood">
+        </div>
+
+        <div class="row mb-5" style="height: 80vh;">
+            <div id="nutri-item" class="col-lg-6 col-12">
+                <template id="nutri-item-template">
+                    <div class="">
+                        <h6>
+                            <div class="row bg-light rounded border-bottom p-2 flex-nowrap">
+                                <!-- <div class="list-group-item d-flex justify-content-between"> -->
+                                <button onclick="deleteItem(this)" type="button" class="col-1 col-sm-1 btn btn-white text-danger item-close"
+                                    aria-label="Close">
+                                    <i class="fa-solid fa-xmark"></i>
+                                </button>
+                                <div class="col-4 col-sm-5 d-flex justify-content-end align-items-center">
+                                    <label class="item-label">
+                                        雞胸肉
+                                    </label>
+                                </div>
+                                <div class="col-7 col-sm-6 d-flex">
+                                    <div class="input-group flex-nowrap me-2">
+                                        <input oninput="calcItem(this)" type="number" class="form-control item-input">
+                                        <span class="input-group-text">克重</span>
+                                    </div>
+                                    <a onclick="toggle(this)" class="btn btn-light item-collapse-btn"
+                                        data-bs-toggle="collapse" href="" role="button" aria-expanded="false"
+                                        aria-controls="collapseExample">
+                                        <i class="fa-solid fa-chevron-down"></i>
+                                    </a>
+                                </div>
+
+
+                                <!-- </div> -->
+                            </div>
+                        </h6>
+                        <div class="collapse mb-2 item-collapse" id="">
+                            <div class="card card-body">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item d-flex justify-content-between">
+                                        <div>熱量</div>
+                                        <div>
+                                            <span class="item-kal"></span>
+                                            <span class="ms-1">大卡</span>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between">
+                                        <div>脂肪</div>
+                                        <div>
+                                            <span class="item-fat"></span>
+                                            <span class="ms-1">克重</span>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between">
+                                        <div>蛋白質</div>
+                                        <div>
+                                            <span class="item-protein"></span>
+                                            <span class="ms-1">克重</span>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between">
+                                        <div>碳水化合物</div>
+                                        <div>
+                                            <span class="item-carb"></span>
+                                            <span class="ms-1">克重</span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </template>
+
+            </div>
+
+            <button class="" id="show-result">
+                <h5 class="my-0">營養統計<span class="mx-2"><i class="fa-solid fa-chevron-up"></i></span></h5>
+            </button>
+            <div id="nutri-result" class="col-lg-6 col-12 d-flex justify-content-center">
+                <div class="card shadow-lg" style="width: 18rem;">
+                    <img src="nutrition.svg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">總計</h5>
+                        <p class="card-text text-end fw-light">每份餐點含有</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex justify-content-between">
+                            <div>熱量</div>
+                            <div>
+                                <span id="kal"></span>
+                                <span class="ms-1">大卡</span>
+                            </div>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <div>脂肪</div>
+                            <div>
+                                <span id="fat"></span>
+                                <span class="ms-1">克重</span>
+                            </div>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <div>蛋白質</div>
+                            <div>
+                                <span id="protein"></span>
+                                <span class="ms-1">克重</span>
+                            </div>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <div>碳水化合物</div>
+                            <div>
+                                <span id="carb"></span>
+                                <span class="ms-1">克重</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+        
+
+    </div>
+
+
+    <!-- a href=httpswww.freepik.comfree-vectororganic-flat-recipes-youtube-channel-art_12978283.htm#query=nutrition&position=10&from_view=search&track=robertav1_2_sidrImage by pikisuperstara on Freepik -->
+</body>
+<script src="nutrition.js"></script>
+
+
+
+</html>
